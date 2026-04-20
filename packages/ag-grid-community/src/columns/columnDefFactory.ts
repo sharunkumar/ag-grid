@@ -59,7 +59,7 @@ export class ColumnDefFactory extends BeanStub implements NamedBean {
         lastOrder: AgColumn[] | null,
         colsList: AgColumn[],
         sorted: boolean = false
-    ): (ColDef | ColGroupDef)[] | undefined {
+    ): (ColDef<any, any> | ColGroupDef<any>)[] | undefined {
         const cols = colDefColsList.slice();
 
         if (showingPivotResult) {
@@ -78,22 +78,22 @@ export class ColumnDefFactory extends BeanStub implements NamedBean {
         cols: AgColumn[],
         rowGroupColumns: AgColumn[] = [],
         pivotColumns: AgColumn[] = []
-    ): (ColDef | ColGroupDef)[] {
-        const res: (ColDef | ColGroupDef)[] = [];
+    ): (ColDef<any, any> | ColGroupDef<any>)[] {
+        const res: (ColDef<any, any> | ColGroupDef<any>)[] = [];
 
-        const colGroupDefs: { [id: string]: ColGroupDef } = {};
+        const colGroupDefs: { [id: string]: ColGroupDef<any> } = {};
 
         for (const col of cols) {
             const colDef = this.createDefFromColumn(col, rowGroupColumns, pivotColumns);
 
             let addToResult = true;
 
-            let childDef: ColDef | ColGroupDef = colDef;
+            let childDef: ColDef<any, any> | ColGroupDef<any> = colDef;
 
             let pointer = col.getOriginalParent();
             let lastPointer: AgProvidedColumnGroup | null = null;
             while (pointer) {
-                let parentDef: ColGroupDef | null | undefined = null;
+                let parentDef: ColGroupDef<any> | null | undefined = null;
 
                 // we don't include padding groups, as the column groups provided
                 // by application didn't have these. the whole point of padding groups
@@ -139,7 +139,7 @@ export class ColumnDefFactory extends BeanStub implements NamedBean {
         return res;
     }
 
-    private createDefFromGroup(group: AgProvidedColumnGroup): ColGroupDef | null | undefined {
+    private createDefFromGroup(group: AgProvidedColumnGroup): ColGroupDef<any> | null | undefined {
         const defCloned = _deepCloneDefinition(group.getColGroupDef(), ['children']);
 
         if (defCloned) {
@@ -149,7 +149,11 @@ export class ColumnDefFactory extends BeanStub implements NamedBean {
         return defCloned;
     }
 
-    private createDefFromColumn(col: AgColumn, rowGroupColumns: AgColumn[], pivotColumns: AgColumn[]): ColDef {
+    private createDefFromColumn(
+        col: AgColumn,
+        rowGroupColumns: AgColumn[],
+        pivotColumns: AgColumn[]
+    ): ColDef<any, any> {
         const colDefCloned = _deepCloneDefinition(col.colDef)!;
 
         colDefCloned.colId = col.colId;

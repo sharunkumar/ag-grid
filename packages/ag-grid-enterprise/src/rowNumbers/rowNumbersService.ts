@@ -408,7 +408,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         return div;
     }
 
-    private createRowNumbersColDef(): ColDef {
+    private createRowNumbersColDef(): ColDef<any, any> {
         const { gos, contextMenuSvc } = this.beans;
         const enableRTL = gos.get('enableRtl');
 

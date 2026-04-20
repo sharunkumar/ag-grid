@@ -38,7 +38,7 @@ import type {
     SortType,
 } from './colDef';
 
-const COL_DEF_DEFAULTS: Partial<ColDef> = {
+const COL_DEF_DEFAULTS: Partial<ColDef<any, any>> = {
     resizable: true,
     sortable: true,
 };
@@ -259,7 +259,7 @@ export class AgColumn<TValue = any>
         this.setActualWidth(initialWidth, source, true);
     }
 
-    private calculateColInitialWidth(colDef: ColDef): number {
+    private calculateColInitialWidth(colDef: ColDef<any, any>): number {
         const width = colDef.width ?? colDef.initialWidth ?? 200;
         return Math.max(Math.min(width, this.maxWidth), this.minWidth);
     }
@@ -389,7 +389,7 @@ export class AgColumn<TValue = any>
     }
 
     /** Get value from ColDef or default if it exists. */
-    private getColDefValue<K extends keyof ColDef>(key: K): ColDef[K] {
+    private getColDefValue<K extends keyof ColDef<any, any>>(key: K): ColDef<any, any>[K] {
         return this.colDef[key] ?? COL_DEF_DEFAULTS[key];
     }
 

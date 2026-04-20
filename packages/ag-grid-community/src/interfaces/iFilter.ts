@@ -285,7 +285,7 @@ export interface SharedFilterParams<TData = any, TContext = any> extends AgGridC
     /** The column this filter is for. */
     column: Column;
     /** The column definition for the column. */
-    colDef: ColDef<TData>;
+    colDef: ColDef<TData, unknown>;
 
     /**
      * Get the cell value for the given row node and column, which can be the column ID, definition, or `Column` object.

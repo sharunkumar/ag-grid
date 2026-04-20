@@ -523,7 +523,7 @@ export class ValueService extends BeanStub implements NamedBean {
         }
     }
 
-    private canCreateRowNodeData(rowNode: IRowNode, colDef: ColDef): boolean {
+    private canCreateRowNodeData(rowNode: IRowNode, colDef: ColDef<any, any>): boolean {
         if (!rowNode.group) {
             return true; // not a group row
         }
@@ -568,7 +568,7 @@ export class ValueService extends BeanStub implements NamedBean {
         return true;
     }
 
-    private isSetValueSupported(column: AgColumn, rowNode: IRowNode, newValue: any, colDef: ColDef): boolean {
+    private isSetValueSupported(column: AgColumn, rowNode: IRowNode, newValue: any, colDef: ColDef<any, any>): boolean {
         const { field, valueSetter } = colDef;
 
         const formulaSvc = this.beans.formula;

@@ -190,11 +190,11 @@ export class AgColumnGroup<TValue = any> extends BeanStub<AgColumnGroupEvent> im
         return result;
     }
 
-    public getDefinition(): AbstractColDef | null {
+    public getDefinition(): AbstractColDef<any, any> | null {
         return this.providedColumnGroup.getColGroupDef();
     }
 
-    public getColGroupDef(): ColGroupDef | null {
+    public getColGroupDef(): ColGroupDef<any> | null {
         return this.providedColumnGroup.getColGroupDef();
     }
 

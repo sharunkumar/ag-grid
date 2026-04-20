@@ -85,7 +85,7 @@ export class ColumnMoveService extends BeanStub implements NamedBean {
         }
 
         const doesMovePassLockedPositions = (proposedColumnOrder: AgColumn[]) => {
-            const lockPositionToPlacement = (position: ColDef['lockPosition']) => {
+            const lockPositionToPlacement = (position: ColDef<any, any>['lockPosition']) => {
                 if (!position) {
                     return MoveDirection.NONE;
                 }

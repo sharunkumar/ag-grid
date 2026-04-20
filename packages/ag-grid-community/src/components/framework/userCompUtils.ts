@@ -137,7 +137,7 @@ export function _getInnerCellRendererDetails<TDefinition = any>(
 
 export function _getHeaderCompDetails(
     userCompFactory: UserComponentFactory,
-    colDef: ColDef,
+    colDef: ColDef<any, any>,
     params: IHeaderParams
 ): UserCompDetails<IHeaderComp> | undefined {
     return userCompFactory.getCompDetails(colDef, HeaderComponent, 'agColumnHeader', params);
@@ -200,7 +200,7 @@ export function _getFullWidthDetailCellRendererDetails(
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export function _getCellRendererDetails<
-    TDefinition = ColDef,
+    TDefinition = ColDef<any, any>,
     TParams extends AgGridCommon<any, any> = ICellRendererParams,
 >(
     userCompFactory: UserComponentFactory,
@@ -226,7 +226,7 @@ export function _getEditorRendererDetails<TDefinition, TEditorParams extends AgG
 
 export function _getLoadingCellRendererDetails(
     userCompFactory: UserComponentFactory,
-    def: ColDef,
+    def: ColDef<any, any>,
     params: ICellRendererParams
 ): UserCompDetails<ILoadingCellRendererComp> | undefined {
     return userCompFactory.getCompDetails(def, LoadingCellRendererComponent, 'agSkeletonCellRenderer', params, true);
@@ -235,7 +235,7 @@ export function _getLoadingCellRendererDetails(
 
 export function _getCellEditorDetails(
     userCompFactory: UserComponentFactory,
-    def: ColDef,
+    def: ColDef<any, any>,
     params: ICellEditorParams
 ): UserCompDetails<ICellEditorComp> | undefined {
     return userCompFactory.getCompDetails(def, CellEditorComponent, 'agCellEditor', params, true);
@@ -264,7 +264,7 @@ export function _getFilterDetails<TFilter extends SharedFilterUi & IComponent<Sh
 
 export function _getDateCompDetails(
     userCompFactory: UserComponentFactory,
-    def: ColDef,
+    def: ColDef<any, any>,
     params: IDateParams
 ): UserCompDetails<IDateComp> | undefined {
     return userCompFactory.getCompDetails(def, DateComponent, 'agDateInput', params, true);

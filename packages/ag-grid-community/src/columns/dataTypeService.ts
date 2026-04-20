@@ -208,8 +208,8 @@ export class DataTypeService extends BeanStub implements NamedBean {
     }
 
     public updateColDefAndGetColumnType(
-        colDef: ColDef,
-        userColDef: ColDef,
+        colDef: ColDef<any, any>,
+        userColDef: ColDef<any, any>,
         colId: string
     ): string | string[] | undefined {
         let { cellDataType } = userColDef;
@@ -250,7 +250,7 @@ export class DataTypeService extends BeanStub implements NamedBean {
         return dataTypeDefinition.columnTypes;
     }
 
-    private addFormulaCellEditorToColDef(colDef: ColDef, userColDef: ColDef): void {
+    private addFormulaCellEditorToColDef(colDef: ColDef<any, any>, userColDef: ColDef<any, any>): void {
         const allowFormula = userColDef.allowFormula ?? colDef.allowFormula;
 
         if (!allowFormula || userColDef.cellEditor) {
@@ -279,7 +279,7 @@ export class DataTypeService extends BeanStub implements NamedBean {
         );
     }
 
-    private canInferCellDataType(colDef: ColDef, userColDef: ColDef): boolean {
+    private canInferCellDataType(colDef: ColDef<any, any>, userColDef: ColDef<any, any>): boolean {
         const { gos } = this;
         if (!_isClientSideRowModel(gos)) {
             return false;
@@ -490,9 +490,14 @@ export class DataTypeService extends BeanStub implements NamedBean {
         return dataTypeMatcher(value);
     }
 
-    public validateColDef(colDef: ColDef, userColDef?: ColDef, defaultColDef?: ColDef, colId?: string): void {
+    public validateColDef(
+        colDef: ColDef<any, any>,
+        userColDef?: ColDef<any, any>,
+        defaultColDef?: ColDef<any, any>,
+        colId?: string
+    ): void {
         if (colDef.cellDataType === 'object') {
-            const wasInferred = (colDef?: ColDef) => {
+            const wasInferred = (colDef?: ColDef<any, any>) => {
                 return colDef?.cellDataType == null || colDef?.cellDataType === true;
             };
             const inferred = wasInferred(userColDef) && wasInferred(defaultColDef);
@@ -507,7 +512,7 @@ export class DataTypeService extends BeanStub implements NamedBean {
         }
     }
 
-    public postProcess(colDef: ColDef): void {
+    public postProcess(colDef: ColDef<any, any>): void {
         const cellDataType = colDef.cellDataType;
         if (!cellDataType || typeof cellDataType !== 'string') {
             return;
@@ -533,14 +538,14 @@ export class DataTypeService extends BeanStub implements NamedBean {
     private readonly columnDefinitionPropsPerDataType: Record<
         BaseCellDataType,
         (args: {
-            colDef: ColDef;
+            colDef: ColDef<any, any>;
             cellDataType: string;
             colModel: ColumnModel;
             dataTypeDefinition: (DataTypeDefinition | CoreDataTypeDefinition) & GroupSafeValueFormatter;
             colId: string;
             formatValue: DataTypeFormatValueFunc;
             filterModuleBean: BeanCollection['filterManager'];
-        }) => Partial<ColDef>
+        }) => Partial<ColDef<any, any>>
     > = {
         number() {
             return { cellEditor: 'agNumberCellEditor' };
@@ -607,7 +612,7 @@ export class DataTypeService extends BeanStub implements NamedBean {
     };
 
     private setColDefPropertiesForBaseDataType(
-        colDef: ColDef,
+        colDef: ColDef<any, any>,
         cellDataType: string,
         dataTypeDefinition: (DataTypeDefinition | CoreDataTypeDefinition) & GroupSafeValueFormatter,
         colId: string
@@ -855,9 +860,9 @@ function createGroupSafeValueFormatter(
 }
 
 function doesColDefPropPreventInference(
-    colDef: ColDef,
-    checkProps: { [key in keyof ColDef]: boolean },
-    prop: keyof ColDef,
+    colDef: ColDef<any, any>,
+    checkProps: { [key in keyof ColDef<any, any>]: boolean },
+    prop: keyof ColDef<any, any>,
     comparisonValue?: any
 ): boolean {
     if (!checkProps[prop]) {
@@ -917,15 +922,15 @@ function toAbsoluteBigInt(value: any): bigint | null {
 }
 
 function doColDefPropsPreventInference(
-    colDef: ColDef,
-    propsToCheckForInference: { [key in keyof ColDef]: boolean }
+    colDef: ColDef<any, any>,
+    propsToCheckForInference: { [key in keyof ColDef<any, any>]: boolean }
 ): boolean {
     return [
         ['cellRenderer', 'agSparklineCellRenderer'],
         ['valueGetter', undefined],
         ['valueParser', undefined],
         ['refData', undefined],
-    ].some(([prop, comparisonValue]: [keyof ColDef, any]) =>
+    ].some(([prop, comparisonValue]: [keyof ColDef<any, any>, any]) =>
         doesColDefPropPreventInference(colDef, propsToCheckForInference, prop, comparisonValue)
     );
 }

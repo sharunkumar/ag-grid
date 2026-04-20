@@ -1594,7 +1594,7 @@ export class ColumnFilterService
     }
 
     public setColDefPropsForDataType(
-        colDef: ColDef,
+        colDef: ColDef<any, any>,
         dataTypeDefinition: CoreDataTypeDefinition,
         formatValue: DataTypeFormatValueFunc
     ): void {

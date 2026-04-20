@@ -129,7 +129,7 @@ export class PivotResultColsService extends BeanStub implements NamedBean, IPivo
         return result;
     }
 
-    public setPivotResultCols(colDefs: (ColDef | ColGroupDef)[] | null, source: ColumnEventType): void {
+    public setPivotResultCols(colDefs: (ColDef<any, any> | ColGroupDef<any>)[] | null, source: ColumnEventType): void {
         this.aggOrderedList = undefined; // Invalidate cached aggregation order
         if (!this.colModel.ready) {
             return;
@@ -174,7 +174,7 @@ export class PivotResultColsService extends BeanStub implements NamedBean, IPivo
         this.visibleCols.refresh(source);
     }
 
-    private processPivotResultColDef(colDefs: (ColDef | ColGroupDef)[] | null) {
+    private processPivotResultColDef(colDefs: (ColDef<any, any> | ColGroupDef<any>)[] | null) {
         const columnCallback = this.gos.get('processPivotResultColDef');
         const groupCallback = this.gos.get('processPivotResultColGroupDef');
 
@@ -182,17 +182,17 @@ export class PivotResultColsService extends BeanStub implements NamedBean, IPivo
             return undefined;
         }
 
-        const searchForColDefs = (colDefs2: (ColDef | ColGroupDef)[]): void => {
-            colDefs2.forEach((abstractColDef: AbstractColDef) => {
+        const searchForColDefs = (colDefs2: (ColDef<any, any> | ColGroupDef<any>)[]): void => {
+            colDefs2.forEach((abstractColDef: AbstractColDef<any, any>) => {
                 const isGroup = _exists((abstractColDef as any).children);
                 if (isGroup) {
-                    const colGroupDef = abstractColDef as ColGroupDef;
+                    const colGroupDef = abstractColDef as ColGroupDef<any>;
                     if (groupCallback) {
                         groupCallback(colGroupDef);
                     }
                     searchForColDefs(colGroupDef.children);
                 } else {
-                    const colDef = abstractColDef as ColDef;
+                    const colDef = abstractColDef as ColDef<any, any>;
                     if (columnCallback) {
                         columnCallback(colDef);
                     }

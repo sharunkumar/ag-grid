@@ -29,7 +29,7 @@ export type { BaseColDefParams, ColumnFunctionCallbackParams } from './colDef-ba
 export type { SortDirection, SortType, SortDef, DisplaySortDef } from '../agStack/utils/aria';
 
 /** AbstractColDef can be a group or a column definition */
-export interface AbstractColDef<TData = any, TValue = any> {
+export interface AbstractColDef<TData, TValue> {
     /** The name to render in the column header. If not specified and field is specified, the field name will be used as the header name. */
     headerName?: string;
     /** Function or expression. Gets the value for display in the header. */
@@ -117,9 +117,9 @@ export interface AbstractColDef<TData = any, TValue = any> {
 }
 
 /** Configuration options for column groups in AG Grid.  */
-export interface ColGroupDef<TData = any> extends AbstractColDef<TData> {
+export interface ColGroupDef<TData> extends AbstractColDef<TData, any> {
     /** A list containing a mix of columns and column groups. */
-    children: (ColDef<TData> | ColGroupDef<TData>)[];
+    children: (ColDef<TData, any> | ColGroupDef<TData>)[];
     /** The unique ID to give the column. This is optional. If missing, a unique ID will be generated. This ID is used to identify the column group in the API. */
     groupId?: string;
     /**
@@ -253,7 +253,7 @@ type NestedPath<TValue, Prefix extends string, TValueNestedChild, TDepth extends
 /**
  * Returns a union of all possible paths to nested fields in `TData`.
  */
-export type ColDefField<TData = any, TValue = any> = TData extends any ? NestedFieldPaths<TData, TValue, []> : never;
+export type ColDefField<TData, TValue> = TData extends any ? NestedFieldPaths<TData, TValue, []> : never;
 
 /**
  * Returns a union of all possible paths to nested fields in `TData`.
@@ -277,7 +277,7 @@ export type SortComparatorFn<TData = any, TValue = any> = (
 ) => number;
 
 /** Configuration options for columns in AG Grid. */
-export interface ColDef<TData = any, TValue = any> extends AbstractColDef<TData, TValue>, IFilterDef {
+export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IFilterDef {
     // *** Columns *** //
 
     /** The unique ID to give the column. This is optional. If missing, the ID will default to the field.
@@ -339,7 +339,7 @@ export interface ColDef<TData = any, TValue = any> extends AbstractColDef<TData,
      * The field of the tooltip to apply to the cell.
      * @agModule `TooltipModule`
      */
-    tooltipField?: ColDefField<TData>;
+    tooltipField?: ColDefField<TData, any>;
     /**
      * Callback that should return the string to use for a tooltip, `tooltipField` takes precedence if set.
      * If using a custom `tooltipComponent` you may return any custom value to be passed to your tooltip component.
@@ -1121,7 +1121,7 @@ export interface ColumnChooserParams {
      * Pass true to default to contracted groups*/
     contractColumnSelection?: boolean;
     /** Custom Columns Panel layout */
-    columnLayout?: (ColDef | ColGroupDef)[];
+    columnLayout?: (ColDef<any, any> | ColGroupDef<any>)[];
 }
 
 export type SpanRowsFunc<TData = any, TValue = any, TContext = any> = (
@@ -1330,6 +1330,6 @@ export type GroupHierarchyParts =
     | 'minute'
     | 'second';
 
-export type GroupHierarchyConfig = { [k: string]: ColDef };
+export type GroupHierarchyConfig = { [k: string]: ColDef<any, any> };
 
 export type RefData = { [p: string]: any };

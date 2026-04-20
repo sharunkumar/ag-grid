@@ -166,7 +166,7 @@ export const getValueFactory =
     };
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getColumnStateFromColDef(colDef: ColDef, colId: string): ColumnState {
+export function _getColumnStateFromColDef(colDef: ColDef<any, any>, colId: string): ColumnState {
     const state: ColumnState = {
         ...colDef,
         sort: undefined,
@@ -182,7 +182,7 @@ export function _getColumnStateFromColDef(colDef: ColDef, colId: string): Column
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getSortDefFromColDef(colDef: ColDef) {
+export function _getSortDefFromColDef(colDef: ColDef<any, any>) {
     const { sort, initialSort } = colDef;
     const sortIsValid = _isSortDefValid(sort) || _isSortDirectionValid(sort);
     const initialSortIsValid = _isSortDefValid(initialSort) || _isSortDirectionValid(initialSort);

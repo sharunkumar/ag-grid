@@ -18,10 +18,10 @@ export type ColumnOrdering = {
 
 export type ColumnExtractors = {
     setFlagFunc: (col: AgColumn, flag: boolean, source: ColumnEventType) => void;
-    getIndexFunc: (colDef: ColDef) => number | null | undefined;
-    getInitialIndexFunc: (colDef: ColDef) => number | null | undefined;
-    getValueFunc: (colDef: ColDef) => boolean | null | undefined;
-    getInitialValueFunc: (colDef: ColDef) => boolean | undefined;
+    getIndexFunc: (colDef: ColDef<any, any>) => number | null | undefined;
+    getInitialIndexFunc: (colDef: ColDef<any, any>) => number | null | undefined;
+    getValueFunc: (colDef: ColDef<any, any>) => boolean | null | undefined;
+    getInitialValueFunc: (colDef: ColDef<any, any>) => boolean | undefined;
 };
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */

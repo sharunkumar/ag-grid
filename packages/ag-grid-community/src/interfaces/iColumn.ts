@@ -303,7 +303,7 @@ export interface ColumnGroup<TValue = any> extends IHeaderColumn<TValue, AgColum
      * The column group definition will be the result of merging the application provided column group definition with any provided defaults
      * (e.g. `defaultColGroupDef` grid option.
      */
-    getColGroupDef(): ColGroupDef | null;
+    getColGroupDef(): ColGroupDef<any> | null;
 
     /** Returns `true` if this column group is a padding group that is used to correctly align column groups / children. */
     isPadding(): boolean;
@@ -353,7 +353,7 @@ export interface ProvidedColumnGroup extends IProvidedColumn, IEventEmitter<AgPr
      * The column group definition will be the result of merging the application provided column group definition with any provided defaults
      * (e.g. `defaultColGroupDef` grid option.
      */
-    getColGroupDef(): ColGroupDef | null;
+    getColGroupDef(): ColGroupDef<any> | null;
 
     /** Returns the leaf columns of this group. */
     getLeafColumns(): Column[];

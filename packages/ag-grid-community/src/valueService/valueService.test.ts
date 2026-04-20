@@ -7,7 +7,7 @@ import { mock } from '../test-utils/mock';
 import type { ExpressionService } from './expressionService';
 import { ValueService } from './valueService';
 
-let colDef: ColDef;
+let colDef: ColDef<any, any>;
 let column: jest.Mocked<AgColumn>;
 let gos: jest.Mocked<GridOptionsService>;
 let expressionSvc: jest.Mocked<ExpressionService>;

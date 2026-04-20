@@ -50,7 +50,7 @@ export function shouldStartEditing(
     return false;
 }
 
-function deriveClickCount(gos: GridOptionsService, colDef?: ColDef): number {
+function deriveClickCount(gos: GridOptionsService, colDef?: ColDef<any, any>): number {
     if (gos.get('suppressClickEdit') === true) {
         return 0;
     }

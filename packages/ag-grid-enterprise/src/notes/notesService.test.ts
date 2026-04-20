@@ -6,7 +6,7 @@ describe('NotesService', () => {
     let service: NotesService;
     let beans: BeanCollection;
     let rowNode: IRowNode;
-    let colDef: ColDef;
+    let colDef: ColDef<any, any>;
     let column: AgColumn;
     let currentNote: Note | undefined;
     let cellCtrl: { showNote: jest.Mock };

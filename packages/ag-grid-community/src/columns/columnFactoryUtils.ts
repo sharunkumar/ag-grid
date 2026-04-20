@@ -28,7 +28,7 @@ const depthFirstCallback = (child: AgColumn | AgProvidedColumnGroup, parent: AgP
  */
 export function _createColumnTreeWithIds(
     beans: BeanCollection,
-    defs: (ColDef | ColGroupDef)[] | null | undefined = null,
+    defs: (ColDef<any, any> | ColGroupDef<any>)[] | null | undefined = null,
     primaryColumns: boolean,
     existingTree: (AgColumn | AgProvidedColumnGroup)[] | undefined,
     source: ColumnEventType
@@ -38,7 +38,10 @@ export function _createColumnTreeWithIds(
     const colGroupIdMap = new Map<string, AgProvidedColumnGroup>(existingGroups.map((group) => [group.getId(), group]));
 
     let maxDepth = 0;
-    const recursivelyProcessColDef = (def: ColDef | ColGroupDef, level: number): AgColumn | AgProvidedColumnGroup => {
+    const recursivelyProcessColDef = (
+        def: ColDef<any, any> | ColGroupDef<any>,
+        level: number
+    ): AgColumn | AgProvidedColumnGroup => {
         maxDepth = Math.max(maxDepth, level);
         if (isColumnGroupDef(def)) {
             if (!beans.colGroupSvc) {
@@ -96,7 +99,7 @@ export function _createColumnTreeWithIds(
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export function _createColumnTree(
     beans: BeanCollection,
-    defs: (ColDef | ColGroupDef)[] | null | undefined = null,
+    defs: (ColDef<any, any> | ColGroupDef<any>)[] | null | undefined = null,
     primaryColumns: boolean,
     existingTree: (AgColumn | AgProvidedColumnGroup)[] | undefined,
     source: ColumnEventType
@@ -161,7 +164,7 @@ function extractExistingTreeData(existingTree?: (AgColumn | AgProvidedColumnGrou
 
 export function _recursivelyCreateColumns(
     beans: BeanCollection,
-    defs: (ColDef | ColGroupDef)[] | null,
+    defs: (ColDef<any, any> | ColGroupDef<any>)[] | null,
     level: number,
     primaryColumns: boolean,
     existingColsCopy: AgColumn[],
@@ -188,7 +191,14 @@ export function _recursivelyCreateColumns(
                 source
             );
         } else {
-            result[i] = createColumn(beans, primaryColumns, def as ColDef, existingColsCopy, columnKeyCreator, source);
+            result[i] = createColumn(
+                beans,
+                primaryColumns,
+                def as ColDef<any, any>,
+                existingColsCopy,
+                columnKeyCreator,
+                source
+            );
         }
     }
     return result;
@@ -197,7 +207,7 @@ export function _recursivelyCreateColumns(
 function createColumn(
     beans: BeanCollection,
     primaryColumns: boolean,
-    colDef: ColDef,
+    colDef: ColDef<any, any>,
     existingColsCopy: AgColumn[] | null,
     columnKeyCreator: IColumnKeyCreator,
     source: ColumnEventType
@@ -273,7 +283,7 @@ export function updateSomeColumnState(
 export function _updateColumnState(
     beans: BeanCollection,
     column: AgColumn,
-    colDef: ColDef,
+    colDef: ColDef<any, any>,
     source: ColumnEventType
 ): void {
     updateSomeColumnState(
@@ -306,7 +316,7 @@ export function _updateColumnState(
 }
 
 function findExistingColumn(
-    newColDef: ColDef,
+    newColDef: ColDef<any, any>,
     existingColsCopy: AgColumn[] | null
 ): { idx: number; column: AgColumn } | undefined {
     if (!existingColsCopy) {
@@ -345,13 +355,13 @@ function findExistingColumn(
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export function _addColumnDefaultAndTypes(
     beans: BeanCollection,
-    colDef: ColDef,
+    colDef: ColDef<any, any>,
     colId: string,
     isAutoCol?: boolean
-): ColDef {
+): ColDef<any, any> {
     const { gos, dataTypeSvc } = beans;
     // start with empty merged definition
-    const res: ColDef = {} as ColDef;
+    const res: ColDef<any, any> = {} as ColDef<any, any>;
 
     // merge properties from default column definitions
     const defaultColDef = gos.get('defaultColDef');
@@ -382,7 +392,7 @@ export function _addColumnDefaultAndTypes(
             {
                 sort: autoGroupColDef.sort,
                 initialSort: autoGroupColDef.initialSort,
-            } as ColDef,
+            } as ColDef<any, any>,
             false,
             true
         );
@@ -398,8 +408,8 @@ export function _addColumnDefaultAndTypes(
 
 function updateColDefAndGetColumnType(
     beans: BeanCollection,
-    colDef: ColDef,
-    userColDef: ColDef,
+    colDef: ColDef<any, any>,
+    userColDef: ColDef<any, any>,
     colId: string
 ): string[] | undefined {
     const dataTypeDefinitionColumnType = beans.dataTypeSvc?.updateColDefAndGetColumnType(colDef, userColDef, colId);
@@ -408,7 +418,7 @@ function updateColDefAndGetColumnType(
     return columnTypes ? convertColumnTypes(columnTypes) : undefined;
 }
 
-function assignColumnTypes(beans: BeanCollection, typeKeys: string[], colDefMerged: ColDef) {
+function assignColumnTypes(beans: BeanCollection, typeKeys: string[], colDefMerged: ColDef<any, any>) {
     if (!typeKeys.length) {
         return;
     }
@@ -444,8 +454,8 @@ function assignColumnTypes(beans: BeanCollection, typeKeys: string[], colDefMerg
 }
 
 // if object has children, we assume it's a group
-function isColumnGroupDef(abstractColDef: ColDef | ColGroupDef): abstractColDef is ColGroupDef {
-    return (abstractColDef as ColGroupDef).children !== undefined;
+function isColumnGroupDef(abstractColDef: ColDef<any, any> | ColGroupDef<any>): abstractColDef is ColGroupDef<any> {
+    return (abstractColDef as ColGroupDef<any>).children !== undefined;
 }
 
 export function depthFirstOriginalTreeSearch(

@@ -98,7 +98,7 @@ export class FiltersToolPanel extends Component implements IFiltersToolPanel, IT
         }
     }
 
-    public setFilterLayout(colDefs: (ColDef | ColGroupDef)[]): void {
+    public setFilterLayout(colDefs: (ColDef<any, any> | ColGroupDef<any>)[]): void {
         this.filtersToolPanelListPanel.setFiltersLayout(colDefs);
     }
 

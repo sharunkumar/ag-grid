@@ -353,13 +353,13 @@ export class AgPrimaryColsList extends Component<AgPrimaryColsListEvent> {
         syncLayoutWithGrid(this.colModel, this.setColumnLayout.bind(this));
     }
 
-    public setColumnLayout(colDefs: AbstractColDef[]): void {
+    public setColumnLayout(colDefs: AbstractColDef<any, any>[]): void {
         const columnTree = toolPanelCreateColumnTree(this.colModel, colDefs);
         this.buildListModel(columnTree);
 
         // using col defs to check if groups exist as it could be a custom layout
         this.groupsExist = colDefs.some((colDef) => {
-            return colDef && typeof (colDef as ColGroupDef).children !== 'undefined';
+            return colDef && typeof (colDef as ColGroupDef<any>).children !== 'undefined';
         });
 
         this.markFilteredColumns();

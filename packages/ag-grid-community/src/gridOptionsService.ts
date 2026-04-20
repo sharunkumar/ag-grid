@@ -317,7 +317,11 @@ export class GridOptionsService
         this.validation?.processGridOptions(gridOptions);
     }
 
-    public validateColDef(colDef: ColDef | ColGroupDef, colId: string, skipInferenceCheck?: boolean): void {
+    public validateColDef(
+        colDef: ColDef<any, any> | ColGroupDef<any>,
+        colId: string,
+        skipInferenceCheck?: boolean
+    ): void {
         if (skipInferenceCheck || !this.beans.dataTypeSvc?.isColPendingInference(colId)) {
             this.validateOptions(colDef, COLUMN_DEFINITION_MOD_VALIDATIONS);
             this.validation?.validateColDef(colDef);

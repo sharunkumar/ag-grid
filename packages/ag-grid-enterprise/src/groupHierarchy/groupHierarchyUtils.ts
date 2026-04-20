@@ -55,6 +55,6 @@ export const numericalMonthToNamedMonth = (monthStr: string): { month: string; l
     return { month, localeKey };
 };
 
-export function _getGroupHierarchy(colDef: ColDef): ColDef['groupHierarchy'] {
+export function _getGroupHierarchy(colDef: ColDef<any, any>): ColDef<any, any>['groupHierarchy'] {
     return colDef.groupHierarchy ?? colDef.rowGroupingHierarchy;
 }

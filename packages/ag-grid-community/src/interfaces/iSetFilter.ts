@@ -106,7 +106,7 @@ export interface SetFilterValuesFuncParams<TData = any, V = string> extends AgGr
     /** The function to call with the values to load into the filter once they are ready. */
     success: (values: (V | null)[]) => void;
     /** The column definition from which the set filter is invoked. */
-    colDef: ColDef<TData>;
+    colDef: ColDef<TData, unknown>;
     /** Column from which the set filter is invoked. */
     column: Column;
 }

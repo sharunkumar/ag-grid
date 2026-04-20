@@ -446,7 +446,7 @@ export class SetFilterListItem<V> extends Component<SetFilterListItemEvent> {
         this.setupFixedAriaLabels(valueToRender);
     }
 
-    public getComponentHolder(): ColDef {
+    public getComponentHolder(): ColDef<any, any> {
         return this.params.column.getColDef();
     }
 }

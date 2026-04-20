@@ -10,7 +10,7 @@ import { createGrid } from '../grid';
 const getColNames = (cols: any[] | undefined) => cols?.map((c) => c.field ?? c.colId) ?? [];
 
 const onlyFields = [{ field: 'field' }, { field: 'field2' }];
-const withGroups: (ColDef | ColGroupDef)[] = [
+const withGroups: (ColDef<any, any> | ColGroupDef<any>)[] = [
     { field: 'field' },
     {
         children: [

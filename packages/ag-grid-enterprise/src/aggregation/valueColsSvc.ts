@@ -26,7 +26,7 @@ export class ValueColsSvc extends BaseColsService implements NamedBean, IColsSer
             this.setColValueActive(col, flag, source),
         getIndexFunc: () => undefined,
         getInitialIndexFunc: () => undefined,
-        getValueFunc: (colDef: ColDef) => {
+        getValueFunc: (colDef: ColDef<any, any>) => {
             const aggFunc = colDef.aggFunc;
             // null or empty string means clear
             if (aggFunc === null || aggFunc === '') {
@@ -38,7 +38,7 @@ export class ValueColsSvc extends BaseColsService implements NamedBean, IColsSer
 
             return !!aggFunc;
         },
-        getInitialValueFunc: (colDef: ColDef) => {
+        getInitialValueFunc: (colDef: ColDef<any, any>) => {
             // return false if any of the following: null, undefined, empty string
             return colDef.initialAggFunc != null && colDef.initialAggFunc != '';
         },

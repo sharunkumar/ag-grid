@@ -467,7 +467,7 @@ export class CellCtrl extends BeanStub {
         return (rowUnpinned || (allowManuallyPinned && _isManualPinnedRow(this.rowNode))) && !!value;
     }
 
-    private isCheckboxSelection(colDef: ColDef): boolean | CheckboxSelectionCallback | undefined {
+    private isCheckboxSelection(colDef: ColDef<any, any>): boolean | CheckboxSelectionCallback | undefined {
         const { rowSelection, groupDisplayType } = this.beans.gridOptions;
         const checkboxLocation = _getCheckboxLocation(rowSelection);
         const isSelectionColumn = isColumnSelectionCol(this.column);

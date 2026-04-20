@@ -227,9 +227,9 @@ export class AutoColService extends BeanStub implements NamedBean, IColumnCollec
         _applyColumnState(beans, { state: [_getColumnStateFromColDef(colDef, colId)] }, source);
     }
 
-    private createAutoColDef(colId: string, underlyingColumn?: AgColumn, index?: number): ColDef {
+    private createAutoColDef(colId: string, underlyingColumn?: AgColumn, index?: number): ColDef<any, any> {
         // if one provided by user, use it, otherwise create one
-        let res: ColDef = this.createBaseColDef(underlyingColumn);
+        let res: ColDef<any, any> = this.createBaseColDef(underlyingColumn);
 
         const autoGroupColumnDef = this.gos.get('autoGroupColumnDef');
         _mergeDeep(res, autoGroupColumnDef);
@@ -278,11 +278,11 @@ export class AutoColService extends BeanStub implements NamedBean, IColumnCollec
         return res;
     }
 
-    private createBaseColDef(rowGroupCol?: AgColumn): ColDef {
+    private createBaseColDef(rowGroupCol?: AgColumn): ColDef<any, any> {
         const userDef = this.gos.get('autoGroupColumnDef');
         const localeTextFunc = this.getLocaleTextFunc();
 
-        const res: ColDef = {
+        const res: ColDef<any, any> = {
             headerName: localeTextFunc('group', 'Group'),
             showRowGroup: rowGroupCol?.colId ?? true,
         };

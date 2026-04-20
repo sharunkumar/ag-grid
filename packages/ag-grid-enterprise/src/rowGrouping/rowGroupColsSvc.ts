@@ -29,10 +29,10 @@ export class RowGroupColsSvc extends BaseColsService implements NamedBean, ICols
     override columnExtractors = {
         setFlagFunc: (col: AgColumn, flag: boolean, source: ColumnEventType) =>
             this.setColRowGroupActive(col, flag, source),
-        getIndexFunc: (colDef: ColDef) => colDef.rowGroupIndex,
-        getInitialIndexFunc: (colDef: ColDef) => colDef.initialRowGroupIndex,
-        getValueFunc: (colDef: ColDef) => colDef.rowGroup,
-        getInitialValueFunc: (colDef: ColDef) => colDef.initialRowGroup,
+        getIndexFunc: (colDef: ColDef<any, any>) => colDef.rowGroupIndex,
+        getInitialIndexFunc: (colDef: ColDef<any, any>) => colDef.initialRowGroupIndex,
+        getValueFunc: (colDef: ColDef<any, any>) => colDef.rowGroup,
+        getInitialValueFunc: (colDef: ColDef<any, any>) => colDef.initialRowGroup,
     } as const;
 
     private readonly modifyColumnsNoEventsCallbacks = {

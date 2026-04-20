@@ -23,7 +23,7 @@ export class DateCompWrapper {
     constructor(
         private readonly context: Context,
         userCompFactory: UserComponentFactory,
-        colDef: ColDef,
+        colDef: ColDef<any, any>,
         dateComponentParams: IDateParams,
         private readonly eParent: HTMLElement,
         onReady?: (comp: DateCompWrapper) => void

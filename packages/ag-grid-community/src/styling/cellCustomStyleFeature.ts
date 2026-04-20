@@ -92,7 +92,7 @@ export class CellCustomStyleFeature extends BeanStub implements ICellStyleFeatur
         }
     }
 
-    private getCellClassParams(column: AgColumn, colDef: ColDef): CellClassParams {
+    private getCellClassParams(column: AgColumn, colDef: ColDef<any, any>): CellClassParams {
         const { value, rowNode } = this.cellCtrl;
         return _addGridCommonParams(this.beans.gos, {
             value,

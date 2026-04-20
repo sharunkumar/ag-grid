@@ -15,7 +15,9 @@ export function getColumnDef<TValue = any, TData = any>(
     return column ? column.colDef : null;
 }
 
-export function getColumnDefs<TData = any>(beans: BeanCollection): (ColDef<TData> | ColGroupDef<TData>)[] | undefined {
+export function getColumnDefs<TData = any>(
+    beans: BeanCollection
+): (ColDef<TData, any> | ColGroupDef<TData>)[] | undefined {
     return beans.colModel.getColumnDefs(true);
 }
 

@@ -378,11 +378,11 @@ export interface GridOptions<TData = any> {
     /**
      * Array of Column / Column Group definitions.
      */
-    columnDefs?: (ColDef<TData> | ColGroupDef<TData>)[] | null;
+    columnDefs?: (ColDef<TData, any> | ColGroupDef<TData>)[] | null;
     /**
      * A default column definition. Items defined in the actual column definitions get precedence.
      */
-    defaultColDef?: ColDef<TData>;
+    defaultColDef?: ColDef<TData, any>;
     /**
      * A default column group definition. All column group definitions will use these properties. Items defined in the actual column group definition get precedence.
      * @initial
@@ -3225,7 +3225,7 @@ export type AutoGroupColumnDef<TData = any, TValue = any> = Omit<ColDef<TData, T
 
 /** Subset of ColDef allowing for customisation of the Selection column, currently used for checkbox selection */
 export type SelectionColumnDef = Pick<
-    ColDef,
+    ColDef<any, any>,
     | 'icons'
     | 'suppressNavigable'
     | 'suppressKeyboardEvent'

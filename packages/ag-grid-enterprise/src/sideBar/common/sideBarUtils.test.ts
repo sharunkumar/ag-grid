@@ -2,13 +2,13 @@ import type { ColDef, ColGroupDef } from 'ag-grid-community';
 
 import { mergeLeafPathTrees } from './sideBarUtils';
 
-function createChild(colId: string): ColDef {
+function createChild(colId: string): ColDef<any, any> {
     return {
         colId,
     };
 }
 
-function createGroup(groupId: string, children: (ColDef | ColGroupDef)[]): ColGroupDef {
+function createGroup(groupId: string, children: (ColDef<any, any> | ColGroupDef<any>)[]): ColGroupDef<any> {
     return {
         groupId,
         children,

@@ -44,7 +44,10 @@ export function getPivotColumns(beans: BeanCollection): Column[] {
     return beans.pivotColsSvc?.columns ?? [];
 }
 
-export function setPivotResultColumns(beans: BeanCollection, colDefs: (ColDef | ColGroupDef)[] | null): void {
+export function setPivotResultColumns(
+    beans: BeanCollection,
+    colDefs: (ColDef<any, any> | ColGroupDef<any>)[] | null
+): void {
     beans.pivotResultCols?.setPivotResultCols(colDefs, 'api');
 }
 

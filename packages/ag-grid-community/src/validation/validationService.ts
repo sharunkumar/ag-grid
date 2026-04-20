@@ -123,7 +123,7 @@ export class ValidationService extends BeanStub implements NamedBean {
     }
 
     /** Should only be called via the GridOptionsService */
-    public validateColDef(colDef: ColDef | ColGroupDef): void {
+    public validateColDef(colDef: ColDef<any, any> | ColGroupDef<any>): void {
         this.processOptions(colDef, COL_DEF_VALIDATORS());
     }
 

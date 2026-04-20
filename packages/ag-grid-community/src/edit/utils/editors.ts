@@ -636,7 +636,7 @@ function dispatchEditingStopped(
     }
 }
 
-function _columnDefsRequireValidation(columnDefs?: ColDef[]): boolean {
+function _columnDefsRequireValidation(columnDefs?: ColDef<any, any>[]): boolean {
     if (!columnDefs) {
         return false;
     }

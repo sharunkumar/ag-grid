@@ -60,7 +60,7 @@ export interface ISetFilterCellRendererParams<TData = any, TContext = any> exten
     valueFormatted: string | null | undefined;
 
     /** The cell's column definition. */
-    colDef?: ColDef;
+    colDef?: ColDef<any, any>;
     /** The cell's column. */
     column?: Column;
     /**

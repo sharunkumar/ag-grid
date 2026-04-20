@@ -667,7 +667,7 @@ export interface _ColumnGridApi<TData> {
      * Returns the current column definitions.
      * @agModule `ColumnApiModule`
      */
-    getColumnDefs(): (ColDef<TData> | ColGroupDef<TData>)[] | undefined;
+    getColumnDefs(): (ColDef<TData, any> | ColGroupDef<TData>)[] | undefined;
 
     /**
      * Returns the column definition with the given `colKey`, which can either be the `colId` (a string) or the column instance.
@@ -1603,7 +1603,7 @@ export interface _PivotGridApi<TData> {
      * Set explicit pivot column definitions yourself. Used for advanced use cases only.
      * @agModule `PivotModule`
      */
-    setPivotResultColumns(colDefs: (ColDef | ColGroupDef)[] | null): void;
+    setPivotResultColumns(colDefs: (ColDef<any, any> | ColGroupDef<any>)[] | null): void;
 
     /**
      * Returns the grid's pivot result columns.
