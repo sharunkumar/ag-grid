@@ -17,7 +17,7 @@ export interface IDetailCellRenderer<TData = any> {
 }
 
 export interface IDetailCellRendererParams<TData = any, TDetail = any>
-    extends ICellRendererParams<TData>,
+    extends ICellRendererParams<TData, any, any>,
         FindDetailGridCellRendererParams<TData> {
     /**
      * Provide Grid Options to use for the Detail Grid.
@@ -48,7 +48,7 @@ export interface GetDetailRowDataParams<TData = any, TDetail = any> {
     successCallback(rowData: TDetail[]): void;
 }
 
-type TemplateFunc<TData = any> = (params: ICellRendererParams<TData>) => string;
+type TemplateFunc<TData = any> = (params: ICellRendererParams<TData, any, any>) => string;
 
 export interface IDetailCellRendererCtrl extends Bean {
     init(comp: IDetailCellRenderer, params: IDetailCellRendererParams): void;

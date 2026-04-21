@@ -59,7 +59,7 @@ export interface IGroupCellRendererFullRowParams {
  * Do not use in `colDef.cellRendererParams` - see `IGroupCellRendererParams` instead.
  */
 export type GroupCellRendererParams<TData = any, TValue = any> = IGroupCellRendererParams &
-    ICellRendererParams<TData, TValue> &
+    ICellRendererParams<TData, TValue, any> &
     IGroupCellRendererFullRowParams;
 
 export interface IGroupCellRenderer {

@@ -24,7 +24,7 @@ export function _suppressCellMouseEvent(
 
 export function _suppressFullWidthMouseEvent(
     gos: GridOptionsService,
-    cellRendererParams: ICellRendererParams | undefined,
+    cellRendererParams: ICellRendererParams<any, any, any> | undefined,
     node: IRowNode,
     event: MouseEvent
 ): boolean {

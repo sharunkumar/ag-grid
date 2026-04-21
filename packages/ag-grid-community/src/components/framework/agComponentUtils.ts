@@ -24,7 +24,7 @@ export class AgComponentUtils extends BeanStub implements NamedBean {
                 return this.eGui;
             }
 
-            init?(params: ICellRendererParams): void {
+            init?(params: ICellRendererParams<any, any, any>): void {
                 const callbackResult: string | HTMLElement = jsCompFunc(params);
                 const type = typeof callbackResult;
                 if (type === 'string' || type === 'number' || type === 'boolean') {

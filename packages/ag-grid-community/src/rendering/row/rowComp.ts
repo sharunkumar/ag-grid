@@ -12,7 +12,7 @@ import type { IRowComp, RowCtrl } from './rowCtrl';
 
 export class RowComp extends Component {
     private fullWidthCellRenderer: ICellRendererComp | null | undefined;
-    private fullWidthCellRendererParams: ICellRendererParams | undefined;
+    private fullWidthCellRendererParams: ICellRendererParams<any, any, any> | undefined;
 
     private readonly rowCtrl: RowCtrl;
 
@@ -135,7 +135,10 @@ export class RowComp extends Component {
         this.destroyCells(this.cellComps);
     }
 
-    private setFullWidthRowComp(fullWidthRowComponent: ICellRendererComp, params: ICellRendererParams): void {
+    private setFullWidthRowComp(
+        fullWidthRowComponent: ICellRendererComp,
+        params: ICellRendererParams<any, any, any>
+    ): void {
         this.fullWidthCellRenderer = fullWidthRowComponent;
         this.fullWidthCellRendererParams = params;
         this.addDestroyFunc(() => {

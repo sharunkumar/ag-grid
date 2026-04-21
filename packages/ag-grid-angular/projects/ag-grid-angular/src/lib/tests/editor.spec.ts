@@ -14,13 +14,13 @@ import type { ICellEditorAngularComp, ICellRendererAngularComp } from '../interf
     template: `£{{ params?.value }}`,
 })
 export class PoundRenderer implements ICellRendererAngularComp {
-    params: ICellRendererParams | undefined;
+    params: ICellRendererParams<any, any, any> | undefined;
 
-    agInit(params: ICellRendererParams): void {
+    agInit(params: ICellRendererParams<any, any, any>): void {
         this.params = params;
     }
 
-    refresh(params: ICellRendererParams) {
+    refresh(params: ICellRendererParams<any, any, any>) {
         this.params = params;
         return true;
     }

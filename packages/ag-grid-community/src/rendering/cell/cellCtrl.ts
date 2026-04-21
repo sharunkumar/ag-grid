@@ -531,7 +531,7 @@ export class CellCtrl extends BeanStub {
         return editSvc?.stopEditing(this, { cancel, source: editSvc?.isBatchEditing() ? 'ui' : 'api' }) ?? false;
     }
 
-    private createCellRendererParams(): ICellRendererParams {
+    private createCellRendererParams(): ICellRendererParams<any, any, any> {
         const {
             value,
             valueFormatted,
@@ -541,7 +541,7 @@ export class CellCtrl extends BeanStub {
             eGui,
             beans: { valueSvc, gos, editSvc },
         } = this;
-        const res: ICellRendererParams = _addGridCommonParams(gos, {
+        const res: ICellRendererParams<any, any, any> = _addGridCommonParams(gos, {
             value: value,
             valueFormatted: valueFormatted,
             getValue: () => valueSvc.getValueForDisplay({ column, node: rowNode, from: 'edit' }).value,

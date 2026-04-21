@@ -34,16 +34,16 @@ function updateCount(counts: Record<string, boolean>, key: string, isInAngularZo
 export class TestComponent implements ICellRendererAngularComp {
     // Validate that component variables are running in Zone
     private testInZone = NgZone.isInAngularZone();
-    private params!: ICellRendererParams & { getZoneStatus: () => any };
+    private params!: ICellRendererParams<any, any, any> & { getZoneStatus: () => any };
 
-    agInit(params: ICellRendererParams & { getZoneStatus: () => any }): void {
+    agInit(params: ICellRendererParams<any, any, any> & { getZoneStatus: () => any }): void {
         // Validate that agInit is running inside Zone
         updateCount(params.getZoneStatus(), 'TestComp -> agInit', NgZone.isInAngularZone());
         updateCount(params.getZoneStatus(), 'TestComp -> class variable', this.testInZone);
         this.params = params;
     }
 
-    refresh(params: ICellRendererParams & { getZoneStatus: () => any }) {
+    refresh(params: ICellRendererParams<any, any, any> & { getZoneStatus: () => any }) {
         updateCount(params.getZoneStatus(), 'TestComp -> refresh', NgZone.isInAngularZone());
         return false;
     }

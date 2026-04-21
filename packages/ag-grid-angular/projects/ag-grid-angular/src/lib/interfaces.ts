@@ -73,7 +73,9 @@ export interface IFilterDisplayAngularComp<TData = any, TContext = any, TModel =
     extends AgFrameworkComponent<FilterDisplayParams<TData, TContext, TModel, TState>>,
         FilterDisplay<TData, TContext, TModel, TState> {}
 
-export interface ICellRendererAngularComp extends AgFrameworkComponent<ICellRendererParams>, ICellRenderer {}
+export interface ICellRendererAngularComp
+    extends AgFrameworkComponent<ICellRendererParams<any, any, any>>,
+        ICellRenderer {}
 
 export interface ICellEditorRendererAngularComp extends AgFrameworkComponent<ICellEditorRendererParams> {}
 

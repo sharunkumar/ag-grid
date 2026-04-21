@@ -78,14 +78,14 @@ export interface IRowComp {
     setCellCtrls(cellCtrls: CellCtrl[], useFlushSync: boolean): void;
     showFullWidth(compDetails: UserCompDetails): void;
     getFullWidthCellRenderer(): ICellRenderer | null | undefined;
-    getFullWidthCellRendererParams(): ICellRendererParams | undefined;
+    getFullWidthCellRendererParams(): ICellRendererParams<any, any, any> | undefined;
     setTop(top: string): void;
     setTransform(transform: string): void;
     setRowIndex(rowIndex: string): void;
     setRowId(rowId: string): void;
     setRowBusinessKey(businessKey: string): void;
     setUserStyles(styles: RowStyle | undefined): void;
-    refreshFullWidth(getUpdatedParams: () => ICellRendererParams): boolean;
+    refreshFullWidth(getUpdatedParams: () => ICellRendererParams<any, any, any>): boolean;
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
@@ -1391,7 +1391,7 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
 
     private createFullWidthCompDetails(eRow: HTMLElement, pinned: ColumnPinnedType): UserCompDetails {
         const { gos, rowNode } = this;
-        const params = _addGridCommonParams<ICellRendererParams>(gos, {
+        const params = _addGridCommonParams<ICellRendererParams<any, any, any>>(gos, {
             fullWidth: true,
             data: rowNode.data,
             node: rowNode,
@@ -1401,14 +1401,14 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
             eGridCell: eRow,
             eParentOfValue: eRow,
             pinned,
-            addRenderedRowListener: this.addEventListener.bind(this) as any, // This is not on the type of ICellRendererParams
+            addRenderedRowListener: this.addEventListener.bind(this) as any, // This is not on the type of ICellRendererParams<any, any, any>
             registerRowDragger: (rowDraggerElement, dragStartPixels, value, rowDragEntireRow) =>
                 this.addFullWidthRowDragging(rowDraggerElement, dragStartPixels, value, rowDragEntireRow),
             setTooltip: (value, shouldDisplayTooltip) => {
                 gos.assertModuleRegistered('Tooltip', 3);
                 this.setupFullWidthRowTooltip(value, shouldDisplayTooltip);
             },
-        } as WithoutGridCommon<ICellRendererParams>);
+        } as WithoutGridCommon<ICellRendererParams<any, any, any>>);
 
         const compFactory = this.beans.userCompFactory;
         switch (this.rowType) {

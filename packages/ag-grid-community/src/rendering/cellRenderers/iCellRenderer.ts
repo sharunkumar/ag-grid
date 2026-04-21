@@ -5,7 +5,7 @@ import type { Column } from '../../interfaces/iColumn';
 import type { AgGridCommon } from '../../interfaces/iCommon';
 import type { IRowNode } from '../../interfaces/iRowNode';
 
-export interface ICellRendererParams<TData = any, TValue = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface ICellRendererParams<TData, TValue, TContext> extends AgGridCommon<TData, TContext> {
     /** Value to be rendered. */
     value: TValue | null | undefined;
     /** Formatted value to be rendered. */
@@ -76,12 +76,14 @@ export interface ICellRenderer<TData = any> {
      * Get the cell to refresh. Return true if successful. Return false if not (or you don't have refresh logic),
      * then the grid will refresh the cell for you.
      */
-    refresh(params: ICellRendererParams<TData>): boolean;
+    refresh(params: ICellRendererParams<TData, any, any>): boolean;
 }
 
-export interface ICellRendererComp<TData = any> extends IComponent<ICellRendererParams<TData>>, ICellRenderer<TData> {}
+export interface ICellRendererComp<TData = any>
+    extends IComponent<ICellRendererParams<TData, any, any>>,
+        ICellRenderer<TData> {}
 
-export type ICellRendererFunc<TData = any> = (params: ICellRendererParams<TData>) => HTMLElement | string;
+export type ICellRendererFunc<TData = any> = (params: ICellRendererParams<TData, any, any>) => HTMLElement | string;
 
 export interface GetCellRendererInstancesParams<TData = any> extends GetCellsParams<TData> {}
 
