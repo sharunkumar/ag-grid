@@ -1,0 +1,228 @@
+name: Fork CI
+
+# Slimmed-down CI for the sharunkumar/ag-grid fork.
+# Runs the checks that don't depend on org secrets, the internal yarn registry,
+# or upstream-only infra (Sonar, Slack, deploy keys, latest-success tag, etc.).
+# See PATCH.md for context.
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened, ready_for_review]
+    workflow_dispatch:
+
+concurrency:
+    group: fork-ci-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    NX_NO_CLOUD: true
+    NX_DAEMON: false
+    SHARP_IGNORE_GLOBAL_LIBVIPS: true
+    CI: true
+
+permissions:
+    contents: read
+
+jobs:
+    setup:
+        name: Install
+        runs-on: ubuntu-24.04
+        if: github.event.pull_request.draft == false
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+                  cache: yarn
+
+            - name: yarn install
+              run: yarn install --frozen-lockfile --ignore-scripts
+
+            - name: yarn postinstall
+              run: yarn postinstall
+
+            - name: Cache workspace
+              uses: actions/cache/save@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+
+    format:
+        name: Format
+        needs: setup
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+            - uses: actions/cache/restore@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  fail-on-cache-miss: true
+            - name: nx format:check
+              run: yarn nx format:check --all
+
+    lint:
+        name: Lint
+        needs: setup
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+            - uses: actions/cache/restore@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  fail-on-cache-miss: true
+            - name: nx lint
+              run: yarn nx lint
+
+    typecheck:
+        name: Typecheck
+        needs: setup
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+            - uses: actions/cache/restore@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  fail-on-cache-miss: true
+            - name: nx build:types
+              run: yarn nx run-many -t build:types
+
+    build:
+        name: Build
+        needs: setup
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+            - uses: actions/cache/restore@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  fail-on-cache-miss: true
+            - name: nx build
+              run: yarn nx run-many -t build -p ag-grid-community ag-grid-enterprise
+
+    unit-tests:
+        name: Unit Tests
+        needs: setup
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+            - uses: actions/cache/restore@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  fail-on-cache-miss: true
+            - name: nx test
+              run: yarn nx run-many -t test -p ag-grid-community ag-grid-enterprise
+
+    behavioural-tests:
+        name: Behavioural Tests
+        needs: setup
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: package.json
+            - uses: actions/cache/restore@v4
+              with:
+                  path: |
+                      node_modules
+                      packages/*/node_modules
+                      plugins/*/node_modules
+                      community-modules/*/node_modules
+                      documentation/*/node_modules
+                      testing/*/node_modules
+                      external/*/node_modules
+                      .nx/cache
+                      .nx/workspace-data
+                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  fail-on-cache-miss: true
+            - name: behave.sh
+              run: ./behave.sh

@@ -11,6 +11,10 @@ upstream   git@github.com:ag-grid/ag-grid.git (fetch)
 upstream   git@github.com:ag-grid/ag-grid.git (push)
 ```
 
+## CI
+
+-   Fork-friendly CI workflow at [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml) (format, lint, typecheck, build, unit + behavioural tests; no org secrets required). Upstream `ci.yml` and other workflows are disabled on the fork.
+
 ## Patches
 
 -   Remove `= any` defaults from public generics
