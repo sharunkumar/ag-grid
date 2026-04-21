@@ -31,7 +31,7 @@ import { _applyColumnState, getColumnStateFromColDef } from './columnStateUtils'
 import { convertColumnTypes } from './columnUtils';
 
 interface GroupSafeValueFormatter {
-    groupSafeValueFormatter?: ValueFormatterFunc;
+    groupSafeValueFormatter?: ValueFormatterFunc<any, any, any>;
 }
 
 type DataTypeDefinitionMap = {
@@ -808,7 +808,7 @@ const isNumberOrBigintBaseDataType = (v: string) => v === 'number' || v === 'big
 function createGroupSafeValueFormatter(
     dataTypeDefinition: DataTypeDefinition | CoreDataTypeDefinition,
     gos: GridOptionsService
-): ValueFormatterFunc | undefined {
+): ValueFormatterFunc<any, any, any> | undefined {
     if (!dataTypeDefinition.valueFormatter) {
         return undefined;
     }

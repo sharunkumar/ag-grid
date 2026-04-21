@@ -321,7 +321,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
     /** Function or expression. Gets the value from your data for display. */
     valueGetter?: string | ValueGetterFunc<TData, TValue, any>;
     /** A function or expression to format a value, should return a string. */
-    valueFormatter?: string | ValueFormatterFunc<TData, TValue>;
+    valueFormatter?: string | ValueFormatterFunc<TData, TValue, any>;
     /** Provided a reference data map to be used to map column values to their respective value from the map. */
     refData?: RefData;
     /**
@@ -345,7 +345,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      * If using a custom `tooltipComponent` you may return any custom value to be passed to your tooltip component.
      * @agModule `TooltipModule`
      */
-    tooltipValueGetter?: TooltipValueGetterFunc<TData, TValue>;
+    tooltipValueGetter?: TooltipValueGetterFunc<TData, TValue, any>;
 
     /**
      * Callback to select which tooltip component to be used for a given row within the same column.
@@ -359,7 +359,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      * Set to `true` (or return `true` from function) to render a selection checkbox in the column.
      * @default false
      */
-    checkboxSelection?: boolean | CheckboxSelectionCallback<TData, TValue>;
+    checkboxSelection?: boolean | CheckboxSelectionCallback<TData, TValue, any>;
     /**
      * @deprecated v32.2 Use the new selection API instead. See `GridOptions.rowSelection`
      *
@@ -439,7 +439,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      * When grouping, see `groupRowEditable` instead for group rows.
      * @default false
      */
-    editable?: boolean | EditableCallback<TData, TValue>;
+    editable?: boolean | EditableCallback<TData, TValue, any>;
     /**
      * Works like `editable`, but is evaluated only for group rows. When provided, group rows use
      * this property instead of `editable`. Set to `true` to make group row cells editable, or use
@@ -480,7 +480,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
     /**
      * Function or expression. Sets the value into your data for saving. Return `true` if the data changed.
      */
-    valueSetter?: string | ValueSetterFunc<TData, TValue>;
+    valueSetter?: string | ValueSetterFunc<TData, TValue, any>;
     /** Function or expression. Parses the value for saving. */
     valueParser?: string | ValueParserFunc<TData, TValue>;
     /**
@@ -618,7 +618,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      *
      * If `true` or the callback returns `true`, a 'select all' checkbox will be put into the header.
      */
-    headerCheckboxSelection?: boolean | HeaderCheckboxSelectionCallback<TData, TValue>;
+    headerCheckboxSelection?: boolean | HeaderCheckboxSelectionCallback<TData, TValue, any>;
     /**
      * @deprecated v32.2 Use the new selection API instead. See `GridOptions.rowSelection`
      *
@@ -761,7 +761,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      * @default false
      * @agModule `RowDragModule`
      */
-    rowDrag?: boolean | RowDragCallback<TData, TValue>;
+    rowDrag?: boolean | RowDragCallback<TData, TValue, any>;
 
     /**
      * A callback that should return a string to be displayed by the `rowDragComp` while dragging a row.
@@ -1006,12 +1006,12 @@ export type ColTypeDef<TData = any, TValue = any> = Omit<ColDef<TData, TValue>, 
 
 export interface CheckboxSelectionCallbackParams<TData, TValue, TContext>
     extends ColumnFunctionCallbackParams<TData, TValue, TContext> {}
-export type CheckboxSelectionCallback<TData = any, TValue = any, TContext = any> = (
+export type CheckboxSelectionCallback<TData, TValue, TContext> = (
     params: CheckboxSelectionCallbackParams<TData, TValue, TContext>
 ) => boolean;
 export interface RowDragCallbackParams<TData, TValue, TContext>
     extends ColumnFunctionCallbackParams<TData, TValue, TContext> {}
-export type RowDragCallback<TData = any, TValue = any, TContext = any> = (
+export type RowDragCallback<TData, TValue, TContext> = (
     params: RowDragCallbackParams<TData, TValue, TContext>
 ) => boolean;
 export interface DndSourceCallbackParams<TData = any, TValue = any, TContext = any>
@@ -1031,7 +1031,7 @@ export type DndSourceCallback<TData = any, TValue = any, TContext = any> = (
 ) => boolean;
 export interface EditableCallbackParams<TData, TValue, TContext>
     extends ColumnFunctionCallbackParams<TData, TValue, TContext> {}
-export type EditableCallback<TData = any, TValue = any, TContext = any> = (
+export type EditableCallback<TData, TValue, TContext> = (
     params: EditableCallbackParams<TData, TValue, TContext>
 ) => boolean;
 export type {
@@ -1067,7 +1067,7 @@ export interface HeaderCheckboxSelectionCallbackParams<TData, TValue, TContext> 
     column: Column<TValue>;
     colDef: ColDef<TData, TValue>;
 }
-export type HeaderCheckboxSelectionCallback<TData = any, TValue = any, TContext = any> = (
+export type HeaderCheckboxSelectionCallback<TData, TValue, TContext> = (
     params: HeaderCheckboxSelectionCallbackParams<TData, TValue, TContext>
 ) => boolean;
 
@@ -1179,7 +1179,7 @@ export type HeaderTooltipValueGetterFunc<TData = any, TValue = any, TContext = a
     params: ITooltipParams<TData, TValue, TContext>
 ) => string | any;
 
-export type TooltipValueGetterFunc<TData = any, TValue = any, TContext = any> = (
+export type TooltipValueGetterFunc<TData, TValue, TContext> = (
     params: ITooltipParams<TData, TValue, TContext>
 ) => string | any;
 
@@ -1193,9 +1193,7 @@ export interface NewValueParams<TData, TValue, TContext>
 
 export interface ValueSetterParams<TData, TValue, TContext>
     extends ChangedValueParams<TData, TValue | null | undefined, TValue | null | undefined, TContext> {}
-export type ValueSetterFunc<TData = any, TValue = any, TContext = any> = (
-    params: ValueSetterParams<TData, TValue, TContext>
-) => boolean;
+export type ValueSetterFunc<TData, TValue, TContext> = (params: ValueSetterParams<TData, TValue, TContext>) => boolean;
 export interface ValueParserParams<TData = any, TValue = any, TContext = any>
     extends ChangedValueParams<TData, TValue | null | undefined, string, TContext> {}
 export type ValueParserFunc<TData = any, TValue = any, TContext = any> = (
@@ -1208,7 +1206,7 @@ export interface ValueFormatterParams<TData, TValue, TContext>
     value: TValue | null | undefined;
 }
 
-export type ValueFormatterFunc<TData = any, TValue = any, TContext = any> = (
+export type ValueFormatterFunc<TData, TValue, TContext> = (
     params: ValueFormatterParams<TData, TValue, TContext>
 ) => string;
 

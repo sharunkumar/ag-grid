@@ -2399,12 +2399,12 @@ export interface GridOptions<TData> {
      * Callback version of property `rowStyle` to set style for each row individually. Function should return an object of CSS values or undefined for no styles.
      * @agModule `RowStyleModule`
      */
-    getRowStyle?: GetRowStyle<TData>;
+    getRowStyle?: GetRowStyle<TData, any>;
     /**
      * Callback version of property `rowClass` to set class(es) for each row individually. Function should return either a string (class name), array of strings (array of class names) or undefined for no class.
      * @agModule `RowStyleModule`
      */
-    getRowClass?: GetRowClass<TData>;
+    getRowClass?: GetRowClass<TData, any>;
     /**
      * Callback version of property `rowHeight` to set height for each row individually. Function should return a positive number of pixels, or return `null`/`undefined` to use the default row height.
      */
@@ -2978,12 +2978,8 @@ export interface RowStyle {
     [cssProperty: string]: string | number;
 }
 
-export type GetRowStyle<TData = any, TContext = any> = (
-    params: RowClassParams<TData, TContext>
-) => RowStyle | undefined;
-export type GetRowClass<TData = any, TContext = any> = (
-    params: RowClassParams<TData, TContext>
-) => string | string[] | undefined;
+export type GetRowStyle<TData, TContext> = (params: RowClassParams<TData, TContext>) => RowStyle | undefined;
+export type GetRowClass<TData, TContext> = (params: RowClassParams<TData, TContext>) => string | string[] | undefined;
 export interface RowClassParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /**
      * The data associated with this row from rowData. Data is `undefined` for row groups.
