@@ -11,7 +11,7 @@ on:
     workflow_dispatch:
 
 concurrency:
-    group: fork-ci-${{ github.ref }}
+    group: fork-ci-${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: true
 
 env:
