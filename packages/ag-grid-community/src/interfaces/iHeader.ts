@@ -3,7 +3,7 @@ import type { SortDef, SortDirection } from '../entities/colDef';
 import type { Column } from './iColumn';
 import type { AgGridCommon } from './iCommon';
 
-export interface IHeaderParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface IHeaderParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** The column the header is for. */
     column: Column<any>;
     /**
@@ -86,10 +86,10 @@ export interface IHeaderParams<TData = any, TContext = any> extends AgGridCommon
 
 export interface IHeader {
     /** Get the header to refresh. Gets called whenever Column Defs are updated. */
-    refresh(params: IHeaderParams): boolean;
+    refresh(params: IHeaderParams<any, any>): boolean;
 }
 
-export interface IHeaderComp extends IHeader, IComponent<IHeaderParams> {}
+export interface IHeaderComp extends IHeader, IComponent<IHeaderParams<any, any>> {}
 
 export interface IInnerHeaderComponent<
     TData = any,

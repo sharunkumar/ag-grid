@@ -138,15 +138,15 @@ export function _getInnerCellRendererDetails<TDefinition = any>(
 export function _getHeaderCompDetails(
     userCompFactory: UserComponentFactory,
     colDef: ColDef<any, any>,
-    params: IHeaderParams
+    params: IHeaderParams<any, any>
 ): UserCompDetails<IHeaderComp> | undefined {
     return userCompFactory.getCompDetails(colDef, HeaderComponent, 'agColumnHeader', params);
 }
 
 export function _getInnerHeaderCompDetails(
     userCompFactory: UserComponentFactory,
-    headerCompParams: IHeaderParams,
-    params: IHeaderParams
+    headerCompParams: IHeaderParams<any, any>,
+    params: IHeaderParams<any, any>
 ): UserCompDetails<IInnerHeaderComponent> | undefined {
     return userCompFactory.getCompDetails(headerCompParams, InnerHeaderComponent, undefined, params);
 }

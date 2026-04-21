@@ -49,9 +49,9 @@ export interface IHeaderGroupAngularComp extends AgFrameworkComponent<IHeaderGro
 
 export interface IInnerHeaderGroupAngularComp extends AgFrameworkComponent<IHeaderGroupParams>, IHeaderGroup {}
 
-export interface IHeaderAngularComp extends AgFrameworkComponent<IHeaderParams>, IHeader {}
+export interface IHeaderAngularComp extends AgFrameworkComponent<IHeaderParams<any, any>>, IHeader {}
 
-export interface IInnerHeaderAngularComp extends AgFrameworkComponent<IHeaderParams>, IHeader {}
+export interface IInnerHeaderAngularComp extends AgFrameworkComponent<IHeaderParams<any, any>>, IHeader {}
 
 export interface IFloatingFilterAngularComp<P = any>
     extends AgFrameworkComponent<IFloatingFilterParams<P>>,
