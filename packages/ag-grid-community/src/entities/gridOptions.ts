@@ -2941,7 +2941,7 @@ export type Components = { [p: string]: any };
 export type RowGroupingDisplayType = 'singleColumn' | 'multipleColumns' | 'groupRows' | 'custom';
 export type TreeDataDisplayType = 'auto' | 'custom';
 
-export type GetDataPath<TData = any> = (data: TData) => string[];
+export type GetDataPath<TData> = (data: TData) => string[];
 
 export type IsServerSideGroup = (dataItem: any) => boolean;
 
