@@ -5,7 +5,7 @@ export interface GetCellsParams<TData = any> {
     /** Optional list of row nodes to restrict operation to */
     rowNodes?: IRowNode<TData>[];
     /** Optional list of columns to restrict operation to */
-    columns?: (string | Column)[];
+    columns?: (string | Column<any>)[];
 }
 
 interface RefreshParams<TData = any> extends GetCellsParams<TData> {
@@ -15,7 +15,7 @@ interface RefreshParams<TData = any> extends GetCellsParams<TData> {
     suppressFlash?: boolean;
 }
 
-export interface RefreshCellsParams<TData = any> extends RefreshParams<TData> {}
+export interface RefreshCellsParams<TData> extends RefreshParams<TData> {}
 
 export interface RefreshRowsParams<TData = any> extends RefreshParams<TData> {}
 

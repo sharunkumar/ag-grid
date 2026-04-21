@@ -27,7 +27,7 @@ import {
 import { _isHiddenParent } from '../rowHierarchyUtils';
 
 export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendererCtrl {
-    private params: GroupCellRendererParams;
+    private params: GroupCellRendererParams<any, any>;
 
     private node: RowNode; // the node this cell is rendering for
     private displayedNode: RowNode; // the node to display instead of this.node for [groupHideOpenParents] and [showOpenedGroup]
@@ -51,7 +51,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
         eExpanded: HTMLElement,
         eContracted: HTMLElement,
         compClass: any,
-        params: GroupCellRendererParams
+        params: GroupCellRendererParams<any, any>
     ): void {
         this.params = params;
         this.eGui = eGui;
@@ -314,7 +314,11 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
         /**
          * Prioritise user cell renderer
          */
-        const innerCompDetails = _getInnerCellRendererDetails<GroupCellRendererParams>(userCompFactory, params, params);
+        const innerCompDetails = _getInnerCellRendererDetails<GroupCellRendererParams<any, any>>(
+            userCompFactory,
+            params,
+            params
+        );
         if (innerCompDetails && !isGroupRowRenderer(innerCompDetails)) {
             return innerCompDetails;
         }
@@ -334,7 +338,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
                 // try to use inner renderer instead
                 if (isGroupRowRenderer(relatedCompDetails)) {
                     if (relatedColDef?.cellRendererParams?.innerRenderer) {
-                        return _getInnerCellRendererDetails<GroupCellRendererParams>(
+                        return _getInnerCellRendererDetails<GroupCellRendererParams<any, any>>(
                             userCompFactory,
                             relatedColDef.cellRendererParams,
                             params
@@ -565,7 +569,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
     }
 
     /** Whether the group cell is editable via groupRowEditable or enableGroupEdit. */
-    private isGroupCellEditable(node: RowNode | IRowNode): boolean {
+    private isGroupCellEditable(node: RowNode | IRowNode<any>): boolean {
         const column = this.params.column;
         return (
             !!column &&

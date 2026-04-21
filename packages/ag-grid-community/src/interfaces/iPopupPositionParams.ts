@@ -3,5 +3,5 @@ import type { IRowNode } from './iRowNode';
 
 export interface PopupPositionParams {
     column?: AgColumn | null;
-    rowNode?: IRowNode | null;
+    rowNode?: IRowNode<any> | null;
 }

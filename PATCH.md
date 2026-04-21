@@ -1,0 +1,93 @@
+# PATCH
+
+This repository is a fork of [ag-grid](https://github.com/ag-grid/ag-grid).
+
+## Remotes
+
+```
+sharun     git@github.com:sharunkumar/ag-grid.git (fetch)
+sharun     git@github.com:sharunkumar/ag-grid.git (push)
+upstream   git@github.com:ag-grid/ag-grid.git (fetch)
+upstream   git@github.com:ag-grid/ag-grid.git (push)
+```
+
+## Syncing from upstream
+
+-   After clicking "Sync fork" on GitHub: `git fetch sharun && git merge refs/remotes/sharun/latest`.
+
+## CI
+
+-   Fork-friendly CI workflow at [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml) (format, lint, typecheck, build, unit + behavioural tests; no org secrets required). Build and lint cover all five published packages (`ag-grid-community`, `ag-grid-enterprise`, `ag-grid-angular`, `ag-grid-vue3`, `ag-grid-react`); Jest unit tests cover community + enterprise. Upstream `ci.yml` and other workflows are disabled on the fork.
+-   When syncing from upstream, disable any newly-added workflows on the `sharun` remote via `GH_HOST=github.com gh workflow disable <id> --repo sharunkumar/ag-grid` so only `Fork CI` remains active.
+
+## Patches
+
+-   Remove `= any` defaults from public generics
+    -   Column-def types
+        -   `ColDef<TData, TValue>`
+        -   `ColGroupDef<TData>`
+        -   `AbstractColDef<TData, TValue>`
+        -   `ColDefField<TData, TValue>`
+    -   `GridOptions<TData>`
+    -   `GridApi<TData>`
+    -   `ICellRendererParams<TData, TValue, TContext>`
+    -   `ValueGetterParams<TData, TValue, TContext>`
+    -   `ValueFormatterParams<TData, TValue, TContext>`
+    -   `Column<TValue>`
+    -   `IServerSideGetRowsParams<TData, TContext>`
+    -   `RowClassParams<TData, TContext>`
+    -   `ICellEditorParams<TData, TValue, TContext>`
+    -   `SetFilterValuesFuncParams<TData, V>`
+    -   `IRowNode<TData>`
+    -   `ValueSetterParams<TData, TValue, TContext>`
+    -   `CellClassParams<TData, TValue, TContext>`
+    -   `EditableCallbackParams<TData, TValue, TContext>`
+    -   `NewValueParams<TData, TValue, TContext>`
+    -   `ProcessCellForExportParams<TData, TContext>`
+    -   `ITooltipParams<TData, TValue, TContext>`
+    -   `IServerSideDatasource<TData>`
+    -   `GetRowIdFunc<TData, TContext>`
+    -   `GetRowIdParams<TData, TContext>`
+    -   `RowDragCallbackParams<TData, TValue, TContext>`
+    -   `MenuItemDef<TData, TContext>` / `MenuItemLeafDef<TData, TContext>`
+    -   `IStatusPanelParams<TData, TContext>`
+    -   `ISetFilterParams<TData, V>`
+    -   `IHeaderParams<TData, TContext>`
+    -   `GetContextMenuItemsParams<TData, TContext>`
+    -   `ValueGetterFunc<TData, TValue, TContext>`
+    -   `RefreshCellsParams<TData>`
+    -   `NestedFieldPaths<TData, TValue, TDepth>`
+    -   `IsRowSelectable<TData>`
+    -   `IsRowMaster<TData>`
+    -   `IGroupCellRendererParams<TData, TValue>`
+    -   `IDetailCellRendererParams<TData, TDetail>`
+    -   `HeaderCheckboxSelectionCallbackParams<TData, TValue, TContext>`
+    -   `GroupCellRendererParams<TData, TValue>`
+    -   `GetMainMenuItemsParams<TData, TContext>`
+    -   `GetDetailRowDataParams<TData, TDetail>`
+    -   `GetDataPath<TData>`
+    -   `GetContextMenuItems<TData, TContext>`
+    -   `CheckboxSelectionCallbackParams<TData, TValue, TContext>`
+    -   Callback aliases paired with the above `*Params` interfaces (kept consistent so bare
+        references error too):
+        -   `CheckboxSelectionCallback<TData, TValue, TContext>`
+        -   `RowDragCallback<TData, TValue, TContext>`
+        -   `EditableCallback<TData, TValue, TContext>`
+        -   `HeaderCheckboxSelectionCallback<TData, TValue, TContext>`
+        -   `TooltipValueGetterFunc<TData, TValue, TContext>`
+        -   `ValueSetterFunc<TData, TValue, TContext>`
+        -   `ValueFormatterFunc<TData, TValue, TContext>`
+        -   `GetRowStyle<TData, TContext>`
+        -   `GetRowClass<TData, TContext>`
+    -   Framework wrapper updates required by the type changes
+        -   `AgGridAngular` class generic constraint updated to `TColDef extends ColDef<TData, any> = ColDef<any, any>`
+        -   Angular codegen (`updateGridAndColumnProperties.js`) regex now matches both
+            `ColDef<TData>` and `ColDef<TData, any>` when substituting `TColDef`
+        -   Vue3 codegen (`updateGridAndColumnProperties.cjs`) no longer strips `<TData>` from
+            `ColDef`/`ColGroupDef` props (both generics are now required)
+        -   Hand-written `coercedGridOptions` / `gridOptions` casts in `AgGridAngular` use
+            `keyof GridOptions<TData>`
+    -   Internal usages updated to pass explicit generics
+        -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
+        -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments
+        -   Type-only edits; no runtime behaviour changes

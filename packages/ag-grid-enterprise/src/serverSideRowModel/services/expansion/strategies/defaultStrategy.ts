@@ -51,7 +51,7 @@ export class ExpandStrategy extends BeanStub implements IExpansionStrategy<RowGr
      * @param row the row to expand/collapse
      * @param expanded true to expand the row, false to collapse it
      */
-    public setRowExpanded(row: IRowNode, expanded: boolean) {
+    public setRowExpanded(row: IRowNode<any>, expanded: boolean) {
         const id = row.id!;
         const stateIsDefault = this.initialState.get(id) === expanded;
         if (expanded) {
@@ -73,7 +73,7 @@ export class ExpandStrategy extends BeanStub implements IExpansionStrategy<RowGr
      * @param rowId the row id to check
      * @returns true if the row is expanded
      */
-    public isRowExpanded(node: IRowNode): boolean {
+    public isRowExpanded(node: IRowNode<any>): boolean {
         const rowId = node.id!;
         if (this.expanded.has(rowId)) {
             return true;
@@ -98,7 +98,7 @@ export class ExpandStrategy extends BeanStub implements IExpansionStrategy<RowGr
      * as this correctly prioritizes user interaction over the user-defined initial state.
      * Plus sanity checks that the rowNode is actually expandable.
      */
-    private getInitialRowState(rowNode: IRowNode): boolean {
+    private getInitialRowState(rowNode: IRowNode<any>): boolean {
         if (!rowNode.isExpandable()) {
             return false;
         }

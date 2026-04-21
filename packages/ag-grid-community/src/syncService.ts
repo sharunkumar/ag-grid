@@ -27,7 +27,7 @@ export class SyncService extends BeanStub implements NamedBean {
         });
     }
 
-    private setColumnsAndData(columnDefs: (ColDef | ColGroupDef)[]): void {
+    private setColumnsAndData(columnDefs: (ColDef<any, any> | ColGroupDef<any>)[]): void {
         const { colModel, rowModel } = this.beans;
         colModel.setColumnDefs(columnDefs ?? [], 'gridInitializing');
         rowModel.start();

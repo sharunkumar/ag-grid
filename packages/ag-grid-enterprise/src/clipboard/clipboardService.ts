@@ -777,7 +777,10 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         }
     }
 
-    private shouldCopyCells(cellSelection?: GridOptions['cellSelection'], rowSelection?: GridOptions['rowSelection']) {
+    private shouldCopyCells(
+        cellSelection?: GridOptions<any>['cellSelection'],
+        rowSelection?: GridOptions<any>['rowSelection']
+    ) {
         const { rangeSvc, selectionSvc, gos } = this.beans;
         if (!rangeSvc || rangeSvc.isEmpty()) {
             return false;
@@ -797,7 +800,7 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         }
     }
 
-    private shouldCopyRows(rowSelection?: GridOptions['rowSelection']) {
+    private shouldCopyRows(rowSelection?: GridOptions<any>['rowSelection']) {
         const { selectionSvc, gos } = this.beans;
         if (selectionSvc?.isEmpty() ?? true) {
             return false;
@@ -1144,13 +1147,13 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         column: AgColumn,
         value: T,
         type: string,
-        func?: (params: WithoutGridCommon<ProcessCellForExportParams>) => T,
+        func?: (params: WithoutGridCommon<ProcessCellForExportParams<any, any>>) => T,
         canParse?: boolean,
         canFormat?: boolean
     ): T {
         const { valueSvc, formula } = this.beans;
         if (func) {
-            const params: WithoutGridCommon<ProcessCellForExportParams> = {
+            const params: WithoutGridCommon<ProcessCellForExportParams<any, any>> = {
                 column,
                 node: rowNode,
                 value,

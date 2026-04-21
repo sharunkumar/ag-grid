@@ -29,7 +29,7 @@ export class SelectableFilterService
     readonly beanName = 'selectableFilter' as const;
 
     private readonly selectedFilters: Map<string, number> = new Map();
-    private readonly valueGetters: Map<string, string | ValueGetterFunc> = new Map();
+    private readonly valueGetters: Map<string, string | ValueGetterFunc<any, any, any>> = new Map();
 
     public postConstruct(): void {
         const { gos, selectedFilters } = this;
@@ -40,7 +40,7 @@ export class SelectableFilterService
         }
     }
 
-    public getFilterValueGetter(colId: string): string | ValueGetterFunc | undefined {
+    public getFilterValueGetter(colId: string): string | ValueGetterFunc<any, any, any> | undefined {
         return this.valueGetters.get(colId);
     }
 
@@ -80,7 +80,9 @@ export class SelectableFilterService
         const updateDef = (def: SelectableFilterDef) => {
             const { filter, filterParams: defFilterParams, name, filterValueGetter = colDef.filterValueGetter } = def;
             const userParams = defaultFilterParams ? { ...defaultFilterParams, ...defFilterParams } : defFilterParams;
-            let updatedParams: { filterParams?: any; filterValueGetter?: string | ValueGetterFunc } | undefined;
+            let updatedParams:
+                | { filterParams?: any; filterValueGetter?: string | ValueGetterFunc<any, any, any> }
+                | undefined;
             if (dataTypeDefinition && formatValue) {
                 if (filter === 'agMultiColumnFilter') {
                     updatedParams = beans.multiFilter?.getParamsForDataType(

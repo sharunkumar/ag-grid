@@ -11,8 +11,8 @@ describe('EditModelService', () => {
     let rowNode1: RowNode;
     let rowNode2: RowNode;
 
-    let column1: Column;
-    let column2: Column;
+    let column1: Column<any>;
+    let column2: Column<any>;
 
     let position1: Required<EditPosition>;
     let position2: Required<EditPosition>;
@@ -24,8 +24,8 @@ describe('EditModelService', () => {
         rowNode1 = {} as RowNode;
         rowNode2 = {} as RowNode;
 
-        column1 = {} as Column;
-        column2 = {} as Column;
+        column1 = {} as Column<any>;
+        column2 = {} as Column<any>;
 
         position1 = { rowNode: rowNode1, column: column1 };
         position2 = { rowNode: rowNode2, column: column2 };
@@ -101,7 +101,7 @@ describe('EditModelService', () => {
 });
 
 function createExpectedMap(arg0: [Required<EditPosition>, { editorValue: string }][]) {
-    const map = new Map<IRowNode, Map<Column, { editorValue: string }>>();
+    const map = new Map<IRowNode<any>, Map<Column<any>, { editorValue: string }>>();
     for (const [position, value] of arg0) {
         const colMap = map.get(position.rowNode) || new Map();
         colMap.set(position.column, value);

@@ -1,16 +1,20 @@
 import type { AbstractColDef, ColDef, ColGroupDef } from 'ag-grid-community';
 import { _last } from 'ag-grid-community';
 
-export function isColGroupDef(colDef: AbstractColDef): colDef is ColGroupDef {
-    return !!colDef && typeof (colDef as ColGroupDef).children !== 'undefined';
+export function isColGroupDef(colDef: AbstractColDef<any, any>): colDef is ColGroupDef<any> {
+    return !!colDef && typeof (colDef as ColGroupDef<any>).children !== 'undefined';
 }
 
-function getId(colDef: AbstractColDef): string | undefined {
-    return isColGroupDef(colDef) ? colDef.groupId : (colDef as ColDef).colId;
+function getId(colDef: AbstractColDef<any, any>): string | undefined {
+    return isColGroupDef(colDef) ? colDef.groupId : (colDef as ColDef<any, any>).colId;
 }
 
-function addChildrenToGroup(tree: AbstractColDef, groupId: string, colDef: AbstractColDef): boolean {
-    const subGroupIsSplit = (currentSubGroup: ColGroupDef, currentSubGroupToAdd: ColGroupDef) => {
+function addChildrenToGroup(
+    tree: AbstractColDef<any, any>,
+    groupId: string,
+    colDef: AbstractColDef<any, any>
+): boolean {
+    const subGroupIsSplit = (currentSubGroup: ColGroupDef<any>, currentSubGroupToAdd: ColGroupDef<any>) => {
         const existingChildIds = currentSubGroup.children.map(getId);
         const childGroupAlreadyExists = existingChildIds.includes(getId(currentSubGroupToAdd));
         const lastChild = _last(currentSubGroup.children);
@@ -23,7 +27,7 @@ function addChildrenToGroup(tree: AbstractColDef, groupId: string, colDef: Abstr
     }
 
     const currentGroup = tree;
-    const groupToAdd = colDef as ColGroupDef;
+    const groupToAdd = colDef as ColGroupDef<any>;
 
     if (subGroupIsSplit(currentGroup, groupToAdd)) {
         currentGroup.children.push(groupToAdd);
@@ -49,13 +53,13 @@ function addChildrenToGroup(tree: AbstractColDef, groupId: string, colDef: Abstr
     return false;
 }
 
-export function mergeLeafPathTrees(leafPathTrees: AbstractColDef[]): AbstractColDef[] {
-    const matchingRootGroupIds = (pathA: AbstractColDef, pathB: AbstractColDef) => {
+export function mergeLeafPathTrees(leafPathTrees: AbstractColDef<any, any>[]): AbstractColDef<any, any>[] {
+    const matchingRootGroupIds = (pathA: AbstractColDef<any, any>, pathB: AbstractColDef<any, any>) => {
         const bothPathsAreGroups = isColGroupDef(pathA) && isColGroupDef(pathB);
         return bothPathsAreGroups && getId(pathA) === getId(pathB);
     };
 
-    const mergeTrees = (treeA: AbstractColDef, treeB: AbstractColDef): AbstractColDef => {
+    const mergeTrees = (treeA: AbstractColDef<any, any>, treeB: AbstractColDef<any, any>): AbstractColDef<any, any> => {
         if (!isColGroupDef(treeB)) {
             return treeA;
         }
@@ -79,7 +83,7 @@ export function mergeLeafPathTrees(leafPathTrees: AbstractColDef[]): AbstractCol
 
     // we can't just merge the leaf path trees as groups can be split apart - instead only merge if leaf
     // path groups with the same root group id are contiguous.
-    const mergeColDefs: AbstractColDef[] = [];
+    const mergeColDefs: AbstractColDef<any, any>[] = [];
     for (let i = 1; i <= leafPathTrees.length; i++) {
         const first = leafPathTrees[i - 1];
         const second = leafPathTrees[i];

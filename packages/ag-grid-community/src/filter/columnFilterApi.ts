@@ -11,14 +11,14 @@ export function isColumnFilterPresent(beans: BeanCollection): boolean {
 
 export function getColumnFilterInstance<TFilter = IFilter>(
     beans: BeanCollection,
-    key: string | Column
+    key: string | Column<any>
 ): Promise<TFilter | null | undefined> {
     return (
         (beans.filterManager?.getColumnFilterInstance(key as string | AgColumn) as any) ?? Promise.resolve(undefined)
     );
 }
 
-export function destroyFilter(beans: BeanCollection, key: string | Column) {
+export function destroyFilter(beans: BeanCollection, key: string | Column<any>) {
     const column = beans.colModel.getColDefColOrCol(key);
     if (column) {
         return beans.colFilter?.destroyFilter(column, 'api');
@@ -35,7 +35,7 @@ export function getFilterModel(beans: BeanCollection): FilterModel {
 
 export function getColumnFilterModel<TModel>(
     beans: BeanCollection,
-    key: string | Column,
+    key: string | Column<any>,
     useUnapplied?: boolean
 ): TModel | null {
     const { gos, colModel, colFilter } = beans;
@@ -49,13 +49,13 @@ export function getColumnFilterModel<TModel>(
 
 export function setColumnFilterModel<TModel>(
     beans: BeanCollection,
-    column: string | Column,
+    column: string | Column<any>,
     model: TModel | null
 ): Promise<void> {
     return beans.filterManager?.setColumnFilterModel(column as string | AgColumn, model) ?? Promise.resolve();
 }
 
-export function showColumnFilter(beans: BeanCollection, colKey: string | Column): void {
+export function showColumnFilter(beans: BeanCollection, colKey: string | Column<any>): void {
     const column = beans.colModel.getColDefColOrCol(colKey);
     if (!column) {
         // Column not found, can't show filter
@@ -73,7 +73,7 @@ export function hideColumnFilter(beans: BeanCollection): void {
     beans.menuSvc?.hideFilterMenu();
 }
 
-export function getColumnFilterHandler(beans: BeanCollection, colKey: string | Column): FilterHandler | undefined {
+export function getColumnFilterHandler(beans: BeanCollection, colKey: string | Column<any>): FilterHandler | undefined {
     const column = beans.colModel.getColDefColOrCol(colKey);
     if (!column) {
         // Column not found, can't show filter

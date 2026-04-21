@@ -24,7 +24,7 @@ export interface IProvidedStatusPanelParams {
     valueFormatter?: (params: IStatusPanelValueFormatterParams) => string;
 }
 
-export interface IStatusPanelParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface IStatusPanelParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     key: string;
 }
 

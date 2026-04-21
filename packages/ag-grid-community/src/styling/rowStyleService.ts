@@ -41,7 +41,7 @@ export class RowStyleService extends BeanStub implements NamedBean {
         const rowClassFunc = gos.getCallback('getRowClass');
 
         if (rowClassFunc) {
-            const params: WithoutGridCommon<RowClassParams> = {
+            const params: WithoutGridCommon<RowClassParams<any, any>> = {
                 data: rowNode.data,
                 node: rowNode,
                 rowIndex: rowNode.rowIndex!,
@@ -70,7 +70,7 @@ export class RowStyleService extends BeanStub implements NamedBean {
         onNotApplicableClass?: (className: string) => void
     ): void {
         const { gos, expressionSvc } = this.beans;
-        const rowClassParams: RowClassParams = _addGridCommonParams(gos, {
+        const rowClassParams: RowClassParams<any, any> = _addGridCommonParams(gos, {
             data: rowNode.data,
             node: rowNode,
             rowIndex: rowNode.rowIndex!,
@@ -96,7 +96,7 @@ export class RowStyleService extends BeanStub implements NamedBean {
         let rowStyleFuncResult: any;
 
         if (rowStyleFunc) {
-            const params: WithoutGridCommon<RowClassParams> = {
+            const params: WithoutGridCommon<RowClassParams<any, any>> = {
                 data: rowNode.data,
                 node: rowNode,
                 rowIndex: rowNode.rowIndex!,

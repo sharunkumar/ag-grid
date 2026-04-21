@@ -313,7 +313,7 @@ export interface _ScrollGridApi<TData> {
      * - `end` - Scrolls the column to the end of the viewport.
      * @agModule `ScrollApiModule`
      */
-    ensureColumnVisible(key: string | Column, position?: 'auto' | 'start' | 'middle' | 'end'): void;
+    ensureColumnVisible(key: string | Column<any>, position?: 'auto' | 'start' | 'middle' | 'end'): void;
 
     /**
      * Vertically scrolls the grid until the provided row index is inside the visible viewport.
@@ -343,10 +343,10 @@ export interface _KeyboardNavigationGridApi {
     clearFocusedCell(): void;
 
     /** Sets the focus to the specified cell. `rowPinned` can be either 'top', 'bottom' or null (for not pinned). */
-    setFocusedCell(rowIndex: number, colKey: string | Column, rowPinned?: RowPinnedType): void;
+    setFocusedCell(rowIndex: number, colKey: string | Column<any>, rowPinned?: RowPinnedType): void;
 
     /** Sets the focus to the specified header. If `floatingFilter` is true, the Column's floatingFilter element will be focused. */
-    setFocusedHeader(colKey: string | Column | ColumnGroup, floatingFilter?: boolean): void;
+    setFocusedHeader(colKey: string | Column<any> | ColumnGroup, floatingFilter?: boolean): void;
 
     /** Navigates the grid focus to the next cell, as if tabbing. */
     tabToNextCell(event?: KeyboardEvent): boolean;
@@ -434,7 +434,7 @@ export interface _ValueApi<TData> {
 
 export interface _CommunityMenuGridApi {
     /** Show the column menu for the provided column. */
-    showColumnMenu(colKey: string | Column): void;
+    showColumnMenu(colKey: string | Column<any>): void;
 
     /** Hides any visible context menu or column menu. */
     hidePopupMenu(): void;
@@ -659,7 +659,7 @@ export interface _ColumnHoverApi {
      * Returns true if the column is currently hovered.
      * @agModule `ColumnHoverModule`
      */
-    isColumnHovered(column: Column): boolean;
+    isColumnHovered(column: Column<any>): boolean;
 }
 
 export interface _ColumnGridApi<TData> {
@@ -667,7 +667,7 @@ export interface _ColumnGridApi<TData> {
      * Returns the current column definitions.
      * @agModule `ColumnApiModule`
      */
-    getColumnDefs(): (ColDef<TData> | ColGroupDef<TData>)[] | undefined;
+    getColumnDefs(): (ColDef<TData, any> | ColGroupDef<TData>)[] | undefined;
 
     /**
      * Returns the column definition with the given `colKey`, which can either be the `colId` (a string) or the column instance.
@@ -679,7 +679,7 @@ export interface _ColumnGridApi<TData> {
      * Returns the display name for a column. Useful if you are doing your own header rendering and want the grid to work out if `headerValueGetter` is used, or if you are doing your own column management GUI, to know what to show as the column name.
      * @agModule `ColumnApiModule`
      */
-    getDisplayNameForColumn(column: Column, location: HeaderLocation): string;
+    getDisplayNameForColumn(column: Column<any>, location: HeaderLocation): string;
 
     /**
      * Returns the column with the given `colKey`, which can either be the `colId` (a string) or the `colDef` (an object).
@@ -691,7 +691,7 @@ export interface _ColumnGridApi<TData> {
      * Returns all the columns, regardless of visible or not.
      * @agModule `ColumnApiModule`
      */
-    getColumns(): Column[] | null;
+    getColumns(): Column<any>[] | null;
 
     /**
      * Applies the state of the columns from a previous state. Returns `false` if one or more columns could not be found.
@@ -733,19 +733,19 @@ export interface _ColumnGridApi<TData> {
      * Returns the column to the right of the provided column, taking into consideration open / closed column groups and visible columns. This is useful if you need to know what column is beside yours e.g. if implementing your own cell navigation.
      * @agModule `ColumnApiModule`
      */
-    getDisplayedColAfter<TValue = any>(col: Column): Column<TValue> | null;
+    getDisplayedColAfter<TValue = any>(col: Column<any>): Column<TValue> | null;
 
     /**
      * Same as `getVisibleColAfter` except gives column to the left.
      * @agModule `ColumnApiModule`
      */
-    getDisplayedColBefore<TValue = any>(col: Column): Column<TValue> | null;
+    getDisplayedColBefore<TValue = any>(col: Column<any>): Column<TValue> | null;
 
     /**
      * Sets the visibility of columns. Key can be the column ID or `Column` object.
      * @agModule `ColumnApiModule`
      */
-    setColumnsVisible(keys: (string | Column)[], visible: boolean): void;
+    setColumnsVisible(keys: (string | Column<any>)[], visible: boolean): void;
 
     /**
      * Set a column's pinned / unpinned state. Key can be the column ID, field, `ColDef` object or `Column` object.
@@ -762,37 +762,37 @@ export interface _ColumnGridApi<TData> {
      *
      * @agModule `ColumnApiModule`
      */
-    getAllGridColumns(): Column[];
+    getAllGridColumns(): Column<any>[];
 
     /**
      * Same as `getAllDisplayedColumns` but just for the pinned left portion of the grid.
      * @agModule `ColumnApiModule`
      */
-    getDisplayedLeftColumns(): Column[];
+    getDisplayedLeftColumns(): Column<any>[];
 
     /**
      * Same as `getAllDisplayedColumns` but just for the center portion of the grid.
      * @agModule `ColumnApiModule`
      */
-    getDisplayedCenterColumns(): Column[];
+    getDisplayedCenterColumns(): Column<any>[];
 
     /**
      * Same as `getAllDisplayedColumns` but just for the pinned right portion of the grid.
      * @agModule `ColumnApiModule`
      */
-    getDisplayedRightColumns(): Column[];
+    getDisplayedRightColumns(): Column<any>[];
 
     /**
      * Returns all columns currently displayed (e.g. are visible and if in a group, the group is showing the columns) for the pinned left, centre and pinned right portions of the grid.
      * @agModule `ColumnApiModule`
      */
-    getAllDisplayedColumns(): Column[];
+    getAllDisplayedColumns(): Column<any>[];
 
     /**
      * Same as `getAllGridColumns()`, except only returns rendered columns, i.e. columns that are not within the viewport and therefore not rendered, due to column virtualisation, are not displayed.
      * @agModule `ColumnApiModule`
      */
-    getAllDisplayedVirtualColumns(): Column[];
+    getAllDisplayedVirtualColumns(): Column<any>[];
 }
 
 export interface _ColumnGroupGridApi {
@@ -818,16 +818,16 @@ export interface _ColumnGroupGridApi {
     resetColumnGroupState(): void;
 
     /** Same as `getAllDisplayedColumnGroups` but just for the pinned left portion of the grid. */
-    getLeftDisplayedColumnGroups(): (Column | ColumnGroup)[];
+    getLeftDisplayedColumnGroups(): (Column<any> | ColumnGroup)[];
 
     /** Same as `getAllDisplayedColumnGroups` but just for the center portion of the grid. */
-    getCenterDisplayedColumnGroups(): (Column | ColumnGroup)[];
+    getCenterDisplayedColumnGroups(): (Column<any> | ColumnGroup)[];
 
     /** Same as `getAllDisplayedColumnGroups` but just for the pinned right portion of the grid. */
-    getRightDisplayedColumnGroups(): (Column | ColumnGroup)[];
+    getRightDisplayedColumnGroups(): (Column<any> | ColumnGroup)[];
 
     /** Returns all 'root' column headers. If you are not grouping columns, these return the columns. If you are grouping, these return the top level groups - you can navigate down through each one to get the other lower level headers and finally the columns at the bottom. */
-    getAllDisplayedColumnGroups(): (Column | ColumnGroup)[] | null;
+    getAllDisplayedColumnGroups(): (Column<any> | ColumnGroup)[] | null;
 }
 
 export interface _DragGridApi<TData> {
@@ -1017,7 +1017,7 @@ export interface _ColumnFilterGridApi {
      * `key` can be a column ID or a `Column` object.
      * @agModule `TextFilterModule` / `NumberFilterModule` / `DateFilterModule` / `SetFilterModule` / `MultiFilterModule` / `CustomFilterModule`
      */
-    getColumnFilterInstance<TFilter = IFilter>(key: string | Column): Promise<TFilter | null | undefined>;
+    getColumnFilterInstance<TFilter = IFilter>(key: string | Column<any>): Promise<TFilter | null | undefined>;
 
     /**
      * Returns the filter handler instance for a column.
@@ -1026,13 +1026,13 @@ export interface _ColumnFilterGridApi {
      * `key` can be a column ID or a `Column` object.
      * @agModule `TextFilterModule` / `NumberFilterModule` / `DateFilterModule` / `SetFilterModule` / `MultiFilterModule` / `CustomFilterModule`
      */
-    getColumnFilterHandler<TFilterHandler>(key: string | Column): TFilterHandler | undefined;
+    getColumnFilterHandler<TFilterHandler>(key: string | Column<any>): TFilterHandler | undefined;
 
     /**
      * Destroys a filter. Useful to force a particular filter to be created from scratch again.
      * @agModule `TextFilterModule` / `NumberFilterModule` / `DateFilterModule` / `SetFilterModule` / `MultiFilterModule` / `CustomFilterModule`
      */
-    destroyFilter(key: string | Column): void;
+    destroyFilter(key: string | Column<any>): void;
 
     /**
      * Sets the state of all the column filters. Provide it with what you get from `getFilterModel()` to restore filter state.
@@ -1056,7 +1056,7 @@ export interface _ColumnFilterGridApi {
      * @param useUnapplied If `enableFilterHandlers = true` and value is `true`, will return the unapplied filter model.
      * @agModule `TextFilterModule` / `NumberFilterModule` / `DateFilterModule` / `SetFilterModule` / `MultiFilterModule` / `CustomFilterModule`
      */
-    getColumnFilterModel<TModel>(column: string | Column, useUnapplied?: boolean): TModel | null;
+    getColumnFilterModel<TModel>(column: string | Column<any>, useUnapplied?: boolean): TModel | null;
 
     /**
      * Sets the filter model for the specified column.
@@ -1064,13 +1064,13 @@ export interface _ColumnFilterGridApi {
      * Must wait on the response before calling `api.onFilterChanged()`.
      * @agModule `TextFilterModule` / `NumberFilterModule` / `DateFilterModule` / `SetFilterModule` / `MultiFilterModule` / `CustomFilterModule`
      */
-    setColumnFilterModel<TModel>(column: string | Column, model: TModel | null): Promise<void>;
+    setColumnFilterModel<TModel>(column: string | Column<any>, model: TModel | null): Promise<void>;
 
     /**
      * Show the filter for the provided column.
      * @agModule `TextFilterModule` / `NumberFilterModule` / `DateFilterModule` / `SetFilterModule` / `MultiFilterModule` / `CustomFilterModule`
      */
-    showColumnFilter(colKey: string | Column): void;
+    showColumnFilter(colKey: string | Column<any>): void;
 
     /**
      * Hide the filter popup if it is open.
@@ -1510,7 +1510,7 @@ export interface _RowGroupingGridApi {
      * Get row group columns.
      * @agModule `RowGroupingModule`
      */
-    getRowGroupColumns(): Column[];
+    getRowGroupColumns(): Column<any>[];
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
@@ -1561,7 +1561,7 @@ export interface _PivotGridApi<TData> {
      * Get a list of the existing value columns.
      * @agModule `PivotModule`
      */
-    getValueColumns(): Column[];
+    getValueColumns(): Column<any>[];
 
     /**
      * Remove the given list of columns from the existing set of value columns.
@@ -1597,19 +1597,19 @@ export interface _PivotGridApi<TData> {
      * Get the columns which the grid is pivoting on.
      * @agModule `PivotModule`
      */
-    getPivotColumns(): Column[];
+    getPivotColumns(): Column<any>[];
 
     /**
      * Set explicit pivot column definitions yourself. Used for advanced use cases only.
      * @agModule `PivotModule`
      */
-    setPivotResultColumns(colDefs: (ColDef | ColGroupDef)[] | null): void;
+    setPivotResultColumns(colDefs: (ColDef<any, any> | ColGroupDef<any>)[] | null): void;
 
     /**
      * Returns the grid's pivot result columns.
      * @agModule `PivotModule`
      */
-    getPivotResultColumns(): Column[] | null;
+    getPivotResultColumns(): Column<any>[] | null;
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
@@ -1949,7 +1949,7 @@ export interface _AiToolkitGridApi {
     getStructuredSchema(params?: StructuredSchemaParams): any;
 }
 
-export interface GridApi<TData = any>
+export interface GridApi<TData>
     extends _CoreGridApi<TData>,
         _StateGridApi,
         _RowSelectionGridApi<TData>,

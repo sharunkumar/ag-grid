@@ -10,7 +10,7 @@ function quote(s: string): string {
     return `"${s}"`;
 }
 
-const COLUMN_DEFINITION_DEPRECATIONS: () => Deprecations<ColDef | ColGroupDef> = () => ({
+const COLUMN_DEFINITION_DEPRECATIONS: () => Deprecations<ColDef<any, any> | ColGroupDef<any>> = () => ({
     checkboxSelection: { version: '32.2', message: 'Use `rowSelection.checkboxes` in `GridOptions` instead.' },
     headerCheckboxSelection: {
         version: '32.2',
@@ -34,13 +34,13 @@ const COLUMN_DEFINITION_DEPRECATIONS: () => Deprecations<ColDef | ColGroupDef> =
     },
 });
 
-export const COLUMN_DEFINITION_MOD_VALIDATIONS: ModuleValidation<ColDef | ColGroupDef> = {
+export const COLUMN_DEFINITION_MOD_VALIDATIONS: ModuleValidation<ColDef<any, any> | ColGroupDef<any>> = {
     allowFormula: 'Formula',
     aggFunc: 'SharedAggregation',
     autoHeight: 'RowAutoHeight',
     cellClass: 'CellStyle',
     cellClassRules: 'CellStyle',
-    cellEditor: ({ cellEditor, editable, groupRowEditable }: ColDef) => {
+    cellEditor: ({ cellEditor, editable, groupRowEditable }: ColDef<any, any>) => {
         const editingEnabled = !!editable || !!groupRowEditable;
         if (!editingEnabled) {
             return null;
@@ -50,7 +50,7 @@ export const COLUMN_DEFINITION_MOD_VALIDATIONS: ModuleValidation<ColDef | ColGro
         }
         return 'CustomEditor';
     },
-    cellRenderer: ({ cellRenderer }: ColDef) => {
+    cellRenderer: ({ cellRenderer }: ColDef<any, any>) => {
         if (typeof cellRenderer !== 'string') {
             return null;
         }
@@ -61,24 +61,25 @@ export const COLUMN_DEFINITION_MOD_VALIDATIONS: ModuleValidation<ColDef | ColGro
     contextMenuItems: 'ContextMenu',
     dndSource: 'DragAndDrop',
     dndSourceOnRowDrag: 'DragAndDrop',
-    editable: ({ editable, cellEditor }: ColDef) => {
+    editable: ({ editable, cellEditor }: ColDef<any, any>) => {
         if (editable && !cellEditor) {
             return 'TextEditor';
         }
         return null;
     },
-    groupRowEditable: ({ groupRowEditable, cellEditor }: ColDef) => {
+    groupRowEditable: ({ groupRowEditable, cellEditor }: ColDef<any, any>) => {
         if (!groupRowEditable) {
             return null;
         }
         return cellEditor ? 'RowGroupingEdit' : ['RowGroupingEdit', 'TextEditor'];
     },
-    groupRowValueSetter: ({ groupRowValueSetter }: ColDef) => (groupRowValueSetter ? 'RowGroupingEdit' : null),
+    groupRowValueSetter: ({ groupRowValueSetter }: ColDef<any, any>) =>
+        groupRowValueSetter ? 'RowGroupingEdit' : null,
     enableCellChangeFlash: 'HighlightChanges',
     enablePivot: 'SharedPivot',
     enableRowGroup: 'SharedRowGrouping',
     enableValue: 'SharedAggregation',
-    filter: ({ filter }: ColDef) => {
+    filter: ({ filter }: ColDef<any, any>) => {
         if (filter && typeof filter !== 'string' && typeof filter !== 'boolean') {
             return 'CustomFilter';
         }
@@ -92,7 +93,7 @@ export const COLUMN_DEFINITION_MOD_VALIDATIONS: ModuleValidation<ColDef | ColGro
     headerTooltip: 'Tooltip',
     headerTooltipValueGetter: 'Tooltip',
     mainMenuItems: 'ColumnMenu',
-    menuTabs: (options: ColDef) => {
+    menuTabs: (options: ColDef<any, any>) => {
         const enterpriseMenuTabs: ColumnMenuTab[] = ['columnsMenuTab', 'generalMenuTab'];
         if (options.menuTabs?.some((tab) => enterpriseMenuTabs.includes(tab))) {
             return 'ColumnMenu';
@@ -111,8 +112,8 @@ export const COLUMN_DEFINITION_MOD_VALIDATIONS: ModuleValidation<ColDef | ColGro
     groupHierarchy: 'SharedRowGrouping',
 };
 
-const COLUMN_DEFINITION_VALIDATIONS: () => Validations<ColDef | ColGroupDef> = () => {
-    const validations: Validations<ColDef | ColGroupDef> = {
+const COLUMN_DEFINITION_VALIDATIONS: () => Validations<ColDef<any, any> | ColGroupDef<any>> = () => {
+    const validations: Validations<ColDef<any, any> | ColGroupDef<any>> = {
         autoHeight: {
             supportedRowModels: ['clientSide', 'serverSide'],
             validate: (_colDef, { paginationAutoPageSize }) => {
@@ -168,7 +169,7 @@ const COLUMN_DEFINITION_VALIDATIONS: () => Validations<ColDef | ColGroupDef> = (
                     : 'headerCheckboxSelectionFilteredOnly is only supported with rowSelection=multiple',
         },
         headerValueGetter: {
-            validate: (_options: AbstractColDef) => {
+            validate: (_options: AbstractColDef<any, any>) => {
                 const headerValueGetter = _options.headerValueGetter;
                 if (typeof headerValueGetter === 'function' || typeof headerValueGetter === 'string') {
                     return null;
@@ -341,7 +342,7 @@ const COLUMN_DEFINITION_VALIDATIONS: () => Validations<ColDef | ColGroupDef> = (
     return validations;
 };
 
-type ColOrGroupKey = keyof ColDef | keyof ColGroupDef;
+type ColOrGroupKey = keyof ColDef<any, any> | keyof ColGroupDef<any>;
 const colDefPropertyMap: Record<ColOrGroupKey, undefined> = {
     headerName: undefined,
     columnGroupShow: undefined,
@@ -499,8 +500,8 @@ const colDefPropertyMap: Record<ColOrGroupKey, undefined> = {
 };
 const ALL_PROPERTIES: () => ColOrGroupKey[] = () => Object.keys(colDefPropertyMap) as ColOrGroupKey[];
 
-let _colDefValidatorsCache: OptionsValidator<ColDef | ColGroupDef> | undefined;
-export const COL_DEF_VALIDATORS: () => OptionsValidator<ColDef | ColGroupDef> = () =>
+let _colDefValidatorsCache: OptionsValidator<ColDef<any, any> | ColGroupDef<any>> | undefined;
+export const COL_DEF_VALIDATORS: () => OptionsValidator<ColDef<any, any> | ColGroupDef<any>> = () =>
     (_colDefValidatorsCache ??= (() => {
         const allProperties = ALL_PROPERTIES();
         const deprecations = COLUMN_DEFINITION_DEPRECATIONS();

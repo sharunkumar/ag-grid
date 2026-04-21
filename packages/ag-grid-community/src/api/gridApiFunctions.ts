@@ -54,7 +54,7 @@ import type {
     _ValueCacheApi,
 } from './gridApi';
 
-const mod = <TGridApi extends Partial<GridApi>>(
+const mod = <TGridApi extends Partial<GridApi<any>>>(
     moduleName: ValidationModuleName,
     input: Record<keyof TGridApi, 0>
 ): Record<keyof TGridApi, ValidationModuleName> => {
@@ -64,7 +64,7 @@ const mod = <TGridApi extends Partial<GridApi>>(
     return input as any;
 };
 
-export const gridApiFunctionsMap: Record<keyof GridApi, ValidationModuleName> = {
+export const gridApiFunctionsMap: Record<keyof GridApi<any>, ValidationModuleName> = {
     dispatchEvent: 'CommunityCore', // this is always registered
     ...mod<_CoreGridApi<any>>('CommunityCore', {
         destroy: 0,

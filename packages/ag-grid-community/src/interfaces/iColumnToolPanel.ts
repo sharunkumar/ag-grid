@@ -5,7 +5,7 @@ import type { IToolPanel } from './iToolPanel';
 export interface IColumnToolPanel extends IToolPanel {
     expandColumnGroups(groupIds?: string[]): void;
     collapseColumnGroups(groupIds?: string[]): void;
-    setColumnLayout(colDefs: (ColDef | ColGroupDef)[]): void;
+    setColumnLayout(colDefs: (ColDef<any, any> | ColGroupDef<any>)[]): void;
     syncLayoutWithGrid(): void;
     setPivotModeSectionVisible(visible: boolean): void;
     setRowGroupsSectionVisible(visible: boolean): void;

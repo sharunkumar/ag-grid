@@ -5,11 +5,14 @@ import { isColGroupDef, mergeLeafPathTrees } from './sideBarUtils';
 
 export function toolPanelCreateColumnTree(
     colModel: ColumnModel,
-    colDefs: AbstractColDef[]
+    colDefs: AbstractColDef<any, any>[]
 ): (AgColumn | AgProvidedColumnGroup)[] {
-    const invalidColIds: AbstractColDef[] = [];
+    const invalidColIds: AbstractColDef<any, any>[] = [];
 
-    const createDummyColGroup = (abstractColDef: AbstractColDef, depth: number): AgColumn | AgProvidedColumnGroup => {
+    const createDummyColGroup = (
+        abstractColDef: AbstractColDef<any, any>,
+        depth: number
+    ): AgColumn | AgProvidedColumnGroup => {
         if (isColGroupDef(abstractColDef)) {
             // creating 'dummy' group which is not associated with grid column group
             const groupDef = abstractColDef;
@@ -27,7 +30,7 @@ export function toolPanelCreateColumnTree(
 
             return group;
         } else {
-            const colDef = abstractColDef as ColDef;
+            const colDef = abstractColDef as ColDef<any, any>;
             const key = colDef.colId ? colDef.colId : colDef.field;
             const column = colModel.getColDefCol(key!)!;
 
@@ -57,10 +60,10 @@ export function toolPanelCreateColumnTree(
 
 export function syncLayoutWithGrid(
     colModel: ColumnModel,
-    syncLayoutCallback: (colDefs: AbstractColDef[]) => void
+    syncLayoutCallback: (colDefs: AbstractColDef<any, any>[]) => void
 ): void {
     // extract ordered list of leaf path trees (column group hierarchy for each individual leaf column)
-    const leafPathTrees: AbstractColDef[] = getLeafPathTrees(getGridPrimaryColumns(colModel));
+    const leafPathTrees: AbstractColDef<any, any>[] = getLeafPathTrees(getGridPrimaryColumns(colModel));
 
     // merge leaf path tree taking split column groups into account
     const mergedColumnTrees = mergeLeafPathTrees(leafPathTrees);
@@ -71,9 +74,9 @@ export function syncLayoutWithGrid(
 
 export function syncLayoutWithColumns(
     columns: AgColumn[],
-    syncLayoutCallback: (colDefs: AbstractColDef[]) => void
+    syncLayoutCallback: (colDefs: AbstractColDef<any, any>[]) => void
 ): void {
-    const leafPathTrees: AbstractColDef[] = getLeafPathTrees(columns);
+    const leafPathTrees: AbstractColDef<any, any>[] = getLeafPathTrees(columns);
 
     // merge leaf path tree taking split column groups into account
     const mergedColumnTrees = mergeLeafPathTrees(leafPathTrees);
@@ -82,10 +85,13 @@ export function syncLayoutWithColumns(
     syncLayoutCallback(mergedColumnTrees);
 }
 
-function getLeafPathTrees(columns: AgColumn[]): AbstractColDef[] {
+function getLeafPathTrees(columns: AgColumn[]): AbstractColDef<any, any>[] {
     // leaf tree paths are obtained by walking up the tree starting at a column until we reach the top level group.
-    const getLeafPathTree = (node: AgColumn | AgProvidedColumnGroup, childDef: AbstractColDef): AbstractColDef => {
-        let leafPathTree: AbstractColDef;
+    const getLeafPathTree = (
+        node: AgColumn | AgProvidedColumnGroup,
+        childDef: AbstractColDef<any, any>
+    ): AbstractColDef<any, any> => {
+        let leafPathTree: AbstractColDef<any, any>;
 
         // build up tree in reverse order
         if (isProvidedColumnGroup(node)) {

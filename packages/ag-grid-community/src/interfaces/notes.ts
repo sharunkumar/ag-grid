@@ -17,12 +17,12 @@ export interface Note {
 
 export interface NoteParams {
     column: ColKey;
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     location?: 'cell';
 }
 
 export interface FullWidthRowNoteParams {
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     location: 'fullWidthRow';
     pinned?: 'left' | 'right';
 }
@@ -34,13 +34,13 @@ export type SetNoteParams = GetNoteParams & {
 };
 
 export interface NotesDataSourceNoteParams {
-    column: Column;
-    rowNode: IRowNode;
+    column: Column<any>;
+    rowNode: IRowNode<any>;
     location?: 'cell';
 }
 
 export interface NotesDataSourceFullWidthRowNoteParams {
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     location: 'fullWidthRow';
     pinned?: 'left' | 'right';
 }
@@ -92,14 +92,14 @@ export interface FullWidthNotesDataSource extends BaseNotesDataSource {
 }
 
 export interface RefreshNotesParams {
-    rowNodes?: IRowNode[];
-    columns?: (string | Column)[];
+    rowNodes?: IRowNode<any>[];
+    columns?: (string | Column<any>)[];
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export interface INoteAccess {
     params: GetNoteParams;
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     column: AgColumn;
     note: Note | undefined;
     isReadOnly: boolean;

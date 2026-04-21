@@ -52,9 +52,9 @@ interface InternalRowDropZoneParams extends InternalRowDropZoneEvents {
 }
 
 type RowsDropCustomResult = {
-    rows?: IRowNode[] | null;
-    newParent?: IRowNode | null;
-    target?: IRowNode | null;
+    rows?: IRowNode<any>[] | null;
+    newParent?: IRowNode<any> | null;
+    target?: IRowNode<any> | null;
     position?: RowDropTargetPosition;
     allowed?: boolean;
     changed?: boolean;
@@ -215,7 +215,7 @@ export class RowDragFeature extends BeanStub implements DropTarget {
         const groupEditSvc = this.beans.groupEditSvc;
         const canSetParent = !!groupEditSvc?.canSetParent(rowsDrop);
 
-        let newParent: IRowNode | null = null;
+        let newParent: IRowNode<any> | null = null;
         if (target?.footer) {
             // Footer row. Get the real parent, that is the sibling of the footer
             const found = _prevOrNextDisplayedRow(rowModel, -1, target) ?? _prevOrNextDisplayedRow(rowModel, 1, target);
@@ -601,10 +601,10 @@ export class RowDragFeature extends BeanStub implements DropTarget {
         return true;
     }
 
-    private filterRows(rowsDrop: RowsDrop): IRowNode[] {
+    private filterRows(rowsDrop: RowsDrop): IRowNode<any>[] {
         const { groupEditSvc } = this.beans;
         const { rows, sameGrid } = rowsDrop;
-        let filtered: IRowNode[] | undefined;
+        let filtered: IRowNode<any>[] | undefined;
         for (let i = 0, len = rows.length; i < len; ++i) {
             let valid = true;
             const row = rows[i];
@@ -687,7 +687,7 @@ export class RowDragFeature extends BeanStub implements DropTarget {
         return true;
     }
 
-    private csrmGetLeaf(row: IRowNode): RowNode | undefined {
+    private csrmGetLeaf(row: IRowNode<any>): RowNode | undefined {
         if (row.sourceRowIndex >= 0) {
             return row.destroyed ? undefined : (row as RowNode);
         }
@@ -710,10 +710,10 @@ const rowsDropChanged = (a: RowsDrop | null | undefined, b: RowsDrop): boolean =
         a.newParent !== b.newParent ||
         !_areEqual(a.rows, b.rows));
 
-const compareRowIndex = ({ rowIndex: a }: IRowNode, { rowIndex: b }: IRowNode): number =>
+const compareRowIndex = ({ rowIndex: a }: IRowNode<any>, { rowIndex: b }: IRowNode<any>): number =>
     a !== null && b !== null ? a - b : 0;
 
-const setRowNodesDragging = (rowNodes: IRowNode[] | null | undefined, dragging: boolean): void => {
+const setRowNodesDragging = (rowNodes: IRowNode<any>[] | null | undefined, dragging: boolean): void => {
     for (let i = 0, len = rowNodes?.length || 0; i < len; ++i) {
         const rowNode = rowNodes![i] as RowNode;
         if (rowNode.dragging !== dragging) {
@@ -751,7 +751,7 @@ const deltaDraggingTarget = (rowModel: IRowModel, rowsDrop: RowsDrop): RowNode |
     return bestTarget;
 };
 
-const computePointerPos = (overNode: IRowNode | null | undefined, pointerY: number): RowDropTargetPosition => {
+const computePointerPos = (overNode: IRowNode<any> | null | undefined, pointerY: number): RowDropTargetPosition => {
     const rowTop = overNode?.rowTop;
     const rowHeight = overNode?.rowHeight ?? 0;
     if (rowTop == null || !rowHeight || rowHeight <= 0) {

@@ -383,10 +383,10 @@ export interface Props<TData> {
     suppressCutToClipboard?: boolean,
     /** Array of Column / Column Group definitions.
          */
-    columnDefs?: (ColDef | ColGroupDef<TData>)[] | null,
+    columnDefs?: (ColDef<TData, any> | ColGroupDef<TData>)[] | null,
     /** A default column definition. Items defined in the actual column definitions get precedence.
          */
-    defaultColDef?: ColDef,
+    defaultColDef?: ColDef<TData, any>,
     /** A default column group definition. All column group definitions will use these properties. Items defined in the actual column group definition get precedence.
          * @initial
          */
@@ -714,7 +714,7 @@ export interface Props<TData> {
     /** Get chart menu items. Only applies when using AG Charts Enterprise.
          * @agModule `IntegratedChartsModule`
          */
-    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData>)[] | GetChartMenuItems<TData>,
+    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData, any>)[] | GetChartMenuItems<TData>,
     /** Provide your own loading cell renderer to use when data is loading via a DataSource or when a cell renderer is deferred.
          * See [Loading Cell Renderer](https://www.ag-grid.com/javascript-data-grid/component-loading-cell-renderer/) for framework specific implementation details.
          */
@@ -1436,7 +1436,7 @@ export interface Props<TData> {
     /** Provide the `serverSideDatasource` for server side row model.
          * @agModule `ServerSideRowModelModule`
          */
-    serverSideDatasource?: IServerSideDatasource,
+    serverSideDatasource?: IServerSideDatasource<any>,
     /** When enabled, always refreshes top level groups regardless of which column was sorted. This property only applies when there is Row Grouping & sorting is handled on the server.
          * @default false
          * @agModule `ServerSideRowModelModule`
@@ -1732,7 +1732,7 @@ export interface Props<TData> {
     /** For customising the context menu.
          * @agModule `ContextMenuModule`
          */
-    getContextMenuItems?: GetContextMenuItems<TData>,
+    getContextMenuItems?: GetContextMenuItems<TData, any>,
     /** For customising the main 'column header' menu.
          * @initial
          * @agModule `ColumnMenuModule`
@@ -1891,7 +1891,7 @@ export interface Props<TData> {
     /** Provide a pure function that returns a string ID to uniquely identify a given row. This enables the grid to work optimally with data changes and updates.
          * @initial
          */
-    getRowId?: GetRowIdFunc<TData>,
+    getRowId?: GetRowIdFunc<TData, any>,
     /** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.
          * @default false
          * @agModule `ClientSideRowModelModule`
@@ -1918,11 +1918,11 @@ export interface Props<TData> {
     /** Callback version of property `rowStyle` to set style for each row individually. Function should return an object of CSS values or undefined for no styles.
          * @agModule `RowStyleModule`
          */
-    getRowStyle?: GetRowStyle<TData>,
+    getRowStyle?: GetRowStyle<TData, any>,
     /** Callback version of property `rowClass` to set class(es) for each row individually. Function should return either a string (class name), array of strings (array of class names) or undefined for no class.
          * @agModule `RowStyleModule`
          */
-    getRowClass?: GetRowClass<TData>,
+    getRowClass?: GetRowClass<TData, any>,
     /** Callback version of property `rowHeight` to set height for each row individually. Function should return a positive number of pixels, or return `null`/`undefined` to use the default row height.
          */
     getRowHeight?: GetRowHeight<TData>,

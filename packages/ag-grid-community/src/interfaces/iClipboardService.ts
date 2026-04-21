@@ -5,7 +5,7 @@ export interface IClipboardCopyParams {
     includeGroupHeaders?: boolean;
 }
 export interface IClipboardCopyRowsParams extends IClipboardCopyParams {
-    columnKeys?: (string | Column)[];
+    columnKeys?: (string | Column<any>)[];
 }
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export interface IClipboardService {

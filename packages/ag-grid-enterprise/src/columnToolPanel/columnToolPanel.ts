@@ -447,7 +447,7 @@ export class ColumnToolPanel extends Component implements IColumnToolPanel, IToo
         this.primaryColsPanel.collapseGroups(groupIds);
     }
 
-    public setColumnLayout(colDefs: (ColDef | ColGroupDef)[]): void {
+    public setColumnLayout(colDefs: (ColDef<any, any> | ColGroupDef<any>)[]): void {
         this.primaryColsPanel.setColumnLayout(colDefs);
     }
 

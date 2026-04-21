@@ -38,7 +38,7 @@ import type {
     SortType,
 } from './colDef';
 
-const COL_DEF_DEFAULTS: Partial<ColDef> = {
+const COL_DEF_DEFAULTS: Partial<ColDef<any, any>> = {
     resizable: true,
     sortable: true,
 };
@@ -48,7 +48,7 @@ export function getNextColInstanceId(): ColumnInstanceId {
     return instanceIdSequence++ as ColumnInstanceId;
 }
 
-export function isColumn(col: Column | ColumnGroup | ProvidedColumnGroup): col is AgColumn {
+export function isColumn(col: Column<any> | ColumnGroup | ProvidedColumnGroup): col is AgColumn {
     return col instanceof AgColumn;
 }
 
@@ -68,7 +68,7 @@ const DEFAULT_ABSOLUTE_SORTING_ORDER: (SortDef | SortDirection)[] = [
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export class AgColumn<TValue = any>
     extends BeanStub<ColumnEventName>
-    implements Column, IAgEventEmitter<ColumnEventName>
+    implements Column<any>, IAgEventEmitter<ColumnEventName>
 {
     public readonly isColumn = true as const;
 
@@ -259,7 +259,7 @@ export class AgColumn<TValue = any>
         this.setActualWidth(initialWidth, source, true);
     }
 
-    private calculateColInitialWidth(colDef: ColDef): number {
+    private calculateColInitialWidth(colDef: ColDef<any, any>): number {
         const width = colDef.width ?? colDef.initialWidth ?? 200;
         return Math.max(Math.min(width, this.maxWidth), this.minWidth);
     }
@@ -339,7 +339,7 @@ export class AgColumn<TValue = any>
         this.colEventSvc.removeEventListener(eventType, listener);
     }
 
-    public createColumnFunctionCallbackParams(rowNode: IRowNode): ColumnFunctionCallbackParams {
+    public createColumnFunctionCallbackParams(rowNode: IRowNode<any>): ColumnFunctionCallbackParams {
         return _addGridCommonParams(this.gos, {
             node: rowNode,
             data: rowNode.data,
@@ -348,11 +348,11 @@ export class AgColumn<TValue = any>
         });
     }
 
-    public isSuppressNavigable(rowNode: IRowNode): boolean {
+    public isSuppressNavigable(rowNode: IRowNode<any>): boolean {
         return this.beans.cellNavigation?.isSuppressNavigable(this, rowNode) ?? false;
     }
 
-    public isCellEditable(rowNode: IRowNode): boolean {
+    public isCellEditable(rowNode: IRowNode<any>): boolean {
         return this.beans.editSvc?.isCellEditable({ rowNode, column: this }) ?? false;
     }
 
@@ -368,19 +368,19 @@ export class AgColumn<TValue = any>
         return !!this.colDef.autoHeaderHeight;
     }
 
-    public isRowDrag(rowNode: IRowNode): boolean {
+    public isRowDrag(rowNode: IRowNode<any>): boolean {
         return this.isColumnFunc(rowNode, this.colDef.rowDrag);
     }
 
-    public isDndSource(rowNode: IRowNode): boolean {
+    public isDndSource(rowNode: IRowNode<any>): boolean {
         return this.isColumnFunc(rowNode, this.colDef.dndSource);
     }
 
-    public isCellCheckboxSelection(rowNode: IRowNode): boolean {
+    public isCellCheckboxSelection(rowNode: IRowNode<any>): boolean {
         return this.beans.selectionSvc?.isCellCheckboxSelection(this, rowNode) ?? false;
     }
 
-    public isSuppressPaste(rowNode: IRowNode): boolean {
+    public isSuppressPaste(rowNode: IRowNode<any>): boolean {
         return this.isColumnFunc(rowNode, this.colDef?.suppressPaste ?? null);
     }
 
@@ -389,12 +389,12 @@ export class AgColumn<TValue = any>
     }
 
     /** Get value from ColDef or default if it exists. */
-    private getColDefValue<K extends keyof ColDef>(key: K): ColDef[K] {
+    private getColDefValue<K extends keyof ColDef<any, any>>(key: K): ColDef<any, any>[K] {
         return this.colDef[key] ?? COL_DEF_DEFAULTS[key];
     }
 
     public isColumnFunc(
-        rowNode: IRowNode,
+        rowNode: IRowNode<any>,
         value?: boolean | ((params: ColumnFunctionCallbackParams) => boolean) | null
     ): boolean {
         // if boolean set, then just use it
@@ -678,7 +678,7 @@ export class AgColumn<TValue = any>
         return changed;
     }
 
-    private createBaseColDefParams(rowNode: IRowNode): BaseColDefParams {
+    private createBaseColDefParams(rowNode: IRowNode<any>): BaseColDefParams {
         const params: BaseColDefParams = _addGridCommonParams(this.gos, {
             node: rowNode,
             data: rowNode.data,
@@ -688,7 +688,7 @@ export class AgColumn<TValue = any>
         return params;
     }
 
-    public getColSpan(rowNode: IRowNode): number {
+    public getColSpan(rowNode: IRowNode<any>): number {
         if (_missing(this.colDef.colSpan)) {
             return 1;
         }
@@ -699,7 +699,7 @@ export class AgColumn<TValue = any>
         return Math.max(colSpan, 1);
     }
 
-    public getRowSpan(rowNode: IRowNode): number {
+    public getRowSpan(rowNode: IRowNode<any>): number {
         if (_missing(this.colDef.rowSpan)) {
             return 1;
         }

@@ -102,13 +102,13 @@ export interface SetFilterUi<TValue = string> {
  * @param TData type of data row
  * @param V type of value in the Set Filter
  */
-export interface SetFilterValuesFuncParams<TData = any, V = string> extends AgGridCommon<TData, any> {
+export interface SetFilterValuesFuncParams<TData, V = string> extends AgGridCommon<TData, any> {
     /** The function to call with the values to load into the filter once they are ready. */
     success: (values: (V | null)[]) => void;
     /** The column definition from which the set filter is invoked. */
-    colDef: ColDef<TData>;
+    colDef: ColDef<TData, unknown>;
     /** Column from which the set filter is invoked. */
-    column: Column;
+    column: Column<any>;
 }
 
 /**
@@ -133,7 +133,7 @@ export type SetFilterParams<TData = any, V = string> = ISetFilterParams<TData, V
  * @param TData type of data row
  * @param V type of value in the Set Filter
  */
-export interface ISetFilterParams<TData = any, V = string> extends IProvidedFilterParams {
+export interface ISetFilterParams<TData, V = string> extends IProvidedFilterParams {
     /**
      * The values to display in the Filter List. If this is not set, the filter will take its
      * values from what is loaded in the table.
@@ -195,7 +195,7 @@ export interface ISetFilterParams<TData = any, V = string> extends IProvidedFilt
      * If specified, this formats the value before it is displayed in the Filter List.
      * If a Key Creator is provided (see `keyCreator`), this must also be provided.
      */
-    valueFormatter?: (params: ValueFormatterParams) => string;
+    valueFormatter?: (params: ValueFormatterParams<any, any, any>) => string;
     /**
      * Function to return a string key for a value. This is required when the filter values are complex objects,
      * or when `treeList = true` and the column is a group column with Tree Data or Grouping enabled.
@@ -254,7 +254,7 @@ export interface ISetFilterParams<TData = any, V = string> extends IProvidedFilt
 /**
  * Tooltip params used with the Set Filter Tree List.
  */
-export interface ISetFilterTreeListTooltipParams extends ITooltipParams {
+export interface ISetFilterTreeListTooltipParams extends ITooltipParams<any, any, any> {
     /** Level of the tree (starting at 0). */
     level: number;
 }

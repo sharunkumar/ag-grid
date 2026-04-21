@@ -16,7 +16,7 @@ export type GroupCheckboxSelectionCallback<TData = any, TValue = any> = (
 /**
  * Parameters used in `colDef.cellRendererParams` to configure a  Group Cell Renderer (`agGroupCellRenderer`).
  */
-export interface IGroupCellRendererParams<TData = any, TValue = any> {
+export interface IGroupCellRendererParams<TData, TValue> {
     /** Set to `true` to not include any padding (indentation) in the child rows. */
     suppressPadding?: boolean;
     /** Set to `true` to suppress expand on double click. */
@@ -58,8 +58,8 @@ export interface IGroupCellRendererFullRowParams {
  * Parameters provided by the grid to the `init` method of a `agGroupCellRenderer`.
  * Do not use in `colDef.cellRendererParams` - see `IGroupCellRendererParams` instead.
  */
-export type GroupCellRendererParams<TData = any, TValue = any> = IGroupCellRendererParams &
-    ICellRendererParams<TData, TValue> &
+export type GroupCellRendererParams<TData, TValue> = IGroupCellRendererParams<any, any> &
+    ICellRendererParams<TData, TValue, any> &
     IGroupCellRendererFullRowParams;
 
 export interface IGroupCellRenderer {

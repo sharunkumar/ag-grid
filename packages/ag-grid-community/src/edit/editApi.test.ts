@@ -15,24 +15,24 @@ import { SingleCellEditStrategy } from './strategy/singleCellEditStrategy';
 import { UNEDITED } from './utils/editors';
 
 describe('Edit API', () => {
-    const rowNode1 = { rowIndex: 0, rowPinned: undefined } as unknown as IRowNode;
-    const rowNode2 = { rowIndex: 1, rowPinned: undefined } as unknown as IRowNode;
+    const rowNode1 = { rowIndex: 0, rowPinned: undefined } as unknown as IRowNode<any>;
+    const rowNode2 = { rowIndex: 1, rowPinned: undefined } as unknown as IRowNode<any>;
     const column1 = {
         getColId: () => 'col1',
         colId: 'col1',
         getColDef: () => ({ editable: true }),
         isColumnFunc: () => false,
-    } as unknown as Column;
+    } as unknown as Column<any>;
     const column2 = {
         getColId: () => 'col2',
         colId: 'col2',
         getColDef: () => ({ editable: true }),
         isColumnFunc: () => false,
-    } as unknown as Column;
+    } as unknown as Column<any>;
     const cellCtrl1 = { rowNode: rowNode1, focusCell: jest.fn(), onEditorAttachedFuncs: [] } as unknown as CellCtrl;
     const cellCtrl2 = { rowNode: rowNode2, focusCell: jest.fn(), onEditorAttachedFuncs: [] } as unknown as CellCtrl;
 
-    const getCellCtrl = (column: Column) => {
+    const getCellCtrl = (column: Column<any>) => {
         if (column.getColId() === 'col1') {
             return cellCtrl1;
         } else if (column.getColId() === 'col2') {
@@ -68,7 +68,7 @@ describe('Edit API', () => {
                 hasEdits: jest.fn(() => editMap && editMap.size > 0),
             } as unknown as EditModelService,
             colModel: {
-                getCol: jest.fn((col: Column | string) => {
+                getCol: jest.fn((col: Column<any> | string) => {
                     const colId = typeof col === 'string' ? col : col.getColId();
                     if (colId === 'col1') {
                         return column1;
@@ -87,7 +87,7 @@ describe('Edit API', () => {
                     }
                     return undefined;
                 }),
-                getRowCtrlByNode: jest.fn((node: IRowNode) => {
+                getRowCtrlByNode: jest.fn((node: IRowNode<any>) => {
                     if (node === rowNode1) {
                         return rowCtrl1;
                     } else if (node === rowNode2) {
@@ -99,18 +99,20 @@ describe('Edit API', () => {
                 getRowCtrls: jest.fn(() => [rowCtrl1, rowCtrl2]),
             } as unknown as RowRenderer,
             valueSvc: {
-                getValue: jest.fn((col: Column, rowNode: IRowNode, _ignoreAggData: boolean, _source: string) => {
-                    if (col.getColId() === 'col1' && rowNode.rowIndex === 0) {
-                        return 'old1';
-                    } else if (col.getColId() === 'col2' && rowNode.rowIndex === 0) {
-                        return 'old2';
-                    } else if (col.getColId() === 'col1' && rowNode.rowIndex === 1) {
-                        return 'old1';
-                    } else if (col.getColId() === 'col2' && rowNode.rowIndex === 1) {
-                        return 'old2';
+                getValue: jest.fn(
+                    (col: Column<any>, rowNode: IRowNode<any>, _ignoreAggData: boolean, _source: string) => {
+                        if (col.getColId() === 'col1' && rowNode.rowIndex === 0) {
+                            return 'old1';
+                        } else if (col.getColId() === 'col2' && rowNode.rowIndex === 0) {
+                            return 'old2';
+                        } else if (col.getColId() === 'col1' && rowNode.rowIndex === 1) {
+                            return 'old1';
+                        } else if (col.getColId() === 'col2' && rowNode.rowIndex === 1) {
+                            return 'old2';
+                        }
+                        return undefined;
                     }
-                    return undefined;
-                }),
+                ),
             } as unknown as ValueService,
             registry: {
                 createDynamicBean: jest.fn(),

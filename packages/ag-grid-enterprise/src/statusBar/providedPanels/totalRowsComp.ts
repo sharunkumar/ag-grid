@@ -26,7 +26,7 @@ export class TotalRowsComp extends AgNameValue implements IStatusPanelComp {
         this.setValue(totalRow, totalRow);
     }
 
-    public init(params: IStatusPanelParams & IProvidedStatusPanelParams) {
+    public init(params: IStatusPanelParams<any, any> & IProvidedStatusPanelParams) {
         this.refresh(params);
         this.onDataChanged();
     }
@@ -36,7 +36,7 @@ export class TotalRowsComp extends AgNameValue implements IStatusPanelComp {
             valueFormatter ?? (({ value }) => _formatNumberCommas(value, this.getLocaleTextFunc.bind(this)));
     }
 
-    public refresh(params: IStatusPanelParams & IProvidedStatusPanelParams): boolean {
+    public refresh(params: IStatusPanelParams<any, any> & IProvidedStatusPanelParams): boolean {
         const { key, valueFormatter } = params;
         this.key = key;
         this.updateValueFormatter(valueFormatter);

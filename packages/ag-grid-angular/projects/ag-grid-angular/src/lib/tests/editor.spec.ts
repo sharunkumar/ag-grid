@@ -14,13 +14,13 @@ import type { ICellEditorAngularComp, ICellRendererAngularComp } from '../interf
     template: `£{{ params?.value }}`,
 })
 export class PoundRenderer implements ICellRendererAngularComp {
-    params: ICellRendererParams | undefined;
+    params: ICellRendererParams<any, any, any> | undefined;
 
-    agInit(params: ICellRendererParams): void {
+    agInit(params: ICellRendererParams<any, any, any>): void {
         this.params = params;
     }
 
-    refresh(params: ICellRendererParams) {
+    refresh(params: ICellRendererParams<any, any, any>) {
         this.params = params;
         return true;
     }
@@ -33,12 +33,12 @@ export class PoundRenderer implements ICellRendererAngularComp {
     template: `<input #input [(ngModel)]="value" style="width: 100%" />`,
 })
 export class EditorComponent implements ICellEditorAngularComp {
-    private params!: ICellEditorParams;
+    private params!: ICellEditorParams<any, any, any>;
     public value!: number;
 
     @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 
-    agInit(params: ICellEditorParams): void {
+    agInit(params: ICellEditorParams<any, any, any>): void {
         this.params = params;
         this.value = this.params.value;
     }

@@ -63,7 +63,7 @@ export class SelectAllFeature extends BeanStub {
         });
 
         this.addManagedPropertyListener('rowSelection', ({ currentValue, previousValue }) => {
-            const getSelectAll = (rowSelection: GridOptions['rowSelection']) =>
+            const getSelectAll = (rowSelection: GridOptions<any>['rowSelection']) =>
                 typeof rowSelection === 'string' || !rowSelection || rowSelection.mode === 'singleRow'
                     ? undefined
                     : rowSelection.selectAll;

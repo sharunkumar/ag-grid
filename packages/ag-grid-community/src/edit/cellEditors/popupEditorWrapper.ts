@@ -20,7 +20,7 @@ export class PopupEditorWrapper extends AgPopupComponent<
     GridOptionsService,
     AgComponentSelectorType
 > {
-    constructor(private readonly params: ICellEditorParams) {
+    constructor(private readonly params: ICellEditorParams<any, any, any>) {
         super(PopupEditorElement);
     }
 

@@ -48,5 +48,5 @@ export interface IExpansionService<T extends RowGroupExpansionState | RowGroupBu
 
     isExpanded(rowNode: RowNode): boolean;
 
-    setDetailsExpansionState(detailGridApi: GridApi): void;
+    setDetailsExpansionState(detailGridApi: GridApi<any>): void;
 }

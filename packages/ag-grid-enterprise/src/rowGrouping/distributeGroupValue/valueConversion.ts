@@ -136,7 +136,7 @@ export const isNumericLike = (value: unknown): boolean => {
  * Auto-detects rounding precision from the column definition.
  * Returns the number of decimal places, or `undefined` if no rounding should be applied.
  */
-export const detectPrecision = (colDef: ColDef): number | undefined => {
+export const detectPrecision = (colDef: ColDef<any, any>): number | undefined => {
     if (colDef.cellDataType === 'bigint') {
         return 0;
     }

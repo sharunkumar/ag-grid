@@ -36,7 +36,7 @@ export type Deprecations<T extends object> = Partial<{
 
 type GetRequiredModule<T extends object> = (
     options: T,
-    gridOptions: GridOptions,
+    gridOptions: GridOptions<any>,
     beans: BeanCollection
 ) => ValidationModuleName | ValidationModuleName[] | null;
 
@@ -55,7 +55,7 @@ export type Validations<T extends object> = {
 interface OptionsValidation<T extends object> {
     supportedRowModels?: RowModelType[];
     dependencies?: RequiredOptions<T>;
-    validate?: (options: T, gridOptions: GridOptions, beans: BeanCollection) => string | null;
+    validate?: (options: T, gridOptions: GridOptions<any>, beans: BeanCollection) => string | null;
     /** Currently only supports boolean or number */
     expectedType?: 'boolean' | 'number';
 }

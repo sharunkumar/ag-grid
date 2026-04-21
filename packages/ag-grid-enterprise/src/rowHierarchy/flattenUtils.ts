@@ -9,9 +9,9 @@ import { _getGrandTotalRow, _getGroupTotalRowCallback, _isGroupMultiAutoColumn }
 
 export interface FlattenDetails {
     hideOpenParents: boolean;
-    groupHideParentOfSingleChild: GridOptions['groupHideParentOfSingleChild'];
+    groupHideParentOfSingleChild: GridOptions<any>['groupHideParentOfSingleChild'];
     isGroupMultiAutoColumn: boolean;
-    grandTotalRow: GridOptions['grandTotalRow'];
+    grandTotalRow: GridOptions<any>['grandTotalRow'];
     groupTotalRow: (params: WithoutGridCommon<GetGroupIncludeFooterParams<any, any>>) => 'top' | 'bottom' | undefined;
 }
 

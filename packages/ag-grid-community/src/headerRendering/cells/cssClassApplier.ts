@@ -15,7 +15,7 @@ const CSS_LAST_COLUMN = 'ag-column-last';
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export function _getHeaderClassesFromColDef(
-    abstractColDef: AbstractColDef | null,
+    abstractColDef: AbstractColDef<any, any> | null,
     gos: GridOptionsService,
     column: AgColumn | null,
     columnGroup: AgColumnGroup | null
@@ -29,7 +29,7 @@ export function _getHeaderClassesFromColDef(
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export function _getToolPanelClassesFromColDef(
-    abstractColDef: AbstractColDef | null,
+    abstractColDef: AbstractColDef<any, any> | null,
     gos: GridOptionsService,
     column: AgColumn | null,
     columnGroup: AgProvidedColumnGroup | null
@@ -51,7 +51,7 @@ export function refreshFirstAndLastStyles(
 }
 
 function getClassParams<T extends HeaderClassParams | ToolPanelClassParams>(
-    abstractColDef: AbstractColDef,
+    abstractColDef: AbstractColDef<any, any>,
     gos: GridOptionsService,
     column: AgColumn | null,
     columnGroup: T['columnGroup']
@@ -68,7 +68,7 @@ function getClassParams<T extends HeaderClassParams | ToolPanelClassParams>(
 
 function getColumnClassesFromCollDef<T extends HeaderClassParams | ToolPanelClassParams>(
     classesOrFunc: string | string[] | ((params: T) => string | string[] | undefined) | null | undefined,
-    abstractColDef: AbstractColDef,
+    abstractColDef: AbstractColDef<any, any>,
     gos: GridOptionsService,
     column: AgColumn | null,
     columnGroup: AgColumnGroup | AgProvidedColumnGroup | null

@@ -116,7 +116,7 @@ export class AgFiltersToolPanelList extends Component<AgFiltersToolPanelListEven
         this.recreateFilters(columnTree);
     }
 
-    public setFiltersLayout(colDefs: AbstractColDef[]): void {
+    public setFiltersLayout(colDefs: AbstractColDef<any, any>[]): void {
         const columnTree = toolPanelCreateColumnTree(this.colModel, colDefs);
         this.recreateFilters(columnTree);
     }

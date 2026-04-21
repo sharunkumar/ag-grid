@@ -30,7 +30,7 @@ import { SelectAllFeature, isCheckboxSelection } from './selectAllFeature';
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export abstract class BaseSelectionService extends BeanStub {
-    protected isRowSelectable?: IsRowSelectable;
+    protected isRowSelectable?: IsRowSelectable<any>;
     protected selectionCtx: RowRangeSelectionContext;
 
     public postConstruct(): void {
@@ -250,7 +250,7 @@ export abstract class BaseSelectionService extends BeanStub {
         return true;
     }
 
-    public isCellCheckboxSelection(column: AgColumn, rowNode: IRowNode): boolean {
+    public isCellCheckboxSelection(column: AgColumn, rowNode: IRowNode<any>): boolean {
         const so = this.gos.get('rowSelection');
 
         if (so && typeof so !== 'string') {

@@ -5,5 +5,5 @@ import type { Column } from './iColumn';
 export interface SortOption {
     sort: NonNullable<SortDirection>;
     type: SortType;
-    column: Column;
+    column: Column<any>;
 }

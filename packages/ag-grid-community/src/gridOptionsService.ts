@@ -41,7 +41,7 @@ type GetKeys<T, U> = {
  * Get all the GridOption properties that strictly contain the provided type.
  * Does not include `any` properties.
  */
-type KeysOfType<U> = Exclude<GetKeys<GridOptions, U>, AnyGridOptions>;
+type KeysOfType<U> = Exclude<GetKeys<GridOptions<any>, U>, AnyGridOptions>;
 
 type NoArgFuncs = KeysOfType<() => any>;
 type AnyArgFuncs = KeysOfType<(arg: 'NO_MATCH') => any>;
@@ -51,18 +51,18 @@ export type ExtractParamsFromCallback<TCallback> = TCallback extends (params: in
 export type ExtractReturnTypeFromCallback<TCallback> = TCallback extends (params: AgGridCommon<any, any>) => infer RT
     ? RT
     : never;
-type WrappedCallback<K extends CallbackProps, OriginalCallback extends GridOptions[K]> =
+type WrappedCallback<K extends CallbackProps, OriginalCallback extends GridOptions<any>[K]> =
     | undefined
     | ((
           params: WithoutGridCommon<ExtractParamsFromCallback<OriginalCallback>>
       ) => ExtractReturnTypeFromCallback<OriginalCallback>);
 
 export type PropertyChangedEvent = AgPropertyChangedEvent<GridOptionsWithDefaults>;
-export type PropertyValueChangedEvent<K extends keyof GridOptions> = AgPropertyValueChangedEvent<
+export type PropertyValueChangedEvent<K extends keyof GridOptions<any>> = AgPropertyValueChangedEvent<
     GridOptionsWithDefaults,
     K
 >;
-type PropertyValueChangedListener<K extends keyof GridOptions> = AgPropertyValueChangedListener<
+type PropertyValueChangedListener<K extends keyof GridOptions<any>> = AgPropertyValueChangedListener<
     GridOptionsWithDefaults,
     K
 >;
@@ -83,9 +83,9 @@ export class GridOptionsService
 {
     beanName = 'gos' as const;
 
-    private gridOptions: GridOptions;
+    private gridOptions: GridOptions<any>;
     private validation?: ValidationService;
-    private api: GridApi;
+    private api: GridApi<any>;
     private gridId: string;
 
     public wireBeans(beans: BeanCollection): void {
@@ -109,7 +109,7 @@ export class GridOptionsService
         return this.gridOptions['context'];
     }
 
-    private readonly propEventSvc: LocalEventService<keyof GridOptions> = new LocalEventService();
+    private readonly propEventSvc: LocalEventService<keyof GridOptions<any>> = new LocalEventService();
 
     public postConstruct(): void {
         this.validateGridOptions(this.gridOptions);
@@ -136,7 +136,7 @@ export class GridOptionsService
      * Get the raw value of the GridOptions property provided.
      * @param property
      */
-    public get<K extends keyof GridOptions>(property: K): GridOptionOrDefault<K> {
+    public get<K extends keyof GridOptions<any>>(property: K): GridOptionOrDefault<K> {
         return (
             this.gridOptions[property] ??
             (GRID_OPTION_DEFAULTS[property as keyof typeof GRID_OPTION_DEFAULTS] as GridOptionOrDefault<K>)
@@ -147,7 +147,7 @@ export class GridOptionsService
      * Get the GridOption callback but wrapped so that the common params of api and context are automatically applied to the params.
      * @param property GridOption callback properties based on the fact that this property has a callback with params extending AgGridCommon
      */
-    public getCallback<K extends CallbackProps>(property: K): WrappedCallback<K, GridOptions[K]> {
+    public getCallback<K extends CallbackProps>(property: K): WrappedCallback<K, GridOptions<any>[K]> {
         return this.mergeGridCommonParams(this.gridOptions[property]);
     }
 
@@ -155,7 +155,7 @@ export class GridOptionsService
      * Returns `true` if a value has been specified for this GridOption.
      * @param property GridOption property
      */
-    public exists(property: keyof GridOptions): boolean {
+    public exists(property: keyof GridOptions<any>): boolean {
         return _exists(this.gridOptions[property]);
     }
 
@@ -181,16 +181,16 @@ export class GridOptionsService
         force,
         source = 'api',
     }: {
-        options: Partial<GridOptions>;
+        options: Partial<GridOptions<any>>;
         force?: boolean;
         source?: AgPropertyChangedSource;
     }): void {
-        const changeSet: AgPropertyChangeSet<GridOptions> = { id: changeSetId++, properties: [] };
+        const changeSet: AgPropertyChangeSet<GridOptions<any>> = { id: changeSetId++, properties: [] };
         // all events are fired after grid options has finished updating.
-        const events: PropertyValueChangedEvent<keyof GridOptions>[] = [];
+        const events: PropertyValueChangedEvent<keyof GridOptions<any>>[] = [];
         const { gridOptions, validation } = this;
 
-        for (const key of Object.keys(options) as (keyof GridOptions)[]) {
+        for (const key of Object.keys(options) as (keyof GridOptions<any>)[]) {
             // apply global grid options if they exist for this key
             // Will only apply if the merge strategy is 'deep' and both global and provided values are objects
             const value = GlobalGridOptions.applyGlobalGridOption(key, options[key]);
@@ -202,7 +202,7 @@ export class GridOptionsService
             const previousValue = gridOptions[key];
             if (shouldForce || previousValue !== value) {
                 gridOptions[key] = value;
-                const event: PropertyValueChangedEvent<keyof GridOptions> = {
+                const event: PropertyValueChangedEvent<keyof GridOptions<any>> = {
                     type: key,
                     currentValue: value,
                     previousValue,
@@ -224,14 +224,14 @@ export class GridOptionsService
         }
     }
 
-    public addPropertyEventListener<K extends keyof GridOptions>(
+    public addPropertyEventListener<K extends keyof GridOptions<any>>(
         key: K,
         listener: PropertyValueChangedListener<K>
     ): void {
         this.propEventSvc.addEventListener(key, listener);
     }
 
-    public removePropertyEventListener<K extends keyof GridOptions>(
+    public removePropertyEventListener<K extends keyof GridOptions<any>>(
         key: K,
         listener: PropertyValueChangedListener<K>
     ): void {
@@ -312,12 +312,16 @@ export class GridOptionsService
         }
     }
 
-    private validateGridOptions(gridOptions: GridOptions): void {
+    private validateGridOptions(gridOptions: GridOptions<any>): void {
         this.validateOptions(gridOptions, GRID_OPTIONS_MODULES);
         this.validation?.processGridOptions(gridOptions);
     }
 
-    public validateColDef(colDef: ColDef | ColGroupDef, colId: string, skipInferenceCheck?: boolean): void {
+    public validateColDef(
+        colDef: ColDef<any, any> | ColGroupDef<any>,
+        colId: string,
+        skipInferenceCheck?: boolean
+    ): void {
         if (skipInferenceCheck || !this.beans.dataTypeSvc?.isColPendingInference(colId)) {
             this.validateOptions(colDef, COLUMN_DEFINITION_MOD_VALIDATIONS);
             this.validation?.validateColDef(colDef);

@@ -106,7 +106,7 @@ export class ChartMenuListFactory extends BeanStub implements NamedBean {
     private getMenuItems(
         chartController: ChartController,
         areChartToolPanelsEnabled: boolean
-    ): (MenuItemDef | DefaultChartMenuItem)[] {
+    ): (MenuItemDef<any, any> | DefaultChartMenuItem)[] {
         const defaultItems: DefaultChartMenuItem[] = [
             ...(areChartToolPanelsEnabled ? (['chartEdit'] as const) : []),
             ...(chartController.isEnterprise() ? (['chartAdvancedSettings'] as const) : []),
@@ -129,19 +129,19 @@ export class ChartMenuListFactory extends BeanStub implements NamedBean {
     }
 
     private mapWithStockItems(
-        originalList: (MenuItemDef | DefaultChartMenuItem)[],
+        originalList: (MenuItemDef<any, any> | DefaultChartMenuItem)[],
         chartMenuContext: ChartMenuContext,
         showMenu: () => void,
         eventSource: HTMLElement,
         areChartToolPanelsEnabled: boolean
-    ): MenuItemDef[] {
+    ): MenuItemDef<any, any>[] {
         if (!originalList) {
             return [];
         }
-        const resultList: MenuItemDef[] = [];
+        const resultList: MenuItemDef<any, any>[] = [];
 
         for (const menuItemOrString of originalList) {
-            let result: MenuItemDef | null;
+            let result: MenuItemDef<any, any> | null;
             if (typeof menuItemOrString === 'string') {
                 result = this.getStockMenuItem(
                     menuItemOrString,
@@ -160,7 +160,7 @@ export class ChartMenuListFactory extends BeanStub implements NamedBean {
             const { subMenu } = result;
             if (Array.isArray(subMenu)) {
                 result.subMenu = this.mapWithStockItems(
-                    subMenu as (DefaultChartMenuItem | MenuItemDef)[],
+                    subMenu as (DefaultChartMenuItem | MenuItemDef<any, any>)[],
                     chartMenuContext,
                     showMenu,
                     eventSource,
@@ -180,7 +180,7 @@ export class ChartMenuListFactory extends BeanStub implements NamedBean {
         showMenu: () => void,
         eventSource: HTMLElement,
         areChartToolPanelsEnabled: boolean
-    ): MenuItemDef | null {
+    ): MenuItemDef<any, any> | null {
         switch (key) {
             case 'chartEdit':
                 return areChartToolPanelsEnabled
@@ -212,7 +212,7 @@ export class ChartMenuListFactory extends BeanStub implements NamedBean {
         return null;
     }
 
-    private createMenuItem(name: string, iconName: IconName, action: () => void): MenuItemDef {
+    private createMenuItem(name: string, iconName: IconName, action: () => void): MenuItemDef<any, any> {
         return {
             name,
             icon: _createIconNoSpan(iconName, this.beans, null),
@@ -232,7 +232,7 @@ class ChartMenuList extends Component {
     private hidePopupFunc: () => void;
     private mainMenuList: MenuList;
 
-    constructor(private readonly menuItems: MenuItemDef[]) {
+    constructor(private readonly menuItems: MenuItemDef<any, any>[]) {
         super(/* html */ `
             <div data-ref="eChartsMenu" role="presentation" class="ag-menu ag-chart-menu-popup"></div>
         `);

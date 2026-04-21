@@ -74,7 +74,7 @@ export class AgPrimaryCols extends Component {
         this.primaryColsListPanel.setGroupsExpanded(false, groupIds);
     }
 
-    public setColumnLayout(colDefs: (ColDef | ColGroupDef)[]): void {
+    public setColumnLayout(colDefs: (ColDef<any, any> | ColGroupDef<any>)[]): void {
         this.primaryColsListPanel.setColumnLayout(colDefs);
     }
 

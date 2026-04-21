@@ -42,7 +42,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
     beanName = 'colModel' as const;
 
     // as provided by gridProp columnsDefs
-    private colDefs?: (ColDef | ColGroupDef)[];
+    private colDefs?: (ColDef<any, any> | ColGroupDef<any>)[];
 
     // columns generated from columnDefs
     // this doesn't change (including order) unless columnDefs prop changses.
@@ -522,7 +522,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
         }
     }
 
-    public getColumnDefs(sorted?: boolean): (ColDef | ColGroupDef)[] | undefined {
+    public getColumnDefs(sorted?: boolean): (ColDef<any, any> | ColGroupDef<any>)[] | undefined {
         return (
             this.colDefCols &&
             this.beans.colDefFactory?.getColumnDefs(
@@ -573,7 +573,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
     }
 
     // called when dataTypes change
-    public recreateColumnDefs(e: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions>): void {
+    public recreateColumnDefs(e: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions<any>>): void {
         if (!this.cols) {
             return;
         }
@@ -584,7 +584,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
         this.createColsFromColDefs(source);
     }
 
-    public setColumnDefs(columnDefs: (ColDef | ColGroupDef)[], source: ColumnEventType) {
+    public setColumnDefs(columnDefs: (ColDef<any, any> | ColGroupDef<any>)[], source: ColumnEventType) {
         this.colDefs = columnDefs;
         this.createColsFromColDefs(source);
     }

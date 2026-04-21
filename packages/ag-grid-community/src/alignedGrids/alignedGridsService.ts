@@ -25,7 +25,7 @@ export class AlignedGridsService extends BeanStub implements NamedBean {
     // we don't fire back any events.
     private consuming = false;
 
-    private getAlignedGridApis(): GridApi[] {
+    private getAlignedGridApis(): GridApi<any>[] {
         let alignedGrids = this.gos.get('alignedGrids') ?? [];
         const isCallbackConfig = typeof alignedGrids === 'function';
         if (typeof alignedGrids === 'function') {
@@ -56,11 +56,11 @@ export class AlignedGridsService extends BeanStub implements NamedBean {
             })
             .filter((api) => !!api && !api.isDestroyed());
 
-        return apis as GridApi[];
+        return apis as GridApi<any>[];
     }
 
-    private isGridApi(ref: AlignedGrid): ref is GridApi {
-        return !!ref && !!(ref as GridApi).dispatchEvent;
+    private isGridApi(ref: AlignedGrid): ref is GridApi<any> {
+        return !!ref && !!(ref as GridApi<any>).dispatchEvent;
     }
 
     public postConstruct(): void {

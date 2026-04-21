@@ -72,7 +72,7 @@ export const _createRowNodeSibling = (rowNode: RowNode, beans: BeanCollection): 
 export const _prevOrNextDisplayedRow = (
     rowModel: IRowModel,
     direction: -1 | 1,
-    initial: IRowNode | null | undefined
+    initial: IRowNode<any> | null | undefined
 ): RowNode | undefined => {
     if (!initial) {
         return undefined;

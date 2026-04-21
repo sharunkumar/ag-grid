@@ -30,7 +30,7 @@ export class CheckboxSelectionComponent extends Component {
     private rowNode: RowNode;
     private column: AgColumn | undefined;
     private overrides?: {
-        isVisible: boolean | CheckboxSelectionCallback | GroupCheckboxSelectionCallback | undefined;
+        isVisible: boolean | CheckboxSelectionCallback<any, any, any> | GroupCheckboxSelectionCallback | undefined;
         callbackParams: any;
         removeHidden: boolean;
     };
@@ -71,7 +71,7 @@ export class CheckboxSelectionComponent extends Component {
         rowNode: RowNode;
         column?: AgColumn;
         overrides?: {
-            isVisible: boolean | CheckboxSelectionCallback | GroupCheckboxSelectionCallback | undefined;
+            isVisible: boolean | CheckboxSelectionCallback<any, any, any> | GroupCheckboxSelectionCallback | undefined;
             callbackParams: any;
             removeHidden: boolean;
         };
@@ -168,7 +168,7 @@ export class CheckboxSelectionComponent extends Component {
         }
     }
 
-    private getIsVisible(): boolean | CheckboxSelectionCallback<any> | undefined {
+    private getIsVisible(): boolean | CheckboxSelectionCallback<any, any, any> | undefined {
         const overrides = this.overrides;
         if (overrides) {
             return overrides.isVisible;

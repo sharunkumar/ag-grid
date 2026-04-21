@@ -76,8 +76,9 @@ function generateAngularInputOutputs({ typeLookup, eventTypeLookup, docLookup })
         let line = addDocLine(docLookup, property, '');
         let inputTypeWithGenerics = inputType;
         if (property == 'columnDefs') {
-            // Use the Generic hint types for improved type checking by updating the columnDefs property
-            inputTypeWithGenerics = inputType.replace('ColDef<TData>', 'TColDef');
+            // Use the Generic hint types for improved type checking by updating the columnDefs property.
+            // Match both the legacy `ColDef<TData>` and the post-strict-types `ColDef<TData, any>` shapes.
+            inputTypeWithGenerics = inputType.replace(/ColDef<TData(?:,\s*any)?>/g, 'TColDef');
         }
         const isBoolean = inputType === 'boolean | undefined';
 

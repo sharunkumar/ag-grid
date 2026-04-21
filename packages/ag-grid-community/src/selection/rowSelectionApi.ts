@@ -8,7 +8,7 @@ import { _warn } from '../validation/logging';
 
 export function setNodesSelected(
     beans: BeanCollection,
-    params: { nodes: IRowNode[]; newValue: boolean; source?: SelectionEventSourceType }
+    params: { nodes: IRowNode<any>[]; newValue: boolean; source?: SelectionEventSourceType }
 ) {
     const allNodesValid = params.nodes.every((node) => {
         if (node.rowPinned && !_isManualPinnedRow(node as RowNode)) {

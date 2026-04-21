@@ -18,7 +18,7 @@ export class FormulaInputRangeSyncFeature extends BeanStub {
     // local mirror of editSvc range selection state while formula editing is active.
     private rangeSelectionEnabled = false;
     private editingCellRef?: string;
-    private editingColumn?: Column;
+    private editingColumn?: Column<any>;
     private editingRowIndex?: number;
 
     // refs found in the formula that should have matching grid ranges (counts handle duplicates).
@@ -80,7 +80,11 @@ export class FormulaInputRangeSyncFeature extends BeanStub {
         this.disableRangeSelectionWhileEditing();
     }
 
-    public setEditingCellRef(column: Column | undefined, rowIndex: number | null | undefined, editingCellRef?: string) {
+    public setEditingCellRef(
+        column: Column<any> | undefined,
+        rowIndex: number | null | undefined,
+        editingCellRef?: string
+    ) {
         this.editingColumn = column;
         this.editingRowIndex = rowIndex ?? undefined;
         this.editingCellRef = editingCellRef;

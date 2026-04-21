@@ -30,7 +30,7 @@ export class ChangedRowsPathImpl implements ChangedRowsPath {
     private readonly rowSet: Set<RowNode> = new Set();
 
     /** {@inheritDoc ChangedRowsPath.addRow} Time: O(D), D = depth. */
-    public addRow(rowNode: IRowNode | null | undefined): void {
+    public addRow(rowNode: IRowNode<any> | null | undefined): void {
         let node = rowNode as RowNode | null | undefined;
         if (node == null) {
             return;
@@ -49,12 +49,12 @@ export class ChangedRowsPathImpl implements ChangedRowsPath {
     }
 
     /** {@inheritDoc ChangedRowsPath.addCell} */
-    public addCell(rowNode: IRowNode | null | undefined, _colId: string | null | undefined): void {
+    public addCell(rowNode: IRowNode<any> | null | undefined, _colId: string | null | undefined): void {
         this.addRow(rowNode);
     }
 
     /** {@inheritDoc ChangedRowsPath.hasRow} Time: O(1). */
-    public hasRow(rowNode: IRowNode): boolean {
+    public hasRow(rowNode: IRowNode<any>): boolean {
         return this.rowSet.has(rowNode as RowNode);
     }
 

@@ -14,13 +14,13 @@ export interface ChangedRowsPath {
      * Adds `rowNode` and all its ancestors. No-op if null/undefined or already present.
      * Column tracking is ignored — delegates to row-level tracking only.
      */
-    addRow(rowNode: IRowNode | null | undefined): void;
+    addRow(rowNode: IRowNode<any> | null | undefined): void;
 
     /** Delegates to `addRow` — column tracking is ignored for `ChangedRowsPath`. */
-    addCell(rowNode: IRowNode | null | undefined, colId: string | null | undefined): void;
+    addCell(rowNode: IRowNode<any> | null | undefined, colId: string | null | undefined): void;
 
     /** Returns true if `rowNode` is tracked (added via `addRow`/`addCell`, or as an ancestor). */
-    hasRow(rowNode: IRowNode): boolean;
+    hasRow(rowNode: IRowNode<any>): boolean;
 
     /** Returns the changed rows sorted deepest-first. Cached — do not modify the returned array. */
     getSortedRows(): RowNode[];
@@ -35,16 +35,16 @@ export interface ChangedCellsPath {
     readonly kind: 'cells';
 
     /** Adds `rowNode` and all its ancestors. All columns are considered changed. No-op if null/undefined. */
-    addRow(rowNode: IRowNode | null | undefined): void;
+    addRow(rowNode: IRowNode<any> | null | undefined): void;
 
     /**
      * Adds `rowNode` and its ancestors with a specific column marked as changed.
      * When `colId` is `null`/`undefined`, delegates to `addRow` (all columns changed).
      */
-    addCell(rowNode: IRowNode | null | undefined, colId: string | null | undefined): void;
+    addCell(rowNode: IRowNode<any> | null | undefined, colId: string | null | undefined): void;
 
     /** Returns true if `rowNode` is tracked (added via `addRow`/`addCell`, or as an ancestor). */
-    hasRow(rowNode: IRowNode): boolean;
+    hasRow(rowNode: IRowNode<any>): boolean;
 
     /** Returns the changed rows sorted deepest-first. Cached — do not modify the returned array. */
     getSortedRows(): RowNode[];
@@ -53,7 +53,7 @@ export interface ChangedCellsPath {
      * Returns the slot index for a row or column, or -1 if not tracked.
      * For RowNode keys, -1 also means all-columns-changed (via `addRow`).
      */
-    getSlot(key: IRowNode | string): number;
+    getSlot(key: IRowNode<any> | string): number;
 
     /** Returns true if the column is changed for the row. Always true when `rowSlot < 0`. */
     hasCellBySlot(rowSlot: number, colSlot: number): boolean;
@@ -85,7 +85,7 @@ export interface IChangedPathFactory {
      * Creates a ChangedRowsPath on `params` if hierarchical and conditions warrant it.
      * Adds rootNode to the newly created changedPath. No-op if changedPath already exists or grid is flat.
      */
-    ensureRowsPath(params: RefreshModelParams, rootNode: IRowNode | null | undefined): ChangedPath | undefined;
+    ensureRowsPath(params: RefreshModelParams, rootNode: IRowNode<any> | null | undefined): ChangedPath | undefined;
 }
 
 const forEachGroupDepthFirst = (children: RowNode[], callback: (rowNode: RowNode) => void): void => {

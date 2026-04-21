@@ -18,7 +18,7 @@ export class ColumnMenuFactory extends BeanStub implements NamedBean {
 
     public createMenu(
         parent: { createManagedBean(bean: MenuList): MenuList },
-        menuItems: (DefaultMenuItem | MenuItemDef)[],
+        menuItems: (DefaultMenuItem | MenuItemDef<any, any>)[],
         column: AgColumn | undefined,
         sourceElement: () => HTMLElement
     ): MenuList {
@@ -47,9 +47,9 @@ export class ColumnMenuFactory extends BeanStub implements NamedBean {
     public getMenuItems(
         column: AgColumn | null = null,
         columnGroup: AgProvidedColumnGroup | null = null
-    ): (DefaultMenuItem | MenuItemDef)[] {
+    ): (DefaultMenuItem | MenuItemDef<any, any>)[] {
         const defaultItems = this.getDefaultMenuOptions(column);
-        let result: (DefaultMenuItem | MenuItemDef)[];
+        let result: (DefaultMenuItem | MenuItemDef<any, any>)[];
 
         const columnMainMenuItems = (column?.colDef ?? columnGroup?.getColGroupDef())?.mainMenuItems;
         if (Array.isArray(columnMainMenuItems)) {

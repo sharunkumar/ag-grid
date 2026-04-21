@@ -86,7 +86,7 @@ export class ContextMenuService extends BeanStub implements NamedBean, IContextM
     private getMenuItems(
         menuActionParams: WithoutGridCommon<IMenuActionParams>,
         mouseEvent: MouseEvent | Touch
-    ): (DefaultMenuItem | MenuItemDef)[] | Promise<(DefaultMenuItem | MenuItemDef<any, any>)[]> | undefined {
+    ): (DefaultMenuItem | MenuItemDef<any, any>)[] | Promise<(DefaultMenuItem | MenuItemDef<any, any>)[]> | undefined {
         const { column, node, value } = menuActionParams;
 
         const defaultMenuOptions: DefaultMenuItem[] = [];
@@ -330,7 +330,7 @@ export class ContextMenuService extends BeanStub implements NamedBean, IContextM
         menuItems: (DefaultMenuItem | MenuItemDef<any, any>)[],
         menuActionParams: WithoutGridCommon<IMenuActionParams>,
         getGui: () => HTMLElement
-    ): (MenuItemDef | DefaultMenuItem)[] {
+    ): (MenuItemDef<any, any> | DefaultMenuItem)[] {
         const { column, node } = menuActionParams;
         return (this.beans.menuItemMapper as MenuItemMapper).mapWithStockItems(
             menuItems,

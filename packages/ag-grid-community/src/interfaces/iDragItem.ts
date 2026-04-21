@@ -7,16 +7,16 @@ export interface DragItem<TValue = any> {
      * When dragging a row, this contains the row node being dragged
      * When dragging multiple rows, this contains the row that started the drag.
      */
-    rowNode?: IRowNode;
+    rowNode?: IRowNode<any>;
 
     /** When dragging multiple rows, this contains all rows being dragged */
-    rowNodes?: IRowNode[];
+    rowNodes?: IRowNode<any>[];
 
     /** When dragging columns, this contains the columns being dragged */
-    columns?: Column[];
+    columns?: Column<any>[];
 
     /** When dragging column groups, this contains the columns in the current group split. */
-    columnsInSplit?: Column[];
+    columnsInSplit?: Column<any>[];
 
     /** When dragging columns, this contains the visible state of the columns */
     visibleState?: { [key: string]: boolean };

@@ -203,7 +203,7 @@ export class ClientSideNodeManager<TData = any> extends BeanStub {
     }
 
     private executeRemove(
-        getRowIdFunc: GetRowIdFunc<TData> | undefined,
+        getRowIdFunc: GetRowIdFunc<TData, any> | undefined,
         { remove }: RowDataTransaction,
         { adds, updates, removals }: ChangedRowNodes<TData>,
         nodesToUnselect: RowNode<TData>[],
@@ -251,7 +251,7 @@ export class ClientSideNodeManager<TData = any> extends BeanStub {
     }
 
     private executeUpdate(
-        getRowIdFunc: GetRowIdFunc<TData> | undefined,
+        getRowIdFunc: GetRowIdFunc<TData, any> | undefined,
         { update }: RowDataTransaction,
         { adds, updates }: ChangedRowNodes<TData>,
         nodesToUnselect: RowNode<TData>[]

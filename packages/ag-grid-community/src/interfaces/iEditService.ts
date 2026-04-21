@@ -46,11 +46,11 @@ export type IsEditingParams = {
 };
 
 export type EditRowPosition = {
-    rowNode?: IRowNode;
+    rowNode?: IRowNode<any>;
 };
 
 export interface EditPosition extends EditRowPosition {
-    column?: Column;
+    column?: Column<any>;
 }
 export interface _SetEditingCellsParams {
     /** Update existing cells, omit or set `false` to replace currently editing cells. */

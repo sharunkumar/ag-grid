@@ -18,6 +18,6 @@ export function moveRowGroupColumn(beans: BeanCollection, fromIndex: number, toI
     (beans.rowGroupColsSvc as RowGroupColsSvc)?.moveColumn?.(fromIndex, toIndex, 'api');
 }
 
-export function getRowGroupColumns(beans: BeanCollection): Column[] {
+export function getRowGroupColumns(beans: BeanCollection): Column<any>[] {
     return beans.rowGroupColsSvc?.columns ?? [];
 }

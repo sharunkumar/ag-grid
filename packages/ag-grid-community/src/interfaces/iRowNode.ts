@@ -99,7 +99,7 @@ export interface DataChangedEvent<TData = any> extends RowNodeEvent<'dataChanged
     update: boolean;
 }
 export interface CellChangedEvent<TData = any> extends RowNodeEvent<'cellChanged', TData> {
-    column: Column;
+    column: Column<any>;
     newValue: TData | undefined;
     oldValue: TData | undefined;
 }
@@ -205,7 +205,7 @@ interface GroupRowNode<TData = any> {
     aggData: any;
 
     /** The row group column used for this group. */
-    rowGroupColumn: Column | null;
+    rowGroupColumn: Column<any> | null;
     /**
      * If doing in-memory (client-side) grouping, this is the index of the group column this cell is for.
      * This is always the same as the level, unless we are collapsing groups, i.e. `groupHideParentOfSingleChild=true`.
@@ -251,7 +251,7 @@ export const DETAIL_ROW_ID_PREFIX = 'detail_';
 /** The row ID of the grand total row (`'rowGroupFooter_ROOT_NODE_ID'`). Use with `api.getRowNode(GRAND_TOTAL_ROW_ID)`. */
 export const GRAND_TOTAL_ROW_ID = GROUP_TOTAL_ROW_ID_PREFIX + ROOT_NODE_ID;
 
-export interface IRowNode<TData = any> extends BaseRowNode<TData>, GroupRowNode<TData> {
+export interface IRowNode<TData> extends BaseRowNode<TData>, GroupRowNode<TData> {
     /**
      * The primary (canonical) row node, resolving footer and pinned sibling relationships.
      *
@@ -371,7 +371,7 @@ export interface IRowNode<TData = any> extends BaseRowNode<TData>, GroupRowNode<
      * @param eventSource Controls how the value is written
      * @returns `true` if the value changed, `false` otherwise
      */
-    setDataValue(colKey: string | Column, newValue: any, eventSource?: string): boolean;
+    setDataValue(colKey: string | Column<any>, newValue: any, eventSource?: string): boolean;
 
     /**
      * Returns the data value from the `rowNode` for the specified column.

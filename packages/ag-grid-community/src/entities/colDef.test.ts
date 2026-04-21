@@ -6,7 +6,7 @@ import type { ColDef, ColGroupDef } from './colDef';
 
 describe('ColDef.field Types', () => {
     test('string with no generic', () => {
-        const t: ColDef = { field: 'anyString' };
+        const t: ColDef<any, any> = { field: 'anyString' };
     });
 
     test('Simple TData', () => {
@@ -14,7 +14,7 @@ describe('ColDef.field Types', () => {
             a: number;
             b: string;
         }
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             { field: 'a' },
             { field: 'b' },
             // @ts-expect-error - non existent field
@@ -27,7 +27,7 @@ describe('ColDef.field Types', () => {
             a: number;
             b: string;
         }
-        const t: (ColDef<RowData> | ColGroupDef<RowData>)[] = [
+        const t: (ColDef<RowData, any> | ColGroupDef<RowData>)[] = [
             { field: 'a' },
             { field: 'b' },
             // @ts-expect-error - non existent field
@@ -45,7 +45,7 @@ describe('ColDef.field Types', () => {
 
     test('Union typed TData', () => {
         type RowData = { a: number } | { b: string } | { a: number; c: boolean };
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             { field: 'a' },
             { field: 'b' },
             { field: 'c' },
@@ -65,7 +65,7 @@ describe('ColDef.field Types', () => {
                 };
             };
         }
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             { field: 'a' },
             { field: 'b' },
             { field: 'c' },
@@ -86,7 +86,7 @@ describe('ColDef.field Types', () => {
             a: number;
             child: RowData;
         }
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             { field: 'a' },
             { field: 'child' },
             { field: 'child.a' },
@@ -138,14 +138,18 @@ describe('ColDef.field Types', () => {
             b: string;
             tree: ChildTree;
         }
-        const t: ColDef<RowData>[] = [{ field: 'a' }, { field: 'b' }, { field: 'tree.children.children.children.id' }];
+        const t: ColDef<RowData, any>[] = [
+            { field: 'a' },
+            { field: 'b' },
+            { field: 'tree.children.children.children.id' },
+        ];
     });
 
     test('Array index access TData', () => {
         interface RowData {
             list: number[];
         }
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             { field: 'list.0' }, // maintain support for this as it works for accessing items from an array
         ];
     });
@@ -155,7 +159,7 @@ describe('ColDef.field Types', () => {
             athlete: string;
         }
 
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             {
                 field: 'athlete',
                 suppressNoteActions: ({ data, column, colDef, node }) =>
@@ -169,7 +173,7 @@ describe('ColDef.field Types', () => {
             a: number;
             child: RowData;
         };
-        const t: ColDef<RowData>[] = [
+        const t: ColDef<RowData, any>[] = [
             { field: 'a' },
             { field: 'child' },
             { field: 'child.a' },

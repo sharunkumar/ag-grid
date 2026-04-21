@@ -15,7 +15,7 @@ export class TooltipStateManager extends BaseTooltipStateManager<
     AgEventTypeParams,
     AgGridCommon<any, any>,
     GridOptionsService,
-    ITooltipParams,
+    ITooltipParams<any, any, any>,
     ITooltipCtrlParams,
     TooltipLocation
 > {

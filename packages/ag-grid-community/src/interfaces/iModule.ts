@@ -53,7 +53,7 @@ export interface Module {
  * Used to define a module that contains api functions.
  * @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time.
  */
-export type _ModuleWithApi<TGridApi extends Readonly<Partial<GridApi>>> = Omit<Module, 'rowModels'> & {
+export type _ModuleWithApi<TGridApi extends Readonly<Partial<GridApi<any>>>> = Omit<Module, 'rowModels'> & {
     apiFunctions?: { [K in ApiFunctionName & keyof TGridApi]: ApiFunction<K> };
 };
 /**

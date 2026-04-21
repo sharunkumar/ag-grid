@@ -299,7 +299,7 @@ export class CellNavigationService extends BeanStub implements NamedBean {
         return { rowIndex: newRowIndex, column: newColumn, rowPinned: newFloating } as CellPosition;
     }
 
-    public isSuppressNavigable(column: AgColumn, rowNode: IRowNode): boolean {
+    public isSuppressNavigable(column: AgColumn, rowNode: IRowNode<any>): boolean {
         const { suppressNavigable } = column.colDef;
         // if boolean set, then just use it
         if (typeof suppressNavigable === 'boolean') {

@@ -117,7 +117,7 @@ export function _sourceAndPendingDiffer({
 export function _filterChangedEdits(edits: EditMap): EditMap {
     const result: EditMap = new Map();
     for (const [rowNode, editRow] of edits) {
-        const filtered = new Map<Column, EditValue>();
+        const filtered = new Map<Column<any>, EditValue>();
         for (const [column, editValue] of editRow) {
             if (_sourceAndPendingDiffer(editValue)) {
                 filtered.set(column, editValue);
@@ -258,7 +258,7 @@ function _createEditorParams(
     position: Required<EditPosition>,
     key?: string | null,
     cellStartedEdit?: boolean | null
-): ICellEditorParams {
+): ICellEditorParams<any, any, any> {
     const { valueSvc, gos, editSvc } = beans;
     const enableGroupEditing = beans.gos.get('enableGroupEdit');
     const cellCtrl = _getCellCtrl(beans, position) as CellCtrl;
@@ -345,9 +345,9 @@ export function _refreshEditorOnColDefChanged(beans: BeanCollection, cellCtrl: C
 }
 
 function checkAndPreventDefault(
-    params: ICellEditorParams & DefaultProvidedCellEditorParams,
+    params: ICellEditorParams<any, any, any> & DefaultProvidedCellEditorParams,
     event?: Event | null
-): ICellEditorParams {
+): ICellEditorParams<any, any, any> {
     if (event instanceof KeyboardEvent && params.column.getColDef().cellEditor === 'agNumberCellEditor') {
         // `-`, `+`, `.`, `e` need suppressPreventDefault to prevent the editor from ignoring the keypress
         params.suppressPreventDefault =
@@ -438,7 +438,7 @@ export function _syncFromEditor(
  * Converts formula to shorthand or longhand depending on context
  * @param forEditing if true, converts to shorthand (A1), if false converts to longhand (REF(COL(id),ROW(id))) for storage
  */
-function getNormalisedFormula(beans: BeanCollection, value: any, forEditing: boolean, column: Column): any {
+function getNormalisedFormula(beans: BeanCollection, value: any, forEditing: boolean, column: Column<any>): any {
     const { formula } = beans;
     if (column.isAllowFormula() && formula?.isFormula(value)) {
         return formula?.normaliseFormula(value, forEditing) ?? value;
@@ -636,7 +636,7 @@ function dispatchEditingStopped(
     }
 }
 
-function _columnDefsRequireValidation(columnDefs?: ColDef[]): boolean {
+function _columnDefsRequireValidation(columnDefs?: ColDef<any, any>[]): boolean {
     if (!columnDefs) {
         return false;
     }

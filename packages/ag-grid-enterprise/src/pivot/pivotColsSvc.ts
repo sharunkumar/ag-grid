@@ -23,10 +23,10 @@ export class PivotColsSvc extends BaseColsService implements NamedBean, IColsSer
     override columnExtractors = {
         setFlagFunc: (col: AgColumn, flag: boolean, source: ColumnEventType) =>
             this.setColPivotActive(col, flag, source),
-        getIndexFunc: (colDef: ColDef) => colDef.pivotIndex,
-        getInitialIndexFunc: (colDef: ColDef) => colDef.initialPivotIndex,
-        getValueFunc: (colDef: ColDef) => colDef.pivot,
-        getInitialValueFunc: (colDef: ColDef) => colDef.initialPivot,
+        getIndexFunc: (colDef: ColDef<any, any>) => colDef.pivotIndex,
+        getInitialIndexFunc: (colDef: ColDef<any, any>) => colDef.initialPivotIndex,
+        getValueFunc: (colDef: ColDef<any, any>) => colDef.pivot,
+        getInitialValueFunc: (colDef: ColDef<any, any>) => colDef.initialPivot,
     } as const;
 
     private readonly modifyColumnsNoEventsCallbacks = {

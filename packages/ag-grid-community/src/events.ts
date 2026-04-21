@@ -374,23 +374,23 @@ export interface FilterChangedEvent<TData = any, TContext = any>
      * - Expect 0-N elements (removed columns) for calls to `api.setColumnDefs()`.
      * - Expect 0 elements for quick-filters and calls to `api.onFilterChanged()`.
      */
-    columns: Column[];
+    columns: Column<any>[];
 }
 
 export interface FilterModifiedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'filterModified', TData, TContext> {
     filterInstance: IFilterComp;
-    column: Column;
+    column: Column<any>;
 }
 
 export interface FilterUiChangedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'filterUiChanged', TData, TContext> {
-    column: Column;
+    column: Column<any>;
 }
 
 export interface FilterOpenedEvent<TData = any, TContext = any> extends AgGlobalEvent<'filterOpened', TData, TContext> {
     /** Column / ProvidedColumnGroup that contains the filter */
-    column: Column | ProvidedColumnGroup;
+    column: Column<any> | ProvidedColumnGroup;
     /** Source of the open request */
     source: FilterRequestSource;
     /** Parent element of the filter */
@@ -399,7 +399,7 @@ export interface FilterOpenedEvent<TData = any, TContext = any> extends AgGlobal
 
 export interface FloatingFilterUiChangedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'floatingFilterUiChanged', TData, TContext> {
-    column: Column;
+    column: Column<any>;
 }
 
 export interface FindChangedEvent<TData = any, TContext = any> extends AgGlobalEvent<'findChanged', TData, TContext> {
@@ -417,7 +417,7 @@ export interface SortChangedEvent<TData = any, TContext = any> extends AgGlobalE
     /**
      * The list of columns impacted by the sort change.
      */
-    columns?: Column[];
+    columns?: Column<any>[];
 }
 
 export interface GridReadyEvent<TData = any, TContext = any> extends AgGlobalEvent<'gridReady', TData, TContext> {}
@@ -445,7 +445,7 @@ export interface ComponentStateChangedEvent<TData = any, TContext = any>
 
 export interface ColumnPanelItemDragStartEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'columnPanelItemDragStart', TData, TContext> {
-    column: Column | ProvidedColumnGroup;
+    column: Column<any> | ProvidedColumnGroup;
 }
 
 export interface ColumnPanelItemDragEndEvent<TData = any, TContext = any>
@@ -726,7 +726,7 @@ export interface CommonCellFocusParams {
     /** Row index of the focused cell */
     rowIndex: number | null;
     /** Column of the focused cell */
-    column: Column | string | null;
+    column: Column<any> | string | null;
     /** either 'top', 'bottom' or null / undefined (if not pinned) */
     rowPinned: RowPinnedType;
     /** Whether the cell a full width cell or a regular cell */
@@ -747,7 +747,7 @@ export interface CellFocusedParams extends CommonCellFocusParams {
 }
 
 export interface HeaderFocusedParams {
-    column: Column | ColumnGroup;
+    column: Column<any> | ColumnGroup;
 }
 
 export interface HeaderFocusedEvent<TData = any, TContext = any>
@@ -815,9 +815,9 @@ export type ColumnEventType =
 export interface ColumnEvent<T extends AgEventType | ColumnEventName = any, TData = any, TContext = any>
     extends AgGridEvent<TData, TContext, T> {
     /** The impacted column, only set if action was on one column */
-    column: Column | null;
+    column: Column<any> | null;
     /** List of all impacted columns */
-    columns: Column[] | null;
+    columns: Column<any>[] | null;
     /** String describing where the event is coming from */
     source: ColumnEventType;
 }
@@ -826,7 +826,7 @@ export interface ColumnResizedEvent<TData = any, TContext = any> extends ColumnE
     /** Set to true for last event in a sequence of move events */
     finished: boolean;
     /** Any columns resized due to flex */
-    flexColumns: Column[] | null;
+    flexColumns: Column<any>[] | null;
 }
 
 export interface ColumnPivotChangedEvent<TData = any, TContext = any>
@@ -858,25 +858,25 @@ export interface ColumnPinnedEvent<TData = any, TContext = any> extends ColumnEv
 export interface ColumnHeaderMouseOverEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'columnHeaderMouseOver', TData, TContext> {
     /** Column or column-group related to the header that triggered the event */
-    column: Column | ProvidedColumnGroup;
+    column: Column<any> | ProvidedColumnGroup;
 }
 
 export interface ColumnHeaderMouseLeaveEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'columnHeaderMouseLeave', TData, TContext> {
     /** Column or column-group related to the header that triggered the event */
-    column: Column | ProvidedColumnGroup;
+    column: Column<any> | ProvidedColumnGroup;
 }
 
 export interface ColumnHeaderClickedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'columnHeaderClicked', TData, TContext> {
     /** Column or column-group related to the header that triggered the event */
-    column: Column | ProvidedColumnGroup;
+    column: Column<any> | ProvidedColumnGroup;
 }
 
 export interface ColumnHeaderContextMenuEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'columnHeaderContextMenu', TData, TContext> {
     /** Column or column-group related to the header that triggered the event */
-    column: Column | ProvidedColumnGroup;
+    column: Column<any> | ProvidedColumnGroup;
 }
 
 /**-------------------*/
@@ -936,7 +936,7 @@ export interface ColumnMenuVisibleChangedEvent<TData = any, TContext = any>
      * Column the menu is opened for. Will be `null` if not launched from a column
      * (e.g. column chooser from the API, or column menu via right-click on a column group or empty header).
      */
-    column: Column | null;
+    column: Column<any> | null;
     /**
      * Column group the menu is opened for if launched from right-click on a column group
      */
@@ -1223,7 +1223,7 @@ export interface AlignedGridScrollEvent<TData = any, TContext = any>
 
 export interface GridOptionsChangedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'gridOptionsChanged', TData, TContext> {
-    options: GridOptions;
+    options: GridOptions<any>;
 }
 
 export interface ScrollbarWidthChangedEvent<TData = any, TContext = any>
@@ -1286,11 +1286,11 @@ export interface ColumnsResetEvent<TData = any, TContext = any> extends AgGlobal
 }
 export interface FilterSwitchedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'filterSwitched', TData, TContext> {
-    column: Column;
+    column: Column<any>;
 }
 
 export interface FilterClosedEvent<TData = any, TContext = any> extends AgGlobalEvent<'filterClosed', TData, TContext> {
-    column: Column;
+    column: Column<any>;
 }
 
 interface BaseFilterDestroyedEvent<
@@ -1299,7 +1299,7 @@ interface BaseFilterDestroyedEvent<
     TContext = any,
 > extends AgGlobalEvent<TEventType, TData, TContext> {
     source: 'api' | 'columnChanged' | 'gridDestroyed' | 'advancedFilterEnabled' | 'paramsUpdated';
-    column: Column;
+    column: Column<any>;
 }
 
 export interface FilterDestroyedEvent<TData = any, TContext = any>

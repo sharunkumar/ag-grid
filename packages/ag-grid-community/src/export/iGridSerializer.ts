@@ -38,7 +38,7 @@ export interface GridSerializingParams {
     valueSvc: ValueService;
     gos: GridOptionsService;
     valueFrom?: CellValueResolveFrom;
-    processCellCallback?: (params: ProcessCellForExportParams) => string;
+    processCellCallback?: (params: ProcessCellForExportParams<any, any>) => string;
     processHeaderCallback?: (params: ProcessHeaderForExportParams) => string;
     processGroupHeaderCallback?: (params: ProcessGroupHeaderForExportParams) => string;
     processRowGroupCallback?: (params: ProcessRowGroupForExportParams) => string;

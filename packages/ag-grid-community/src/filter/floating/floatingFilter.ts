@@ -18,7 +18,7 @@ export type IFloatingFilterParentCallback<P = InbuiltParentType> = (parentFilter
 
 interface SharedFloatingFilterParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** The column this filter is for. */
-    column: Column;
+    column: Column<any>;
 
     /**
      * Shows the parent filter popup.

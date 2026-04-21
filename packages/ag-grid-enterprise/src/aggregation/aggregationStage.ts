@@ -28,7 +28,7 @@ import { getNodesFromMappedSet, setAggData, setAggDataWithSiblings } from './agg
 interface ResolvedValueColumn {
     column: AgColumn;
     colId: string;
-    colDef: ColDef;
+    colDef: ColDef<any, any>;
     aggFunc: IAggFunc | null;
     /** Bitmask slot for ChangedCellsPath column tracking. -1 when inactive. */
     colSlot: number;

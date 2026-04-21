@@ -10,11 +10,11 @@ export class AgGridReact<TData = any> extends Component<AgGridReactProps<TData>,
     public api!: GridApi<TData>;
     private readonly apiListeners: Array<(params: any) => void> = [];
 
-    public registerApiListener(listener: (api: GridApi) => void) {
+    public registerApiListener(listener: (api: GridApi<any>) => void) {
         this.apiListeners.push(listener);
     }
 
-    private readonly setGridApi = (api: GridApi) => {
+    private readonly setGridApi = (api: GridApi<any>) => {
         this.api = api;
         for (const listener of this.apiListeners) {
             listener(api);

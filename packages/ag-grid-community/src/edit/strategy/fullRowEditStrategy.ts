@@ -17,8 +17,8 @@ import { BaseEditStrategy } from './baseEditStrategy';
 
 export class FullRowEditStrategy extends BaseEditStrategy {
     override beanName = 'fullRow' as BeanName | undefined;
-    private rowNode?: IRowNode;
-    private readonly startedRows = new Set<IRowNode>();
+    private rowNode?: IRowNode<any>;
+    private readonly startedRows = new Set<IRowNode<any>>();
 
     public override shouldStop(
         position?: EditPosition,
@@ -145,7 +145,7 @@ export class FullRowEditStrategy extends BaseEditStrategy {
             return false;
         }
 
-        const changedRows: IRowNode[] = [];
+        const changedRows: IRowNode<any>[] = [];
         model.getEditMap().forEach((rowEdits, rowNode) => {
             if (!rowEdits || rowEdits.size === 0) {
                 return;
@@ -226,7 +226,7 @@ export class FullRowEditStrategy extends BaseEditStrategy {
      * Destroys all editors for a row that started full row editing, including editors
      * that are not represented in the edit model (e.g. empty/unedited editors).
      */
-    private destroyEditorsForRow(rowNode: IRowNode): void {
+    private destroyEditorsForRow(rowNode: IRowNode<any>): void {
         const rowCtrl = _getRowCtrl(this.beans, { rowNode });
         if (!rowCtrl) {
             return; // Row not rendered, no editors to destroy.

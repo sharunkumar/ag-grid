@@ -79,7 +79,7 @@ export class GroupHierarchyColService extends BeanStub implements NamedBean, IGr
         this.inverseColumnMap = newInverseColumnMap;
     }
 
-    public updateColumns(_event: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions>): void {
+    public updateColumns(_event: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions<any>>): void {
         // No-op
     }
 
@@ -166,8 +166,8 @@ export class GroupHierarchyColService extends BeanStub implements NamedBean, IGr
         );
     }
 
-    private createGroupHierarchyColDefs(sourceCol: AgColumn): ColDef[] {
-        const colDefs: ColDef[] = [];
+    private createGroupHierarchyColDefs(sourceCol: AgColumn): ColDef<any, any>[] {
+        const colDefs: ColDef<any, any>[] = [];
         const sourceColDef = sourceCol.colDef;
         const groupHierarchy = _getGroupHierarchy(sourceColDef);
 
@@ -180,7 +180,7 @@ export class GroupHierarchyColService extends BeanStub implements NamedBean, IGr
         }
 
         for (const part of groupHierarchy) {
-            let colDef: ColDef | null = null;
+            let colDef: ColDef<any, any> | null = null;
             if (typeof part === 'string') {
                 colDef = this.createColDefForPart(part, sourceCol, sourceColDef);
             } else {
@@ -220,11 +220,15 @@ export class GroupHierarchyColService extends BeanStub implements NamedBean, IGr
         return newCols;
     }
 
-    private createColDefForPart(part: string, sourceCol: AgColumn, sourceColDef: ColDef): ColDef | null {
+    private createColDefForPart(
+        part: string,
+        sourceCol: AgColumn,
+        sourceColDef: ColDef<any, any>
+    ): ColDef<any, any> | null {
         const { beans, gos } = this;
 
         const colId = `${GROUP_HIERARCHY_COLUMN_ID_PREFIX}-${sourceCol.colId}-${part}`;
-        const defaults: Partial<ColDef> = {
+        const defaults: Partial<ColDef<any, any>> = {
             enableRowGroup: sourceColDef.enableRowGroup,
             rowGroup: sourceColDef.rowGroup,
             enablePivot: sourceColDef.enablePivot,
@@ -239,7 +243,7 @@ export class GroupHierarchyColService extends BeanStub implements NamedBean, IGr
             return _addColumnDefaultAndTypes(beans, colDef, colDef.colId, true);
         }
 
-        const base: ColDef = _addColumnDefaultAndTypes(beans, { colId, ...defaults }, colId, true);
+        const base: ColDef<any, any> = _addColumnDefaultAndTypes(beans, { colId, ...defaults }, colId, true);
 
         const translate = this.getLocaleTextFunc();
         const translatePart = (part: string, fallback: string) => translate?.(part, fallback) ?? fallback;

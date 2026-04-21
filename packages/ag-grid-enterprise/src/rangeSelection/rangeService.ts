@@ -1345,7 +1345,7 @@ export class RangeService extends BeanStub implements NamedBean, IRangeService, 
 
     private forEachEditableCellInRanges(
         cellRanges: CellRange[],
-        callback: (rowNode: IRowNode, column: AgColumn) => void
+        callback: (rowNode: IRowNode<any>, column: AgColumn) => void
     ): void {
         const { beans } = this;
         for (const cellRange of cellRanges) {

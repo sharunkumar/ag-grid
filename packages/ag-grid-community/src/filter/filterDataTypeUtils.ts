@@ -152,11 +152,11 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
     number: () => ({ comparator: setFilterNumberComparator }),
     bigint: () => ({ comparator: setFilterBigIntComparator }),
     boolean: ({ t }) => ({
-        valueFormatter: (params: ValueFormatterParams<any, boolean>) =>
+        valueFormatter: (params: ValueFormatterParams<any, boolean, any>) =>
             _exists(params.value) ? t(String(params.value), params.value ? 'True' : 'False') : t('blanks', '(Blanks)'),
     }),
     date: ({ formatValue, t }) => ({
-        valueFormatter: (params: ValueFormatterParams) => {
+        valueFormatter: (params: ValueFormatterParams<any, any, any>) => {
             const valueFormatted = formatValue(params);
             return _exists(valueFormatted) ? valueFormatted : t('blanks', '(Blanks)');
         },
@@ -174,7 +174,7 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
         treeListPathGetter: (date: Date | null) => _getDateParts(date, false),
     }),
     dateString: ({ formatValue, dataTypeDefinition, t }) => ({
-        valueFormatter: (params: ValueFormatterParams) => {
+        valueFormatter: (params: ValueFormatterParams<any, any, any>) => {
             const valueFormatted = formatValue(params);
             return _exists(valueFormatted) ? valueFormatted : t('blanks', '(Blanks)');
         },
@@ -196,12 +196,12 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
     },
     dateTimeString(args) {
         const convertToDate = (args.dataTypeDefinition as DateStringDataTypeDefinition).dateParser!;
-        const params = setFilterParamsForEachDataType.dateString(args) as ISetFilterParams;
+        const params = setFilterParamsForEachDataType.dateString(args) as ISetFilterParams<any>;
         params.treeListPathGetter = (value: string | null) => _getDateParts(convertToDate(value ?? undefined));
         return params;
     },
     object: ({ formatValue, t }) => ({
-        valueFormatter: (params: ValueFormatterParams) => {
+        valueFormatter: (params: ValueFormatterParams<any, any, any>) => {
             const valueFormatted = formatValue(params);
             return _exists(valueFormatted) ? valueFormatted : t('blanks', '(Blanks)');
         },
@@ -213,17 +213,17 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
 export function _getFilterParamsForDataType(
     filter: string,
     existingFilterParams: any,
-    existingFilterValueGetter: string | ValueGetterFunc | undefined,
+    existingFilterValueGetter: string | ValueGetterFunc<any, any, any> | undefined,
     dataTypeDefinition: CoreDataTypeDefinition,
     formatValue: DataTypeFormatValueFunc,
     beans: BeanCollection,
     translate: LocaleTextFunc
-): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc } {
+): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc<any, any, any> } {
     let filterParams: any = existingFilterParams;
-    let filterValueGetter: string | ValueGetterFunc | undefined = existingFilterValueGetter;
+    let filterValueGetter: string | ValueGetterFunc<any, any, any> | undefined = existingFilterValueGetter;
     const usingSetFilter = filter === 'agSetColumnFilter';
     if (!filterValueGetter && dataTypeDefinition.baseDataType === 'object' && !usingSetFilter) {
-        filterValueGetter = ({ column, node }: ValueGetterParams) =>
+        filterValueGetter = ({ column, node }: ValueGetterParams<any, any, any>) =>
             formatValue({ column, node, value: beans.valueSvc.getValue(column as AgColumn, node, 'data') });
     }
     const filterParamsMap = usingSetFilter ? setFilterParamsForEachDataType : filterParamsForEachDataType;

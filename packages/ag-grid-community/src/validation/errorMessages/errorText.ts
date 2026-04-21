@@ -192,7 +192,7 @@ export const AG_GRID_ERRORS = {
     10: ({ eventType }: { eventType: RowNodeEventType }) =>
         `As of v33, the '${eventType}' event is deprecated. Use the global 'modelUpdated' event to determine when row children have changed.`,
     11: () => 'No gridOptions provided to createGrid' as const,
-    12: ({ colKey }: { colKey: string | Column }) => ['column ', colKey, ' not found'] as const,
+    12: ({ colKey }: { colKey: string | Column<any> }) => ['column ', colKey, ' not found'] as const,
     13: () =>
         'Could not find rowIndex, this means tasks are being executed on a rowNode that has been removed from the grid.' as const,
     14: ({ groupPrefix }: { groupPrefix: string }) =>

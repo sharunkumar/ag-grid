@@ -467,7 +467,9 @@ export class CellCtrl extends BeanStub {
         return (rowUnpinned || (allowManuallyPinned && _isManualPinnedRow(this.rowNode))) && !!value;
     }
 
-    private isCheckboxSelection(colDef: ColDef): boolean | CheckboxSelectionCallback | undefined {
+    private isCheckboxSelection(
+        colDef: ColDef<any, any>
+    ): boolean | CheckboxSelectionCallback<any, any, any> | undefined {
         const { rowSelection, groupDisplayType } = this.beans.gridOptions;
         const checkboxLocation = _getCheckboxLocation(rowSelection);
         const isSelectionColumn = isColumnSelectionCol(this.column);
@@ -531,7 +533,7 @@ export class CellCtrl extends BeanStub {
         return editSvc?.stopEditing(this, { cancel, source: editSvc?.isBatchEditing() ? 'ui' : 'api' }) ?? false;
     }
 
-    private createCellRendererParams(): ICellRendererParams {
+    private createCellRendererParams(): ICellRendererParams<any, any, any> {
         const {
             value,
             valueFormatted,
@@ -541,7 +543,7 @@ export class CellCtrl extends BeanStub {
             eGui,
             beans: { valueSvc, gos, editSvc },
         } = this;
-        const res: ICellRendererParams = _addGridCommonParams(gos, {
+        const res: ICellRendererParams<any, any, any> = _addGridCommonParams(gos, {
             value: value,
             valueFormatted: valueFormatted,
             getValue: () => valueSvc.getValueForDisplay({ column, node: rowNode, from: 'edit' }).value,
@@ -583,7 +585,7 @@ export class CellCtrl extends BeanStub {
         }
     }
 
-    public refreshOrDestroyCell(params?: RefreshCellsParams): void {
+    public refreshOrDestroyCell(params?: RefreshCellsParams<any>): void {
         if (this.refreshShouldDestroy()) {
             this.rowCtrl?.recreateCell(this);
         } else {
@@ -606,7 +608,7 @@ export class CellCtrl extends BeanStub {
     // + rowCtrl: event dataChanged {suppressFlash: !update, newData: !update}
     // + rowCtrl: api refreshCells() {animate: true/false}
     // + rowRenderer: api softRefreshView() {}
-    public refreshCell(params?: RefreshCellsParams & { newData?: boolean }): void {
+    public refreshCell(params?: RefreshCellsParams<any> & { newData?: boolean }): void {
         const {
             editStyleFeature,
             customStyleFeature,

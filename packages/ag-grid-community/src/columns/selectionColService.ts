@@ -130,13 +130,13 @@ export class SelectionColService extends BeanStub implements NamedBean, IColumnC
         return checkboxes || headerCheckbox;
     }
 
-    private createSelectionColDef(def?: SelectionColumnDef): ColDef {
+    private createSelectionColDef(def?: SelectionColumnDef): ColDef<any, any> {
         const { gos } = this;
         const selectionColumnDef = def ?? gos.get('selectionColumnDef');
         const enableRTL = gos.get('enableRtl');
 
         // We don't support row spanning in the selection column
-        const { rowSpan: _, spanRows: __, ...filteredSelColDef } = (selectionColumnDef ?? {}) as ColDef;
+        const { rowSpan: _, spanRows: __, ...filteredSelColDef } = (selectionColumnDef ?? {}) as ColDef<any, any>;
 
         return {
             // overridable properties
@@ -177,8 +177,8 @@ export class SelectionColService extends BeanStub implements NamedBean, IColumnC
     }
 
     private onSelectionOptionsChanged(
-        current: GridOptions['rowSelection'],
-        prev: GridOptions['rowSelection'],
+        current: GridOptions<any>['rowSelection'],
+        prev: GridOptions<any>['rowSelection'],
         source: ColumnEventType
     ) {
         const prevCheckbox = prev && typeof prev !== 'string' ? _getCheckboxes(prev) : undefined;

@@ -10,7 +10,7 @@ import { createGrid } from '../grid';
 const getColNames = (cols: any[] | undefined) => cols?.map((c) => c.field ?? c.colId) ?? [];
 
 const onlyFields = [{ field: 'field' }, { field: 'field2' }];
-const withGroups: (ColDef | ColGroupDef)[] = [
+const withGroups: (ColDef<any, any> | ColGroupDef<any>)[] = [
     { field: 'field' },
     {
         children: [
@@ -25,7 +25,7 @@ const withGroups: (ColDef | ColGroupDef)[] = [
 
 describe('getColumnDefs', () => {
     test('simple columns', (done) => {
-        const options: GridOptions = {
+        const options: GridOptions<any> = {
             columnDefs: onlyFields,
             onGridReady: (params: GridReadyEvent) => {
                 const defs1 = params.api.getColumnDefs();
@@ -39,7 +39,7 @@ describe('getColumnDefs', () => {
     });
 
     test('with column groups', (done) => {
-        const options: GridOptions = {
+        const options: GridOptions<any> = {
             columnDefs: withGroups,
             onGridReady: (params: GridReadyEvent) => {
                 const defs1 = params.api.getColumnDefs();

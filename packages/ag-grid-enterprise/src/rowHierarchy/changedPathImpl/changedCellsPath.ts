@@ -59,7 +59,7 @@ export class ChangedCellsPathImpl implements ChangedCellsPath {
     private colCount: number = 0;
 
     /** {@inheritDoc ChangedCellsPath.addRow} Time: O(D), D = depth. */
-    public addRow(rowNode: IRowNode | null | undefined): void {
+    public addRow(rowNode: IRowNode<any> | null | undefined): void {
         let node: RowNode | null | undefined = rowNode as RowNode | null | undefined;
         if (node == null) {
             return;
@@ -83,7 +83,7 @@ export class ChangedCellsPathImpl implements ChangedCellsPath {
     }
 
     /** {@inheritDoc ChangedCellsPath.addCell} Time: O(D × ⌈C/32⌉), D = depth, C = tracked columns. */
-    public addCell(rowNode: IRowNode | null | undefined, colId: string | null | undefined): void {
+    public addCell(rowNode: IRowNode<any> | null | undefined, colId: string | null | undefined): void {
         if (colId == null) {
             this.addRow(rowNode);
             return;
@@ -126,7 +126,7 @@ export class ChangedCellsPathImpl implements ChangedCellsPath {
     }
 
     /** {@inheritDoc ChangedCellsPath.hasRow} Time: O(1). */
-    public hasRow(rowNode: IRowNode): boolean {
+    public hasRow(rowNode: IRowNode<any>): boolean {
         return this.slots.has(rowNode as RowNode);
     }
 
@@ -142,7 +142,7 @@ export class ChangedCellsPathImpl implements ChangedCellsPath {
     }
 
     /** {@inheritDoc ChangedCellsPath.getSlot} Read-only — does not allocate slots. Time: O(1). */
-    public getSlot(key: IRowNode | string): number {
+    public getSlot(key: IRowNode<any> | string): number {
         return this.slots.get(key as RowNode | string) ?? -1;
     }
 
@@ -164,7 +164,7 @@ export class ChangedCellsPathImpl implements ChangedCellsPath {
      * C < 32 is the common case (single bitmask word per row, no extraBits loop).
      * Space: O(D × ⌈C/32⌉).
      */
-    private ensureRow(rowNode: IRowNode): number {
+    private ensureRow(rowNode: IRowNode<any>): number {
         const slots = this.slots;
         const rows = this.rows;
         const bits = this.bits;

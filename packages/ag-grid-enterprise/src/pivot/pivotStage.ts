@@ -25,7 +25,7 @@ export class PivotStage extends BeanStub implements NamedBean, _IRowNodePivotSta
     beanName = 'pivotStage' as const;
 
     public readonly step: ClientSideRowModelStage = 'pivot';
-    public readonly refreshProps: (keyof GridOptions)[] = [
+    public readonly refreshProps: (keyof GridOptions<any>)[] = [
         'removePivotHeaderRowWhenSingleValueColumn',
         'pivotRowTotals',
         'pivotColumnGroupTotals',
@@ -54,7 +54,10 @@ export class PivotStage extends BeanStub implements NamedBean, _IRowNodePivotSta
     private maxUniqueValues: number = -1;
 
     /** Returns `true` if the changedPath should be deactivated (e.g. pivot columns changed). */
-    public execute(changedPath: ChangedPath | undefined, changedProps: Set<keyof GridOptions> | undefined): boolean {
+    public execute(
+        changedPath: ChangedPath | undefined,
+        changedProps: Set<keyof GridOptions<any>> | undefined
+    ): boolean {
         if (this.beans.colModel.isPivotActive()) {
             return this.executePivotOn(changedPath, changedProps);
         } else {
@@ -75,7 +78,7 @@ export class PivotStage extends BeanStub implements NamedBean, _IRowNodePivotSta
 
     private executePivotOn(
         changedPath: ChangedPath | undefined,
-        changedProps: Set<keyof GridOptions> | undefined
+        changedProps: Set<keyof GridOptions<any>> | undefined
     ): boolean {
         const { valueColsSvc, gos, rowGroupColsSvc, pivotColsSvc } = this.beans;
         const numberOfAggregationColumns = valueColsSvc?.columns.length ?? 1;

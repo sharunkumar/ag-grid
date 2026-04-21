@@ -2,7 +2,7 @@ import type { BeanCollection } from '../../context/context';
 import type { Column } from '../../interfaces/iColumn';
 import { _error } from '../../validation/logging';
 
-export function showColumnMenu(beans: BeanCollection, colKey: string | Column): void {
+export function showColumnMenu(beans: BeanCollection, colKey: string | Column<any>): void {
     const column = beans.colModel.getCol(colKey);
     if (!column) {
         // No column found, can't show menu

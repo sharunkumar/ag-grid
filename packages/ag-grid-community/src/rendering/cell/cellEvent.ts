@@ -6,7 +6,7 @@ import type { Column } from '../../interfaces/iColumn';
 import type { IRowNode } from '../../interfaces/iRowNode';
 
 type EventPosition = {
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     column: Column<any>;
 };
 

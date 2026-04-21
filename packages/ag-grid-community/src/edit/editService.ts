@@ -268,7 +268,7 @@ export class EditService extends BeanStub implements NamedBean {
         return this.model.hasEdits(position ?? undefined, params ?? CHECK_SIBLING);
     }
 
-    public isRowEditing(rowNode?: IRowNode, params?: IsEditingParams): boolean {
+    public isRowEditing(rowNode?: IRowNode<any>, params?: IsEditingParams): boolean {
         return !!rowNode && this.model.hasRowEdits(rowNode, params);
     }
 
@@ -689,8 +689,8 @@ export class EditService extends BeanStub implements NamedBean {
      * batch-finalisation case (where edits are removed immediately after commit).
      */
     private setNodeDataValue(
-        rowNode: IRowNode,
-        column: Column,
+        rowNode: IRowNode<any>,
+        column: Column<any>,
         newValue: any,
         cellCtrl: CellCtrl | null | undefined,
         originalSource: string = 'edit'
@@ -789,13 +789,13 @@ export class EditService extends BeanStub implements NamedBean {
         });
     }
 
-    private bulkRefreshCell(position: Required<EditPosition>, params?: RefreshCellsParams): void {
+    private bulkRefreshCell(position: Required<EditPosition>, params?: RefreshCellsParams<any>): void {
         if (_isClientSideRowModel(this.gos, this.beans.rowModel)) {
             this.refCell(position, this.model.getEdit(position), params);
         }
     }
 
-    private bulkRefreshMap(editMap: EditMap, params?: RefreshCellsParams): void {
+    private bulkRefreshMap(editMap: EditMap, params?: RefreshCellsParams<any>): void {
         if (_isClientSideRowModel(this.gos, this.beans.rowModel)) {
             editMap.forEach((editRow, rowNode) => {
                 for (const column of editRow.keys()) {
@@ -808,12 +808,12 @@ export class EditService extends BeanStub implements NamedBean {
     private refCell(
         { rowNode, column }: Required<EditPosition>,
         edit?: EditValue,
-        params: RefreshCellsParams = {}
+        params: RefreshCellsParams<any> = {}
     ): void {
         const { beans, gos } = this;
 
-        const updatedNodes: Set<IRowNode> = new Set([rowNode]);
-        const refreshNodes: Set<IRowNode> = new Set();
+        const updatedNodes: Set<IRowNode<any>> = new Set([rowNode]);
+        const refreshNodes: Set<IRowNode<any>> = new Set();
 
         const pinnedSibling = (rowNode as RowNode).pinnedSibling;
         if (pinnedSibling) {
@@ -1014,7 +1014,7 @@ export class EditService extends BeanStub implements NamedBean {
      * Gets the pending edit value for a cell (used by ValueService).
      * Returns undefined to fallback to committed data/valueGetter.
      */
-    public getPendingEditValue(rowNode: IRowNode, column: Column, from: CellValueResolveFrom): any {
+    public getPendingEditValue(rowNode: IRowNode<any>, column: Column<any>, from: CellValueResolveFrom): any {
         if (from === 'data') {
             return undefined; // 'data' mode: always use committed data, never edit values
         }
@@ -1070,7 +1070,7 @@ export class EditService extends BeanStub implements NamedBean {
         _addStopEditingWhenGridLosesFocus(this, this.beans, viewports);
     }
 
-    public createPopupEditorWrapper(params: ICellEditorParams): PopupEditorWrapper {
+    public createPopupEditorWrapper(params: ICellEditorParams<any, any, any>): PopupEditorWrapper {
         // TODO: find a better place for this
         return new PopupEditorWrapper(params);
     }
@@ -1587,7 +1587,10 @@ export class EditService extends BeanStub implements NamedBean {
     }
 }
 
-function getRowColumnsFromMap(edits: EditMap): { rowNodes: IRowNode[] | undefined; columns: Column[] | undefined } {
+function getRowColumnsFromMap(edits: EditMap): {
+    rowNodes: IRowNode<any>[] | undefined;
+    columns: Column<any>[] | undefined;
+} {
     return {
         rowNodes: edits ? Array.from(edits.keys()) : undefined,
         columns: edits

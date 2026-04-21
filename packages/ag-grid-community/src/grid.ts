@@ -65,8 +65,8 @@ export interface Params {
     modules?: Module[];
 }
 
-const _gridApiCache = new WeakMap<Element, GridApi>();
-const _gridElementCache = new WeakMap<GridApi, Element>();
+const _gridApiCache = new WeakMap<Element, GridApi<any>>();
+const _gridElementCache = new WeakMap<GridApi<any>, Element>();
 
 // **NOTE** If updating this JsDoc please also update the re-exported createGrid in main-umd-shared.ts
 /**
@@ -84,7 +84,7 @@ export function createGrid<TData>(
     if (!gridOptions) {
         // No gridOptions provided, abort creating the grid
         _error(11);
-        return {} as GridApi;
+        return {} as GridApi<any>;
     }
     const gridParams: GridParams | undefined = params;
     let destroyCallback: (() => void) | undefined;
@@ -122,12 +122,12 @@ let nextGridId = 1;
 export class GridCoreCreator {
     public create(
         eGridDiv: HTMLElement,
-        providedOptions: GridOptions,
+        providedOptions: GridOptions<any>,
         createUi: (context: Context) => void,
         acceptChanges?: (context: Context) => void,
         params?: GridParams,
         _destroyCallback?: () => void
-    ): GridApi {
+    ): GridApi<any> {
         // Returns a shallow copy of the provided options, with global options merged in
         const gridOptions = GlobalGridOptions.applyGlobalGridOptions(providedOptions);
 
@@ -227,7 +227,7 @@ export class GridCoreCreator {
         }
     }
 
-    private createProvidedBeans(eGridDiv: HTMLElement, gridOptions: GridOptions, params?: GridParams): any {
+    private createProvidedBeans(eGridDiv: HTMLElement, gridOptions: GridOptions<any>, params?: GridParams): any {
         let frameworkOverrides = params ? params.frameworkOverrides : null;
         if (_missing(frameworkOverrides)) {
             frameworkOverrides = new VanillaFrameworkOverrides();
@@ -351,7 +351,7 @@ function getDefaultRowModelType(passedRowModelType?: RowModelType): RowModelType
  * If passing a DOM node as an argument, this DOM node must be an immediate child of the element passed
  * to `createGrid`. This is to support the case where multiple grids are instantiated in a single element.
  */
-export function getGridApi(gridElement: Element | string | null | undefined): GridApi | undefined {
+export function getGridApi(gridElement: Element | string | null | undefined): GridApi<any> | undefined {
     if (typeof gridElement === 'string') {
         try {
             gridElement =
@@ -368,6 +368,6 @@ export function getGridApi(gridElement: Element | string | null | undefined): Gr
 /**
  * Returns the `Element` instance associated with the grid instance referred to by `GridApi`
  */
-export function getGridElement(api: GridApi): Element | undefined {
+export function getGridElement(api: GridApi<any>): Element | undefined {
     return _gridElementCache.get(api);
 }

@@ -2,10 +2,10 @@ import type { AgColumn, ColDef } from 'ag-grid-community';
 
 export interface GroupColumn {
     col: AgColumn;
-    field: ColDef['field'];
-    type: ColDef['type'];
-    keyCreator: ColDef['keyCreator'];
-    valueGetter: ColDef['valueGetter'];
+    field: ColDef<any, any>['field'];
+    type: ColDef<any, any>['type'];
+    keyCreator: ColDef<any, any>['keyCreator'];
+    valueGetter: ColDef<any, any>['valueGetter'];
 }
 
 export const makeGroupColumns = (columns: AgColumn[] | null | undefined, result: GroupColumn[]): void => {

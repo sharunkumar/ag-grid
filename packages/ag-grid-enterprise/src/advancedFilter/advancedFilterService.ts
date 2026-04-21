@@ -85,7 +85,7 @@ export class AdvancedFilterService extends BeanStub implements NamedBean, IAdvan
         return !!this.expressionFunction;
     }
 
-    public doesFilterPass(node: IRowNode): boolean {
+    public doesFilterPass(node: IRowNode<any>): boolean {
         return this.expressionFunction!(this.expressionProxy, node, this.expressionParams!);
     }
 

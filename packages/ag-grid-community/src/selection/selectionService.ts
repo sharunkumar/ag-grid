@@ -757,7 +757,11 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
         }
     }
 
-    public setDetailSelectionState(masterNode: RowNode, detailGridOptions: GridOptions, detailApi: GridApi): void {
+    public setDetailSelectionState(
+        masterNode: RowNode,
+        detailGridOptions: GridOptions<any>,
+        detailApi: GridApi<any>
+    ): void {
         if (!this.masterSelectsDetail) {
             return;
         }
@@ -779,7 +783,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
             case undefined: {
                 const selectedIds = this.detailSelection.get(masterNode.id!);
                 if (selectedIds) {
-                    const nodes: IRowNode[] = [];
+                    const nodes: IRowNode<any>[] = [];
                     for (const id of selectedIds) {
                         const n = detailApi.getRowNode(id);
                         if (n) {
@@ -807,7 +811,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
     }
 }
 
-function _isAllSelected(api: GridApi): boolean | undefined {
+function _isAllSelected(api: GridApi<any>): boolean | undefined {
     let selectedCount = 0;
     let notSelectedCount = 0;
 

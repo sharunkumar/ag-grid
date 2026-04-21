@@ -16,7 +16,7 @@ import type { IRowNode } from '../interfaces/iRowNode';
 export function _isUserSuppressingKeyboardEvent(
     gos: GridOptionsService,
     keyboardEvent: KeyboardEvent,
-    rowNode: IRowNode,
+    rowNode: IRowNode<any>,
     column: AgColumn,
     editing: boolean
 ): boolean {

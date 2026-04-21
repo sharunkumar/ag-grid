@@ -40,7 +40,7 @@ export class GridWrapperComponent {
             onCellDoubleClicked: (_event: CellDoubleClickedEvent) => {
                 this.zoneStatus['cellDoubleClicked'] = NgZone.isInAngularZone();
             },
-            onCellValueChanged: (_event: NewValueParams) => {
+            onCellValueChanged: (_event: NewValueParams<any, any, any>) => {
                 this.zoneStatus['cellValueChanged'] = NgZone.isInAngularZone();
             },
             onCellContextMenu: (_event: CellContextMenuEvent) => {

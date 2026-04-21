@@ -6,9 +6,9 @@ export interface IGroupEditService {
     canSetParent(rowsDrop: RowsDrop): boolean;
     isGroupingDrop(rowsDrop: RowsDrop): boolean;
     dropGroupEdit(rowsDrop: RowsDrop): boolean;
-    canDropRow(row: IRowNode, rowsDrop: RowsDrop): boolean;
+    canDropRow(row: IRowNode<any>, rowsDrop: RowsDrop): boolean;
     fixRowsDrop(rowsDrop: RowsDrop, canSetParent: boolean, moving: boolean, yDelta: number): void;
     stopDragging(final: boolean): void;
-    csrmFirstLeaf(parent: IRowNode | null): IRowNode | null;
+    csrmFirstLeaf(parent: IRowNode<any> | null): IRowNode<any> | null;
     clearNewSameParent(rowsDrop: RowsDrop, canSetParent: boolean): void;
 }

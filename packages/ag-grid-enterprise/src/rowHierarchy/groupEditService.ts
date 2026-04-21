@@ -21,10 +21,10 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
     public beanName = 'groupEditSvc' as const;
 
     private pendingEditRefresh: _ChangedRowNodes | null = null;
-    private dropGroupTarget: IRowNode | null = null;
+    private dropGroupTarget: IRowNode<any> | null = null;
     private dropGroupTimer: number | null = null;
     private dropGroupThrottled = false;
-    private draggingGroups: Map<IRowNode, RowNode[]> | null = null;
+    private draggingGroups: Map<IRowNode<any>, RowNode[]> | null = null;
 
     public postConstruct(): void {
         if (_isClientSideRowModel(this.gos)) {
@@ -52,7 +52,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
     }
 
     private initDraggingGroups(rowsDrop: _RowsDrop): void {
-        const structure = new Map<IRowNode, RowNode[]>();
+        const structure = new Map<IRowNode<any>, RowNode[]>();
 
         // Let's make a copy of all the children being dragged
         const recurse = (row: RowNode) => {
@@ -90,7 +90,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         return !!this.beans.rowGroupColsSvc?.columns?.length;
     }
 
-    public canDropRow(rowNode: IRowNode, rowsDrop: _RowsDrop): boolean {
+    public canDropRow(rowNode: IRowNode<any>, rowsDrop: _RowsDrop): boolean {
         if (this.beans.groupStage?.treeData) {
             return !wouldCycle(rowNode, rowsDrop.newParent);
         }
@@ -144,10 +144,10 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         }
 
         let target = rowsDrop.target;
-        let newParent: IRowNode | null = null;
+        let newParent: IRowNode<any> | null = null;
         let inside = false;
 
-        const rootNode = rowsDrop.rootNode as IRowNode;
+        const rootNode = rowsDrop.rootNode as IRowNode<any>;
         const rowModel = this.beans.rowModel;
 
         const canStartGroup = this.canStartGroup(target, treeData);
@@ -182,7 +182,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
             }
 
             if (target && !inside) {
-                let current: IRowNode | null = target;
+                let current: IRowNode<any> | null = target;
                 while (current && current !== rootNode && current !== newParent) {
                     target = current;
                     current = current.parent;
@@ -224,7 +224,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         }
     }
 
-    private canDropInTarget(target: IRowNode, rowsDrop: _RowsDrop): boolean {
+    private canDropInTarget(target: IRowNode<any>, rowsDrop: _RowsDrop): boolean {
         if (target.expanded) {
             return true;
         }
@@ -248,7 +248,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         return true;
     }
 
-    private startDropGroupDelay(target: IRowNode): void {
+    private startDropGroupDelay(target: IRowNode<any>): void {
         if (this.dropGroupTarget && this.dropGroupTarget !== target) {
             this.resetDragGroup();
         }
@@ -399,7 +399,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         return true;
     }
 
-    private canStartGroup(target: IRowNode | null, treeData: boolean): boolean {
+    private canStartGroup(target: IRowNode<any> | null, treeData: boolean): boolean {
         if (!target || target.level < 0 || target.footer || target.detail) {
             return false; // cannot group into root, footer, or detail rows
         }
@@ -435,11 +435,11 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         });
     }
 
-    private newGroupValues(parent: IRowNode | null): GroupValues {
+    private newGroupValues(parent: IRowNode<any> | null): GroupValues {
         const columns = this.beans.rowGroupColsSvc?.columns ?? [];
         const values = new Array<any>(columns.length);
         let maxLevel = -1;
-        let current: IRowNode | null | undefined = parent;
+        let current: IRowNode<any> | null | undefined = parent;
         while (current && current.level >= 0) {
             const column: AgColumn | undefined = columns[current.level];
             if (column) {
@@ -522,14 +522,14 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         }
     }
 
-    public csrmFirstLeaf(parent: IRowNode | null): RowNode | null {
+    public csrmFirstLeaf(parent: IRowNode<any> | null): RowNode | null {
         if (!parent) {
             return null;
         }
         const draggingGroups = this.draggingGroups;
-        let children: IRowNode[] | null | undefined = draggingGroups?.get(parent) ?? parent.childrenAfterGroup;
+        let children: IRowNode<any>[] | null | undefined = draggingGroups?.get(parent) ?? parent.childrenAfterGroup;
         while (children?.length) {
-            const child: IRowNode = children[0];
+            const child: IRowNode<any> = children[0];
             if (child.sourceRowIndex >= 0) {
                 if (!child.destroyed) {
                     return child as RowNode;
@@ -541,7 +541,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         return _csrmFirstLeaf(parent) as RowNode | null;
     }
 
-    private firstAliveChildLeaf(parent: IRowNode): RowNode | null {
+    private firstAliveChildLeaf(parent: IRowNode<any>): RowNode | null {
         const children = this.draggingGroups?.get(parent) ?? parent.childrenAfterGroup;
         if (children) {
             for (const grandChild of children) {
@@ -553,7 +553,7 @@ export class GroupEditService extends BeanStub implements _IGroupEditService {
         return null;
     }
 
-    private findFirstLeafForParent(parent: IRowNode | null, exclude: ReadonlySet<RowNode>): RowNode | null {
+    private findFirstLeafForParent(parent: IRowNode<any> | null, exclude: ReadonlySet<RowNode>): RowNode | null {
         if (!parent) {
             return null;
         }
@@ -587,11 +587,14 @@ interface GroupValues {
     values: any[];
 }
 
-const isAncestorOrSelf = (candidate: IRowNode | null | undefined, node: IRowNode | null | undefined): boolean => {
+const isAncestorOrSelf = (
+    candidate: IRowNode<any> | null | undefined,
+    node: IRowNode<any> | null | undefined
+): boolean => {
     if (!candidate || !node) {
         return false;
     }
-    let current: IRowNode | null | undefined = node;
+    let current: IRowNode<any> | null | undefined = node;
     while (current) {
         if (current === candidate) {
             return true;
@@ -602,11 +605,11 @@ const isAncestorOrSelf = (candidate: IRowNode | null | undefined, node: IRowNode
 };
 
 /** Checks if setting `newParent` as the parent of `row` would create a cycle in the tree hierarchy */
-const wouldCycle = (row: IRowNode, newParent: IRowNode | null | undefined): boolean => {
+const wouldCycle = (row: IRowNode<any>, newParent: IRowNode<any> | null | undefined): boolean => {
     if (!newParent || row.parent === newParent) {
         return false;
     }
-    let current: IRowNode | null | undefined = newParent;
+    let current: IRowNode<any> | null | undefined = newParent;
     const rowId = row.id;
     while (current) {
         if (current === row) {
@@ -620,7 +623,7 @@ const wouldCycle = (row: IRowNode, newParent: IRowNode | null | undefined): bool
     return false;
 };
 
-const rowsHaveSameParent = (rows: IRowNode<any>[], newParent: IRowNode): boolean => {
+const rowsHaveSameParent = (rows: IRowNode<any>[], newParent: IRowNode<any>): boolean => {
     for (let i = 0, len = rows.length; i < len; ++i) {
         if (rows[i].parent !== newParent) {
             return false;

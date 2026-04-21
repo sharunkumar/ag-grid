@@ -10,11 +10,11 @@ import type { DefaultMenuItem } from './menuItem';
 import type { GetNoteParams } from './notes';
 import type { ServerSideTransaction } from './serverSideTransaction';
 
-export interface GetContextMenuItemsParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface GetContextMenuItemsParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** Names of the items that would be provided by default. */
     defaultItems: DefaultMenuItem[] | undefined;
     /** The column, if a cell was clicked, otherwise null. */
-    column: Column | null;
+    column: Column<any> | null;
     /** The row node, if a cell was clicked, otherwise null. */
     node: IRowNode<TData> | null;
     /** The value, if a cell was clicked, otherwise null.  */
@@ -23,9 +23,9 @@ export interface GetContextMenuItemsParams<TData = any, TContext = any> extends 
     event: MouseEvent | Touch;
 }
 
-export interface GetMainMenuItemsParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface GetMainMenuItemsParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** The column that was clicked. Will be `null` if clicking on a column group or empty header space. */
-    column: Column | null;
+    column: Column<any> | null;
     /** The column group that was clicked. Will be `null` if clicking on a column or empty header space. */
     columnGroup: ProvidedColumnGroup | null;
     /** List of the items that would be displayed by default */
@@ -41,16 +41,16 @@ export interface GetChartMenuItemsParams<TData = any, TContext = any> extends Ag
 
 export type ProcessUnpinnedColumns<TData = any, TContext = any> = (
     params: ProcessUnpinnedColumnsParams<TData, TContext>
-) => Column[];
+) => Column<any>[];
 export interface ProcessUnpinnedColumnsParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
-    columns: Column[];
+    columns: Column<any>[];
     viewportWidth: number;
 }
 
 export type PostProcessPopup<TData = any, TContext = any> = (params: PostProcessPopupParams<TData, TContext>) => void;
 export interface PostProcessPopupParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** If popup is for a column, this gives the Column */
-    column?: Column | null;
+    column?: Column<any> | null;
     /** If popup is for a row, this gives the RowNode */
     rowNode?: IRowNode<TData> | null;
     /** The popup we are showing */
@@ -188,7 +188,7 @@ export interface IsGroupOpenByDefaultParams<TData = any, TContext = any> extends
     /** The row node being considered. */
     rowNode: IRowNode<TData>;
     /** The Column for which this row is grouping. */
-    rowGroupColumn: Column;
+    rowGroupColumn: Column<any>;
     /** Same as `rowNode.level` - what level the group is at, e.g. 0 for top level, 1 for second etc */
     level: number;
     /** Same as `rowNode.field` - the field we are grouping on, e.g. 'country' */
@@ -226,11 +226,11 @@ export interface GetServerSideGroupLevelParamsParams<TData = any, TContext = any
     /** The level of the store. Top level is 0. */
     level: number;
     /** The Row Node for the group that got expanded, or undefined if top level (ie no parent) */
-    parentRowNode?: IRowNode;
+    parentRowNode?: IRowNode<any>;
     /** Active Row Group Columns, if any. */
-    rowGroupColumns: Column[];
+    rowGroupColumns: Column<any>[];
     /** Active Pivot Columns, if any. */
-    pivotColumns: Column[];
+    pivotColumns: Column<any>[];
     /** true if pivot mode is active. */
     pivotMode: boolean;
 }
@@ -241,19 +241,19 @@ export type IsServerSideGroupOpenByDefault<TData = any, TContext = any> = (
 export interface IsServerSideGroupOpenByDefaultParams<TData = any, TContext = any>
     extends AgGridCommon<TData, TContext> {
     data: any;
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
 }
 
 export interface IsApplyServerSideTransactionParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** The transaction getting applied. */
     transaction: ServerSideTransaction;
     /** The parent RowNode, if transaction is applied to a group. */
-    parentNode: IRowNode;
+    parentNode: IRowNode<any>;
     /** Store info, if any, as passed via the success() callback when loading data. */
     groupLevelInfo: any;
 }
 
-export interface GetRowIdParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface GetRowIdParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** The data item provided to the grid for the row in question */
     data: TData;
     /** Pinned state of the row */
@@ -285,7 +285,7 @@ export interface FillOperationParams<TData = any, TContext = any> extends AgGrid
     /** The RowNode of the current cell being changed. */
     rowNode: IRowNode<TData>;
     /** The Column of the current cell being changed. */
-    column: Column;
+    column: Column<any>;
     /** The values that were present before processing started. */
     initialValues: any[];
     /** The values that were present before processing, without the aggregation function. */
@@ -361,7 +361,7 @@ export interface GetGroupIncludeTotalRowParams<TData = any, TContext = any> exte
 
 export interface IMenuActionParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** The column, if a cell was clicked, otherwise null. */
-    column: Column | null;
+    column: Column<any> | null;
     /** The row node, if a cell was clicked, otherwise null. */
     node: IRowNode<TData> | null;
     /** The value, if a cell was clicked, otherwise null.  */

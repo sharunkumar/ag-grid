@@ -286,7 +286,11 @@ export class GroupSelectsChildrenStrategy extends BeanStub implements ISelection
         forEachNodeStateDepthFirst();
     }
 
-    private recursivelySelectNode([nextNode, ...nodes]: IRowNode[], selectedState: SelectionState, newValue: boolean) {
+    private recursivelySelectNode(
+        [nextNode, ...nodes]: IRowNode<any>[],
+        selectedState: SelectionState,
+        newValue: boolean
+    ) {
         if (!nextNode) {
             return;
         }

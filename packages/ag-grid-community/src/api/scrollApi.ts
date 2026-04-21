@@ -12,7 +12,7 @@ export function getHorizontalPixelRange(beans: BeanCollection): { left: number; 
 
 export function ensureColumnVisible(
     beans: BeanCollection,
-    key: string | Column,
+    key: string | Column<any>,
     position: 'auto' | 'start' | 'middle' | 'end' = 'auto'
 ) {
     beans.frameworkOverrides.wrapIncoming(

@@ -45,11 +45,11 @@ export class SetFilterHandler<TValue = string>
      */
     private appliedModel: SetFilterAppliedModel;
     public valueModel: SetValueModel<TValue>;
-    private createKey: (value: TValue | null | undefined, node?: IRowNode | null) => string | null;
+    private createKey: (value: TValue | null | undefined, node?: IRowNode<any> | null) => string | null;
     private treeDataTreeList = false;
     private groupingTreeList = false;
     private caseSensitive: boolean = false;
-    public valueFormatter?: (params: ValueFormatterParams) => string;
+    public valueFormatter?: (params: ValueFormatterParams<any, any, any>) => string;
     private noValueFormatterSupplied = false;
 
     public init(params: FilterHandlerParams<any, any, SetFilterModel, ISetFilterParams<any, TValue>>): void {
@@ -341,7 +341,7 @@ export class SetFilterHandler<TValue = string>
         return this.valueModel.valuesType === SetFilterModelValuesType.TAKEN_FROM_GRID_VALUES;
     }
 
-    private doesFilterPassForTreeData(node: IRowNode): boolean {
+    private doesFilterPassForTreeData(node: IRowNode<any>): boolean {
         if (node.childrenAfterGroup?.length) {
             // only perform checking on leaves. The core filtering logic for tree data won't work properly otherwise
             return false;
@@ -358,7 +358,7 @@ export class SetFilterHandler<TValue = string>
         );
     }
 
-    private doesFilterPassForGrouping(node: IRowNode): boolean {
+    private doesFilterPassForGrouping(node: IRowNode<any>): boolean {
         const {
             appliedModel,
             params,
@@ -375,7 +375,7 @@ export class SetFilterHandler<TValue = string>
     private generateCreateKey(
         keyCreator: ((params: KeyCreatorParams<any, any>) => string) | undefined,
         treeDataOrGrouping: boolean
-    ): (value: TValue | null | undefined, node?: IRowNode | null) => string | null {
+    ): (value: TValue | null | undefined, node?: IRowNode<any> | null) => string | null {
         if (treeDataOrGrouping && !keyCreator) {
             _error(250);
             return () => null;
@@ -389,7 +389,7 @@ export class SetFilterHandler<TValue = string>
         return (value) => _makeNull(_toStringOrNull(value));
     }
 
-    private getKeyCreatorParams(value: TValue | null | undefined, node: IRowNode | null = null): KeyCreatorParams {
+    private getKeyCreatorParams(value: TValue | null | undefined, node: IRowNode<any> | null = null): KeyCreatorParams {
         const { colDef, column } = this.params;
         return _addGridCommonParams(this.gos, {
             value,
@@ -401,7 +401,7 @@ export class SetFilterHandler<TValue = string>
     }
 
     private setValueFormatter(
-        providedValueFormatter: ((params: ValueFormatterParams) => string) | undefined,
+        providedValueFormatter: ((params: ValueFormatterParams<any, any, any>) => string) | undefined,
         keyCreator: ((params: KeyCreatorParams<any, any>) => string) | undefined,
         treeList: boolean,
         isRefData: boolean

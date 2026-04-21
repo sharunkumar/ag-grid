@@ -10,8 +10,8 @@ export class CellStyleService extends BeanStub implements NamedBean {
     beanName = 'cellStyles' as const;
 
     public processAllCellClasses(
-        colDef: ColDef,
-        params: CellClassParams,
+        colDef: ColDef<any, any>,
+        params: CellClassParams<any, any, any>,
         onApplicableClass: (className: string) => void,
         onNotApplicableClass?: (className: string) => void
     ) {
@@ -26,7 +26,7 @@ export class CellStyleService extends BeanStub implements NamedBean {
         this.processStaticCellClasses(colDef, params, onApplicableClass);
     }
 
-    public getStaticCellClasses(colDef: ColDef, params: CellClassParams): string[] {
+    public getStaticCellClasses(colDef: ColDef<any, any>, params: CellClassParams<any, any, any>): string[] {
         const { cellClass } = colDef;
 
         if (!cellClass) {
@@ -54,8 +54,8 @@ export class CellStyleService extends BeanStub implements NamedBean {
     }
 
     private processStaticCellClasses(
-        colDef: ColDef,
-        params: CellClassParams,
+        colDef: ColDef<any, any>,
+        params: CellClassParams<any, any, any>,
         onApplicableClass: (className: string) => void
     ) {
         const classOrClasses = this.getStaticCellClasses(colDef, params);

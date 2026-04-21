@@ -1,6 +1,6 @@
 import type { ICellEditorParams } from '../../interfaces/iCellEditor';
 
-export interface ILargeTextEditorParams extends ICellEditorParams {
+export interface ILargeTextEditorParams extends ICellEditorParams<any, any, any> {
     /**
      * Max number of characters to allow.
      * @default 200

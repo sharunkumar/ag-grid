@@ -472,14 +472,14 @@ export interface ExcelFreezeRowsGetterParams<TData = any, TContext = any> extend
 }
 
 export interface ExcelFreezeColumnsGetterParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
-    column: Column;
+    column: Column<any>;
 }
 
 export type ExcelFreezeRowsGetter = (params: ExcelFreezeRowsGetterParams) => boolean;
 export type ExcelFreezeColumnsGetter = (params: ExcelFreezeColumnsGetterParams) => boolean;
 
 export interface ColumnWidthCallbackParams {
-    column: Column | null;
+    column: Column<any> | null;
     index: number;
 }
 
@@ -581,7 +581,7 @@ export interface ExcelWorksheetConfigParams {
      */
     addImageToCell?: (
         rowIndex: number,
-        column: Column,
+        column: Column<any>,
         value: string
     ) => { image: ExcelImage; value?: string } | undefined;
     /**

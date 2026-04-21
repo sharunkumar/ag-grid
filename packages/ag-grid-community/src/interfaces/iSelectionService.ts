@@ -47,9 +47,9 @@ export interface ISelectionService {
     selectRowNode(rowNode: RowNode, newValue?: boolean, e?: Event, source?: SelectionEventSourceType): boolean;
     createDaemonNode?(rowNode: RowNode): RowNode | undefined;
     handleSelectionEvent(event: MouseEvent | KeyboardEvent, rowNode: RowNode, source: SelectionEventSourceType): number;
-    isCellCheckboxSelection(column: AgColumn, rowNode: IRowNode): boolean;
+    isCellCheckboxSelection(column: AgColumn, rowNode: IRowNode<any>): boolean;
     refreshMasterNodeState(node: RowNode, e?: Event): void;
-    setDetailSelectionState(masterNode: RowNode, option: GridOptions, detailApi: GridApi): void;
+    setDetailSelectionState(masterNode: RowNode, option: GridOptions<any>, detailApi: GridApi<any>): void;
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */

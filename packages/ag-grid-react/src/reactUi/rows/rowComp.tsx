@@ -52,7 +52,7 @@ const RowComp = ({ rowCtrl, containerType }: { rowCtrl: RowCtrl; containerType: 
 
     const eGui = useRef<HTMLDivElement | null>(null);
     const fullWidthCompRef = useRef<ICellRenderer>();
-    const fullWidthParamsRef = useRef<ICellRendererParams>();
+    const fullWidthParamsRef = useRef<ICellRendererParams<any, any, any>>();
 
     const autoHeightSetup = useRef<boolean>(false);
     const [autoHeightSetupAttempt, setAutoHeightSetupAttempt] = useState<number>(0);

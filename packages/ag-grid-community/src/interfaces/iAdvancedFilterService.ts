@@ -8,7 +8,7 @@ export interface IAdvancedFilterService {
 
     isFilterPresent(): boolean;
 
-    doesFilterPass(node: IRowNode): boolean;
+    doesFilterPass(node: IRowNode<any>): boolean;
 
     getModel(): AdvancedFilterModel | null;
 

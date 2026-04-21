@@ -15,7 +15,7 @@ import type { ITooltipParams, TooltipLocation } from './tooltipComponent';
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export interface ITooltipCtrlParams {
     column?: AgColumn | AgColumnGroup;
-    colDef?: ColDef | ColGroupDef;
+    colDef?: ColDef<any, any> | ColGroupDef<any>;
     rowIndex?: number;
     node?: RowNode;
     data?: any;
@@ -45,7 +45,7 @@ export type TooltipFeature = AgTooltipFeature<
     AgEventTypeParams,
     AgGridCommon<any, any>,
     GridOptionsService,
-    ITooltipParams,
+    ITooltipParams<any, any, any>,
     ITooltipCtrlParams,
     TooltipLocation
 >;

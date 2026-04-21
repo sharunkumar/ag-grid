@@ -8,12 +8,12 @@ export interface FilterExpressionEvaluatorParams<ConvertedTValue, TValue = Conve
     includeBlanksInEquals?: boolean;
     includeBlanksInLessThan?: boolean;
     includeBlanksInGreaterThan?: boolean;
-    valueConverter: (value: TValue, node: IRowNode) => ConvertedTValue;
+    valueConverter: (value: TValue, node: IRowNode<any>) => ConvertedTValue;
 }
 
 type FilterExpressionEvaluator<ConvertedTValue, TValue = ConvertedTValue> = (
     value: TValue | null | undefined,
-    node: IRowNode,
+    node: IRowNode<any>,
     params: FilterExpressionEvaluatorParams<ConvertedTValue, TValue>,
     operand1?: ConvertedTValue,
     operand2?: ConvertedTValue
@@ -159,7 +159,7 @@ export class TextFilterExpressionOperators<TValue = string>
 
     private evaluateExpression(
         value: TValue | null | undefined,
-        node: IRowNode,
+        node: IRowNode<any>,
         params: FilterExpressionEvaluatorParams<string, TValue>,
         operand: string,
         nullsMatch: boolean,
@@ -291,7 +291,7 @@ export class ScalarFilterExpressionOperators<ConvertedTValue extends number | Da
 
     private evaluateSingleOperandExpression(
         value: TValue | null | undefined,
-        node: IRowNode,
+        node: IRowNode<any>,
         params: FilterExpressionEvaluatorParams<ConvertedTValue, TValue>,
         operand: ConvertedTValue,
         nullsMatch: boolean,

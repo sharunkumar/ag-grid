@@ -50,7 +50,7 @@ export class ColumnNameService extends BeanStub implements NamedBean {
 
     // location is where the column is going to appear, ie who is calling us
     private getHeaderName(
-        colDef: AbstractColDef,
+        colDef: AbstractColDef<any, any>,
         column: AgColumn | null,
         columnGroup: AgColumnGroup | null,
         providedColumnGroup: AgProvidedColumnGroup | null,
@@ -77,8 +77,8 @@ export class ColumnNameService extends BeanStub implements NamedBean {
             return '';
         } else if (colDef.headerName != null) {
             return colDef.headerName;
-        } else if ((colDef as ColDef).field) {
-            return _camelCaseToHumanText((colDef as ColDef).field);
+        } else if ((colDef as ColDef<any, any>).field) {
+            return _camelCaseToHumanText((colDef as ColDef<any, any>).field);
         }
 
         return '';

@@ -16,7 +16,7 @@ interface DefaultWidthLimits {
 
 export interface IColumnLimit extends WidthLimits {
     /** Selector for the column to which these dimension limits will apply */
-    key: Column | string;
+    key: Column<any> | string;
 }
 
 export interface ISizeColumnsToFitParams extends DefaultWidthLimits {

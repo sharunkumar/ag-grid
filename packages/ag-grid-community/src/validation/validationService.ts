@@ -25,7 +25,7 @@ import type { DependentValues, OptionsValidator, RequiredOptions } from './valid
 export class ValidationService extends BeanStub implements NamedBean {
     beanName = 'validation' as const;
 
-    private gridOptions: GridOptions;
+    private gridOptions: GridOptions<any>;
     /**
      * Caches per-property-name validation results keyed by objectName.
      * Each inner map records: property name → true if valid for runtime checks, false if not.
@@ -45,7 +45,7 @@ export class ValidationService extends BeanStub implements NamedBean {
         }
     }
 
-    public processGridOptions(options: GridOptions): void {
+    public processGridOptions(options: GridOptions<any>): void {
         this.processOptions(options, GRID_OPTIONS_VALIDATORS());
     }
 
@@ -123,7 +123,7 @@ export class ValidationService extends BeanStub implements NamedBean {
     }
 
     /** Should only be called via the GridOptionsService */
-    public validateColDef(colDef: ColDef | ColGroupDef): void {
+    public validateColDef(colDef: ColDef<any, any> | ColGroupDef<any>): void {
         this.processOptions(colDef, COL_DEF_VALIDATORS());
     }
 

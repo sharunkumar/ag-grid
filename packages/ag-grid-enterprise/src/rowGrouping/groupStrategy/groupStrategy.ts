@@ -234,9 +234,9 @@ export class GroupStrategy extends BeanStub implements IRowGroupingStrategy {
         const beans = this.beans;
         const api = beans.gridApi;
         const context = beans.gridOptions.context;
-        const comparer = (nodeA: IRowNode, nodeB: IRowNode) =>
+        const comparer = (nodeA: IRowNode<any>, nodeB: IRowNode<any>) =>
             initialGroupOrderComparator({ api, context, nodeA, nodeB });
-        const recursiveSort = (rowNode: IRowNode): void => {
+        const recursiveSort = (rowNode: IRowNode<any>): void => {
             const childrenAfterGroup = rowNode.childrenAfterGroup;
             const childrenAfterGroupLen = childrenAfterGroup?.length;
             if (!childrenAfterGroupLen || rowNode.leafGroup) {

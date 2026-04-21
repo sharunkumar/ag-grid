@@ -76,7 +76,7 @@ export class HeaderComp extends Component implements IHeaderComp {
     private readonly eSortAbsoluteAsc?: HTMLElement = RefPlaceholder;
     private readonly eSortAbsoluteDesc?: HTMLElement = RefPlaceholder;
 
-    public params: IHeaderParams;
+    public params: IHeaderParams<any, any>;
 
     private currentDisplayName: string;
     private currentTemplate: ElementParams | string | null | undefined;
@@ -90,7 +90,7 @@ export class HeaderComp extends Component implements IHeaderComp {
 
     private mouseListener?: HeaderCellMouseListenerFeature;
 
-    public refresh(params: IHeaderParams): boolean {
+    public refresh(params: IHeaderParams<any, any>): boolean {
         const oldParams = this.params;
         this.params = params;
 
@@ -120,7 +120,7 @@ export class HeaderComp extends Component implements IHeaderComp {
         return true;
     }
 
-    private workOutTemplate(params: IHeaderParams, isSorting: boolean): string | ElementParams {
+    private workOutTemplate(params: IHeaderParams<any, any>, isSorting: boolean): string | ElementParams {
         const { formula } = this.beans;
         const paramsTemplate = params.template;
         if (paramsTemplate) {
@@ -130,7 +130,7 @@ export class HeaderComp extends Component implements IHeaderComp {
         return getHeaderCompElementParams(!!formula?.active, isSorting);
     }
 
-    public init(params: IHeaderParams): void {
+    public init(params: IHeaderParams<any, any>): void {
         this.params = params;
 
         const { sortSvc, touchSvc, rowNumbersSvc, userCompFactory } = this.beans;
@@ -156,7 +156,7 @@ export class HeaderComp extends Component implements IHeaderComp {
         this.setDisplayName(params);
     }
 
-    private workOutInnerHeaderComponent(userCompFactory: UserComponentFactory, params: IHeaderParams): void {
+    private workOutInnerHeaderComponent(userCompFactory: UserComponentFactory, params: IHeaderParams<any, any>): void {
         const userCompDetails = _getInnerHeaderCompDetails(userCompFactory, params, params);
 
         if (!userCompDetails) {
@@ -183,7 +183,7 @@ export class HeaderComp extends Component implements IHeaderComp {
         });
     }
 
-    private setDisplayName(params: IHeaderParams) {
+    private setDisplayName(params: IHeaderParams<any, any>) {
         const { displayName } = params;
         const oldDisplayName = this.currentDisplayName;
         this.currentDisplayName = displayName;

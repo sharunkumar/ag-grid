@@ -25,7 +25,7 @@ Reflect.defineProperty(GridApiClass, 'name', { value: 'GridApi' });
 export class ApiFunctionService extends BeanStub implements NamedBean {
     beanName = 'apiFunctionSvc' as const;
 
-    public readonly api: GridApi = new GridApiClass() as GridApi;
+    public readonly api: GridApi<any> = new GridApiClass() as GridApi<any>;
 
     private fns: {
         [key in ApiFunctionName]?: (beans: BeanCollection, ...args: any[]) => any;

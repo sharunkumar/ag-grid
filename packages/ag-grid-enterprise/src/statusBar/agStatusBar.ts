@@ -29,7 +29,7 @@ import type { StatusBarService } from './statusBarService';
 function getStatusPanelCompDetails(
     userCompFactory: UserComponentFactory,
     def: StatusPanelDef,
-    params: IStatusPanelParams
+    params: IStatusPanelParams<any, any>
 ): UserCompDetails<IStatusPanelComp> | undefined {
     return userCompFactory.getCompDetails(def, StatusPanelComponent, undefined, params, true);
 }
@@ -180,7 +180,7 @@ class AgStatusBar extends Component implements FocusableContainer {
                 const key = statusPanelConfig.key ?? statusPanelConfig.statusPanel;
                 const existingStatusPanel = this.statusBarSvc.getStatusPanel(key);
                 if (existingStatusPanel?.refresh) {
-                    const newParams: IStatusPanelParams = _addGridCommonParams(this.gos, {
+                    const newParams: IStatusPanelParams<any, any> = _addGridCommonParams(this.gos, {
                         ...(statusPanelConfig.statusPanelParams ?? {}),
                         key,
                     });

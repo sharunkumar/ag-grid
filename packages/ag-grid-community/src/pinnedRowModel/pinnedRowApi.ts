@@ -9,18 +9,18 @@ export function getPinnedBottomRowCount(beans: BeanCollection): number {
     return beans.pinnedRowModel?.getPinnedBottomRowCount() ?? 0;
 }
 
-export function getPinnedTopRow(beans: BeanCollection, index: number): IRowNode | undefined {
+export function getPinnedTopRow(beans: BeanCollection, index: number): IRowNode<any> | undefined {
     return beans.pinnedRowModel?.getPinnedTopRow(index);
 }
 
-export function getPinnedBottomRow(beans: BeanCollection, index: number): IRowNode | undefined {
+export function getPinnedBottomRow(beans: BeanCollection, index: number): IRowNode<any> | undefined {
     return beans.pinnedRowModel?.getPinnedBottomRow(index);
 }
 
 export function forEachPinnedRow(
     beans: BeanCollection,
     floating: NonNullable<RowPinnedType>,
-    callback: (rowNode: IRowNode) => void
+    callback: (rowNode: IRowNode<any>) => void
 ): void {
     return beans.pinnedRowModel?.forEachPinnedRow(floating, callback);
 }

@@ -6,7 +6,7 @@ export interface IServerSideStore extends Bean {
     /**
      * Returns the first child of the group (index 0), if the node is not loaded, returns null.
      */
-    getFirstNode(): IRowNode | null;
+    getFirstNode(): IRowNode<any> | null;
 }
 
 export interface StoreRefreshAfterParams {

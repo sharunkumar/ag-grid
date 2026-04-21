@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props<TData>>(), getProps());
 const rootRef = useTemplateRef<HTMLDivElement>('root');
 
 // shallowRef avoids deep reactive proxying — grid API and simple flags only change at the top level
-const api: Ref<GridApi | undefined> = shallowRef(undefined);
+const api: Ref<GridApi<any> | undefined> = shallowRef(undefined);
 const gridCreated = shallowRef(false);
 const isDestroyed = shallowRef(false);
 const gridReadyFired = shallowRef(false);
@@ -109,7 +109,7 @@ const getRowDataBasedOnBindings = () => {
 
 const getRowData = (): TData[] => {
     const rowData: any[] = [];
-    api?.value!.forEachLeafNode((rowNode: IRowNode) => {
+    api?.value!.forEachLeafNode((rowNode: IRowNode<any>) => {
         rowData.push(rowNode.data);
     });
     return rowData;

@@ -17,7 +17,7 @@ export interface IColumnCollectionService {
         source: ColumnEventType
     ): void;
 
-    updateColumns(event: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions>): void;
+    updateColumns(event: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions<any>>): void;
 
     getColumn(key: ColKey): AgColumn | null;
 

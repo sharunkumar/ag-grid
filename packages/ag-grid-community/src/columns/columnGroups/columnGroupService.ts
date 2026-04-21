@@ -319,7 +319,7 @@ export class ColumnGroupService extends BeanStub implements NamedBean {
 
     public createProvidedColumnGroup(
         primaryColumns: boolean,
-        colGroupDef: ColGroupDef,
+        colGroupDef: ColGroupDef<any>,
         level: number,
         existingColumns: AgColumn[],
         columnKeyCreator: IColumnKeyCreator,
@@ -486,7 +486,7 @@ export class ColumnGroupService extends BeanStub implements NamedBean {
     }
 
     private findExistingGroup(
-        newGroupDef: ColGroupDef,
+        newGroupDef: ColGroupDef<any>,
         existingGroups: AgProvidedColumnGroup[]
     ): { idx: number; group: AgProvidedColumnGroup } | undefined {
         const newHasId = newGroupDef.groupId != null;

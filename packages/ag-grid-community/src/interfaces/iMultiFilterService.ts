@@ -6,8 +6,8 @@ import type { IMultiFilterParams } from './iMultiFilter';
 export interface IMultiFilterService {
     getParamsForDataType(
         existingFilterParams: IMultiFilterParams | undefined,
-        existingFilterValueGetter: string | ValueGetterFunc | undefined,
+        existingFilterValueGetter: string | ValueGetterFunc<any, any, any> | undefined,
         dataTypeDefinition: CoreDataTypeDefinition,
         formatValue: DataTypeFormatValueFunc
-    ): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc };
+    ): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc<any, any, any> };
 }

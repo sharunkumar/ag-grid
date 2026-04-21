@@ -11,7 +11,7 @@ import { _MONTHS, _getDateParts, _parseDateTimeFromString } from 'ag-grid-commun
 const getDate = (
     { valueSvc, dataTypeSvc }: BeanCollection,
     sourceCol: AgColumn,
-    node: IRowNode | null
+    node: IRowNode<any> | null
 ): Date | null => {
     const innerValue = valueSvc.getValue(sourceCol, node, 'data');
     let date: Date | null = null;
@@ -27,7 +27,7 @@ const getDate = (
 
 export const getDatePartValueGetter =
     (beans: BeanCollection, col: AgColumn, index: number, map?: (part: string) => string) =>
-    (params: ValueGetterParams) => {
+    (params: ValueGetterParams<any, any, any>) => {
         const date = getDate(beans, col, params.node);
         const parts = _getDateParts(date);
         if (!parts) {
@@ -55,6 +55,6 @@ export const numericalMonthToNamedMonth = (monthStr: string): { month: string; l
     return { month, localeKey };
 };
 
-export function _getGroupHierarchy(colDef: ColDef): ColDef['groupHierarchy'] {
+export function _getGroupHierarchy(colDef: ColDef<any, any>): ColDef<any, any>['groupHierarchy'] {
     return colDef.groupHierarchy ?? colDef.rowGroupingHierarchy;
 }

@@ -204,7 +204,7 @@ import type {
 } from './colDef';
 import type { DataTypeDefinitions } from './dataType';
 
-export interface GridOptions<TData = any> {
+export interface GridOptions<TData> {
     // ******************************************************************************************************
     // If you change the properties on this interface, you must also update PropertyKeys to be consistent. *
     // ******************************************************************************************************
@@ -378,11 +378,11 @@ export interface GridOptions<TData = any> {
     /**
      * Array of Column / Column Group definitions.
      */
-    columnDefs?: (ColDef<TData> | ColGroupDef<TData>)[] | null;
+    columnDefs?: (ColDef<TData, any> | ColGroupDef<TData>)[] | null;
     /**
      * A default column definition. Items defined in the actual column definitions get precedence.
      */
-    defaultColDef?: ColDef<TData>;
+    defaultColDef?: ColDef<TData, any>;
     /**
      * A default column group definition. All column group definitions will use these properties. Items defined in the actual column group definition get precedence.
      * @initial
@@ -809,7 +809,7 @@ export interface GridOptions<TData = any> {
      * Get chart menu items. Only applies when using AG Charts Enterprise.
      * @agModule `IntegratedChartsModule`
      */
-    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData>)[] | GetChartMenuItems<TData>;
+    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData, any>)[] | GetChartMenuItems<TData>;
 
     // *** Loading Cell Renderers *** //
     /**
@@ -1735,7 +1735,7 @@ export interface GridOptions<TData = any> {
      * Provide the `serverSideDatasource` for server side row model.
      * @agModule `ServerSideRowModelModule`
      */
-    serverSideDatasource?: IServerSideDatasource;
+    serverSideDatasource?: IServerSideDatasource<any>;
 
     /**
      * When enabled, always refreshes top level groups regardless of which column was sorted. This property only applies when there is Row Grouping & sorting is handled on the server.
@@ -2142,7 +2142,7 @@ export interface GridOptions<TData = any> {
      * For customising the context menu.
      * @agModule `ContextMenuModule`
      */
-    getContextMenuItems?: GetContextMenuItems<TData>;
+    getContextMenuItems?: GetContextMenuItems<TData, any>;
     /**
      * For customising the main 'column header' menu.
      * @initial
@@ -2361,7 +2361,7 @@ export interface GridOptions<TData = any> {
      * Provide a pure function that returns a string ID to uniquely identify a given row. This enables the grid to work optimally with data changes and updates.
      * @initial
      */
-    getRowId?: GetRowIdFunc<TData>;
+    getRowId?: GetRowIdFunc<TData, any>;
     /**
      * When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.
      * @default false
@@ -2399,12 +2399,12 @@ export interface GridOptions<TData = any> {
      * Callback version of property `rowStyle` to set style for each row individually. Function should return an object of CSS values or undefined for no styles.
      * @agModule `RowStyleModule`
      */
-    getRowStyle?: GetRowStyle<TData>;
+    getRowStyle?: GetRowStyle<TData, any>;
     /**
      * Callback version of property `rowClass` to set class(es) for each row individually. Function should return either a string (class name), array of strings (array of class names) or undefined for no class.
      * @agModule `RowStyleModule`
      */
-    getRowClass?: GetRowClass<TData>;
+    getRowClass?: GetRowClass<TData, any>;
     /**
      * Callback version of property `rowHeight` to set height for each row individually. Function should return a positive number of pixels, or return `null`/`undefined` to use the default row height.
      */
@@ -2941,7 +2941,7 @@ export type Components = { [p: string]: any };
 export type RowGroupingDisplayType = 'singleColumn' | 'multipleColumns' | 'groupRows' | 'custom';
 export type TreeDataDisplayType = 'auto' | 'custom';
 
-export type GetDataPath<TData = any> = (data: TData) => string[];
+export type GetDataPath<TData> = (data: TData) => string[];
 
 export type IsServerSideGroup = (dataItem: any) => boolean;
 
@@ -2962,9 +2962,9 @@ export type IsApplyServerSideTransaction<TData = any, TContext = any> = (
 ) => boolean;
 export type GetServerSideGroupKey = (dataItem: any) => string;
 
-export type IsRowMaster<TData = any> = (dataItem: TData) => boolean;
+export type IsRowMaster<TData> = (dataItem: TData) => boolean;
 
-export type IsRowSelectable<TData = any> = (node: IRowNode<TData>) => boolean;
+export type IsRowSelectable<TData> = (node: IRowNode<TData>) => boolean;
 
 export type IsRowPinnable<TData = any> = (node: IRowNode<TData>) => boolean;
 
@@ -2978,13 +2978,9 @@ export interface RowStyle {
     [cssProperty: string]: string | number;
 }
 
-export type GetRowStyle<TData = any, TContext = any> = (
-    params: RowClassParams<TData, TContext>
-) => RowStyle | undefined;
-export type GetRowClass<TData = any, TContext = any> = (
-    params: RowClassParams<TData, TContext>
-) => string | string[] | undefined;
-export interface RowClassParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export type GetRowStyle<TData, TContext> = (params: RowClassParams<TData, TContext>) => RowStyle | undefined;
+export type GetRowClass<TData, TContext> = (params: RowClassParams<TData, TContext>) => string | string[] | undefined;
+export interface RowClassParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /**
      * The data associated with this row from rowData. Data is `undefined` for row groups.
      */
@@ -3002,7 +2998,7 @@ type MenuCallbackReturn<TMenuItem extends string, TData = any, TContext = any> =
     | MenuItemDef<TData, TContext>
 )[];
 
-export type GetContextMenuItems<TData = any, TContext = any> = (
+export type GetContextMenuItems<TData, TContext> = (
     params: GetContextMenuItemsParams<TData, TContext>
 ) =>
     | MenuCallbackReturn<DefaultMenuItem, TData, TContext>
@@ -3024,7 +3020,7 @@ export type GetChartMenuItems<TData = any, TContext = any> = (
 
 export type GetRowNodeIdFunc<TData = any> = (data: TData) => string;
 
-export type GetRowIdFunc<TData = any, TContext = any> = (params: GetRowIdParams<TData, TContext>) => string;
+export type GetRowIdFunc<TData, TContext> = (params: GetRowIdParams<TData, TContext>) => string;
 
 export interface ChartRef {
     /**
@@ -3225,7 +3221,7 @@ export type AutoGroupColumnDef<TData = any, TValue = any> = Omit<ColDef<TData, T
 
 /** Subset of ColDef allowing for customisation of the Selection column, currently used for checkbox selection */
 export type SelectionColumnDef = Pick<
-    ColDef,
+    ColDef<any, any>,
     | 'icons'
     | 'suppressNavigable'
     | 'suppressKeyboardEvent'
@@ -3311,7 +3307,7 @@ export type CheckboxLocation = 'selectionColumn' | 'autoGroupColumn';
 
 export type MasterSelectionMode = NonNullable<CommonRowSelectionOptions['masterSelects']>;
 
-export type AgPublicEventHandlerType = `on${Capitalize<AgPublicEventType>}` & keyof GridOptions;
+export type AgPublicEventHandlerType = `on${Capitalize<AgPublicEventType>}` & keyof GridOptions<any>;
 
 export type ProcessPivotResultColDef<TData = any, TValue = any> = (colDef: ColDef<TData, TValue>) => void;
 export type ProcessPivotResultColGroupDef<TData = any> = (colDef: ColGroupDef<TData>) => void;

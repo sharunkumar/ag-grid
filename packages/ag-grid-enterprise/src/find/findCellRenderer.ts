@@ -7,11 +7,11 @@ export class FindCellRenderer extends Component implements ICellRenderer {
         super(FindCellRendererElement);
     }
 
-    public init(params: ICellRendererParams): void {
+    public init(params: ICellRendererParams<any, any, any>): void {
         this.refresh(params);
     }
 
-    public refresh(params: ICellRendererParams): boolean {
+    public refresh(params: ICellRendererParams<any, any, any>): boolean {
         const { node, column } = params;
         const { findSvc, valueSvc } = this.beans;
         const { value, valueFormatted } = valueSvc.getValueForDisplay({

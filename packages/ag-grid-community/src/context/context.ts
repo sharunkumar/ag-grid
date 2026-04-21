@@ -294,8 +294,8 @@ interface CoreBeanCollection
     ariaAnnounce: IAriaAnnouncementService;
     rangeSvc?: IRangeService;
     validation?: ValidationService;
-    gridApi: GridApi;
-    gridOptions: GridOptions;
+    gridApi: GridApi<any>;
+    gridOptions: GridOptions<any>;
     eGridDiv: HTMLElement;
     eRootDiv: HTMLElement;
     withinStudio?: boolean;

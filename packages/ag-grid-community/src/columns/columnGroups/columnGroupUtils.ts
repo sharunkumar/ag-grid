@@ -3,10 +3,10 @@ import type { ColGroupDef } from '../../entities/colDef';
 
 export function createMergedColGroupDef(
     beans: BeanCollection,
-    colGroupDef: ColGroupDef | null,
+    colGroupDef: ColGroupDef<any> | null,
     groupId: string
-): ColGroupDef {
-    const colGroupDefMerged: ColGroupDef = {} as ColGroupDef;
+): ColGroupDef<any> {
+    const colGroupDefMerged: ColGroupDef<any> = {} as ColGroupDef<any>;
     const gos = beans.gos;
     Object.assign(colGroupDefMerged, gos.get('defaultColGroupDef'));
     Object.assign(colGroupDefMerged, colGroupDef);

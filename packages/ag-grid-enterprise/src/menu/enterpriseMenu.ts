@@ -603,7 +603,7 @@ class ColumnContextMenu extends Component implements EnterpriseColumnMenu {
     private mainMenuList: MenuList;
 
     constructor(
-        private readonly menuItems: (DefaultMenuItem | MenuItemDef)[],
+        private readonly menuItems: (DefaultMenuItem | MenuItemDef<any, any>)[],
         private readonly column: AgColumn | undefined,
         private readonly restoreFocusParams: MenuRestoreFocusParams,
         private readonly sourceElement?: HTMLElement

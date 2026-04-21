@@ -52,7 +52,7 @@ export interface SSRMParams {
     valueCols: ColumnVO[];
     pivotCols: ColumnVO[];
     pivotMode: boolean;
-    datasource?: IServerSideDatasource;
+    datasource?: IServerSideDatasource<any>;
 }
 
 export class ServerSideRowModel extends BeanStub implements NamedBean, IServerSideRowModel {
@@ -89,7 +89,7 @@ export class ServerSideRowModel extends BeanStub implements NamedBean, IServerSi
     }
 
     public rootNode: RowNode;
-    private datasource: IServerSideDatasource | undefined;
+    private datasource: IServerSideDatasource<any> | undefined;
 
     private storeParams: SSRMParams;
 
@@ -167,7 +167,7 @@ export class ServerSideRowModel extends BeanStub implements NamedBean, IServerSi
         }
     }
 
-    public setDatasource(datasource: IServerSideDatasource): void {
+    public setDatasource(datasource: IServerSideDatasource<any>): void {
         // sometimes React, due to async, can call gridApi.setDatasource() before we have started.
         // this happens when React app does this:
         //      useEffect(() => setDatasource(ds), []);

@@ -128,7 +128,7 @@ export class RowNodeSorter extends BeanStub implements NamedBean {
         return this.getComparatorFromColDef(primaryColumn.colDef, sortOption);
     }
 
-    private getComparatorFromColDef(colDef: ColDef, sortOption: SortOption): SortComparatorFn | undefined {
+    private getComparatorFromColDef(colDef: ColDef<any, any>, sortOption: SortOption): SortComparatorFn | undefined {
         const comparator = colDef.comparator;
         if (comparator == null) {
             return;

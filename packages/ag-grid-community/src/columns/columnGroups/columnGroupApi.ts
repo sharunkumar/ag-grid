@@ -40,18 +40,18 @@ export function resetColumnGroupState(beans: BeanCollection): void {
     beans.colGroupSvc?.resetColumnGroupState('api');
 }
 
-export function getLeftDisplayedColumnGroups(beans: BeanCollection): (Column | ColumnGroup)[] {
+export function getLeftDisplayedColumnGroups(beans: BeanCollection): (Column<any> | ColumnGroup)[] {
     return beans.visibleCols.treeLeft;
 }
 
-export function getCenterDisplayedColumnGroups(beans: BeanCollection): (Column | ColumnGroup)[] {
+export function getCenterDisplayedColumnGroups(beans: BeanCollection): (Column<any> | ColumnGroup)[] {
     return beans.visibleCols.treeCenter;
 }
 
-export function getRightDisplayedColumnGroups(beans: BeanCollection): (Column | ColumnGroup)[] {
+export function getRightDisplayedColumnGroups(beans: BeanCollection): (Column<any> | ColumnGroup)[] {
     return beans.visibleCols.treeRight;
 }
 
-export function getAllDisplayedColumnGroups(beans: BeanCollection): (Column | ColumnGroup)[] | null {
+export function getAllDisplayedColumnGroups(beans: BeanCollection): (Column<any> | ColumnGroup)[] | null {
     return beans.visibleCols.getAllTrees();
 }

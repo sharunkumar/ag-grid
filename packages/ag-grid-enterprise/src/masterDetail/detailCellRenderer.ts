@@ -24,8 +24,8 @@ const DetailCellRendererElement: ElementParams = {
 export class DetailCellRenderer extends Component implements ICellRenderer {
     private readonly eDetailGrid: HTMLElement = RefPlaceholder;
 
-    private detailApi?: GridApi;
-    private params: IDetailCellRendererParams;
+    private detailApi?: GridApi<any>;
+    private params: IDetailCellRendererParams<any, any>;
     private ctrl?: DetailCellRendererCtrl;
     private context: Context;
 
@@ -33,7 +33,7 @@ export class DetailCellRenderer extends Component implements ICellRenderer {
         this.context = beans.context;
     }
 
-    public init(params: IDetailCellRendererParams): void {
+    public init(params: IDetailCellRendererParams<any, any>): void {
         this.params = params;
         this.selectAndSetTemplate();
 
@@ -85,7 +85,7 @@ export class DetailCellRenderer extends Component implements ICellRenderer {
         }
     }
 
-    private setDetailGrid(gridOptions: GridOptions): void {
+    private setDetailGrid(gridOptions: GridOptions<any>): void {
         if (!this.eDetailGrid) {
             return;
         }

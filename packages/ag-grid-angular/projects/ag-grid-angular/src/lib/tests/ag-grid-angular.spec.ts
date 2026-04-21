@@ -26,7 +26,7 @@ export class GridWrapperComponent {
     columnDefs = [{ field: 'make' }, { field: 'model' }, { field: 'price' }];
 
     gridOptions: GridOptions = {};
-    gridApi: GridApi;
+    gridApi: GridApi<any>;
 
     @ViewChild(AgGridAngular) agGrid: AgGridAngular;
 

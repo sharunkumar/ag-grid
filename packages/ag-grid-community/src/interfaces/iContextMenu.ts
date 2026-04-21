@@ -19,9 +19,9 @@ export interface IContextMenuService {
 
 export interface ShowContextMenuParams {
     /** The row node associated with the Context Menu */
-    rowNode?: IRowNode | null;
+    rowNode?: IRowNode<any> | null;
     /** The column associated with the Context Menu */
-    column?: Column | null;
+    column?: Column<any> | null;
     /** The value that will be passed to the Context Menu (useful with `getContextMenuItems`). If none is passed, and `rowNode` and `column` are provided, this will be the respective Cell value */
     value: any;
     source: 'api' | 'ui';

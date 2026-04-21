@@ -50,7 +50,7 @@ export class EditModelService extends BeanStub implements NamedBean {
         }
     }
 
-    public getEditRow(rowNode: IRowNode, params: GetEditsParams = {}): EditRow | undefined {
+    public getEditRow(rowNode: IRowNode<any>, params: GetEditsParams = {}): EditRow | undefined {
         if (this.suspendEdits) {
             return undefined;
         }
@@ -75,7 +75,7 @@ export class EditModelService extends BeanStub implements NamedBean {
         return undefined;
     }
 
-    public getEditRowDataValue(rowNode: IRowNode, { checkSiblings }: GetEditsParams = {}): any {
+    public getEditRowDataValue(rowNode: IRowNode<any>, { checkSiblings }: GetEditsParams = {}): any {
         if (!rowNode || this.edits.size === 0) {
             return undefined;
         }
@@ -143,9 +143,9 @@ export class EditModelService extends BeanStub implements NamedBean {
             return this.edits;
         }
 
-        const map = new Map<IRowNode, Map<Column, EditValue>>();
+        const map = new Map<IRowNode<any>, Map<Column<any>, EditValue>>();
         this.edits.forEach((editRow, rowNode) => {
-            const newEditRow = new Map<Column, EditValue>();
+            const newEditRow = new Map<Column<any>, EditValue>();
             editRow.forEach(({ editorState: _, ...cellData }, column) =>
                 // Ensure we copy the cell data to avoid reference issues
                 newEditRow.set(column, { ...cellData } as EditValue)
@@ -158,7 +158,7 @@ export class EditModelService extends BeanStub implements NamedBean {
     public setEditMap(newEdits: EditMap): void {
         this.edits.clear();
         newEdits.forEach((editRow, rowNode) => {
-            const newRow = new Map<Column, EditValue>();
+            const newRow = new Map<Column<any>, EditValue>();
             editRow.forEach((cellData, column) =>
                 // Ensure we copy the cell data to avoid reference issues
                 newRow.set(column, { ...cellData })
@@ -242,7 +242,7 @@ export class EditModelService extends BeanStub implements NamedBean {
         return positions;
     }
 
-    public hasRowEdits(rowNode: IRowNode, params?: GetEditsParams): boolean {
+    public hasRowEdits(rowNode: IRowNode<any>, params?: GetEditsParams): boolean {
         if (this.suspendEdits) {
             return false;
         }
@@ -297,7 +297,7 @@ export class EditModelService extends BeanStub implements NamedBean {
     }
 
     public start(position: Required<EditPosition>): void {
-        const map = this.getEditRow(position.rowNode) ?? new Map<Column, EditValue>();
+        const map = this.getEditRow(position.rowNode) ?? new Map<Column<any>, EditValue>();
         const { rowNode, column } = position;
         if (column && !map.has(column)) {
             map.set(column, {

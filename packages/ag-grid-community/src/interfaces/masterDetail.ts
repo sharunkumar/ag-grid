@@ -16,8 +16,8 @@ export interface IDetailCellRenderer<TData = any> {
     getGui(): HTMLElement;
 }
 
-export interface IDetailCellRendererParams<TData = any, TDetail = any>
-    extends ICellRendererParams<TData>,
+export interface IDetailCellRendererParams<TData, TDetail>
+    extends ICellRendererParams<TData, any, any>,
         FindDetailGridCellRendererParams<TData> {
     /**
      * Provide Grid Options to use for the Detail Grid.
@@ -39,7 +39,7 @@ export interface IDetailCellRendererParams<TData = any, TDetail = any>
 
 export type GetDetailRowData<TData = any, TDetail = any> = (params: GetDetailRowDataParams<TData, TDetail>) => void;
 
-export interface GetDetailRowDataParams<TData = any, TDetail = any> {
+export interface GetDetailRowDataParams<TData, TDetail> {
     /** Row node for the details request. */
     node: IRowNode<TData>;
     /** Data for the current row. */
@@ -48,11 +48,11 @@ export interface GetDetailRowDataParams<TData = any, TDetail = any> {
     successCallback(rowData: TDetail[]): void;
 }
 
-type TemplateFunc<TData = any> = (params: ICellRendererParams<TData>) => string;
+type TemplateFunc<TData = any> = (params: ICellRendererParams<TData, any, any>) => string;
 
 export interface IDetailCellRendererCtrl extends Bean {
-    init(comp: IDetailCellRenderer, params: IDetailCellRendererParams): void;
-    registerDetailWithMaster(api: GridApi): void;
+    init(comp: IDetailCellRenderer, params: IDetailCellRendererParams<any, any>): void;
+    registerDetailWithMaster(api: GridApi<any>): void;
     refresh(): boolean;
 }
 
@@ -73,5 +73,5 @@ export interface DetailGridInfo {
      */
     id: string;
     /** Grid api of the detail grid. */
-    api?: GridApi;
+    api?: GridApi<any>;
 }

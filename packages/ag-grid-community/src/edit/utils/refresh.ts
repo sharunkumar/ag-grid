@@ -4,9 +4,9 @@ import type { IRowNode } from '../../interfaces/iRowNode';
 
 const purgeRows = (
     { rowModel, pinnedRowModel, editModelSvc }: BeanCollection,
-    rowNodes: Set<IRowNode>
-): Set<IRowNode> => {
-    const found = new Set<IRowNode>();
+    rowNodes: Set<IRowNode<any>>
+): Set<IRowNode<any>> => {
+    const found = new Set<IRowNode<any>>();
 
     rowModel.forEachNode((node) => rowNodes.has(node) && found.add(node));
     pinnedRowModel?.forEachPinnedRow('top', (node) => rowNodes.has(node) && found.add(node));
@@ -21,7 +21,11 @@ const purgeRows = (
     return found;
 };
 
-const purgeCells = ({ editModelSvc }: BeanCollection, rowNodes: Set<IRowNode>, columns: Set<Column>): void => {
+const purgeCells = (
+    { editModelSvc }: BeanCollection,
+    rowNodes: Set<IRowNode<any>>,
+    columns: Set<Column<any>>
+): void => {
     for (const rowNode of rowNodes) {
         editModelSvc
             ?.getEditRow(rowNode)
@@ -30,7 +34,7 @@ const purgeCells = ({ editModelSvc }: BeanCollection, rowNodes: Set<IRowNode>, c
 };
 
 export const _refreshEditCells = (beans: BeanCollection) => () => {
-    const columns = new Set<Column>(beans.colModel.getCols());
+    const columns = new Set<Column<any>>(beans.colModel.getCols());
     const updates = beans.editModelSvc!.getEditMap(true);
     const rowNodes = new Set(updates.keys());
 

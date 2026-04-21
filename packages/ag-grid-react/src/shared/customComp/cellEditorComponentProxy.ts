@@ -14,7 +14,7 @@ export class CellEditorComponentProxy implements ICellEditor {
     private readonly onValueChange = (value: any) => this.updateValue(value);
 
     constructor(
-        private cellEditorParams: ICellEditorParams,
+        private cellEditorParams: ICellEditorParams<any, any, any>,
         private readonly refreshProps: () => void
     ) {
         this.value = cellEditorParams.value;
@@ -33,7 +33,7 @@ export class CellEditorComponentProxy implements ICellEditor {
         return this.value;
     }
 
-    public refresh(params: ICellEditorParams): void {
+    public refresh(params: ICellEditorParams<any, any, any>): void {
         this.cellEditorParams = params;
         this.refreshProps();
     }

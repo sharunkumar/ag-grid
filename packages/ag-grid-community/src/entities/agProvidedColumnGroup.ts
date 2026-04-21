@@ -4,7 +4,9 @@ import type { AgColumn } from './agColumn';
 import { getNextColInstanceId, isColumn } from './agColumn';
 import type { ColGroupDef } from './colDef';
 
-export function isProvidedColumnGroup(col: Column | ProvidedColumnGroup | string | null): col is AgProvidedColumnGroup {
+export function isProvidedColumnGroup(
+    col: Column<any> | ProvidedColumnGroup | string | null
+): col is AgProvidedColumnGroup {
     return col instanceof AgProvidedColumnGroup;
 }
 
@@ -27,7 +29,7 @@ export class AgProvidedColumnGroup extends BeanStub<AgProvidedColumnGroupEvent> 
     private expandableListenerRemoveCallback: (() => void) | null = null;
 
     constructor(
-        private colGroupDef: ColGroupDef | null,
+        private colGroupDef: ColGroupDef<any> | null,
         private readonly groupId: string,
         private readonly padding: boolean,
         private level: number
@@ -43,7 +45,7 @@ export class AgProvidedColumnGroup extends BeanStub<AgProvidedColumnGroupEvent> 
         super.destroy();
     }
 
-    private reset(colGroupDef: ColGroupDef | null, level: number | undefined): void {
+    private reset(colGroupDef: ColGroupDef<any> | null, level: number | undefined): void {
         this.colGroupDef = colGroupDef;
         this.level = level!;
 
@@ -113,7 +115,7 @@ export class AgProvidedColumnGroup extends BeanStub<AgProvidedColumnGroupEvent> 
         return this.children;
     }
 
-    public getColGroupDef(): ColGroupDef | null {
+    public getColGroupDef(): ColGroupDef<any> | null {
         return this.colGroupDef;
     }
 
@@ -137,7 +139,7 @@ export class AgProvidedColumnGroup extends BeanStub<AgProvidedColumnGroupEvent> 
         }
     }
 
-    private addLeafColumns(leafColumns: Column[]): void {
+    private addLeafColumns(leafColumns: Column<any>[]): void {
         if (!this.children) {
             return;
         }

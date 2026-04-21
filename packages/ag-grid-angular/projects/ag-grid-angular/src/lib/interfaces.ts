@@ -49,9 +49,9 @@ export interface IHeaderGroupAngularComp extends AgFrameworkComponent<IHeaderGro
 
 export interface IInnerHeaderGroupAngularComp extends AgFrameworkComponent<IHeaderGroupParams>, IHeaderGroup {}
 
-export interface IHeaderAngularComp extends AgFrameworkComponent<IHeaderParams>, IHeader {}
+export interface IHeaderAngularComp extends AgFrameworkComponent<IHeaderParams<any, any>>, IHeader {}
 
-export interface IInnerHeaderAngularComp extends AgFrameworkComponent<IHeaderParams>, IHeader {}
+export interface IInnerHeaderAngularComp extends AgFrameworkComponent<IHeaderParams<any, any>>, IHeader {}
 
 export interface IFloatingFilterAngularComp<P = any>
     extends AgFrameworkComponent<IFloatingFilterParams<P>>,
@@ -73,11 +73,13 @@ export interface IFilterDisplayAngularComp<TData = any, TContext = any, TModel =
     extends AgFrameworkComponent<FilterDisplayParams<TData, TContext, TModel, TState>>,
         FilterDisplay<TData, TContext, TModel, TState> {}
 
-export interface ICellRendererAngularComp extends AgFrameworkComponent<ICellRendererParams>, ICellRenderer {}
+export interface ICellRendererAngularComp
+    extends AgFrameworkComponent<ICellRendererParams<any, any, any>>,
+        ICellRenderer {}
 
 export interface ICellEditorRendererAngularComp extends AgFrameworkComponent<ICellEditorRendererParams> {}
 
-export interface ICellEditorAngularComp extends AgFrameworkComponent<ICellEditorParams>, ICellEditor {}
+export interface ICellEditorAngularComp extends AgFrameworkComponent<ICellEditorParams<any, any, any>>, ICellEditor {}
 
 export interface AgRendererComponent extends ICellRendererAngularComp {}
 
@@ -101,10 +103,10 @@ export interface INoMatchingRowsOverlayAngularComp
     extends AgFrameworkComponent<INoMatchingRowsOverlayParams>,
         INoMatchingRowsOverlay {}
 
-export interface IStatusPanelAngularComp extends AgFrameworkComponent<IStatusPanelParams>, IStatusPanel {}
+export interface IStatusPanelAngularComp extends AgFrameworkComponent<IStatusPanelParams<any, any>>, IStatusPanel {}
 
 export interface IToolPanelAngularComp extends AgFrameworkComponent<IToolPanelParams>, IToolPanel {}
 
-export interface ITooltipAngularComp extends AgFrameworkComponent<ITooltipParams> {}
+export interface ITooltipAngularComp extends AgFrameworkComponent<ITooltipParams<any, any, any>> {}
 
 export interface IMenuItemAngularComp extends AgFrameworkComponent<IMenuItemParams>, IMenuItem {}

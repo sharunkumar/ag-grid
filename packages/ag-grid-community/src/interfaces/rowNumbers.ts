@@ -6,7 +6,7 @@ import type { IColumnCollectionService } from './iColumnCollectionService';
 
 export interface RowNumbersOptions
     extends Pick<
-        ColDef,
+        ColDef<any, any>,
         | 'contextMenuItems'
         | 'context'
         | 'onCellClicked'

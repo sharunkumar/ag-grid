@@ -393,7 +393,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         let value = String(this.beans.rowModel.getRowCount() + 1);
 
         if (typeof this.rowNumberOverrides.valueFormatter === 'function') {
-            const valueFormatterParams: ValueFormatterParams = _addGridCommonParams(this.beans.gos, {
+            const valueFormatterParams: ValueFormatterParams<any, any, any> = _addGridCommonParams(this.beans.gos, {
                 data: undefined,
                 value,
                 node: null,
@@ -408,7 +408,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         return div;
     }
 
-    private createRowNumbersColDef(): ColDef {
+    private createRowNumbersColDef(): ColDef<any, any> {
         const { gos, contextMenuSvc } = this.beans;
         const enableRTL = gos.get('enableRtl');
 
@@ -441,7 +441,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         };
     }
 
-    private valueGetter(params: ValueGetterParams): string {
+    private valueGetter(params: ValueGetterParams<any, any, any>): string {
         const node = params.node as RowNode | null;
         const isFormulasActive = this.beans.formula?.active;
 
@@ -465,7 +465,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         return cssClass;
     }
 
-    private getCellClass(params: CellClassParams): string[] {
+    private getCellClass(params: CellClassParams<any, any, any>): string[] {
         const { beans } = this;
         const { rangeSvc, gos } = beans;
         const { node } = params;

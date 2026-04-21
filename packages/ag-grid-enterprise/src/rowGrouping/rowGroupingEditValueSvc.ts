@@ -14,7 +14,7 @@ import { resolveStrategy } from './distributeGroupValue/valueConversion';
 export class RowGroupingEditValueSvc extends BeanStub implements NamedBean, _IRowGroupingEditValueSvc {
     beanName = 'rowGroupingEditValueSvc' as const;
 
-    public isGroupCellEditable(rowNode: IRowNode, column: AgColumn): boolean {
+    public isGroupCellEditable(rowNode: IRowNode<any>, column: AgColumn): boolean {
         const colDef = column.colDef;
 
         if (!column.isColumnFunc(rowNode, colDef.groupRowEditable)) {

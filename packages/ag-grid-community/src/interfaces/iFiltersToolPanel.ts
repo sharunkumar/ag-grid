@@ -3,7 +3,7 @@ import type { FiltersToolPanelState } from './gridState';
 import type { IToolPanel } from './iToolPanel';
 
 export interface IFiltersToolPanel extends IToolPanel {
-    setFilterLayout(colDefs: ColDef[]): void;
+    setFilterLayout(colDefs: ColDef<any, any>[]): void;
     expandFilterGroups(groupIds?: string[]): void;
     collapseFilterGroups(groupIds?: string[]): void;
     expandFilters(colIds?: string[]): void;

@@ -87,7 +87,7 @@ export enum ColumnHighlightPosition {
     After,
 }
 
-export interface Column<TValue = any>
+export interface Column<TValue>
     extends IHeaderColumn<TValue, ColumnEventName>,
         IProvidedColumn,
         IEventEmitter<ColumnEventName> {
@@ -123,12 +123,12 @@ export interface Column<TValue = any>
     removeEventListener<T extends ColumnEventName>(eventType: T, userListener: (params: ColumnEvent<T>) => void): void;
 
     /** Returns `true` if navigation is suppressed for the given column and rowNode. */
-    isSuppressNavigable(rowNode: IRowNode): boolean;
+    isSuppressNavigable(rowNode: IRowNode<any>): boolean;
 
     /**
      * Returns `true` if the cell for this column is editable for the given `rowNode`, otherwise `false`.
      */
-    isCellEditable(rowNode: IRowNode): boolean;
+    isCellEditable(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if the fill handle is suppressed. */
     isSuppressFillHandle(): boolean;
@@ -140,16 +140,16 @@ export interface Column<TValue = any>
     isAutoHeaderHeight(): boolean;
 
     /** Returns `true` if this column and row node can be dragged. */
-    isRowDrag(rowNode: IRowNode): boolean;
+    isRowDrag(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if this column and row node allows dragging for native drag and drop. */
-    isDndSource(rowNode: IRowNode): boolean;
+    isDndSource(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if this column and row node has checkbox selection. */
-    isCellCheckboxSelection(rowNode: IRowNode): boolean;
+    isCellCheckboxSelection(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if paste is suppress for this column and row node. */
-    isSuppressPaste(rowNode: IRowNode): boolean;
+    isSuppressPaste(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if a menu is visible for this column. */
     isMenuVisible(): boolean;
@@ -232,10 +232,10 @@ export interface Column<TValue = any>
     getAutoHeaderHeight(): number | null;
 
     /** Returns the column span for this column and row node. */
-    getColSpan(rowNode: IRowNode): number;
+    getColSpan(rowNode: IRowNode<any>): number;
 
     /** Returns the row span for this column and row node. */
-    getRowSpan(rowNode: IRowNode): number;
+    getRowSpan(rowNode: IRowNode<any>): number;
 
     /** @deprecated v32 Internal method no longer to be exposed on Column interface. */
     isGreaterThanMax(width: number): boolean;
@@ -291,19 +291,19 @@ export interface ColumnGroup<TValue = any> extends IHeaderColumn<TValue, AgColum
     isResizable(): boolean;
 
     /** Returns the displayed children of this group. */
-    getDisplayedChildren(): (Column | ColumnGroup)[] | null;
+    getDisplayedChildren(): (Column<any> | ColumnGroup)[] | null;
 
     /** Returns the leaf columns of this group. */
-    getLeafColumns(): Column[];
+    getLeafColumns(): Column<any>[];
 
     /** Returns the displayed leaf columns of this group. */
-    getDisplayedLeafColumns(): Column[];
+    getDisplayedLeafColumns(): Column<any>[];
 
     /** Returns the column group definition for this column.
      * The column group definition will be the result of merging the application provided column group definition with any provided defaults
      * (e.g. `defaultColGroupDef` grid option.
      */
-    getColGroupDef(): ColGroupDef | null;
+    getColGroupDef(): ColGroupDef<any> | null;
 
     /** Returns `true` if this column group is a padding group that is used to correctly align column groups / children. */
     isPadding(): boolean;
@@ -318,7 +318,7 @@ export interface ColumnGroup<TValue = any> extends IHeaderColumn<TValue, AgColum
     isExpanded(): boolean;
 
     /** Returns the children of this group if they exist or `null` */
-    getChildren(): (Column | ColumnGroup)[] | null;
+    getChildren(): (Column<any> | ColumnGroup)[] | null;
 
     /** Returns the provided column group */
     getProvidedColumnGroup(): ProvidedColumnGroup;
@@ -347,16 +347,16 @@ export interface ProvidedColumnGroup extends IProvidedColumn, IEventEmitter<AgPr
     getGroupId(): string;
 
     /** Returns the children of this group. */
-    getChildren(): (Column | ProvidedColumnGroup)[];
+    getChildren(): (Column<any> | ProvidedColumnGroup)[];
 
     /** Returns the column group definition for this column.
      * The column group definition will be the result of merging the application provided column group definition with any provided defaults
      * (e.g. `defaultColGroupDef` grid option.
      */
-    getColGroupDef(): ColGroupDef | null;
+    getColGroupDef(): ColGroupDef<any> | null;
 
     /** Returns the leaf columns of this group. */
-    getLeafColumns(): Column[];
+    getLeafColumns(): Column<any>[];
 
     /** isColumn is always `false`. Used to distinguish between columns and column groups.  */
     isColumn: false;

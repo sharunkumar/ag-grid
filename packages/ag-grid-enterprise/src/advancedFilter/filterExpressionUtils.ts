@@ -30,12 +30,12 @@ export interface FilterExpressionFunctionParams {
 }
 
 export interface ExpressionProxy {
-    getValue<T = any>(colId: string, node: IRowNode): T;
+    getValue<T = any>(colId: string, node: IRowNode<any>): T;
 }
 
 export type FilterExpressionFunction = (
     expressionProxy: ExpressionProxy,
-    node: IRowNode,
+    node: IRowNode<any>,
     params: FilterExpressionFunctionParams
 ) => boolean;
 

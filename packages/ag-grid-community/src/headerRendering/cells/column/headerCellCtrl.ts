@@ -187,9 +187,9 @@ export class HeaderCellCtrl extends AbstractHeaderCellCtrl<IHeaderCellComp, AgCo
         return _getHeaderCompDetails(this.beans.userCompFactory, colDef, params)!;
     }
 
-    private createParams(): IHeaderParams {
+    private createParams(): IHeaderParams<any, any> {
         const { menuSvc, sortSvc, colFilter, gos } = this.beans;
-        const params: IHeaderParams = _addGridCommonParams(gos, {
+        const params: IHeaderParams<any, any> = _addGridCommonParams(gos, {
             column: this.column,
             displayName: this.displayName!,
             enableSorting: this.column.isSortable(),
@@ -423,7 +423,7 @@ export class HeaderCellCtrl extends AbstractHeaderCellCtrl<IHeaderCellComp, AgCo
         }
     }
 
-    private attemptHeaderCompRefresh(params: IHeaderParams): boolean {
+    private attemptHeaderCompRefresh(params: IHeaderParams<any, any>): boolean {
         const headerComp = this.comp.getUserCompInstance();
         if (!headerComp) {
             return false;

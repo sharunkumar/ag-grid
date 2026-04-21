@@ -6,7 +6,7 @@ import type { IRowNode } from '../interfaces/iRowNode';
 
 export interface GetCellValueParams<TValue = any> {
     /** The row to read from */
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     /** The column to read (field name, `colId`, or `Column` object) */
     colKey: string | Column<TValue>;
     /** If `true`, returns the formatted string (via the column's `valueFormatter`) instead of the raw value. */

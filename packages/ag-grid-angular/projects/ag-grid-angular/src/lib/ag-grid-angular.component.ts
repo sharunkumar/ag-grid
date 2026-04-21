@@ -256,7 +256,7 @@ import { AngularFrameworkOverrides } from './angularFrameworkOverrides';
     // tell angular we don't want view encapsulation, we don't want a shadow root
     encapsulation: ViewEncapsulation.None,
 })
-export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<any>>
+export class AgGridAngular<TData = any, TColDef extends ColDef<TData, any> = ColDef<any, any>>
     implements AfterViewInit, OnChanges, OnDestroy
 {
     // not intended for user to interact with. so putting _ in so if user gets reference
@@ -308,7 +308,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
             const coercedGridOptions = {} as GridOptions<TData>;
             for (const key of gridOptionKeys) {
                 const valueToUse = getValueOrCoercedValue(key, this[key as keyof AgGridAngular]);
-                coercedGridOptions[key as keyof GridOptions] = valueToUse;
+                coercedGridOptions[key as keyof GridOptions<TData>] = valueToUse;
             }
 
             const mergedGridOps = _combineAttributesAndGridOptions(
@@ -345,10 +345,10 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
         if (this._initialised) {
             // Run the changes outside of angular so any event handlers that are created do not trigger change detection
             this._angularFrameworkOverrides.runOutsideAngular(() => {
-                const gridOptions: GridOptions = {};
+                const gridOptions: GridOptions<TData> = {};
                 for (const key of Object.keys(changes)) {
                     const value = changes[key];
-                    gridOptions[key as keyof GridOptions] = value.currentValue;
+                    gridOptions[key as keyof GridOptions<TData>] = value.currentValue;
                 }
                 _processOnChange(gridOptions, this.api);
             });
@@ -552,7 +552,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     @Input() public columnDefs: (TColDef | ColGroupDef<TData>)[] | null | undefined = undefined;
     /** A default column definition. Items defined in the actual column definitions get precedence.
      */
-    @Input() public defaultColDef: ColDef<TData> | undefined = undefined;
+    @Input() public defaultColDef: ColDef<TData, any> | undefined = undefined;
     /** A default column group definition. All column group definitions will use these properties. Items defined in the actual column group definition get precedence.
      * @initial
      */
@@ -888,7 +888,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      * @agModule `IntegratedChartsModule`
      */
     @Input() public chartMenuItems:
-        | (DefaultChartMenuItem | MenuItemDef<TData>)[]
+        | (DefaultChartMenuItem | MenuItemDef<TData, any>)[]
         | GetChartMenuItems<TData>
         | undefined = undefined;
     /** Provide your own loading cell renderer to use when data is loading via a DataSource or when a cell renderer is deferred.
@@ -1615,7 +1615,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** Provide the `serverSideDatasource` for server side row model.
      * @agModule `ServerSideRowModelModule`
      */
-    @Input() public serverSideDatasource: IServerSideDatasource | undefined = undefined;
+    @Input() public serverSideDatasource: IServerSideDatasource<any> | undefined = undefined;
     /** When enabled, always refreshes top level groups regardless of which column was sorted. This property only applies when there is Row Grouping & sorting is handled on the server.
      * @default false
      * @agModule `ServerSideRowModelModule`
@@ -1911,7 +1911,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** For customising the context menu.
      * @agModule `ContextMenuModule`
      */
-    @Input() public getContextMenuItems: GetContextMenuItems<TData> | undefined = undefined;
+    @Input() public getContextMenuItems: GetContextMenuItems<TData, any> | undefined = undefined;
     /** For customising the main 'column header' menu.
      * @initial
      * @agModule `ColumnMenuModule`
@@ -2070,7 +2070,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** Provide a pure function that returns a string ID to uniquely identify a given row. This enables the grid to work optimally with data changes and updates.
      * @initial
      */
-    @Input() public getRowId: GetRowIdFunc<TData> | undefined = undefined;
+    @Input() public getRowId: GetRowIdFunc<TData, any> | undefined = undefined;
     /** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.
      * @default false
      * @agModule `ClientSideRowModelModule`
@@ -2097,11 +2097,11 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** Callback version of property `rowStyle` to set style for each row individually. Function should return an object of CSS values or undefined for no styles.
      * @agModule `RowStyleModule`
      */
-    @Input() public getRowStyle: GetRowStyle<TData> | undefined = undefined;
+    @Input() public getRowStyle: GetRowStyle<TData, any> | undefined = undefined;
     /** Callback version of property `rowClass` to set class(es) for each row individually. Function should return either a string (class name), array of strings (array of class names) or undefined for no class.
      * @agModule `RowStyleModule`
      */
-    @Input() public getRowClass: GetRowClass<TData> | undefined = undefined;
+    @Input() public getRowClass: GetRowClass<TData, any> | undefined = undefined;
     /** Callback version of property `rowHeight` to set height for each row individually. Function should return a positive number of pixels, or return `null`/`undefined` to use the default row height.
      */
     @Input() public getRowHeight: GetRowHeight<TData> | undefined = undefined;
