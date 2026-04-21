@@ -55,7 +55,7 @@ describe('formatValue', () => {
     });
 
     it('does not use value formatter from column definition if disabled', () => {
-        const formatter = (params: ValueFormatterParams) => params.value.toString();
+        const formatter = (params: ValueFormatterParams<any, any, any>) => params.value.toString();
         colDef.valueFormatter = formatter;
         const formattedValue = valueSvc.formatValue(column, null, 'bar', undefined, false);
 
@@ -65,7 +65,8 @@ describe('formatValue', () => {
 
     it('uses pinned value formatter from column definition if row is pinned', () => {
         const returnValue = 'foo';
-        const formatter = (params: ValueFormatterParams) => (params.node?.isRowPinned() ? returnValue : '');
+        const formatter = (params: ValueFormatterParams<any, any, any>) =>
+            params.node?.isRowPinned() ? returnValue : '';
         colDef.valueFormatter = formatter;
         const value = 'bar';
         const node = new RowNode({} as any);
@@ -97,7 +98,7 @@ describe('formatValue', () => {
     it('does not use refData if formatter is found', () => {
         const value = 'foo';
         const returnValue = 'foo';
-        const formatter = (params: ValueFormatterParams) => params.value.toString();
+        const formatter = (params: ValueFormatterParams<any, any, any>) => params.value.toString();
         colDef.refData = { [value]: 'bob' };
 
         const formattedValue = valueSvc.formatValue(column, null, value, formatter);

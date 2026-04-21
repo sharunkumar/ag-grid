@@ -395,7 +395,7 @@ export class ValueService extends BeanStub implements NamedBean {
         if (formatter) {
             const data = node ? node.data : null;
 
-            const params: ValueFormatterParams = _addGridCommonParams(this.gos, {
+            const params: ValueFormatterParams<any, any, any> = _addGridCommonParams(this.gos, {
                 value,
                 node,
                 data,

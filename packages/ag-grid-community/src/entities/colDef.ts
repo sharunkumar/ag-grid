@@ -1203,7 +1203,7 @@ export type ValueParserFunc<TData = any, TValue = any, TContext = any> = (
     params: ValueParserParams<TData, TValue, TContext>
 ) => TValue | null | undefined;
 
-export interface ValueFormatterParams<TData = any, TValue = any, TContext = any>
+export interface ValueFormatterParams<TData, TValue, TContext>
     extends BaseColDefOptionalDataParams<TData, TValue, TContext> {
     /** Value for the cell. */
     value: TValue | null | undefined;

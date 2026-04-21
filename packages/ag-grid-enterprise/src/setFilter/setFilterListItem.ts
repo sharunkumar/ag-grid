@@ -56,7 +56,7 @@ export interface SetFilterListItemParams<V> {
     value: V | null | (() => string);
     params: ISetFilterParams<any, V> & FilterDisplayParams<any, any, SetFilterModel>;
     translate: (key: SetFilterLocaleTextKey) => string;
-    valueFormatter?: (params: ValueFormatterParams) => string;
+    valueFormatter?: (params: ValueFormatterParams<any, any, any>) => string;
     item: SetFilterModelTreeItem | string | null;
     isSelected: boolean | undefined;
     isTree?: boolean;
@@ -105,7 +105,7 @@ export class SetFilterListItem<V> extends Component<SetFilterListItemEvent> {
     private readonly value: V | null | (() => string);
     private readonly params: ISetFilterParams<any, V> & FilterDisplayParams<any, any, SetFilterModel>;
     private readonly translate: (key: SetFilterLocaleTextKey) => string;
-    private readonly valueFormatter?: (params: ValueFormatterParams) => string;
+    private readonly valueFormatter?: (params: ValueFormatterParams<any, any, any>) => string;
     private readonly isTree?: boolean;
     private readonly depth: number;
     private readonly isGroup?: boolean;

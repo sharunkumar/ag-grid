@@ -393,7 +393,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         let value = String(this.beans.rowModel.getRowCount() + 1);
 
         if (typeof this.rowNumberOverrides.valueFormatter === 'function') {
-            const valueFormatterParams: ValueFormatterParams = _addGridCommonParams(this.beans.gos, {
+            const valueFormatterParams: ValueFormatterParams<any, any, any> = _addGridCommonParams(this.beans.gos, {
                 data: undefined,
                 value,
                 node: null,

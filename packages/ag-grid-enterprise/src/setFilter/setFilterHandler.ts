@@ -49,7 +49,7 @@ export class SetFilterHandler<TValue = string>
     private treeDataTreeList = false;
     private groupingTreeList = false;
     private caseSensitive: boolean = false;
-    public valueFormatter?: (params: ValueFormatterParams) => string;
+    public valueFormatter?: (params: ValueFormatterParams<any, any, any>) => string;
     private noValueFormatterSupplied = false;
 
     public init(params: FilterHandlerParams<any, any, SetFilterModel, ISetFilterParams<any, TValue>>): void {
@@ -401,7 +401,7 @@ export class SetFilterHandler<TValue = string>
     }
 
     private setValueFormatter(
-        providedValueFormatter: ((params: ValueFormatterParams) => string) | undefined,
+        providedValueFormatter: ((params: ValueFormatterParams<any, any, any>) => string) | undefined,
         keyCreator: ((params: KeyCreatorParams<any, any>) => string) | undefined,
         treeList: boolean,
         isRefData: boolean

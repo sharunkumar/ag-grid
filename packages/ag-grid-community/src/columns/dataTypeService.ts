@@ -813,7 +813,7 @@ function createGroupSafeValueFormatter(
         return undefined;
     }
 
-    return (params: ValueFormatterParams) => {
+    return (params: ValueFormatterParams<any, any, any>) => {
         const { node, colDef, column, value } = params;
 
         if (node?.group) {

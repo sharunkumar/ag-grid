@@ -152,11 +152,11 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
     number: () => ({ comparator: setFilterNumberComparator }),
     bigint: () => ({ comparator: setFilterBigIntComparator }),
     boolean: ({ t }) => ({
-        valueFormatter: (params: ValueFormatterParams<any, boolean>) =>
+        valueFormatter: (params: ValueFormatterParams<any, boolean, any>) =>
             _exists(params.value) ? t(String(params.value), params.value ? 'True' : 'False') : t('blanks', '(Blanks)'),
     }),
     date: ({ formatValue, t }) => ({
-        valueFormatter: (params: ValueFormatterParams) => {
+        valueFormatter: (params: ValueFormatterParams<any, any, any>) => {
             const valueFormatted = formatValue(params);
             return _exists(valueFormatted) ? valueFormatted : t('blanks', '(Blanks)');
         },
@@ -174,7 +174,7 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
         treeListPathGetter: (date: Date | null) => _getDateParts(date, false),
     }),
     dateString: ({ formatValue, dataTypeDefinition, t }) => ({
-        valueFormatter: (params: ValueFormatterParams) => {
+        valueFormatter: (params: ValueFormatterParams<any, any, any>) => {
             const valueFormatted = formatValue(params);
             return _exists(valueFormatted) ? valueFormatted : t('blanks', '(Blanks)');
         },
@@ -201,7 +201,7 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
         return params;
     },
     object: ({ formatValue, t }) => ({
-        valueFormatter: (params: ValueFormatterParams) => {
+        valueFormatter: (params: ValueFormatterParams<any, any, any>) => {
             const valueFormatted = formatValue(params);
             return _exists(valueFormatted) ? valueFormatted : t('blanks', '(Blanks)');
         },
