@@ -15,7 +15,7 @@ export const buildPivotFeatureSchema = (beans: BeanCollection) => {
             {
                 pivotMode: s.boolean('Whether pivot mode is enabled'),
                 pivotColIds: s.array(
-                    s.enum(pivotableColumnIds, 'Column ID that supports pivoting'),
+                    s.enum(pivotableColumnIds, 'Column<any> ID that supports pivoting'),
                     'Array of column IDs to use as pivot columns'
                 ),
             },

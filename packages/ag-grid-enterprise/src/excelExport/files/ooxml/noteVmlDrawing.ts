@@ -139,7 +139,7 @@ const getClientData = (comment: ExcelComment): XmlElement => {
                 textNode: String(row),
             },
             {
-                name: 'x:Column',
+                name: 'x:Column<any>',
                 textNode: String(column),
             },
         ],

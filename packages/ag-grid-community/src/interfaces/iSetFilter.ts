@@ -108,7 +108,7 @@ export interface SetFilterValuesFuncParams<TData = any, V = string> extends AgGr
     /** The column definition from which the set filter is invoked. */
     colDef: ColDef<TData, unknown>;
     /** Column from which the set filter is invoked. */
-    column: Column;
+    column: Column<any>;
 }
 
 /**

@@ -179,7 +179,7 @@ export type CoreDataTypeDefinition<TData = any, TValue = any, TContext = any> = 
     'extendsDataType'
 >;
 
-export type DataTypeFormatValueFunc = (params: { column: Column; node: IRowNode | null; value: any }) => string;
+export type DataTypeFormatValueFunc = (params: { column: Column<any>; node: IRowNode | null; value: any }) => string;
 
 // Line below used for type checking
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

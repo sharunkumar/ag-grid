@@ -21,7 +21,7 @@ const purgeRows = (
     return found;
 };
 
-const purgeCells = ({ editModelSvc }: BeanCollection, rowNodes: Set<IRowNode>, columns: Set<Column>): void => {
+const purgeCells = ({ editModelSvc }: BeanCollection, rowNodes: Set<IRowNode>, columns: Set<Column<any>>): void => {
     for (const rowNode of rowNodes) {
         editModelSvc
             ?.getEditRow(rowNode)
@@ -30,7 +30,7 @@ const purgeCells = ({ editModelSvc }: BeanCollection, rowNodes: Set<IRowNode>, c
 };
 
 export const _refreshEditCells = (beans: BeanCollection) => () => {
-    const columns = new Set<Column>(beans.colModel.getCols());
+    const columns = new Set<Column<any>>(beans.colModel.getCols());
     const updates = beans.editModelSvc!.getEditMap(true);
     const rowNodes = new Set(updates.keys());
 

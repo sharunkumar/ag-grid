@@ -131,7 +131,7 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
                 case 'pinSubMenu':
                     return pinnedCols && column
                         ? {
-                              name: localeTextFunc('pinColumn', 'Pin Column'),
+                              name: localeTextFunc('pinColumn', 'Pin Column<any>'),
                               icon: _createIconNoSpan('menuPin', beans, null),
                               subMenu: ['clearPinned', 'pinLeft', 'pinRight'],
                           }
@@ -226,7 +226,7 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
                 case 'autoSizeThis':
                     return colAutosize
                         ? {
-                              name: localeTextFunc('autosizeThisColumn', 'Autosize This Column'),
+                              name: localeTextFunc('autosizeThisColumn', 'Autosize This Column<any>'),
                               action: () =>
                                   column && colAutosize.autoSizeColumn(column, source, gos.get('skipHeaderOnAutoSize')),
                           }
@@ -433,7 +433,7 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
                 case 'columnFilter':
                     return menuSvc && column
                         ? {
-                              name: localeTextFunc('columnFilter', 'Column Filter'),
+                              name: localeTextFunc('columnFilter', 'Column<any> Filter'),
                               icon: _createIconNoSpan('filter', beans, null),
                               action: () =>
                                   menuSvc.showFilterMenu({

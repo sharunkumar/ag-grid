@@ -76,9 +76,9 @@ export interface CellRange {
     /** The end row of the range */
     endRow?: RowPosition;
     /** The columns in the range */
-    columns: Column[];
+    columns: Column<any>[];
     /** The start column for the range */
-    startColumn: Column;
+    startColumn: Column<any>;
     /** A custom color class to be applied to this range */
     colorClass?: string | null;
 }
@@ -96,11 +96,11 @@ export interface CellRangeParams {
     rowEndPinned?: RowPinnedType;
 
     /** Starting column for range */
-    columnStart?: string | Column;
+    columnStart?: string | Column<any>;
     /** End column for range */
-    columnEnd?: string | Column;
+    columnEnd?: string | Column<any>;
     /** Specify Columns to include instead of using `columnStart` and `columnEnd` */
-    columns?: (string | Column)[];
+    columns?: (string | Column<any>)[];
 }
 
 export interface CellRangeBoundaryParams {

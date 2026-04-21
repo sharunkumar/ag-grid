@@ -158,8 +158,8 @@ export class FilterMenuFactory extends BeanStub implements NamedBean, IMenuFacto
 
         const ariaLabel =
             isLegacyMenuEnabled && containerType !== 'columnFilter'
-                ? translate('ariaLabelColumnMenu', 'Column Menu')
-                : translate('ariaLabelColumnFilter', 'Column Filter');
+                ? translate('ariaLabelColumnMenu', 'Column<any> Menu')
+                : translate('ariaLabelColumnFilter', 'Column<any> Filter');
 
         const addPopupRes = this.popupSvc?.addPopup({
             modal: true,

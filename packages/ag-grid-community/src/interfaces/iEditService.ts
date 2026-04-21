@@ -50,7 +50,7 @@ export type EditRowPosition = {
 };
 
 export interface EditPosition extends EditRowPosition {
-    column?: Column;
+    column?: Column<any>;
 }
 export interface _SetEditingCellsParams {
     /** Update existing cells, omit or set `false` to replace currently editing cells. */

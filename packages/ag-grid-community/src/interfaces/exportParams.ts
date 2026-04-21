@@ -18,7 +18,7 @@ export interface BaseExportParams {
     /**
      * Provide a list (an array) of column keys or Column objects if you want to export specific columns.
      */
-    columnKeys?: (string | Column)[];
+    columnKeys?: (string | Column<any>)[];
     /** Row node positions. */
     rowPositions?: RowPosition[];
     /**
@@ -169,7 +169,7 @@ export interface ProcessCellForExportParams<TData = any, TContext = any> extends
     value: any;
     accumulatedRowIndex?: number;
     node?: IRowNode<TData> | null;
-    column: Column;
+    column: Column<any>;
     type: string; // clipboard, dragCopy (ctrl+D), export
     /** Utility function to parse a value using the column's `colDef.valueParser` */
     parseValue: (value: string) => any;
@@ -181,7 +181,7 @@ export type ProcessHeaderForClipboard<TData = any, TContext = any> = (
     params: ProcessHeaderForExportParams<TData, TContext>
 ) => any;
 export interface ProcessHeaderForExportParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
-    column: Column;
+    column: Column<any>;
 }
 
 export type ProcessGroupHeaderForClipboard<TData = any, TContext = any> = (
@@ -193,5 +193,5 @@ export interface ProcessGroupHeaderForExportParams<TData = any, TContext = any> 
 
 export interface ProcessRowGroupForExportParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     node: IRowNode<TData>;
-    column?: Column;
+    column?: Column<any>;
 }

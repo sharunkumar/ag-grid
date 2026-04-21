@@ -195,7 +195,7 @@ export interface IAggFuncParams<TData = any, TValue = any, TContext = any> exten
     /** ColDef of the aggregation column */
     colDef: ColDef<TData, TValue>;
     /** Pivot Result Column being produced using this aggregation */
-    pivotResultColumn?: Column;
+    pivotResultColumn?: Column<any>;
     /** The parent RowNode, where the aggregation result will be shown */
     rowNode: IRowNode<TData>;
     /** data (if any) of the parent RowNode */
@@ -988,7 +988,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
     suppressAutoSize?: boolean;
 
     /** Never set this, it is used internally by grid when doing in-grid pivoting */
-    pivotValueColumn?: Column | null;
+    pivotValueColumn?: Column<any> | null;
     /** Never set this, it is used internally by grid when doing in-grid pivoting */
     pivotTotalColumnIds?: string[];
 

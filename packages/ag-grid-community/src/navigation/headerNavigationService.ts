@@ -74,7 +74,7 @@ export class HeaderNavigationService extends BeanStub implements NamedBean {
     }
 
     public getHeaderPositionForColumn(
-        colKey: string | Column | ColumnGroup,
+        colKey: string | Column<any> | ColumnGroup,
         floatingFilter: boolean
     ): HeaderPosition | null {
         let column: AgColumn | AgColumnGroup | null;

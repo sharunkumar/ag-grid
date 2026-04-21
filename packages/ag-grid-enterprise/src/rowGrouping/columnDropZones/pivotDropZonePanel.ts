@@ -13,7 +13,7 @@ export class PivotDropZonePanel extends BaseDropZonePanel implements FocusableCo
     public postConstruct(): void {
         const localeTextFunc = this.getLocaleTextFunc();
         const emptyMessage = localeTextFunc('pivotColumnsEmptyMessage', 'Drag here to set column labels');
-        const title = localeTextFunc('pivots', 'Column Labels');
+        const title = localeTextFunc('pivots', 'Column<any> Labels');
 
         super.init({
             icon: _createIconNoSpan('pivotPanel', this.beans, null)!,
@@ -38,7 +38,7 @@ export class PivotDropZonePanel extends BaseDropZonePanel implements FocusableCo
     protected getAriaLabel(): string {
         const translate = this.getLocaleTextFunc();
 
-        return translate('ariaPivotDropZonePanelLabel', 'Column Labels');
+        return translate('ariaPivotDropZonePanelLabel', 'Column<any> Labels');
     }
 
     public refresh(): void {

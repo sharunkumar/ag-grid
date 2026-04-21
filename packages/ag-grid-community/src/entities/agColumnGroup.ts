@@ -18,7 +18,7 @@ export function createUniqueColumnGroupId(groupId: string, instanceId: number): 
     return (groupId + '_' + instanceId) as HeaderColumnId;
 }
 
-export function isColumnGroup(col: Column | ColumnGroup | string): col is AgColumnGroup {
+export function isColumnGroup(col: Column<any> | ColumnGroup | string): col is AgColumnGroup {
     return col instanceof AgColumnGroup;
 }
 

@@ -623,7 +623,7 @@ export class HeaderCellCtrl extends AbstractHeaderCellCtrl<IHeaderCellComp, AgCo
         let description: string | null = null;
         if (this.column.isFilterActive()) {
             const translate = this.getLocaleTextFunc();
-            description = translate('ariaColumnFiltered', 'Column Filtered');
+            description = translate('ariaColumnFiltered', 'Column<any> Filtered');
         }
         this.setAriaDescriptionProperty('filter', description);
     }

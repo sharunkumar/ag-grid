@@ -283,7 +283,7 @@ export interface FilterWrapperParams {
 
 export interface SharedFilterParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** The column this filter is for. */
-    column: Column;
+    column: Column<any>;
     /** The column definition for the column. */
     colDef: ColDef<TData, unknown>;
 

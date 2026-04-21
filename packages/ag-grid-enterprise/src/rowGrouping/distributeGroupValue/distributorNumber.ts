@@ -18,7 +18,7 @@ interface ValueAndCount {
 /** Distributes a numeric value to children using the chosen strategy. */
 export class DistributorNumber {
     private readonly children: readonly IRowNode[];
-    private readonly column: Column;
+    private readonly column: Column<any>;
     private readonly count: number;
     private readonly target: number;
     private readonly oldTarget: number;

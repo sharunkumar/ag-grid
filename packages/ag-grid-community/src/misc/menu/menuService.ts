@@ -14,12 +14,12 @@ import type { Column } from '../../interfaces/iColumn';
 import type { IMenuFactory } from '../../interfaces/iMenuFactory';
 
 interface BaseShowColumnMenuParams {
-    column?: Column;
+    column?: Column<any>;
     onClosedCallback?: () => void;
 }
 
 interface BaseShowFilterMenuParams {
-    column: Column;
+    column: Column<any>;
     containerType: ContainerType;
 }
 

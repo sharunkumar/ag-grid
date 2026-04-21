@@ -16,7 +16,7 @@ export class SingleCellEditStrategy extends BaseEditStrategy {
     override beanName = 'singleCell' as BeanName | undefined;
 
     private rowNode?: IRowNode | null;
-    private column?: Column | null;
+    private column?: Column<any> | null;
 
     public override shouldStop(
         position?: EditPosition,

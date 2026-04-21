@@ -173,13 +173,13 @@ export interface EditingCellPosition extends RowPosition {
      * Column instance.
      * @deprecated Use `colId` instead.
      */
-    column?: Column;
+    column?: Column<any>;
 
     /**
      * Column instance.
      * @deprecated Use `colId` instead.
      */
-    colKey?: string | Column;
+    colKey?: string | Column<any>;
 
     /** New pending value, use `null` to delete cell content */
     newValue?: any;
@@ -192,7 +192,7 @@ export interface EditingCellPosition extends RowPosition {
 }
 
 export interface ICellEditorValidationError extends RowPosition {
-    column: Column;
+    column: Column<any>;
     messages: string[] | null;
 }
 
@@ -200,7 +200,7 @@ export interface StartEditingCellParams {
     /** The row index of the row to start editing */
     rowIndex: number;
     /** The column key of the row to start editing */
-    colKey: string | Column;
+    colKey: string | Column<any>;
     /** Set to `'top'` or `'bottom'` to start editing a pinned row */
     rowPinned?: RowPinnedType;
     /** The key to pass to the cell editor */

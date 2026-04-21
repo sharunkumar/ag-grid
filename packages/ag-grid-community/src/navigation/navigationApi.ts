@@ -14,7 +14,7 @@ export function clearFocusedCell(beans: BeanCollection): void {
 export function setFocusedCell(
     beans: BeanCollection,
     rowIndex: number,
-    colKey: string | Column,
+    colKey: string | Column<any>,
     rowPinned?: RowPinnedType
 ) {
     beans.focusSvc.setFocusedCell({ rowIndex, column: colKey, rowPinned, forceBrowserFocus: true });
@@ -30,7 +30,7 @@ export function tabToPreviousCell(beans: BeanCollection, event?: KeyboardEvent):
 
 export function setFocusedHeader(
     beans: BeanCollection,
-    colKey: string | Column | ColumnGroup,
+    colKey: string | Column<any> | ColumnGroup,
     floatingFilter: boolean = false
 ): void {
     const headerPosition = beans.headerNavigation?.getHeaderPositionForColumn(colKey, floatingFilter);

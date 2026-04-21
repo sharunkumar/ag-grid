@@ -10,12 +10,12 @@ import { NavigationService } from './navigation/navigationService';
 import { mock } from './test-utils/mock';
 import { _focusNextGridCoreContainer } from './utils/gridFocus';
 
-function createColumn(colId: string): Column {
+function createColumn(colId: string): Column<any> {
     return {
         getId: () => colId,
         getColId: () => colId,
         getPinned: () => null,
-    } as unknown as Column;
+    } as unknown as Column<any>;
 }
 
 function createHeaderPosition(columnId: string, headerRowIndex: number): HeaderPosition {
@@ -444,8 +444,8 @@ describe('Focus override callbacks', () => {
         let gos: jest.Mocked<GridOptionsService>;
         let getOption: jest.Mock<unknown, [string]>;
         let getCallback: jest.Mock<unknown, [string]>;
-        let colA: Column;
-        let colB: Column;
+        let colA: Column<any>;
+        let colB: Column<any>;
 
         beforeEach(() => {
             navigationSvc = new NavigationService();

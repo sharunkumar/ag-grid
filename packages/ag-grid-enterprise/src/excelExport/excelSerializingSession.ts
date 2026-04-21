@@ -39,7 +39,7 @@ export interface StyleLinkerInterface {
     rowType: 'HEADER_GROUPING' | 'HEADER' | 'BODY';
     rowIndex: number;
     value: string;
-    column?: Column;
+    column?: Column<any>;
     columnGroup?: ColumnGroup;
     node?: RowNode;
 }

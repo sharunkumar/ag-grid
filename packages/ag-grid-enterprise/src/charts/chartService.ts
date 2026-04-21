@@ -336,7 +336,7 @@ export class ChartService extends BeanStub implements NamedBean, IChartService {
             return { columns: [] };
         }
 
-        const uCols = new Set<Column>();
+        const uCols = new Set<Column<any>>();
 
         let startRowIndex = Number.MAX_VALUE;
         let endRowIndex = -Number.MAX_VALUE;

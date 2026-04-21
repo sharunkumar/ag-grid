@@ -87,7 +87,7 @@ export enum ColumnHighlightPosition {
     After,
 }
 
-export interface Column<TValue = any>
+export interface Column<TValue>
     extends IHeaderColumn<TValue, ColumnEventName>,
         IProvidedColumn,
         IEventEmitter<ColumnEventName> {
@@ -291,13 +291,13 @@ export interface ColumnGroup<TValue = any> extends IHeaderColumn<TValue, AgColum
     isResizable(): boolean;
 
     /** Returns the displayed children of this group. */
-    getDisplayedChildren(): (Column | ColumnGroup)[] | null;
+    getDisplayedChildren(): (Column<any> | ColumnGroup)[] | null;
 
     /** Returns the leaf columns of this group. */
-    getLeafColumns(): Column[];
+    getLeafColumns(): Column<any>[];
 
     /** Returns the displayed leaf columns of this group. */
-    getDisplayedLeafColumns(): Column[];
+    getDisplayedLeafColumns(): Column<any>[];
 
     /** Returns the column group definition for this column.
      * The column group definition will be the result of merging the application provided column group definition with any provided defaults
@@ -318,7 +318,7 @@ export interface ColumnGroup<TValue = any> extends IHeaderColumn<TValue, AgColum
     isExpanded(): boolean;
 
     /** Returns the children of this group if they exist or `null` */
-    getChildren(): (Column | ColumnGroup)[] | null;
+    getChildren(): (Column<any> | ColumnGroup)[] | null;
 
     /** Returns the provided column group */
     getProvidedColumnGroup(): ProvidedColumnGroup;
@@ -347,7 +347,7 @@ export interface ProvidedColumnGroup extends IProvidedColumn, IEventEmitter<AgPr
     getGroupId(): string;
 
     /** Returns the children of this group. */
-    getChildren(): (Column | ProvidedColumnGroup)[];
+    getChildren(): (Column<any> | ProvidedColumnGroup)[];
 
     /** Returns the column group definition for this column.
      * The column group definition will be the result of merging the application provided column group definition with any provided defaults
@@ -356,7 +356,7 @@ export interface ProvidedColumnGroup extends IProvidedColumn, IEventEmitter<AgPr
     getColGroupDef(): ColGroupDef<any> | null;
 
     /** Returns the leaf columns of this group. */
-    getLeafColumns(): Column[];
+    getLeafColumns(): Column<any>[];
 
     /** isColumn is always `false`. Used to distinguish between columns and column groups.  */
     isColumn: false;

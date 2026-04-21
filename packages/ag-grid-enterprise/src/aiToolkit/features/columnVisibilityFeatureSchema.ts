@@ -6,7 +6,7 @@ export const buildColumnVisibilityFeatureSchema = () => {
             {
                 hiddenColIds: s.array(s.ref('allColumnIds'), 'Array of column IDs to hide'),
             },
-            'Column visibility configuration for the grid'
+            'Column<any> visibility configuration for the grid'
         )
         .nullable();
 };

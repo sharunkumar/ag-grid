@@ -74,7 +74,7 @@ type DummyDetailNode = {
 type Matches = Map<IRowNode, CellMatch[]>;
 
 /** column and corresponding number of matches in the cell for that column. `null` column is full width. */
-type CellMatch = [Column | null, number];
+type CellMatch = [Column<any> | null, number];
 
 export class FindService extends BeanStub implements NamedBean, IFindService {
     beanName = 'findSvc' as const;
@@ -187,7 +187,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
     }
 
     // called by cell ctrl, so needs to be performant
-    public isMatch(node: IRowNode, column: Column | null): boolean {
+    public isMatch(node: IRowNode, column: Column<any> | null): boolean {
         return (
             this.active &&
             !!this.getMatches(node.rowPinned)
@@ -196,7 +196,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         );
     }
 
-    public getNumMatches(node: IRowNode, column: Column | null): number {
+    public getNumMatches(node: IRowNode, column: Column<any> | null): number {
         return (
             this.getMatches(node.rowPinned)
                 .get(node)
@@ -376,7 +376,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         let matches: Matches;
         let rowNodes: IRowNode[];
         let checkCurrentPage: boolean = false;
-        const addMatches = (node: IRowNode, column: Column | null, numMatches: number, skipRefresh?: boolean) => {
+        const addMatches = (node: IRowNode, column: Column<any> | null, numMatches: number, skipRefresh?: boolean) => {
             if (!numMatches) {
                 return;
             }
@@ -662,7 +662,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         this.setDetailActive(activeMatch);
     }
 
-    private refreshRows(rowNodes: Set<IRowNode>, columns?: Set<Column>): void {
+    private refreshRows(rowNodes: Set<IRowNode>, columns?: Set<Column<any>>): void {
         if (!rowNodes.size) {
             return;
         }
@@ -733,7 +733,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         backwards: boolean,
         nextOverallNum: number,
         currentNode?: IRowNode,
-        currentColumn?: Column | null,
+        currentColumn?: Column<any> | null,
         currentNumInMatch?: number
     ): boolean {
         const matches = this.getMatches(rowPinned);
@@ -850,7 +850,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
     private refreshAndScrollToActive(activeMatch: FindMatch | undefined, oldActiveMatch: FindMatch | undefined): void {
         if (activeMatch || oldActiveMatch) {
             const nodes = new Set<IRowNode>();
-            const columns = new Set<Column>();
+            const columns = new Set<Column<any>>();
             let skipColumns = false;
             const addMatch = (match?: FindMatch) => {
                 if (!match) {
@@ -928,7 +928,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
         }
     }
 
-    private getActiveMatchNum(node: IRowNode, column: Column | null): number {
+    private getActiveMatchNum(node: IRowNode, column: Column<any> | null): number {
         const activeMatch = this.activeMatch;
         return activeMatch != null && activeMatch.node === node && activeMatch.column === column
             ? activeMatch.numInMatch

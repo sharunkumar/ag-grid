@@ -13,7 +13,7 @@ import type { RowCtrl } from './row/rowCtrl';
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export function _suppressCellMouseEvent(
     gos: GridOptionsService,
-    column: Column,
+    column: Column<any>,
     node: IRowNode,
     event: MouseEvent
 ): boolean {
@@ -34,7 +34,7 @@ export function _suppressFullWidthMouseEvent(
 
 function suppressMouseEvent(
     gos: GridOptionsService,
-    column: Column | undefined,
+    column: Column<any> | undefined,
     node: IRowNode,
     event: MouseEvent,
     suppressMouseEventHandling?: (params: SuppressMouseEventHandlingParams) => boolean

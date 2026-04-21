@@ -4,7 +4,9 @@ import type { AgColumn } from './agColumn';
 import { getNextColInstanceId, isColumn } from './agColumn';
 import type { ColGroupDef } from './colDef';
 
-export function isProvidedColumnGroup(col: Column | ProvidedColumnGroup | string | null): col is AgProvidedColumnGroup {
+export function isProvidedColumnGroup(
+    col: Column<any> | ProvidedColumnGroup | string | null
+): col is AgProvidedColumnGroup {
     return col instanceof AgProvidedColumnGroup;
 }
 
@@ -137,7 +139,7 @@ export class AgProvidedColumnGroup extends BeanStub<AgProvidedColumnGroupEvent> 
         }
     }
 
-    private addLeafColumns(leafColumns: Column[]): void {
+    private addLeafColumns(leafColumns: Column<any>[]): void {
         if (!this.children) {
             return;
         }

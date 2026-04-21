@@ -62,7 +62,7 @@ export interface ISetFilterCellRendererParams<TData = any, TContext = any> exten
     /** The cell's column definition. */
     colDef?: ColDef<any, any>;
     /** The cell's column. */
-    column?: Column;
+    column?: Column<any>;
     /**
      * Sets a tooltip to the main element of this component.
      * @param value The value to be displayed by the tooltip

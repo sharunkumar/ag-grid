@@ -233,7 +233,7 @@ export class ColumnMoveService extends BeanStub implements NamedBean {
                 if (hideColumnOnExit) {
                     const { columns = [], visibleState } = dragItem ?? {};
                     const hasVisibleState = isGroup
-                        ? (col: Column) => !visibleState || visibleState[col.getColId()]
+                        ? (col: Column<any>) => !visibleState || visibleState[col.getColId()]
                         : () => true;
                     const unlockedColumns = columns.filter(
                         (col) => !col.getColDef().lockVisible && hasVisibleState(col)

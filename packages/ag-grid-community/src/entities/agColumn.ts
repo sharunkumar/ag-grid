@@ -48,7 +48,7 @@ export function getNextColInstanceId(): ColumnInstanceId {
     return instanceIdSequence++ as ColumnInstanceId;
 }
 
-export function isColumn(col: Column | ColumnGroup | ProvidedColumnGroup): col is AgColumn {
+export function isColumn(col: Column<any> | ColumnGroup | ProvidedColumnGroup): col is AgColumn {
     return col instanceof AgColumn;
 }
 
@@ -68,7 +68,7 @@ const DEFAULT_ABSOLUTE_SORTING_ORDER: (SortDef | SortDirection)[] = [
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
 export class AgColumn<TValue = any>
     extends BeanStub<ColumnEventName>
-    implements Column, IAgEventEmitter<ColumnEventName>
+    implements Column<any>, IAgEventEmitter<ColumnEventName>
 {
     public readonly isColumn = true as const;
 

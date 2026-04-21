@@ -16,7 +16,7 @@ export function setValueColumns(beans: BeanCollection, colKeys: ColKey[]): void 
     beans.valueColsSvc?.setColumns(colKeys, 'api');
 }
 
-export function getValueColumns(beans: BeanCollection): Column[] {
+export function getValueColumns(beans: BeanCollection): Column<any>[] {
     return beans.valueColsSvc?.columns ?? [];
 }
 
@@ -40,7 +40,7 @@ export function addPivotColumns(beans: BeanCollection, colKeys: ColKey[]): void 
     beans.pivotColsSvc?.addColumns(colKeys, 'api');
 }
 
-export function getPivotColumns(beans: BeanCollection): Column[] {
+export function getPivotColumns(beans: BeanCollection): Column<any>[] {
     return beans.pivotColsSvc?.columns ?? [];
 }
 
@@ -51,7 +51,7 @@ export function setPivotResultColumns(
     beans.pivotResultCols?.setPivotResultCols(colDefs, 'api');
 }
 
-export function getPivotResultColumns(beans: BeanCollection): Column[] | null {
+export function getPivotResultColumns(beans: BeanCollection): Column<any>[] | null {
     const pivotResultCols = beans.pivotResultCols?.getPivotResultCols();
     return pivotResultCols ? pivotResultCols.list : null;
 }

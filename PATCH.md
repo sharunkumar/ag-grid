@@ -29,6 +29,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
     -   `ICellRendererParams<TData, TValue, TContext>`
     -   `ValueGetterParams<TData, TValue, TContext>`
     -   `ValueFormatterParams<TData, TValue, TContext>`
+    -   `Column<TValue>`
     -   Internal usages updated to pass explicit generics
         -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
         -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments

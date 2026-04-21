@@ -690,7 +690,7 @@ export class EditService extends BeanStub implements NamedBean {
      */
     private setNodeDataValue(
         rowNode: IRowNode,
-        column: Column,
+        column: Column<any>,
         newValue: any,
         cellCtrl: CellCtrl | null | undefined,
         originalSource: string = 'edit'
@@ -1014,7 +1014,7 @@ export class EditService extends BeanStub implements NamedBean {
      * Gets the pending edit value for a cell (used by ValueService).
      * Returns undefined to fallback to committed data/valueGetter.
      */
-    public getPendingEditValue(rowNode: IRowNode, column: Column, from: CellValueResolveFrom): any {
+    public getPendingEditValue(rowNode: IRowNode, column: Column<any>, from: CellValueResolveFrom): any {
         if (from === 'data') {
             return undefined; // 'data' mode: always use committed data, never edit values
         }
@@ -1587,7 +1587,10 @@ export class EditService extends BeanStub implements NamedBean {
     }
 }
 
-function getRowColumnsFromMap(edits: EditMap): { rowNodes: IRowNode[] | undefined; columns: Column[] | undefined } {
+function getRowColumnsFromMap(edits: EditMap): {
+    rowNodes: IRowNode[] | undefined;
+    columns: Column<any>[] | undefined;
+} {
     return {
         rowNodes: edits ? Array.from(edits.keys()) : undefined,
         columns: edits

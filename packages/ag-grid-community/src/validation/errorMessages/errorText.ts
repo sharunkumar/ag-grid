@@ -192,7 +192,7 @@ export const AG_GRID_ERRORS = {
     10: ({ eventType }: { eventType: RowNodeEventType }) =>
         `As of v33, the '${eventType}' event is deprecated. Use the global 'modelUpdated' event to determine when row children have changed.`,
     11: () => 'No gridOptions provided to createGrid' as const,
-    12: ({ colKey }: { colKey: string | Column }) => ['column ', colKey, ' not found'] as const,
+    12: ({ colKey }: { colKey: string | Column<any> }) => ['column ', colKey, ' not found'] as const,
     13: () =>
         'Could not find rowIndex, this means tasks are being executed on a rowNode that has been removed from the grid.' as const,
     14: ({ groupPrefix }: { groupPrefix: string }) =>
@@ -245,7 +245,7 @@ export const AG_GRID_ERRORS = {
     34: ({ key }: { key: string }) =>
         `the column type '${key}' is a default column type and cannot be overridden.` as const,
     35: () =>
-        `Column type definitions 'columnTypes' with a 'type' attribute are not supported because a column type cannot refer to another column type. Only column definitions 'columnDefs' can use the 'type' attribute to refer to a column type.` as const,
+        `Column<any> type definitions 'columnTypes' with a 'type' attribute are not supported because a column type cannot refer to another column type. Only column definitions 'columnDefs' can use the 'type' attribute to refer to a column type.` as const,
     36: ({ t }: { t: string }) => "colDef.type '" + t + "' does not correspond to defined gridOptions.columnTypes",
     37: () => `Changing the column pinning status is not allowed with domLayout='print'` as const,
     38: ({ iconName }: { iconName: string }) =>
@@ -295,7 +295,7 @@ export const AG_GRID_ERRORS = {
     65: () => 'filter missing setModel method, which is needed for setFilterModel' as const,
     66: () => 'filter API missing getModel method, which is needed for getFilterModel' as const,
     67: () => 'Filter is missing isFilterActive() method' as const,
-    68: () => 'Column Filter API methods have been disabled as Advanced Filters are enabled.' as const,
+    68: () => 'Column<any> Filter API methods have been disabled as Advanced Filters are enabled.' as const,
     69: ({ guiFromFilter }: { guiFromFilter: any }) =>
         `getGui method from filter returned ${guiFromFilter}; it should be a DOM element.` as const,
     70: ({ newFilter }: { newFilter: any }) =>
@@ -537,7 +537,7 @@ export const AG_GRID_ERRORS = {
         'agRichSelectCellEditor cannot have `multiSelect` and `allowTyping` set to `true`. AllowTyping has been turned off.' as const,
     182: () =>
         'you cannot mix groupDisplayType = "multipleColumns" with treeData, only one column can be used to display groups when doing tree data' as const,
-    183: () => 'Group Column Filter only works on group columns. Please use a different filter.' as const,
+    183: () => 'Group Column<any> Filter only works on group columns. Please use a different filter.' as const,
     184: ({ parentGroupData, childNodeData }: { parentGroupData: any; childNodeData: any }) =>
         [`duplicate group keys for row data, keys should be unique`, [parentGroupData, childNodeData]] as const,
     185: ({ data }: { data: any }) => [`getDataPath() should not return an empty path`, [data]] as const,
@@ -639,13 +639,13 @@ export const AG_GRID_ERRORS = {
     233: ({ methodName }: { methodName: string }) =>
         `Framework component is missing the method ${methodName}()` as const,
     234: () =>
-        'Group Column Filter does not work with the colDef property "field". This property will be ignored.' as const,
+        'Group Column<any> Filter does not work with the colDef property "field". This property will be ignored.' as const,
     235: () =>
-        'Group Column Filter does not work with the colDef property "filterValueGetter". This property will be ignored.' as const,
+        'Group Column<any> Filter does not work with the colDef property "filterValueGetter". This property will be ignored.' as const,
     236: () =>
-        'Group Column Filter does not work with the colDef property "filterParams". This property will be ignored.' as const,
+        'Group Column<any> Filter does not work with the colDef property "filterParams". This property will be ignored.' as const,
     237: () =>
-        'Group Column Filter does not work with Tree Data enabled. Please disable Tree Data, or use a different filter.' as const,
+        'Group Column<any> Filter does not work with Tree Data enabled. Please disable Tree Data, or use a different filter.' as const,
     238: () => 'setRowCount can only accept a positive row count.' as const,
     239: () =>
         'Theming API and CSS File Themes are both used in the same page. In v33 we released the Theming API as the new default method of styling the grid. See the migration docs https://www.ag-grid.com/react-data-grid/theming-migration/. Because no value was provided to the `theme` grid option it defaulted to themeQuartz. But the file (ag-grid.css) is also included and will cause styling issues. Either pass the string "legacy" to the theme grid option to use v32 style themes, or remove ag-grid.css from the page to use Theming API.' as const,

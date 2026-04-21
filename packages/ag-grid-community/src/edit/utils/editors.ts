@@ -117,7 +117,7 @@ export function _sourceAndPendingDiffer({
 export function _filterChangedEdits(edits: EditMap): EditMap {
     const result: EditMap = new Map();
     for (const [rowNode, editRow] of edits) {
-        const filtered = new Map<Column, EditValue>();
+        const filtered = new Map<Column<any>, EditValue>();
         for (const [column, editValue] of editRow) {
             if (_sourceAndPendingDiffer(editValue)) {
                 filtered.set(column, editValue);
@@ -438,7 +438,7 @@ export function _syncFromEditor(
  * Converts formula to shorthand or longhand depending on context
  * @param forEditing if true, converts to shorthand (A1), if false converts to longhand (REF(COL(id),ROW(id))) for storage
  */
-function getNormalisedFormula(beans: BeanCollection, value: any, forEditing: boolean, column: Column): any {
+function getNormalisedFormula(beans: BeanCollection, value: any, forEditing: boolean, column: Column<any>): any {
     const { formula } = beans;
     if (column.isAllowFormula() && formula?.isFormula(value)) {
         return formula?.normaliseFormula(value, forEditing) ?? value;

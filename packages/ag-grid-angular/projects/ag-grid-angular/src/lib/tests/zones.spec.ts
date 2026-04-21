@@ -152,7 +152,7 @@ describe('GridWrapperComponent', () => {
 
             setTimeout(() => {
                 assertZoneStatuses(component.zoneStatus, {
-                    'Column -> eventListener': true,
+                    'Column<any> -> eventListener': true,
                     'RowNode -> eventListener': true,
                     'api -> eventListener': true,
                     'api -> globalListener': true,
@@ -245,7 +245,7 @@ describe('GridWrapperComponent', () => {
 
             setTimeout(() => {
                 assertZoneStatuses(component.zoneStatus, {
-                    'Column -> eventListener': false, // Will stay outside
+                    'Column<any> -> eventListener': false, // Will stay outside
                     'RowNode -> eventListener': false, // Will stay outside
                     'api -> eventListener': false, // Will stay outside
                     'api -> globalListener': false, // Will stay outside
@@ -298,7 +298,7 @@ function setupTestListeners(zoneStatus: any, api: GridApi<any>) {
     });
 
     api.getColumn('make')?.addEventListener('visibleChanged', (_event: any) => {
-        updateCount(zoneStatus, 'Column -> eventListener', NgZone.isInAngularZone());
+        updateCount(zoneStatus, 'Column<any> -> eventListener', NgZone.isInAngularZone());
     });
 
     api.getRowNode('Toyota')?.setData({ make: 'Toyota', model: 'Celica', price: 40000 });

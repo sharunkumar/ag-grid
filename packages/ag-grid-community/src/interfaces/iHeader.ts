@@ -5,7 +5,7 @@ import type { AgGridCommon } from './iCommon';
 
 export interface IHeaderParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** The column the header is for. */
-    column: Column;
+    column: Column<any>;
     /**
      * The name to display for the column.
      * If the column is using a headerValueGetter, the displayName will take this into account.

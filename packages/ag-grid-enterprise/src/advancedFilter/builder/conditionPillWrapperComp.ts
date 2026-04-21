@@ -85,7 +85,7 @@ export class ConditionPillWrapperComp extends Component<AdvancedFilterBuilderEve
             getEditorParams: () => ({ values: this.advFilterExpSvc.getColumnAutocompleteEntries() }),
             update: (key) => this.setColumnKey(key),
             pickerAriaLabelKey: 'ariaLabelAdvancedFilterBuilderColumnSelectField',
-            pickerAriaLabelValue: 'Advanced Filter Builder Column Select Field',
+            pickerAriaLabelValue: 'Advanced Filter Builder Column<any> Select Field',
             ariaLabel: this.advFilterExpSvc.translate('ariaAdvancedFilterBuilderColumn'),
         });
         this.getGui().appendChild(this.eColumnPill.getGui());

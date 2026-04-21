@@ -538,7 +538,7 @@ export class ColumnFilterService
         return true;
     }
 
-    public getHandlerParams(column: Column): FilterHandlerBaseParams | undefined {
+    public getHandlerParams(column: Column<any>): FilterHandlerBaseParams | undefined {
         const wrapper = this.allColumnFilters.get(column.getColId());
         return wrapper?.isHandler ? wrapper.handlerParams : undefined;
     }
@@ -1714,7 +1714,7 @@ export class ColumnFilterService
         });
     }
 
-    public filterUiChanged(column: Column, additionalEventAttributes?: any): void {
+    public filterUiChanged(column: Column<any>, additionalEventAttributes?: any): void {
         if (this.gos.get('enableFilterHandlers')) {
             this.eventSvc.dispatchEvent({
                 type: 'filterUiChanged',
@@ -1724,7 +1724,7 @@ export class ColumnFilterService
         }
     }
 
-    private floatingFilterUiChanged(column: Column, additionalEventAttributes?: any): void {
+    private floatingFilterUiChanged(column: Column<any>, additionalEventAttributes?: any): void {
         if (this.gos.get('enableFilterHandlers')) {
             this.eventSvc.dispatchEvent({
                 type: 'floatingFilterUiChanged',
@@ -1850,7 +1850,7 @@ export class ColumnFilterService
         });
     }
 
-    public shouldKeepStateOnDetach(column: Column, lastContainerType?: ContainerType): boolean {
+    public shouldKeepStateOnDetach(column: Column<any>, lastContainerType?: ContainerType): boolean {
         if (lastContainerType === 'newFiltersToolPanel') {
             // don't reset for new filters tool panel
             return true;

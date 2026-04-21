@@ -13,10 +13,10 @@ export interface DragItem<TValue = any> {
     rowNodes?: IRowNode[];
 
     /** When dragging columns, this contains the columns being dragged */
-    columns?: Column[];
+    columns?: Column<any>[];
 
     /** When dragging column groups, this contains the columns in the current group split. */
-    columnsInSplit?: Column[];
+    columnsInSplit?: Column<any>[];
 
     /** When dragging columns, this contains the visible state of the columns */
     visibleState?: { [key: string]: boolean };

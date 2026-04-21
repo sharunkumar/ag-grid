@@ -20,7 +20,7 @@ type ResolveRowControllerType = {
 type ResolveCellControllerType = {
     colId?: string | null;
     columnId?: string | null;
-    column?: string | Column | AgColumn | null;
+    column?: string | Column<any> | AgColumn | null;
     cellCtrl?: CellCtrl | null;
     rowPinned?: RowPinnedType;
 };
@@ -130,7 +130,7 @@ export function _addStopEditingWhenGridLosesFocus(
     }
 }
 
-export function _getColId(column?: Column | string | null): string | undefined {
+export function _getColId(column?: Column<any> | string | null): string | undefined {
     if (!column) {
         return undefined;
     }

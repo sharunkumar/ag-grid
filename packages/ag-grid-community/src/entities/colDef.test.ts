@@ -22,7 +22,7 @@ describe('ColDef<any, any>.field Types', () => {
         ];
     });
 
-    test('Simple TData with Column Group', () => {
+    test('Simple TData with Column<any> Group', () => {
         interface RowData {
             a: number;
             b: string;

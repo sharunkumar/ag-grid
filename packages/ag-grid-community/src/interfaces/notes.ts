@@ -34,7 +34,7 @@ export type SetNoteParams = GetNoteParams & {
 };
 
 export interface NotesDataSourceNoteParams {
-    column: Column;
+    column: Column<any>;
     rowNode: IRowNode;
     location?: 'cell';
 }
@@ -93,7 +93,7 @@ export interface FullWidthNotesDataSource extends BaseNotesDataSource {
 
 export interface RefreshNotesParams {
     rowNodes?: IRowNode[];
-    columns?: (string | Column)[];
+    columns?: (string | Column<any>)[];
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */

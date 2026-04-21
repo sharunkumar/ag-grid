@@ -59,7 +59,7 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
         return getDefaultIndex(adjustedIndex);
     }
 
-    public doesCellShowTotalPrefix(node: IRowNode, col?: Column): boolean {
+    public doesCellShowTotalPrefix(node: IRowNode, col?: Column<any>): boolean {
         if (!node.footer || !col?.getColDef().showRowGroup) {
             return false;
         }
@@ -78,7 +78,7 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
         return !!node.rowGroupColumn && col?.isRowGroupDisplayed(node.rowGroupColumn.getId());
     }
 
-    public applyTotalPrefix(value: any, formattedValue: string | null, node: IRowNode, column: Column): string {
+    public applyTotalPrefix(value: any, formattedValue: string | null, node: IRowNode, column: Column<any>): string {
         const totalValueGetter = column.getColDef().cellRendererParams?.totalValueGetter;
         if (totalValueGetter) {
             const valueGetterParams = _addGridCommonParams(this.gos, { column, node, value, formattedValue });
