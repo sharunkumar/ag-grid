@@ -1009,7 +1009,7 @@ export interface CheckboxSelectionCallbackParams<TData = any, TValue = any, TCon
 export type CheckboxSelectionCallback<TData = any, TValue = any, TContext = any> = (
     params: CheckboxSelectionCallbackParams<TData, TValue, TContext>
 ) => boolean;
-export interface RowDragCallbackParams<TData = any, TValue = any, TContext = any>
+export interface RowDragCallbackParams<TData, TValue, TContext>
     extends ColumnFunctionCallbackParams<TData, TValue, TContext> {}
 export type RowDragCallback<TData = any, TValue = any, TContext = any> = (
     params: RowDragCallbackParams<TData, TValue, TContext>
