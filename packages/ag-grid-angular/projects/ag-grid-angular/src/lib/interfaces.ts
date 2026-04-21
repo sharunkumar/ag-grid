@@ -103,7 +103,7 @@ export interface INoMatchingRowsOverlayAngularComp
     extends AgFrameworkComponent<INoMatchingRowsOverlayParams>,
         INoMatchingRowsOverlay {}
 
-export interface IStatusPanelAngularComp extends AgFrameworkComponent<IStatusPanelParams>, IStatusPanel {}
+export interface IStatusPanelAngularComp extends AgFrameworkComponent<IStatusPanelParams<any, any>>, IStatusPanel {}
 
 export interface IToolPanelAngularComp extends AgFrameworkComponent<IToolPanelParams>, IToolPanel {}
 
