@@ -27,7 +27,7 @@ jobs:
     setup:
         name: Install
         runs-on: ubuntu-24.04
-        if: github.event.pull_request.draft == false
+        if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
         steps:
             - uses: actions/checkout@v4
               with:
@@ -54,7 +54,7 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
 
     format:
         name: Format
@@ -79,7 +79,7 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
                   fail-on-cache-miss: true
             - name: nx format:check
               run: yarn nx format:check --all
@@ -107,10 +107,10 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
                   fail-on-cache-miss: true
             - name: nx lint
-              run: yarn nx lint
+              run: yarn nx run-many -t lint -p ag-grid-community ag-grid-enterprise ag-grid-angular ag-grid-vue3 ag-grid-react
 
     typecheck:
         name: Typecheck
@@ -135,10 +135,10 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
                   fail-on-cache-miss: true
             - name: nx build:types
-              run: yarn nx run-many -t build:types
+              run: yarn nx run-many -t build:types -p ag-grid-community ag-grid-enterprise ag-grid-react
 
     build:
         name: Build
@@ -163,10 +163,10 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
                   fail-on-cache-miss: true
             - name: nx build
-              run: yarn nx run-many -t build -p ag-grid-community ag-grid-enterprise
+              run: yarn nx run-many -t build -p ag-grid-community ag-grid-enterprise ag-grid-angular ag-grid-vue3 ag-grid-react
 
     unit-tests:
         name: Unit Tests
@@ -191,7 +191,7 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
                   fail-on-cache-miss: true
             - name: nx test
               run: yarn nx run-many -t test -p ag-grid-community ag-grid-enterprise
@@ -219,7 +219,7 @@ jobs:
                       external/*/node_modules
                       .nx/cache
                       .nx/workspace-data
-                  key: fork-ci-ws-${{ runner.os }}-${{ github.sha }}
+                  key: fork-ci-ws-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
                   fail-on-cache-miss: true
             - name: behave.sh
               run: ./behave.sh
