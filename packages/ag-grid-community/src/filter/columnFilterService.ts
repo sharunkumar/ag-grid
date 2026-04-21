@@ -637,7 +637,7 @@ export class ColumnFilterService
 
     public createGetValue(
         filterColumn: AgColumn,
-        filterValueGetterOverride?: string | ValueGetterFunc
+        filterValueGetterOverride?: string | ValueGetterFunc<any, any, any>
     ): IFilterParams['getValue'] {
         const { filterValueSvc, colModel } = this.beans;
         return (rowNode, column) => {
@@ -1607,7 +1607,7 @@ export class ColumnFilterService
             return;
         }
         let filterParams: any;
-        let filterValueGetter: string | ValueGetterFunc | undefined;
+        let filterValueGetter: string | ValueGetterFunc<any, any, any> | undefined;
         const beans = this.beans;
         const { filterParams: colDefFilterParams, filterValueGetter: colDefFilterValueGetter } = colDef;
         if (filter === 'agMultiColumnFilter') {

@@ -12,10 +12,10 @@ export class MultiFilterService extends BeanStub implements IMultiFilterService 
 
     public getParamsForDataType(
         existingFilterParams: IMultiFilterParams | undefined,
-        existingFilterValueGetter: string | ValueGetterFunc | undefined,
+        existingFilterValueGetter: string | ValueGetterFunc<any, any, any> | undefined,
         dataTypeDefinition: CoreDataTypeDefinition,
         formatValue: DataTypeFormatValueFunc
-    ): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc<any, any> } {
+    ): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc<any, any, any> } {
         let filters = existingFilterParams?.filters;
         const beans = this.beans;
         if (!filters) {

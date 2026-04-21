@@ -14,7 +14,7 @@ export class FilterValueService extends BeanStub implements NamedBean {
     public getValue(
         column: AgColumn,
         rowNode?: IRowNode<any> | null,
-        filterValueGetterOverride?: string | ValueGetterFunc
+        filterValueGetterOverride?: string | ValueGetterFunc<any, any, any>
     ) {
         if (!rowNode) {
             return;

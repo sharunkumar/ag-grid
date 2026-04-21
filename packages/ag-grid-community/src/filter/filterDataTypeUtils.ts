@@ -213,14 +213,14 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
 export function _getFilterParamsForDataType(
     filter: string,
     existingFilterParams: any,
-    existingFilterValueGetter: string | ValueGetterFunc | undefined,
+    existingFilterValueGetter: string | ValueGetterFunc<any, any, any> | undefined,
     dataTypeDefinition: CoreDataTypeDefinition,
     formatValue: DataTypeFormatValueFunc,
     beans: BeanCollection,
     translate: LocaleTextFunc
-): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc } {
+): { filterParams?: any; filterValueGetter?: string | ValueGetterFunc<any, any, any> } {
     let filterParams: any = existingFilterParams;
-    let filterValueGetter: string | ValueGetterFunc | undefined = existingFilterValueGetter;
+    let filterValueGetter: string | ValueGetterFunc<any, any, any> | undefined = existingFilterValueGetter;
     const usingSetFilter = filter === 'agSetColumnFilter';
     if (!filterValueGetter && dataTypeDefinition.baseDataType === 'object' && !usingSetFilter) {
         filterValueGetter = ({ column, node }: ValueGetterParams<any, any, any>) =>

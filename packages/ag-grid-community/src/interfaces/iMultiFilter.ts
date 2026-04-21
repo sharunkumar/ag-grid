@@ -45,7 +45,7 @@ export interface IMultiFilterDef extends IFilterDef {
      * Allows for different values to be used for child filters
      * instead of using `colDef.filterValueGetter`.
      */
-    filterValueGetter?: string | ValueGetterFunc;
+    filterValueGetter?: string | ValueGetterFunc<any, any, any>;
 }
 
 /**

@@ -26,7 +26,7 @@ export interface SelectableFilterDef {
      * Allows for different values to be used for different filters
      * instead of using `colDef.filterValueGetter`.
      */
-    filterValueGetter?: string | ValueGetterFunc;
+    filterValueGetter?: string | ValueGetterFunc<any, any, any>;
 }
 
 export interface SelectableFilterParams {
@@ -89,7 +89,7 @@ export interface IFilterPanelService extends IEventEmitter<'filterPanelStateChan
 }
 
 export interface ISelectableFilterService extends IEventEmitter<'selectedFilterChanged'> {
-    getFilterValueGetter(colId: string): string | ValueGetterFunc | undefined;
+    getFilterValueGetter(colId: string): string | ValueGetterFunc<any, any, any> | undefined;
     isSelectable(filterDef: IFilterDef): boolean;
     getFilterDef(column: AgColumn, filterDef: IFilterDef): IFilterDef;
     getDefs(

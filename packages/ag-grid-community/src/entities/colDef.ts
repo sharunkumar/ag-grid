@@ -319,7 +319,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      */
     allowFormula?: boolean;
     /** Function or expression. Gets the value from your data for display. */
-    valueGetter?: string | ValueGetterFunc<TData, TValue>;
+    valueGetter?: string | ValueGetterFunc<TData, TValue, any>;
     /** A function or expression to format a value, should return a string. */
     valueFormatter?: string | ValueFormatterFunc<TData, TValue>;
     /** Provided a reference data map to be used to map column values to their respective value from the map. */
@@ -544,7 +544,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
     /**
      * Function or expression. Gets the value for filtering purposes.
      */
-    filterValueGetter?: string | ValueGetterFunc<TData>;
+    filterValueGetter?: string | ValueGetterFunc<TData, any, any>;
     /**
      * Whether to display a floating filter for this column.
      * @default false
@@ -1147,7 +1147,7 @@ export interface ValueGetterParams<TData, TValue, TContext>
     /** A utility method for getting other column values */
     getValue: (field: string) => any;
 }
-export type ValueGetterFunc<TData = any, TValue = any, TContext = any> = (
+export type ValueGetterFunc<TData, TValue, TContext> = (
     params: ValueGetterParams<TData, TValue, TContext>
 ) => TValue | null | undefined;
 export type HeaderLocation =
