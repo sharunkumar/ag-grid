@@ -39,10 +39,7 @@ jobs:
                   cache: yarn
 
             - name: yarn install
-              run: yarn install --frozen-lockfile --ignore-scripts
-
-            - name: yarn postinstall
-              run: yarn postinstall
+              run: yarn install --frozen-lockfile
 
             - name: Cache workspace
               uses: actions/cache/save@v4
