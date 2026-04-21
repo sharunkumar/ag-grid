@@ -1004,7 +1004,7 @@ export type ColTypeDefs<TData = any, TValue = any> = { [key: string]: ColTypeDef
 /** Configuration options for reusable columns types in AG Grid. This includes all possible options from `ColDef` except the `type` and `cellDataType` fields. */
 export type ColTypeDef<TData = any, TValue = any> = Omit<ColDef<TData, TValue>, 'type' | 'cellDataType'>;
 
-export interface CheckboxSelectionCallbackParams<TData = any, TValue = any, TContext = any>
+export interface CheckboxSelectionCallbackParams<TData, TValue, TContext>
     extends ColumnFunctionCallbackParams<TData, TValue, TContext> {}
 export type CheckboxSelectionCallback<TData = any, TValue = any, TContext = any> = (
     params: CheckboxSelectionCallbackParams<TData, TValue, TContext>
