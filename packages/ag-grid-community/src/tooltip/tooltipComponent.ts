@@ -23,7 +23,7 @@ export type TooltipLocation =
     | 'valueColumnsList'
     | 'UNKNOWN';
 
-export interface ITooltipParams<TData = any, TValue = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface ITooltipParams<TData, TValue, TContext> extends AgGridCommon<TData, TContext> {
     /** What part of the application is showing the tooltip, e.g. 'cell', 'header', 'menuItem' etc */
     location: TooltipLocation;
     /** The value to be rendered by the tooltip. */
@@ -44,4 +44,4 @@ export interface ITooltipParams<TData = any, TValue = any, TContext = any> exten
     hideTooltipCallback?: () => void;
 }
 
-export interface ITooltipComp extends IComponent<ITooltipParams> {}
+export interface ITooltipComp extends IComponent<ITooltipParams<any, any, any>> {}

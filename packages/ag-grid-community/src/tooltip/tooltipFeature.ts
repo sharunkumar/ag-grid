@@ -45,7 +45,7 @@ export type TooltipFeature = AgTooltipFeature<
     AgEventTypeParams,
     AgGridCommon<any, any>,
     GridOptionsService,
-    ITooltipParams,
+    ITooltipParams<any, any, any>,
     ITooltipCtrlParams,
     TooltipLocation
 >;

@@ -272,7 +272,7 @@ export function _getDateCompDetails(
 
 export function _getTooltipCompDetails(
     userCompFactory: UserComponentFactory,
-    params: ITooltipParams
+    params: ITooltipParams<any, any, any>
 ): UserCompDetails<ITooltipComp> | undefined {
     return userCompFactory.getCompDetails(params.colDef!, TooltipComponent, 'agTooltipComponent', params, true);
 }

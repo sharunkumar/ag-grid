@@ -107,6 +107,6 @@ export interface IStatusPanelAngularComp extends AgFrameworkComponent<IStatusPan
 
 export interface IToolPanelAngularComp extends AgFrameworkComponent<IToolPanelParams>, IToolPanel {}
 
-export interface ITooltipAngularComp extends AgFrameworkComponent<ITooltipParams> {}
+export interface ITooltipAngularComp extends AgFrameworkComponent<ITooltipParams<any, any, any>> {}
 
 export interface IMenuItemAngularComp extends AgFrameworkComponent<IMenuItemParams>, IMenuItem {}
