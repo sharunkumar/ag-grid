@@ -79,7 +79,7 @@ export class GridWrapperComponent {
     ];
 
     gridOptions: GridOptions = {
-        getRowClass: (_params: RowClassParams) => {
+        getRowClass: (_params: RowClassParams<any, any>) => {
             // Callbacks should run outside of Angular Zone as they are just for configuring the grid
             // and they get called a lot in some cases.
             updateCount(this.zoneStatus, 'gridOptions -> callback', NgZone.isInAngularZone());

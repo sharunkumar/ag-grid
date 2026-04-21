@@ -6,7 +6,7 @@ export function processClassRules(
     expressionSvc: ExpressionService | undefined,
     previousClassRules: { [cssClassName: string]: ((...args: any[]) => any) | string } | undefined,
     classRules: { [cssClassName: string]: ((...args: any[]) => any) | string } | undefined,
-    params: RowClassParams | CellClassParams,
+    params: RowClassParams<any, any> | CellClassParams,
     onApplicableClass: (className: string) => void,
     onNotApplicableClass?: (className: string) => void
 ) {

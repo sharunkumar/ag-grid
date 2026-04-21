@@ -2984,7 +2984,7 @@ export type GetRowStyle<TData = any, TContext = any> = (
 export type GetRowClass<TData = any, TContext = any> = (
     params: RowClassParams<TData, TContext>
 ) => string | string[] | undefined;
-export interface RowClassParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface RowClassParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /**
      * The data associated with this row from rowData. Data is `undefined` for row groups.
      */
