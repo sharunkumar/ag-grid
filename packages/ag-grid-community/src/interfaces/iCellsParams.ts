@@ -15,7 +15,7 @@ interface RefreshParams<TData = any> extends GetCellsParams<TData> {
     suppressFlash?: boolean;
 }
 
-export interface RefreshCellsParams<TData = any> extends RefreshParams<TData> {}
+export interface RefreshCellsParams<TData> extends RefreshParams<TData> {}
 
 export interface RefreshRowsParams<TData = any> extends RefreshParams<TData> {}
 

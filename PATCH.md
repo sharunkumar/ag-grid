@@ -51,6 +51,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
     -   `IHeaderParams<TData, TContext>`
     -   `GetContextMenuItemsParams<TData, TContext>`
     -   `ValueGetterFunc<TData, TValue, TContext>`
+    -   `RefreshCellsParams<TData>`
     -   Internal usages updated to pass explicit generics
         -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
         -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments

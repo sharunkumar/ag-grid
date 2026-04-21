@@ -789,13 +789,13 @@ export class EditService extends BeanStub implements NamedBean {
         });
     }
 
-    private bulkRefreshCell(position: Required<EditPosition>, params?: RefreshCellsParams): void {
+    private bulkRefreshCell(position: Required<EditPosition>, params?: RefreshCellsParams<any>): void {
         if (_isClientSideRowModel(this.gos, this.beans.rowModel)) {
             this.refCell(position, this.model.getEdit(position), params);
         }
     }
 
-    private bulkRefreshMap(editMap: EditMap, params?: RefreshCellsParams): void {
+    private bulkRefreshMap(editMap: EditMap, params?: RefreshCellsParams<any>): void {
         if (_isClientSideRowModel(this.gos, this.beans.rowModel)) {
             editMap.forEach((editRow, rowNode) => {
                 for (const column of editRow.keys()) {
@@ -808,7 +808,7 @@ export class EditService extends BeanStub implements NamedBean {
     private refCell(
         { rowNode, column }: Required<EditPosition>,
         edit?: EditValue,
-        params: RefreshCellsParams = {}
+        params: RefreshCellsParams<any> = {}
     ): void {
         const { beans, gos } = this;
 

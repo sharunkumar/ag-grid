@@ -863,7 +863,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
         }
     }
 
-    public refreshCells({ rowNodes, columns, force, suppressFlash }: RefreshCellsParams = {}): void {
+    public refreshCells({ rowNodes, columns, force, suppressFlash }: RefreshCellsParams<any> = {}): void {
         const refreshCellParams = {
             force,
             newData: false,

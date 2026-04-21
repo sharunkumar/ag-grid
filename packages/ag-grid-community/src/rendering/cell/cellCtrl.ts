@@ -583,7 +583,7 @@ export class CellCtrl extends BeanStub {
         }
     }
 
-    public refreshOrDestroyCell(params?: RefreshCellsParams): void {
+    public refreshOrDestroyCell(params?: RefreshCellsParams<any>): void {
         if (this.refreshShouldDestroy()) {
             this.rowCtrl?.recreateCell(this);
         } else {
@@ -606,7 +606,7 @@ export class CellCtrl extends BeanStub {
     // + rowCtrl: event dataChanged {suppressFlash: !update, newData: !update}
     // + rowCtrl: api refreshCells() {animate: true/false}
     // + rowRenderer: api softRefreshView() {}
-    public refreshCell(params?: RefreshCellsParams & { newData?: boolean }): void {
+    public refreshCell(params?: RefreshCellsParams<any> & { newData?: boolean }): void {
         const {
             editStyleFeature,
             customStyleFeature,
