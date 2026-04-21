@@ -21,7 +21,7 @@ import { BeansContext } from '../beansContext';
 import { showJsComp } from '../jsComp';
 import { CssClasses } from '../utils';
 
-const GroupCellRenderer = forwardRef((props: GroupCellRendererParams, ref) => {
+const GroupCellRenderer = forwardRef((props: GroupCellRendererParams<any, any>, ref) => {
     const { registry, context } = useContext(BeansContext);
 
     const eGui = useRef<HTMLElement | null>(null);

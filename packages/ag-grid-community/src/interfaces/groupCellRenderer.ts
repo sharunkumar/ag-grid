@@ -58,7 +58,7 @@ export interface IGroupCellRendererFullRowParams {
  * Parameters provided by the grid to the `init` method of a `agGroupCellRenderer`.
  * Do not use in `colDef.cellRendererParams` - see `IGroupCellRendererParams` instead.
  */
-export type GroupCellRendererParams<TData = any, TValue = any> = IGroupCellRendererParams<any, any> &
+export type GroupCellRendererParams<TData, TValue> = IGroupCellRendererParams<any, any> &
     ICellRendererParams<TData, TValue, any> &
     IGroupCellRendererFullRowParams;
 
