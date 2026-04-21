@@ -1192,7 +1192,7 @@ export interface NewValueParams<TData = any, TValue = any, TContext = any>
     source: string | undefined;
 }
 
-export interface ValueSetterParams<TData = any, TValue = any, TContext = any>
+export interface ValueSetterParams<TData, TValue, TContext>
     extends ChangedValueParams<TData, TValue | null | undefined, TValue | null | undefined, TContext> {}
 export type ValueSetterFunc<TData = any, TValue = any, TContext = any> = (
     params: ValueSetterParams<TData, TValue, TContext>

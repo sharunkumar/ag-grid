@@ -441,7 +441,7 @@ export class ValueService extends BeanStub implements NamedBean {
         // Get old value from stored data, ignoring any pending edit state
         const oldValue = this.getValue(column, rowNode, 'data');
 
-        const params: ValueSetterParams = _addGridCommonParams(this.gos, {
+        const params: ValueSetterParams<any, any, any> = _addGridCommonParams(this.gos, {
             node: rowNode,
             data: rowNode.data,
             oldValue,
@@ -548,7 +548,7 @@ export class ValueService extends BeanStub implements NamedBean {
     private finishValueChange(
         rowNode: IRowNode<any>,
         column: AgColumn,
-        params: ValueSetterParams,
+        params: ValueSetterParams<any, any, any>,
         eventSource?: string,
         savedValueOverride?: any
     ): boolean {
@@ -602,7 +602,7 @@ export class ValueService extends BeanStub implements NamedBean {
         column: AgColumn;
         rowNode: IRowNode<any>;
         newValue: any;
-        setterParams: ValueSetterParams;
+        setterParams: ValueSetterParams<any, any, any>;
         eventSource?: string;
     }): boolean | null {
         const { column, rowNode, newValue, eventSource, setterParams } = args;
@@ -627,7 +627,7 @@ export class ValueService extends BeanStub implements NamedBean {
             const computedValue = formulaSvc?.resolveValue(column, rowNode as RowNode);
             const colDef = column.colDef;
             if (_exists(colDef.valueSetter) || !_missing(colDef.field)) {
-                const computedParams: ValueSetterParams = { ...setterParams, newValue: computedValue };
+                const computedParams: ValueSetterParams<any, any, any> = { ...setterParams, newValue: computedValue };
                 this.computeValueChange({
                     column,
                     rowNode,
@@ -650,8 +650,8 @@ export class ValueService extends BeanStub implements NamedBean {
     }
 
     private computeValueChange(params: {
-        valueSetter: ValueSetterParams['colDef']['valueSetter'];
-        params: ValueSetterParams;
+        valueSetter: ValueSetterParams<any, any, any>['colDef']['valueSetter'];
+        params: ValueSetterParams<any, any, any>;
         rowData: any;
         field: string | undefined;
         rowNode: IRowNode<any>;
@@ -672,7 +672,7 @@ export class ValueService extends BeanStub implements NamedBean {
 
     private dispatchCellValueChangedEvent(
         rowNode: IRowNode<any>,
-        params: ValueSetterParams,
+        params: ValueSetterParams<any, any, any>,
         value: any,
         source?: string
     ): void {

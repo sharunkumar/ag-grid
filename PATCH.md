@@ -35,6 +35,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
     -   `ICellEditorParams<TData, TValue, TContext>`
     -   `SetFilterValuesFuncParams<TData, V>`
     -   `IRowNode<TData>`
+    -   `ValueSetterParams<TData, TValue, TContext>`
     -   Internal usages updated to pass explicit generics
         -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
         -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments
