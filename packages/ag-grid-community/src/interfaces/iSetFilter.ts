@@ -133,7 +133,7 @@ export type SetFilterParams<TData = any, V = string> = ISetFilterParams<TData, V
  * @param TData type of data row
  * @param V type of value in the Set Filter
  */
-export interface ISetFilterParams<TData = any, V = string> extends IProvidedFilterParams {
+export interface ISetFilterParams<TData, V = string> extends IProvidedFilterParams {
     /**
      * The values to display in the Filter List. If this is not set, the filter will take its
      * values from what is loaded in the table.

@@ -196,7 +196,7 @@ const setFilterParamsForEachDataType: FilterParamsDefMap = {
     },
     dateTimeString(args) {
         const convertToDate = (args.dataTypeDefinition as DateStringDataTypeDefinition).dateParser!;
-        const params = setFilterParamsForEachDataType.dateString(args) as ISetFilterParams;
+        const params = setFilterParamsForEachDataType.dateString(args) as ISetFilterParams<any>;
         params.treeListPathGetter = (value: string | null) => _getDateParts(convertToDate(value ?? undefined));
         return params;
     },
