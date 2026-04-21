@@ -2962,7 +2962,7 @@ export type IsApplyServerSideTransaction<TData = any, TContext = any> = (
 ) => boolean;
 export type GetServerSideGroupKey = (dataItem: any) => string;
 
-export type IsRowMaster<TData = any> = (dataItem: TData) => boolean;
+export type IsRowMaster<TData> = (dataItem: TData) => boolean;
 
 export type IsRowSelectable<TData> = (node: IRowNode<TData>) => boolean;
 
