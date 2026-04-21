@@ -1063,8 +1063,7 @@ export interface SuppressNoteActionsCallbackParams<TData = any, TValue = any, TC
 export type SuppressNoteActionsCallback<TData = any, TValue = any, TContext = any> = (
     params: SuppressNoteActionsCallbackParams<TData, TValue, TContext>
 ) => boolean;
-export interface HeaderCheckboxSelectionCallbackParams<TData = any, TValue = any, TContext = any>
-    extends AgGridCommon<TData, TContext> {
+export interface HeaderCheckboxSelectionCallbackParams<TData, TValue, TContext> extends AgGridCommon<TData, TContext> {
     column: Column<TValue>;
     colDef: ColDef<TData, TValue>;
 }
