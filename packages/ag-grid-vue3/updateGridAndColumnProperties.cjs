@@ -70,10 +70,9 @@ function generatePropsAndEmits({ typeLookup, eventTypeLookup, docLookup }) {
         const inputType = getSafeType(typeName);
         let line = addDocLine(docLookup, property, '');
         let inputTypeWithGenerics = inputType;
-        if (property === 'columnDefs' || property === 'defaultColDef') {
-            // Use the Generic hint types for improved type checking by updating the columnDefs property
-            inputTypeWithGenerics = inputType.replace('<TData>', '');
-        }
+        // Previously stripped a `<TData>` suffix on these props back when ColDef/ColGroupDef
+        // had `= any` defaults. After the strict-types patch both generics are required,
+        // so leave the input type alone (TData is in scope on the Vue component).
 
         line += `    ${property}?: ${inputTypeWithGenerics},${EOL}`;
         const order = typeKeysOrder.findIndex((p) => p === property);

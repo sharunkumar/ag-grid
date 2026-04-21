@@ -383,10 +383,10 @@ export interface Props<TData> {
     suppressCutToClipboard?: boolean,
     /** Array of Column / Column Group definitions.
          */
-    columnDefs?: (ColDef | ColGroupDef<TData>)[] | null,
+    columnDefs?: (ColDef<TData, any> | ColGroupDef<TData>)[] | null,
     /** A default column definition. Items defined in the actual column definitions get precedence.
          */
-    defaultColDef?: ColDef,
+    defaultColDef?: ColDef<TData, any>,
     /** A default column group definition. All column group definitions will use these properties. Items defined in the actual column group definition get precedence.
          * @initial
          */
@@ -1918,11 +1918,11 @@ export interface Props<TData> {
     /** Callback version of property `rowStyle` to set style for each row individually. Function should return an object of CSS values or undefined for no styles.
          * @agModule `RowStyleModule`
          */
-    getRowStyle?: GetRowStyle<TData>,
+    getRowStyle?: GetRowStyle<TData, any>,
     /** Callback version of property `rowClass` to set class(es) for each row individually. Function should return either a string (class name), array of strings (array of class names) or undefined for no class.
          * @agModule `RowStyleModule`
          */
-    getRowClass?: GetRowClass<TData>,
+    getRowClass?: GetRowClass<TData, any>,
     /** Callback version of property `rowHeight` to set height for each row individually. Function should return a positive number of pixels, or return `null`/`undefined` to use the default row height.
          */
     getRowHeight?: GetRowHeight<TData>,
