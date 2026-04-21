@@ -537,7 +537,7 @@ export const AG_GRID_ERRORS = {
         'agRichSelectCellEditor cannot have `multiSelect` and `allowTyping` set to `true`. AllowTyping has been turned off.' as const,
     182: () =>
         'you cannot mix groupDisplayType = "multipleColumns" with treeData, only one column can be used to display groups when doing tree data' as const,
-    183: () => 'Group Column<any> Filter only works on group columns. Please use a different filter.' as const,
+    183: () => 'Group Column Filter only works on group columns. Please use a different filter.' as const,
     184: ({ parentGroupData, childNodeData }: { parentGroupData: any; childNodeData: any }) =>
         [`duplicate group keys for row data, keys should be unique`, [parentGroupData, childNodeData]] as const,
     185: ({ data }: { data: any }) => [`getDataPath() should not return an empty path`, [data]] as const,
@@ -639,13 +639,13 @@ export const AG_GRID_ERRORS = {
     233: ({ methodName }: { methodName: string }) =>
         `Framework component is missing the method ${methodName}()` as const,
     234: () =>
-        'Group Column<any> Filter does not work with the colDef property "field". This property will be ignored.' as const,
+        'Group Column Filter does not work with the colDef property "field". This property will be ignored.' as const,
     235: () =>
-        'Group Column<any> Filter does not work with the colDef property "filterValueGetter". This property will be ignored.' as const,
+        'Group Column Filter does not work with the colDef property "filterValueGetter". This property will be ignored.' as const,
     236: () =>
-        'Group Column<any> Filter does not work with the colDef property "filterParams". This property will be ignored.' as const,
+        'Group Column Filter does not work with the colDef property "filterParams". This property will be ignored.' as const,
     237: () =>
-        'Group Column<any> Filter does not work with Tree Data enabled. Please disable Tree Data, or use a different filter.' as const,
+        'Group Column Filter does not work with Tree Data enabled. Please disable Tree Data, or use a different filter.' as const,
     238: () => 'setRowCount can only accept a positive row count.' as const,
     239: () =>
         'Theming API and CSS File Themes are both used in the same page. In v33 we released the Theming API as the new default method of styling the grid. See the migration docs https://www.ag-grid.com/react-data-grid/theming-migration/. Because no value was provided to the `theme` grid option it defaulted to themeQuartz. But the file (ag-grid.css) is also included and will cause styling issues. Either pass the string "legacy" to the theme grid option to use v32 style themes, or remove ag-grid.css from the page to use Theming API.' as const,
@@ -728,7 +728,7 @@ export const AG_GRID_ERRORS = {
                 msg += ' This property is no longer required and so will be removed in a future version.';
                 break;
             case 'setGridApi':
-                msg += ` This method is not called by AG Grid. To access the GridApi<any> see: https://ag-grid.com/react-data-grid/grid-interface/#grid-api `;
+                msg += ` This method is not called by AG Grid. To access the GridApi see: https://ag-grid.com/react-data-grid/grid-interface/#grid-api `;
                 break;
             case 'children':
                 msg += ` For multiple versions AgGridReact does not support children.`;

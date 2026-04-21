@@ -301,7 +301,7 @@ class PivotMenuItemMapper implements MenuItemBuilder<PivotMenuOptionName> {
                     name: localeTextFunc('combinationChart', 'Combination'),
                     subMenu: [
                         getMenuItem('columnLineCombo', 'Column & Line', 'columnLineCombo', 'pivotColumnLineCombo'),
-                        getMenuItem('AreaColumnCombo', 'Area & Column<any>', 'areaColumnCombo', 'pivotAreaColumnCombo'),
+                        getMenuItem('AreaColumnCombo', 'Area & Column', 'areaColumnCombo', 'pivotAreaColumnCombo'),
                     ],
                 },
             ],
@@ -512,7 +512,7 @@ class RangeMenuItemMapper implements MenuItemBuilder<RangeMenuOptionName> {
                         getMenuItem('radarLine', 'Radar Line', 'radarLine', 'rangeRadarLine'),
                         getMenuItem('radarArea', 'Radar Area', 'radarArea', 'rangeRadarArea'),
                         getMenuItem('nightingale', 'Nightingale', 'nightingale', 'rangeNightingale'),
-                        getMenuItem('radialColumn', 'Radial Column<any>', 'radialColumn', 'rangeRadialColumn'),
+                        getMenuItem('radialColumn', 'Radial Column', 'radialColumn', 'rangeRadialColumn'),
                         getMenuItem('radialBar', 'Radial Bar', 'radialBar', 'rangeRadialBar'),
                     ],
                     _key: 'rangePolarChart',
@@ -561,7 +561,7 @@ class RangeMenuItemMapper implements MenuItemBuilder<RangeMenuOptionName> {
                     name: localeTextFunc('combinationChart', 'Combination'),
                     subMenu: [
                         getMenuItem('columnLineCombo', 'Column & Line', 'columnLineCombo', 'rangeColumnLineCombo'),
-                        getMenuItem('AreaColumnCombo', 'Area & Column<any>', 'areaColumnCombo', 'rangeAreaColumnCombo'),
+                        getMenuItem('AreaColumnCombo', 'Area & Column', 'areaColumnCombo', 'rangeAreaColumnCombo'),
                     ],
                     _key: 'rangeCombinationChart',
                 },

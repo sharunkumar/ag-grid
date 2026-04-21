@@ -117,7 +117,7 @@ AG Grid is available in two versions: Community & Enterprise.
 | [Clipboard Operations](https://www.ag-grid.com/angular-data-grid/clipboard/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)            | ❌                | ✅                 |
 | [Master/Detail](https://www.ag-grid.com/angular-data-grid/master-detail/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)               | ❌                | ✅                 |
 | [Tree Data](https://www.ag-grid.com/angular-data-grid/tree-data/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)                       | ❌                | ✅                 |
-| [Column<any> Menu](https://www.ag-grid.com/angular-data-grid/column-menu/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)              | ❌                | ✅                 |
+| [Column Menu](https://www.ag-grid.com/angular-data-grid/column-menu/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)                   | ❌                | ✅                 |
 | [Context Menu](https://www.ag-grid.com/angular-data-grid/context-menu/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)                 | ❌                | ✅                 |
 | [Tool Panels](https://www.ag-grid.com/angular-data-grid/tool-panel/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github)                    | ❌                | ✅                 |
 | [Support](https://ag-grid.zendesk.com/hc/en-us)                                                                                                                     | ❌                | ✅                 |
@@ -341,7 +341,7 @@ There are a number of different [Component Types](https://www.ag-grid.com/angula
 -   [Status Bar Component](https://www.ag-grid.com/angular-data-grid/status-bar/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github): For custom status bar components.
 -   [Tool Panel Component](https://www.ag-grid.com/angular-data-grid/component-tool-panel/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github): For custom tool panel components.
 -   [Tooltip Component](https://www.ag-grid.com/angular-data-grid/tooltips/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github): For custom cell tooltip components.
--   [Menu Item Component](https://www.ag-grid.com/angular-data-grid/component-menu-item/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github): To customise the menu items shown in the Column<any> and Context Menus.
+-   [Menu Item Component](https://www.ag-grid.com/angular-data-grid/component-menu-item/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github): To customise the menu items shown in the Column and Context Menus.
 
 To supply a custom cell renderer and filter components to the Grid, create a direct reference to your component within the `gridOptions.columnDefs` property:
 
