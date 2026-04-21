@@ -480,7 +480,7 @@ export class AgPrimaryColsList extends Component<AgPrimaryColsListEvent> {
 
     private refreshAriaLabel(): void {
         const translate = this.getLocaleTextFunc();
-        const columnListName = translate('ariaColumnPanelList', 'Column<any> List');
+        const columnListName = translate('ariaColumnPanelList', 'Column List');
         const localeColumns = translate('columns', 'Columns');
         const items = this.displayedColsList.length;
 

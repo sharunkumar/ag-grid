@@ -4,7 +4,7 @@ import { describe, test } from '@jest/globals';
 
 import type { ColDef, ColGroupDef } from './colDef';
 
-describe('ColDef<any, any>.field Types', () => {
+describe('ColDef.field Types', () => {
     test('string with no generic', () => {
         const t: ColDef<any, any> = { field: 'anyString' };
     });

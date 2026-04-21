@@ -134,7 +134,7 @@ export class SelectAllFeature extends BeanStub {
             cbSelectAllVisible ? `${ariaLabel} (${ariaStatus})` : null
         );
 
-        cbSelectAll.setInputAriaLabel(translate('ariaHeaderSelection', 'Column<any> with Header Selection'));
+        cbSelectAll.setInputAriaLabel(translate('ariaHeaderSelection', 'Column with Header Selection'));
 
         // skip repetitive announcements during column move
         if (!fromColumnMoved) {

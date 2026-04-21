@@ -15,7 +15,7 @@ export const buildRowGroupFeatureSchema = (beans: BeanCollection) => {
     return s.object(
         {
             groupColIds: s.array(
-                s.enum(groupableColumnIds, 'Column<any> ID that supports row grouping'),
+                s.enum(groupableColumnIds, 'Column ID that supports row grouping'),
                 'Array of column IDs to group by'
             ),
         },

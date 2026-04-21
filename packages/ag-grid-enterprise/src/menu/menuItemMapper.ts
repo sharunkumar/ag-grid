@@ -433,7 +433,7 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
                 case 'columnFilter':
                     return menuSvc && column
                         ? {
-                              name: localeTextFunc('columnFilter', 'Column<any> Filter'),
+                              name: localeTextFunc('columnFilter', 'Column Filter'),
                               icon: _createIconNoSpan('filter', beans, null),
                               action: () =>
                                   menuSvc.showFilterMenu({

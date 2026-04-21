@@ -65,7 +65,7 @@ export const buildAdvancedFilterFeatureSchema = ({ colModel, dataTypeSvc }: Bean
 const buildBooleanFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('boolean', 'Filter type identifier for boolean column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the boolean column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the boolean column to filter'),
         type: s.enum(['true', 'false'], 'Boolean value to filter by'),
     });
 };
@@ -73,7 +73,7 @@ const buildBooleanFilterSchema = (colIds: string[]) => {
 const buildObjectFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('object', 'Filter type identifier for object column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the object column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the object column to filter'),
         filter: s.string('Filter value to compare against object column values').nullable(),
         type: s.enum(
             ['equals', 'notEqual', 'contains', 'notContains', 'startsWith', 'endsWith', 'blank', 'notBlank'],
@@ -85,7 +85,7 @@ const buildObjectFilterSchema = (colIds: string[]) => {
 const buildDateFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('date', 'Filter type identifier for date column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the date column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the date column to filter'),
         filter: s
             .string({ pattern: '^\\d{4}-\\d{2}-\\d{2}$', description: 'Date value in YYYY-MM-DD format' })
             .nullable(),
@@ -108,7 +108,7 @@ const buildDateFilterSchema = (colIds: string[]) => {
 const buildDateStringFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('date', 'Filter type identifier for date string column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the date string column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the date string column to filter'),
         filter: s
             .string({ pattern: '^\\d{4}-\\d{2}-\\d{2}$', description: 'Date value in YYYY-MM-DD format' })
             .nullable(),
@@ -131,7 +131,7 @@ const buildDateStringFilterSchema = (colIds: string[]) => {
 const buildDateTimeFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('dateTime', 'Filter type identifier for datetime column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the datetime column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the datetime column to filter'),
         filter: s
             .string({
                 pattern: '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$',
@@ -157,7 +157,7 @@ const buildDateTimeFilterSchema = (colIds: string[]) => {
 const buildDateTimeStringFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('dateTimeString', 'Filter type identifier for datetime string column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the datetime string column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the datetime string column to filter'),
         filter: s
             .string({
                 pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$',
@@ -183,7 +183,7 @@ const buildDateTimeStringFilterSchema = (colIds: string[]) => {
 const buildNumberFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('number', 'Filter type identifier for number column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the number column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the number column to filter'),
         filter: s.number('Numeric value to filter by').nullable(),
         type: s.enum(
             [
@@ -204,7 +204,7 @@ const buildNumberFilterSchema = (colIds: string[]) => {
 const buildBigIntFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('bigint', 'Filter type identifier for bigint column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the bigint column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the bigint column to filter'),
         filter: s
             .string({
                 pattern: '^-?\\d+$',
@@ -230,7 +230,7 @@ const buildBigIntFilterSchema = (colIds: string[]) => {
 const buildTextFilterSchema = (colIds: string[]) => {
     return s.object({
         filterType: s.literal('text', 'Filter type identifier for text column filters'),
-        colId: s.enum(colIds, 'Column<any> identifier for the text column to filter'),
+        colId: s.enum(colIds, 'Column identifier for the text column to filter'),
         filter: s.string('Text value to filter by').nullable(),
         type: s.enum(
             ['equals', 'notEqual', 'contains', 'notContains', 'startsWith', 'endsWith', 'blank', 'notBlank'],

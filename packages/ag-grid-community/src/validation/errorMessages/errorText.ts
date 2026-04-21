@@ -245,7 +245,7 @@ export const AG_GRID_ERRORS = {
     34: ({ key }: { key: string }) =>
         `the column type '${key}' is a default column type and cannot be overridden.` as const,
     35: () =>
-        `Column<any> type definitions 'columnTypes' with a 'type' attribute are not supported because a column type cannot refer to another column type. Only column definitions 'columnDefs' can use the 'type' attribute to refer to a column type.` as const,
+        `Column type definitions 'columnTypes' with a 'type' attribute are not supported because a column type cannot refer to another column type. Only column definitions 'columnDefs' can use the 'type' attribute to refer to a column type.` as const,
     36: ({ t }: { t: string }) => "colDef.type '" + t + "' does not correspond to defined gridOptions.columnTypes",
     37: () => `Changing the column pinning status is not allowed with domLayout='print'` as const,
     38: ({ iconName }: { iconName: string }) =>
@@ -295,7 +295,7 @@ export const AG_GRID_ERRORS = {
     65: () => 'filter missing setModel method, which is needed for setFilterModel' as const,
     66: () => 'filter API missing getModel method, which is needed for getFilterModel' as const,
     67: () => 'Filter is missing isFilterActive() method' as const,
-    68: () => 'Column<any> Filter API methods have been disabled as Advanced Filters are enabled.' as const,
+    68: () => 'Column Filter API methods have been disabled as Advanced Filters are enabled.' as const,
     69: ({ guiFromFilter }: { guiFromFilter: any }) =>
         `getGui method from filter returned ${guiFromFilter}; it should be a DOM element.` as const,
     70: ({ newFilter }: { newFilter: any }) =>

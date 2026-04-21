@@ -11,22 +11,22 @@ function quote(s: string): string {
 }
 
 const COLUMN_DEFINITION_DEPRECATIONS: () => Deprecations<ColDef<any, any> | ColGroupDef<any>> = () => ({
-    checkboxSelection: { version: '32.2', message: 'Use `rowSelection.checkboxes` in `GridOptions<any>` instead.' },
+    checkboxSelection: { version: '32.2', message: 'Use `rowSelection.checkboxes` in `GridOptions` instead.' },
     headerCheckboxSelection: {
         version: '32.2',
-        message: 'Use `rowSelection.headerCheckbox = true` in `GridOptions<any>` instead.',
+        message: 'Use `rowSelection.headerCheckbox = true` in `GridOptions` instead.',
     },
     headerCheckboxSelectionFilteredOnly: {
         version: '32.2',
-        message: 'Use `rowSelection.selectAll = "filtered"` in `GridOptions<any>` instead.',
+        message: 'Use `rowSelection.selectAll = "filtered"` in `GridOptions` instead.',
     },
     headerCheckboxSelectionCurrentPageOnly: {
         version: '32.2',
-        message: 'Use `rowSelection.selectAll = "currentPage"` in `GridOptions<any>` instead.',
+        message: 'Use `rowSelection.selectAll = "currentPage"` in `GridOptions` instead.',
     },
     showDisabledCheckboxes: {
         version: '32.2',
-        message: 'Use `rowSelection.hideDisabledCheckboxes = true` in `GridOptions<any>` instead.',
+        message: 'Use `rowSelection.hideDisabledCheckboxes = true` in `GridOptions` instead.',
     },
     rowGroupingHierarchy: {
         version: '34.3',

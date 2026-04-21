@@ -30,7 +30,7 @@ export const buildColumnSizingFeatureSchema = (beans: BeanCollection) => {
                     'Array of column sizing configurations'
                 ),
             },
-            'Column<any> sizing configuration for the grid'
+            'Column sizing configuration for the grid'
         )
-        .define('resizableColumnId', s.enum(resizableColumnIds, 'Column<any> ID that supports resizing'));
+        .define('resizableColumnId', s.enum(resizableColumnIds, 'Column ID that supports resizing'));
 };

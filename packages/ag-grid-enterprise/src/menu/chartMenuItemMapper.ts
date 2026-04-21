@@ -222,7 +222,7 @@ class PivotMenuItemMapper implements MenuItemBuilder<PivotMenuOptionName> {
             subMenu: [
                 {
                     _key: 'pivotColumnChart',
-                    name: localeTextFunc('columnChart', 'Column<any>'),
+                    name: localeTextFunc('columnChart', 'Column'),
                     subMenu: [
                         getMenuItem('groupedColumn', 'Grouped', 'groupedColumn', 'pivotGroupedColumn'),
                         getMenuItem('stackedColumn', 'Stacked', 'stackedColumn', 'pivotStackedColumn'),
@@ -300,7 +300,7 @@ class PivotMenuItemMapper implements MenuItemBuilder<PivotMenuOptionName> {
                     _key: 'pivotCombinationChart',
                     name: localeTextFunc('combinationChart', 'Combination'),
                     subMenu: [
-                        getMenuItem('columnLineCombo', 'Column<any> & Line', 'columnLineCombo', 'pivotColumnLineCombo'),
+                        getMenuItem('columnLineCombo', 'Column & Line', 'columnLineCombo', 'pivotColumnLineCombo'),
                         getMenuItem('AreaColumnCombo', 'Area & Column<any>', 'areaColumnCombo', 'pivotAreaColumnCombo'),
                     ],
                 },
@@ -455,7 +455,7 @@ class RangeMenuItemMapper implements MenuItemBuilder<RangeMenuOptionName> {
             _key: 'chartRange',
             subMenu: [
                 {
-                    name: localeTextFunc('columnChart', 'Column<any>'),
+                    name: localeTextFunc('columnChart', 'Column'),
                     subMenu: [
                         getMenuItem('groupedColumn', 'Grouped', 'groupedColumn', 'rangeGroupedColumn'),
                         getMenuItem('stackedColumn', 'Stacked', 'stackedColumn', 'rangeStackedColumn'),
@@ -560,7 +560,7 @@ class RangeMenuItemMapper implements MenuItemBuilder<RangeMenuOptionName> {
                 {
                     name: localeTextFunc('combinationChart', 'Combination'),
                     subMenu: [
-                        getMenuItem('columnLineCombo', 'Column<any> & Line', 'columnLineCombo', 'rangeColumnLineCombo'),
+                        getMenuItem('columnLineCombo', 'Column & Line', 'columnLineCombo', 'rangeColumnLineCombo'),
                         getMenuItem('AreaColumnCombo', 'Area & Column<any>', 'areaColumnCombo', 'rangeAreaColumnCombo'),
                     ],
                     _key: 'rangeCombinationChart',

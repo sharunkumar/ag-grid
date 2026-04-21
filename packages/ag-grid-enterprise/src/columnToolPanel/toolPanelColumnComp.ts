@@ -212,7 +212,7 @@ export class ToolPanelColumnComp extends Component {
     private refreshAriaLabel(): void {
         const { cbSelect, focusWrapper, displayName } = this;
         const translate = this.getLocaleTextFunc();
-        const columnLabel = translate('ariaColumn', 'Column<any>');
+        const columnLabel = translate('ariaColumn', 'Column');
         const state = cbSelect.getValue() ? translate('ariaVisible', 'visible') : translate('ariaHidden', 'hidden');
         const visibilityLabel = translate('ariaToggleVisibility', 'Press SPACE to toggle visibility');
 

@@ -219,7 +219,7 @@ export class EnterpriseMenuFactory extends BeanStub implements NamedBean, IMenuF
             // if defaultTab is not present, positionCallback will be called
             // after `showTabBasedOnPreviousSelection` is called.
             positionCallback: defaultTab ? () => positionCallback(menu) : undefined,
-            ariaLabel: translate('ariaLabelColumnMenu', 'Column<any> Menu'),
+            ariaLabel: translate('ariaLabelColumnMenu', 'Column Menu'),
         });
 
         if (!defaultTab) {

@@ -342,7 +342,7 @@ export class ToolPanelColumnGroupComp extends Component {
     private refreshAriaLabel(): void {
         const { cbSelect, focusWrapper, displayName } = this;
         const translate = this.getLocaleTextFunc();
-        const columnLabel = translate('ariaColumnGroup', 'Column<any> Group');
+        const columnLabel = translate('ariaColumnGroup', 'Column Group');
         const checkboxValue = cbSelect.getValue();
         const state =
             checkboxValue === undefined

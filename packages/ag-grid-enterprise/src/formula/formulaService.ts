@@ -135,7 +135,7 @@ export class FormulaService extends BeanStub implements IFormulaService, NamedBe
 
         return cols.list.every((col) => {
             if (col.isAllowPivot() || col.isPivotActive()) {
-                _warn(295, { blockedService: 'Column<any> Pivoting' });
+                _warn(295, { blockedService: 'Column Pivoting' });
                 return false;
             }
             if (col.isAllowRowGroup() || col.isRowGroupActive()) {
