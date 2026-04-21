@@ -258,7 +258,7 @@ export type ColDefField<TData, TValue> = TData extends any ? NestedFieldPaths<TD
 /**
  * Returns a union of all possible paths to nested fields in `TData`.
  */
-export type NestedFieldPaths<TData = any, TValue = any, TDepth extends any[] = []> = {
+export type NestedFieldPaths<TData, TValue, TDepth extends any[] = []> = {
     [TKey in StringOrNumKeys<TData>]: TData[TKey] extends ((...args: any[]) => any) | undefined
         ? never // ignore functions
         : TData[TKey] extends any[] | undefined
