@@ -79,7 +79,7 @@ export interface ICellRendererAngularComp
 
 export interface ICellEditorRendererAngularComp extends AgFrameworkComponent<ICellEditorRendererParams> {}
 
-export interface ICellEditorAngularComp extends AgFrameworkComponent<ICellEditorParams>, ICellEditor {}
+export interface ICellEditorAngularComp extends AgFrameworkComponent<ICellEditorParams<any, any, any>>, ICellEditor {}
 
 export interface AgRendererComponent extends ICellRendererAngularComp {}
 

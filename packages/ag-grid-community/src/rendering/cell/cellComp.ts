@@ -438,7 +438,7 @@ export class CellComp extends Component {
     private afterCellEditorCreated(
         requestVersion: number,
         cellEditor: ICellEditorComp,
-        params: ICellEditorParams,
+        params: ICellEditorParams<any, any, any>,
         popup?: boolean,
         position?: 'over' | 'under'
     ): void {
@@ -509,7 +509,7 @@ export class CellComp extends Component {
         }
     }
 
-    private addPopupCellEditor(params: ICellEditorParams, position?: 'over' | 'under'): void {
+    private addPopupCellEditor(params: ICellEditorParams<any, any, any>, position?: 'over' | 'under'): void {
         const { gos, context, popupSvc, editSvc } = this.beans;
         if (gos.get('editType') === 'fullRow') {
             //popup cellEditor does not work with fullRowEdit

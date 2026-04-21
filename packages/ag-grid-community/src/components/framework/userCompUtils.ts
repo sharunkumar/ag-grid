@@ -236,7 +236,7 @@ export function _getLoadingCellRendererDetails(
 export function _getCellEditorDetails(
     userCompFactory: UserComponentFactory,
     def: ColDef<any, any>,
-    params: ICellEditorParams
+    params: ICellEditorParams<any, any, any>
 ): UserCompDetails<ICellEditorComp> | undefined {
     return userCompFactory.getCompDetails(def, CellEditorComponent, 'agCellEditor', params, true);
 }

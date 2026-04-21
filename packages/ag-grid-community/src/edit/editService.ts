@@ -1070,7 +1070,7 @@ export class EditService extends BeanStub implements NamedBean {
         _addStopEditingWhenGridLosesFocus(this, this.beans, viewports);
     }
 
-    public createPopupEditorWrapper(params: ICellEditorParams): PopupEditorWrapper {
+    public createPopupEditorWrapper(params: ICellEditorParams<any, any, any>): PopupEditorWrapper {
         // TODO: find a better place for this
         return new PopupEditorWrapper(params);
     }

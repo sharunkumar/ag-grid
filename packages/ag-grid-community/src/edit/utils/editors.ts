@@ -258,7 +258,7 @@ function _createEditorParams(
     position: Required<EditPosition>,
     key?: string | null,
     cellStartedEdit?: boolean | null
-): ICellEditorParams {
+): ICellEditorParams<any, any, any> {
     const { valueSvc, gos, editSvc } = beans;
     const enableGroupEditing = beans.gos.get('enableGroupEdit');
     const cellCtrl = _getCellCtrl(beans, position) as CellCtrl;
@@ -345,9 +345,9 @@ export function _refreshEditorOnColDefChanged(beans: BeanCollection, cellCtrl: C
 }
 
 function checkAndPreventDefault(
-    params: ICellEditorParams & DefaultProvidedCellEditorParams,
+    params: ICellEditorParams<any, any, any> & DefaultProvidedCellEditorParams,
     event?: Event | null
-): ICellEditorParams {
+): ICellEditorParams<any, any, any> {
     if (event instanceof KeyboardEvent && params.column.getColDef().cellEditor === 'agNumberCellEditor') {
         // `-`, `+`, `.`, `e` need suppressPreventDefault to prevent the editor from ignoring the keypress
         params.suppressPreventDefault =

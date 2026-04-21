@@ -3,7 +3,7 @@ import type { ElementParams } from '../../utils/element';
 import type { ComponentSelector } from '../../widgets/component';
 import type { GridInputTextField } from '../../widgets/gridWidgetTypes';
 
-export interface CellEditorInput<TValue, P extends ICellEditorParams, I extends GridInputTextField> {
+export interface CellEditorInput<TValue, P extends ICellEditorParams<any, any, any>, I extends GridInputTextField> {
     getTemplate(): ElementParams;
     getAgComponents(): ComponentSelector[];
     init(eInput: I, params: P): void;

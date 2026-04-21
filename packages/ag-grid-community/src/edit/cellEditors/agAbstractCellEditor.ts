@@ -8,7 +8,7 @@ import type { AgBaseCellEditor, ICellEditorComp, ICellEditorParams } from '../..
 import type { AgGridCommon } from '../../interfaces/iCommon';
 import type { AgComponentSelectorType } from '../../widgets/component';
 
-export abstract class AgAbstractCellEditor<P extends ICellEditorParams, TValue, TEditorValue = TValue>
+export abstract class AgAbstractCellEditor<P extends ICellEditorParams<any, any, any>, TValue, TEditorValue = TValue>
     extends AgPopupComponent<
         BeanCollection,
         GridOptionsWithDefaults,

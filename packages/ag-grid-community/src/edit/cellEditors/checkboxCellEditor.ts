@@ -17,14 +17,14 @@ const CheckboxCellEditorElement: ElementParams = {
         },
     ],
 };
-export class CheckboxCellEditor extends AgAbstractCellEditor<ICellEditorParams<any, boolean>, boolean> {
+export class CheckboxCellEditor extends AgAbstractCellEditor<ICellEditorParams<any, boolean, any>, boolean> {
     constructor() {
         super(CheckboxCellEditorElement, [AgCheckboxSelector]);
     }
 
     protected readonly eEditor: GridCheckbox = RefPlaceholder;
 
-    public initialiseEditor(params: ICellEditorParams<any, boolean>): void {
+    public initialiseEditor(params: ICellEditorParams<any, boolean, any>): void {
         this.agSetEditValue(params.value);
 
         const inputEl = this.eEditor.getInputElement();

@@ -8,9 +8,9 @@ import type { CellEditorInput } from './iCellEditorInput';
 
 export class SimpleCellEditor<
     TValue,
-    P extends ICellEditorParams & DefaultProvidedCellEditorParams,
+    P extends ICellEditorParams<any, any, any> & DefaultProvidedCellEditorParams,
     I extends GridInputTextField,
-> extends AgAbstractCellEditor<ICellEditorParams, TValue, string> {
+> extends AgAbstractCellEditor<ICellEditorParams<any, any, any>, TValue, string> {
     private highlightAllOnFocus: boolean;
     private focusAfterAttached: boolean;
     protected readonly eEditor: I = RefPlaceholder;

@@ -73,7 +73,7 @@ export interface ICellEditor<TValue = any> extends BaseCellEditor {
     /**
      * Optional: Gets called with the latest cell editor params every time they update
      */
-    refresh?(params: ICellEditorParams<any, TValue>): void;
+    refresh?(params: ICellEditorParams<any, TValue, any>): void;
 
     /**
      * Optional: A hook to perform any necessary operation just after the GUI for this component has been rendered on the screen.
@@ -146,8 +146,7 @@ export interface ICellEditorParamsShared<TData = any, TValue = any, TContext = a
     validate(): void;
 }
 
-export interface ICellEditorParams<TData = any, TValue = any, TContext = any>
-    extends ICellEditorParamsShared<TData, TValue, TContext> {
+export interface ICellEditorParams<TData, TValue, TContext> extends ICellEditorParamsShared<TData, TValue, TContext> {
     /** Utility function to parse a value using the column's `colDef.valueParser` */
     parseValue: (value: string) => TValue | null | undefined;
     /** Utility function to format a value using the column's `colDef.valueFormatter` */
