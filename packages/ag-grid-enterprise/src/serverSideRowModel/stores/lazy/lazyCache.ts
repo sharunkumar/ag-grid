@@ -101,7 +101,7 @@ export class LazyCache extends BeanStub {
     /**
      * Grid options properties - stored locally for access speed.
      */
-    private getRowIdFunc?: (params: WithoutGridCommon<GetRowIdParams>) => string;
+    private getRowIdFunc?: (params: WithoutGridCommon<GetRowIdParams<any, any>>) => string;
     private isMasterDetail: boolean;
 
     /**

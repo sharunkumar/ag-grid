@@ -253,7 +253,7 @@ export interface IsApplyServerSideTransactionParams<TData = any, TContext = any>
     groupLevelInfo: any;
 }
 
-export interface GetRowIdParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface GetRowIdParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** The data item provided to the grid for the row in question */
     data: TData;
     /** Pinned state of the row */

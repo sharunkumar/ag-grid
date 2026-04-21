@@ -108,7 +108,7 @@ export class GridWrapperComponent {
         this.setupListeners(this.zone, params.api, this.zoneStatus);
     }
 
-    getRowId = (params: GetRowIdParams) => {
+    getRowId = (params: GetRowIdParams<any, any>) => {
         // Validate callback passed to component is run outside of Angular Zone
         updateCount(this.zoneStatus, 'component -> callback', NgZone.isInAngularZone());
         return params.data.make;
