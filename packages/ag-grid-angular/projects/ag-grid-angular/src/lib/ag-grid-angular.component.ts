@@ -1615,7 +1615,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** Provide the `serverSideDatasource` for server side row model.
      * @agModule `ServerSideRowModelModule`
      */
-    @Input() public serverSideDatasource: IServerSideDatasource | undefined = undefined;
+    @Input() public serverSideDatasource: IServerSideDatasource<any> | undefined = undefined;
     /** When enabled, always refreshes top level groups regardless of which column was sorted. This property only applies when there is Row Grouping & sorting is handled on the server.
      * @default false
      * @agModule `ServerSideRowModelModule`

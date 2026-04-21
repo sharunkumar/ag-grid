@@ -41,6 +41,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
     -   `NewValueParams<TData, TValue, TContext>`
     -   `ProcessCellForExportParams<TData, TContext>`
     -   `ITooltipParams<TData, TValue, TContext>`
+    -   `IServerSideDatasource<TData>`
     -   Internal usages updated to pass explicit generics
         -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
         -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments

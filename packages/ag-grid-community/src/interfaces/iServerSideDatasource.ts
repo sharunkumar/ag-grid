@@ -69,7 +69,7 @@ export interface IServerSideGetRowsParams<TData, TContext> extends AgGridCommon<
 }
 
 // datasource for Server Side Row Model
-export interface IServerSideDatasource<TData = any> {
+export interface IServerSideDatasource<TData> {
     /**
      * Grid calls `getRows` when it requires more rows as specified in the params.
      * Params object contains callbacks for responding to the request.

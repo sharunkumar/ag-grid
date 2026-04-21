@@ -1735,7 +1735,7 @@ export interface GridOptions<TData> {
      * Provide the `serverSideDatasource` for server side row model.
      * @agModule `ServerSideRowModelModule`
      */
-    serverSideDatasource?: IServerSideDatasource;
+    serverSideDatasource?: IServerSideDatasource<any>;
 
     /**
      * When enabled, always refreshes top level groups regardless of which column was sorted. This property only applies when there is Row Grouping & sorting is handled on the server.
