@@ -470,7 +470,7 @@ export function _getEnableDeselection(gos: GridOptionsService): boolean {
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getIsRowSelectable(gos: GridOptionsService): IsRowSelectable | undefined {
+export function _getIsRowSelectable(gos: GridOptionsService): IsRowSelectable<any> | undefined {
     const selection = gos.get('rowSelection');
 
     if (typeof selection === 'string') {

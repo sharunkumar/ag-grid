@@ -2964,7 +2964,7 @@ export type GetServerSideGroupKey = (dataItem: any) => string;
 
 export type IsRowMaster<TData = any> = (dataItem: TData) => boolean;
 
-export type IsRowSelectable<TData = any> = (node: IRowNode<TData>) => boolean;
+export type IsRowSelectable<TData> = (node: IRowNode<TData>) => boolean;
 
 export type IsRowPinnable<TData = any> = (node: IRowNode<TData>) => boolean;
 
