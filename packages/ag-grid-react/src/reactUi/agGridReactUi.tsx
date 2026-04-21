@@ -389,7 +389,7 @@ class ReactFrameworkComponentWrapper
 }
 
 // Define DetailCellRenderer and ReactFrameworkOverrides here to avoid circular dependency
-const DetailCellRenderer = forwardRef((props: IDetailCellRendererParams, ref: any) => {
+const DetailCellRenderer = forwardRef((props: IDetailCellRendererParams<any, any>, ref: any) => {
     const beans = useContext(BeansContext);
     const { registry, context, gos, rowModel } = beans;
 

@@ -18,7 +18,7 @@ import type {
 import { BeanStub, _addGridCommonParams, _focusInto, _isSameRow, _missing, _warn } from 'ag-grid-community';
 
 export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRendererCtrl {
-    private params: IDetailCellRendererParams;
+    private params: IDetailCellRendererParams<any, any>;
 
     private comp: IDetailCellRenderer;
 
@@ -32,7 +32,7 @@ export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRende
         this.environment = beans.environment;
     }
 
-    public init(comp: IDetailCellRenderer, params: IDetailCellRendererParams): void {
+    public init(comp: IDetailCellRenderer, params: IDetailCellRendererParams<any, any>): void {
         this.params = params;
         this.comp = comp;
 

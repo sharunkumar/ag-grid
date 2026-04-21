@@ -16,7 +16,7 @@ export interface IDetailCellRenderer<TData = any> {
     getGui(): HTMLElement;
 }
 
-export interface IDetailCellRendererParams<TData = any, TDetail = any>
+export interface IDetailCellRendererParams<TData, TDetail>
     extends ICellRendererParams<TData, any, any>,
         FindDetailGridCellRendererParams<TData> {
     /**
@@ -51,7 +51,7 @@ export interface GetDetailRowDataParams<TData = any, TDetail = any> {
 type TemplateFunc<TData = any> = (params: ICellRendererParams<TData, any, any>) => string;
 
 export interface IDetailCellRendererCtrl extends Bean {
-    init(comp: IDetailCellRenderer, params: IDetailCellRendererParams): void;
+    init(comp: IDetailCellRenderer, params: IDetailCellRendererParams<any, any>): void;
     registerDetailWithMaster(api: GridApi<any>): void;
     refresh(): boolean;
 }
