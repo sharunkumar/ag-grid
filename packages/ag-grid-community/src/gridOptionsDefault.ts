@@ -187,13 +187,13 @@ export const GRID_OPTION_DEFAULTS = {
  * Done here to allow inference of the above type, for gridOptionsService.get to infer where defaults exist.
  */
 type AllValidGridOptionsKeys =
-    Exclude<keyof typeof GRID_OPTION_DEFAULTS, keyof GridOptions> extends never ? true : false;
+    Exclude<keyof typeof GRID_OPTION_DEFAULTS, keyof GridOptions<any>> extends never ? true : false;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const allValidKeys: AllValidGridOptionsKeys = true;
 
 // validate each default value is the right type
 type AllTypesValid = {
-    [K in keyof typeof GRID_OPTION_DEFAULTS]: (typeof GRID_OPTION_DEFAULTS)[K] extends NonNullable<GridOptions[K]>
+    [K in keyof typeof GRID_OPTION_DEFAULTS]: (typeof GRID_OPTION_DEFAULTS)[K] extends NonNullable<GridOptions<any>[K]>
         ? 'V'
         : 'X';
 }[keyof typeof GRID_OPTION_DEFAULTS];
@@ -203,11 +203,11 @@ const allValidValues: AllTypeValid = 'V';
 
 type GridOptionDefaultsKeys = keyof typeof GRID_OPTION_DEFAULTS;
 
-export type GridOptionOrDefault<K extends keyof GridOptions> = K extends GridOptionDefaultsKeys
-    ? NonNullable<GridOptions[K]>
-    : GridOptions[K];
+export type GridOptionOrDefault<K extends keyof GridOptions<any>> = K extends GridOptionDefaultsKeys
+    ? NonNullable<GridOptions<any>[K]>
+    : GridOptions<any>[K];
 
-type PartialGridOptionsWithDefaults = { [K in keyof GridOptions]: GridOptionOrDefault<K> };
+type PartialGridOptionsWithDefaults = { [K in keyof GridOptions<any>]: GridOptionOrDefault<K> };
 
 export type GridOptionsWithDefaults = Required<Pick<PartialGridOptionsWithDefaults, GridOptionDefaultsKeys>> &
     Omit<PartialGridOptionsWithDefaults, GridOptionDefaultsKeys>;

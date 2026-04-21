@@ -204,7 +204,7 @@ import type {
 } from './colDef';
 import type { DataTypeDefinitions } from './dataType';
 
-export interface GridOptions<TData = any> {
+export interface GridOptions<TData> {
     // ******************************************************************************************************
     // If you change the properties on this interface, you must also update PropertyKeys to be consistent. *
     // ******************************************************************************************************
@@ -3311,7 +3311,7 @@ export type CheckboxLocation = 'selectionColumn' | 'autoGroupColumn';
 
 export type MasterSelectionMode = NonNullable<CommonRowSelectionOptions['masterSelects']>;
 
-export type AgPublicEventHandlerType = `on${Capitalize<AgPublicEventType>}` & keyof GridOptions;
+export type AgPublicEventHandlerType = `on${Capitalize<AgPublicEventType>}` & keyof GridOptions<any>;
 
 export type ProcessPivotResultColDef<TData = any, TValue = any> = (colDef: ColDef<TData, TValue>) => void;
 export type ProcessPivotResultColGroupDef<TData = any> = (colDef: ColGroupDef<TData>) => void;

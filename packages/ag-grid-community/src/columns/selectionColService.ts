@@ -177,8 +177,8 @@ export class SelectionColService extends BeanStub implements NamedBean, IColumnC
     }
 
     private onSelectionOptionsChanged(
-        current: GridOptions['rowSelection'],
-        prev: GridOptions['rowSelection'],
+        current: GridOptions<any>['rowSelection'],
+        prev: GridOptions<any>['rowSelection'],
         source: ColumnEventType
     ) {
         const prevCheckbox = prev && typeof prev !== 'string' ? _getCheckboxes(prev) : undefined;

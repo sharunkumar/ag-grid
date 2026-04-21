@@ -88,7 +88,7 @@ export function _getUserCompKeys<TDefinition>(
 export class UserComponentFactory extends BeanStub implements NamedBean {
     beanName = 'userCompFactory' as const;
 
-    private gridOptions: GridOptions;
+    private gridOptions: GridOptions<any>;
     private agCompUtils?: AgComponentUtils;
     private registry: Registry;
     private frameworkCompWrapper?: FrameworkComponentWrapper;

@@ -573,7 +573,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
     }
 
     // called when dataTypes change
-    public recreateColumnDefs(e: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions>): void {
+    public recreateColumnDefs(e: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions<any>>): void {
         if (!this.cols) {
             return;
         }

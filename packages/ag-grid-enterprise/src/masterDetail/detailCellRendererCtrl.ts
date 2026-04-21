@@ -103,7 +103,7 @@ export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRende
             _warn(267);
         }
 
-        const gridOptions: GridOptions = {
+        const gridOptions: GridOptions<any> = {
             themeStyleContainer: this.environment.eStyleContainer,
             ...params.detailGridOptions,
             theme: masterTheme,

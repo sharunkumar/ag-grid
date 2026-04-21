@@ -79,7 +79,7 @@ export class GroupHierarchyColService extends BeanStub implements NamedBean, IGr
         this.inverseColumnMap = newInverseColumnMap;
     }
 
-    public updateColumns(_event: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions>): void {
+    public updateColumns(_event: PropertyChangedEvent | PropertyValueChangedEvent<keyof GridOptions<any>>): void {
         // No-op
     }
 

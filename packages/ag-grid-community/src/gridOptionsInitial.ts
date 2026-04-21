@@ -93,11 +93,11 @@ type InitialGridOptionKey = keyof typeof INITIAL_GRID_OPTION_KEYS;
  * Used simply to type check the default grid options.
  * Done here to allow inference of the above type, for gridOptionsService.get to infer where defaults exist.
  */
-type AllValidKeys = Exclude<InitialGridOptionKey, keyof GridOptions> extends never ? true : false;
+type AllValidKeys = Exclude<InitialGridOptionKey, keyof GridOptions<any>> extends never ? true : false;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const allValidKeys: AllValidKeys = true;
 
-export type ManagedGridOptionKey = Exclude<keyof GridOptions, InitialGridOptionKey>;
+export type ManagedGridOptionKey = Exclude<keyof GridOptions<any>, InitialGridOptionKey>;
 
 export type ManagedGridOptions<TData = any> = {
     [K in ManagedGridOptionKey]?: GridOptions<TData>[K];

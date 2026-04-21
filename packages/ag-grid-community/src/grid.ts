@@ -122,7 +122,7 @@ let nextGridId = 1;
 export class GridCoreCreator {
     public create(
         eGridDiv: HTMLElement,
-        providedOptions: GridOptions,
+        providedOptions: GridOptions<any>,
         createUi: (context: Context) => void,
         acceptChanges?: (context: Context) => void,
         params?: GridParams,
@@ -227,7 +227,7 @@ export class GridCoreCreator {
         }
     }
 
-    private createProvidedBeans(eGridDiv: HTMLElement, gridOptions: GridOptions, params?: GridParams): any {
+    private createProvidedBeans(eGridDiv: HTMLElement, gridOptions: GridOptions<any>, params?: GridParams): any {
         let frameworkOverrides = params ? params.frameworkOverrides : null;
         if (_missing(frameworkOverrides)) {
             frameworkOverrides = new VanillaFrameworkOverrides();

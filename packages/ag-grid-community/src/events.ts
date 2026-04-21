@@ -1223,7 +1223,7 @@ export interface AlignedGridScrollEvent<TData = any, TContext = any>
 
 export interface GridOptionsChangedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'gridOptionsChanged', TData, TContext> {
-    options: GridOptions;
+    options: GridOptions<any>;
 }
 
 export interface ScrollbarWidthChangedEvent<TData = any, TContext = any>

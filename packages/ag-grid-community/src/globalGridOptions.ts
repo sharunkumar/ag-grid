@@ -3,7 +3,7 @@ import { _mergeDeep } from './utils/mergeDeep';
 
 export class GlobalGridOptions {
     // eslint-disable-next-line no-restricted-syntax
-    static gridOptions: GridOptions | undefined = undefined;
+    static gridOptions: GridOptions<any> | undefined = undefined;
     // eslint-disable-next-line no-restricted-syntax
     static mergeStrategy: GlobalGridOptionsMergeStrategy = 'shallow';
 
@@ -11,13 +11,13 @@ export class GlobalGridOptions {
      * @param providedOptions
      * @returns Shallow copy of the provided options with global options merged in.
      */
-    static applyGlobalGridOptions(providedOptions: GridOptions): GridOptions {
+    static applyGlobalGridOptions(providedOptions: GridOptions<any>): GridOptions<any> {
         if (!GlobalGridOptions.gridOptions) {
             // No global options provided, return a shallow copy of the provided options
             return { ...providedOptions };
         }
 
-        let mergedGridOps: GridOptions = {};
+        let mergedGridOps: GridOptions<any> = {};
         // Merge deep to avoid leaking changes to the global options
         _mergeDeep(mergedGridOps, GlobalGridOptions.gridOptions, true, true);
         if (GlobalGridOptions.mergeStrategy === 'deep') {
@@ -50,10 +50,10 @@ export class GlobalGridOptions {
      * @param providedValue - The value provided to the grid instance.
      * @returns The merged value if applicable, otherwise the provided value.
      */
-    static applyGlobalGridOption<K extends keyof GridOptions>(
+    static applyGlobalGridOption<K extends keyof GridOptions<any>>(
         optionKey: K,
-        providedValue: GridOptions[K]
-    ): GridOptions[K] {
+        providedValue: GridOptions<any>[K]
+    ): GridOptions<any>[K] {
         if (GlobalGridOptions.mergeStrategy === 'deep') {
             const globalValue = _getGlobalGridOption(optionKey);
             if (globalValue && typeof globalValue === 'object' && typeof providedValue === 'object') {
@@ -79,7 +79,7 @@ export type GlobalGridOptionsMergeStrategy = 'deep' | 'shallow';
  * @param gridOptions - global grid options
  */
 export function provideGlobalGridOptions(
-    gridOptions: GridOptions,
+    gridOptions: GridOptions<any>,
     mergeStrategy: GlobalGridOptionsMergeStrategy = 'shallow'
 ): void {
     GlobalGridOptions.gridOptions = gridOptions;
@@ -87,6 +87,6 @@ export function provideGlobalGridOptions(
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getGlobalGridOption<K extends keyof GridOptions>(gridOption: K): GridOptions[K] {
+export function _getGlobalGridOption<K extends keyof GridOptions<any>>(gridOption: K): GridOptions<any>[K] {
     return GlobalGridOptions.gridOptions?.[gridOption];
 }

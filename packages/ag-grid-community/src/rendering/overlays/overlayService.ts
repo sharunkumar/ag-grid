@@ -28,8 +28,8 @@ type OverlayDef = Readonly<{
     comp: ComponentType;
     wrapperCls: string;
     exclusive?: boolean;
-    compKey?: keyof GridOptions;
-    paramsKey?: keyof GridOptions;
+    compKey?: keyof GridOptions<any>;
+    paramsKey?: keyof GridOptions<any>;
     isSuppressed?: (gos: GridOptionsService) => boolean;
     overriddenComp?: UserCompDetails<any>;
 }>;
@@ -425,7 +425,7 @@ export class OverlayService extends BeanStub implements NamedBean {
         // Prefer overlay-specific params if provided (e.g. loadingOverlayComponentParams
         // or noRowsOverlayComponentParams). Fall back to legacy component option presence
         // (e.g. loadingOverlayComponent) or finally to activeOverlayParams.
-        let legacyParamsKey: keyof GridOptions | undefined;
+        let legacyParamsKey: keyof GridOptions<any> | undefined;
         if (
             (componentDef.paramsKey && gos.get(componentDef.paramsKey)) ||
             (componentDef.compKey && gos.get(componentDef.compKey))
@@ -464,7 +464,7 @@ export class OverlayService extends BeanStub implements NamedBean {
 
     private makeCompParams(
         includeActiveOverlayParams: boolean,
-        legacyParamsKey?: keyof GridOptions,
+        legacyParamsKey?: keyof GridOptions<any>,
         overlayType?: OverlayType
     ): any {
         const { gos } = this;

@@ -108,7 +108,7 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
 
 function _positionMatchesGrandTotalRow(
     position: 'top' | 'bottom',
-    grandTotaRow: GridOptions['grandTotalRow'] | false
+    grandTotaRow: GridOptions<any>['grandTotalRow'] | false
 ): boolean {
     switch (grandTotaRow) {
         case 'top':

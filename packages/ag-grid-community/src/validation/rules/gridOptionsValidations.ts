@@ -11,7 +11,7 @@ import type { Deprecations, OptionsValidator, RequiredModule, Validations } from
  * Deprecations have been kept separately for ease of removing them in the future.
  *
  */
-const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions> => ({
+const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions<any>> => ({
     suppressLoadingOverlay: { version: '32', message: 'Use `loading`=false instead.' },
 
     enableFillHandle: { version: '32.2', message: 'Use `cellSelection.handle` instead.' },
@@ -95,7 +95,7 @@ const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions> => ({
     },
 });
 
-function toConstrainedNum(key: keyof GridOptions, value: any, min: number): string | null {
+function toConstrainedNum(key: keyof GridOptions<any>, value: any, min: number): string | null {
     if (typeof value === 'number' || value == null) {
         if (value == null) {
             return null;
@@ -105,7 +105,7 @@ function toConstrainedNum(key: keyof GridOptions, value: any, min: number): stri
     return `${key}: value should be a number`;
 }
 
-export const GRID_OPTIONS_MODULES: Partial<Record<keyof GridOptions, RequiredModule<GridOptions>>> = {
+export const GRID_OPTIONS_MODULES: Partial<Record<keyof GridOptions<any>, RequiredModule<GridOptions<any>>>> = {
     alignedGrids: 'AlignedGrids',
     allowContextMenuWithControlKey: 'ContextMenu',
     autoSizeStrategy: 'ColumnAutoSize',
@@ -169,8 +169,8 @@ export const GRID_OPTIONS_MODULES: Partial<Record<keyof GridOptions, RequiredMod
 /**
  * Validation rules for gridOptions
  */
-const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
-    const definedValidations: Validations<GridOptions> = {
+const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions<any>> = () => {
+    const definedValidations: Validations<GridOptions<any>> = {
         autoSizePadding: {
             validate({ autoSizePadding }) {
                 return toConstrainedNum('autoSizePadding', autoSizePadding, 0);
@@ -590,7 +590,7 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
         renderingMode: {
             validate: (options) => {
                 const renderingMode = options.renderingMode;
-                const validModes: GridOptions['renderingMode'][] = ['default', 'legacy'];
+                const validModes: GridOptions<any>['renderingMode'][] = ['default', 'legacy'];
                 if (renderingMode && !validModes.includes(renderingMode)) {
                     return `renderingMode must be one of [${validModes.join()}], currently it's ${renderingMode}`;
                 }
@@ -603,7 +603,7 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
                     return null;
                 }
 
-                const validModes: NonNullable<GridOptions['autoSizeStrategy']>['type'][] = [
+                const validModes: NonNullable<GridOptions<any>['autoSizeStrategy']>['type'][] = [
                     'fitCellContents',
                     'fitGridWidth',
                     'fitProvidedWidth',
@@ -619,7 +619,7 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
             },
         },
     };
-    const validations: Validations<GridOptions> = {};
+    const validations: Validations<GridOptions<any>> = {};
     for (const key of _BOOLEAN_GRID_OPTIONS) {
         validations[key] = { expectedType: 'boolean' };
     }
@@ -631,8 +631,8 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
     return validations;
 };
 
-let _gridOptionsValidatorsCache: Required<OptionsValidator<GridOptions>> | undefined;
-export const GRID_OPTIONS_VALIDATORS: () => Required<OptionsValidator<GridOptions>> = () =>
+let _gridOptionsValidatorsCache: Required<OptionsValidator<GridOptions<any>>> | undefined;
+export const GRID_OPTIONS_VALIDATORS: () => Required<OptionsValidator<GridOptions<any>>> = () =>
     (_gridOptionsValidatorsCache ??= (() => {
         const allProperties = [..._GET_ALL_GRID_OPTIONS(), ...Object.values(_PUBLIC_EVENT_HANDLERS_MAP)];
         const deprecations = GRID_OPTION_DEPRECATIONS();

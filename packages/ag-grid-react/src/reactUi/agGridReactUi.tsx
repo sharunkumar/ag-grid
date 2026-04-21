@@ -69,7 +69,7 @@ const deprecatedProps: Pick<InternalAgGridReactProps, 'setGridApi' | 'children' 
 };
 
 // Used to only pass gridOptions to the GridCoreCreator from the props
-type ReactCompProps = Omit<InternalAgGridReactProps, keyof GridOptions>;
+type ReactCompProps = Omit<InternalAgGridReactProps, keyof GridOptions<any>>;
 const reactPropsNotGridOptions: ReactCompProps = {
     gridOptions: undefined,
     modules: undefined,
@@ -322,7 +322,7 @@ class ReactFrameworkComponentWrapper
 {
     constructor(
         private readonly parent: PortalManager,
-        private readonly gridOptions: GridOptions
+        private readonly gridOptions: GridOptions<any>
     ) {
         super();
     }
@@ -395,7 +395,7 @@ const DetailCellRenderer = forwardRef((props: IDetailCellRendererParams, ref: an
 
     const [cssClasses, setCssClasses] = useState<CssClasses>(() => new CssClasses());
     const [gridCssClasses, setGridCssClasses] = useState<CssClasses>(() => new CssClasses());
-    const [detailGridOptions, setDetailGridOptions] = useState<GridOptions>();
+    const [detailGridOptions, setDetailGridOptions] = useState<GridOptions<any>>();
     const [detailRowData, setDetailRowData] = useState<any[]>();
 
     const ctrlRef = useRef<IDetailCellRendererCtrl>();

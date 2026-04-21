@@ -94,7 +94,7 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
     private rowNodesCountReady: boolean = false;
 
     /** Maps a property name to the index in this.stages array */
-    private readonly stagesRefreshProps = new Map<keyof GridOptions, number>();
+    private readonly stagesRefreshProps = new Map<keyof GridOptions<any>, number>();
 
     public postConstruct(): void {
         const beans = this.beans;
@@ -248,7 +248,7 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         return res;
     }
 
-    private onPropChange(properties: (keyof GridOptions)[]): void {
+    private onPropChange(properties: (keyof GridOptions<any>)[]): void {
         const { nodeManager, gos, beans } = this;
         const groupStage = beans.groupStage;
         if (!nodeManager) {
@@ -298,7 +298,7 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         }
     }
 
-    private getRefreshedStage(properties: (keyof GridOptions)[]): ClientSideRowModelStage | null {
+    private getRefreshedStage(properties: (keyof GridOptions<any>)[]): ClientSideRowModelStage | null {
         const { stages, stagesRefreshProps } = this;
         if (!stages) {
             return null;
@@ -1009,7 +1009,10 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
     }
 
     /** Returns `true` if pivot columns changed and changedPath should be deactivated. */
-    private doPivot(changedPath: ChangedPath | undefined, changedProps: Set<keyof GridOptions> | undefined): boolean {
+    private doPivot(
+        changedPath: ChangedPath | undefined,
+        changedProps: Set<keyof GridOptions<any>> | undefined
+    ): boolean {
         return this.beans.pivotStage?.execute(changedPath, changedProps) ?? false;
     }
 

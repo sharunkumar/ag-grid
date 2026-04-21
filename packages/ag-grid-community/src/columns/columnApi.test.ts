@@ -25,7 +25,7 @@ const withGroups: (ColDef<any, any> | ColGroupDef<any>)[] = [
 
 describe('getColumnDefs', () => {
     test('simple columns', (done) => {
-        const options: GridOptions = {
+        const options: GridOptions<any> = {
             columnDefs: onlyFields,
             onGridReady: (params: GridReadyEvent) => {
                 const defs1 = params.api.getColumnDefs();
@@ -39,7 +39,7 @@ describe('getColumnDefs', () => {
     });
 
     test('with column groups', (done) => {
-        const options: GridOptions = {
+        const options: GridOptions<any> = {
             columnDefs: withGroups,
             onGridReady: (params: GridReadyEvent) => {
                 const defs1 = params.api.getColumnDefs();

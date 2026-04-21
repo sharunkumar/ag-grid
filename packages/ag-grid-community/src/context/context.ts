@@ -295,7 +295,7 @@ interface CoreBeanCollection
     rangeSvc?: IRangeService;
     validation?: ValidationService;
     gridApi: GridApi;
-    gridOptions: GridOptions;
+    gridOptions: GridOptions<any>;
     eGridDiv: HTMLElement;
     eRootDiv: HTMLElement;
     withinStudio?: boolean;

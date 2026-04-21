@@ -225,7 +225,7 @@ export function _getGroupAggFiltering(
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getGrandTotalRow(gos: GridOptionsService): GridOptions['grandTotalRow'] {
+export function _getGrandTotalRow(gos: GridOptionsService): GridOptions<any>['grandTotalRow'] {
     return gos.get('grandTotalRow');
 }
 
@@ -370,7 +370,7 @@ export function _getHeaderCheckbox(selection: RowSelectionOptions): boolean {
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getCheckboxLocation(rowSelection: GridOptions['rowSelection']): CheckboxLocation | undefined {
+export function _getCheckboxLocation(rowSelection: GridOptions<any>['rowSelection']): CheckboxLocation | undefined {
     if (typeof rowSelection !== 'object') {
         return undefined;
     }
@@ -481,13 +481,13 @@ export function _getIsRowSelectable(gos: GridOptionsService): IsRowSelectable | 
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _getRowSelectionMode(gridOptions: GridOptions): RowSelectionMode | undefined;
+export function _getRowSelectionMode(gridOptions: GridOptions<any>): RowSelectionMode | undefined;
 export function _getRowSelectionMode(gos: GridOptionsService): RowSelectionMode | undefined;
 export function _getRowSelectionMode(arg: object): RowSelectionMode | undefined {
     const selection =
         'beanName' in arg && arg.beanName === 'gos'
             ? (arg as GridOptionsService).get('rowSelection')
-            : (arg as GridOptions).rowSelection;
+            : (arg as GridOptions<any>).rowSelection;
 
     if (typeof selection === 'string') {
         switch (selection) {
@@ -511,7 +511,7 @@ export function _getRowSelectionMode(arg: object): RowSelectionMode | undefined 
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _isMultiRowSelection(gridOptions: GridOptions): boolean;
+export function _isMultiRowSelection(gridOptions: GridOptions<any>): boolean;
 export function _isMultiRowSelection(gos: GridOptionsService): boolean;
 export function _isMultiRowSelection(arg: object): boolean {
     const mode = _getRowSelectionMode(arg as GridOptionsService);
@@ -605,13 +605,13 @@ export function _getCallbackForEvent(eventName: string): string {
  * @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time.
  */
 export function _combineAttributesAndGridOptions(
-    gridOptions: GridOptions | undefined,
+    gridOptions: GridOptions<any> | undefined,
     component: any,
     gridOptionsKeys: string[]
-): GridOptions {
+): GridOptions<any> {
     // create empty grid options if none were passed
     if (typeof gridOptions !== 'object') {
-        gridOptions = {} as GridOptions;
+        gridOptions = {} as GridOptions<any>;
     }
     // shallow copy (so we don't change the provided object)
     const mergedOptions = { ...gridOptions } as any;
@@ -669,8 +669,8 @@ export function _addGridCommonParams<T extends AgGridCommon<TData, TContext>, TD
  * Used for before GridOptionsService is initialised
  * @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time.
  */
-export function _getGridOption<K extends keyof GridOptions>(
-    providedGridOptions: GridOptions,
+export function _getGridOption<K extends keyof GridOptions<any>>(
+    providedGridOptions: GridOptions<any>,
     gridOption: K
 ): GridOptionOrDefault<K> {
     return (

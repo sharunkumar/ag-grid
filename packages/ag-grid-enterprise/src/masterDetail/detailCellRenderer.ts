@@ -85,7 +85,7 @@ export class DetailCellRenderer extends Component implements ICellRenderer {
         }
     }
 
-    private setDetailGrid(gridOptions: GridOptions): void {
+    private setDetailGrid(gridOptions: GridOptions<any>): void {
         if (!this.eDetailGrid) {
             return;
         }

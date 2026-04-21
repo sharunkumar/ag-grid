@@ -757,7 +757,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
         }
     }
 
-    public setDetailSelectionState(masterNode: RowNode, detailGridOptions: GridOptions, detailApi: GridApi): void {
+    public setDetailSelectionState(masterNode: RowNode, detailGridOptions: GridOptions<any>, detailApi: GridApi): void {
         if (!this.masterSelectsDetail) {
             return;
         }
