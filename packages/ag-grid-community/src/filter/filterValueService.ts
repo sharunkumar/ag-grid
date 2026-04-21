@@ -40,7 +40,7 @@ export class FilterValueService extends BeanStub implements NamedBean {
         colDef: ColDef<any, any>
     ): any {
         const { expressionSvc, valueSvc } = this.beans;
-        const params: ValueGetterParams = _addGridCommonParams(this.gos, {
+        const params: ValueGetterParams<any, any, any> = _addGridCommonParams(this.gos, {
             data,
             node,
             column,

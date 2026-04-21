@@ -1142,7 +1142,7 @@ export interface SpanRowsParams<TData = any, TValue = any, TContext = any> exten
     colDef: ColDef<TData, TValue>;
 }
 
-export interface ValueGetterParams<TData = any, TValue = any, TContext = any>
+export interface ValueGetterParams<TData, TValue, TContext>
     extends BaseColDefOptionalDataParams<TData, TValue, TContext> {
     /** A utility method for getting other column values */
     getValue: (field: string) => any;

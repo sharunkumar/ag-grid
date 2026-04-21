@@ -761,7 +761,7 @@ export class ValueService extends BeanStub implements NamedBean {
         column: AgColumn,
         rowNode: IRowNode
     ): any {
-        const params: ValueGetterParams = _addGridCommonParams(this.gos, {
+        const params: ValueGetterParams<any, any, any> = _addGridCommonParams(this.gos, {
             data: data,
             node: rowNode,
             column: column,

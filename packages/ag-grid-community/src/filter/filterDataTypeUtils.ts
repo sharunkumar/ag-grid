@@ -223,7 +223,7 @@ export function _getFilterParamsForDataType(
     let filterValueGetter: string | ValueGetterFunc | undefined = existingFilterValueGetter;
     const usingSetFilter = filter === 'agSetColumnFilter';
     if (!filterValueGetter && dataTypeDefinition.baseDataType === 'object' && !usingSetFilter) {
-        filterValueGetter = ({ column, node }: ValueGetterParams) =>
+        filterValueGetter = ({ column, node }: ValueGetterParams<any, any, any>) =>
             formatValue({ column, node, value: beans.valueSvc.getValue(column as AgColumn, node, 'data') });
     }
     const filterParamsMap = usingSetFilter ? setFilterParamsForEachDataType : filterParamsForEachDataType;

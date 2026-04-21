@@ -441,7 +441,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         };
     }
 
-    private valueGetter(params: ValueGetterParams): string {
+    private valueGetter(params: ValueGetterParams<any, any, any>): string {
         const node = params.node as RowNode | null;
         const isFormulasActive = this.beans.formula?.active;
 

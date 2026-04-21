@@ -27,7 +27,7 @@ const getDate = (
 
 export const getDatePartValueGetter =
     (beans: BeanCollection, col: AgColumn, index: number, map?: (part: string) => string) =>
-    (params: ValueGetterParams) => {
+    (params: ValueGetterParams<any, any, any>) => {
         const date = getDate(beans, col, params.node);
         const parts = _getDateParts(date);
         if (!parts) {
