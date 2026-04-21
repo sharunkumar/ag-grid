@@ -13,7 +13,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
 
 ## CI
 
--   Fork-friendly CI workflow at [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml) (format, lint, typecheck, build, unit + behavioural tests; no org secrets required). Upstream `ci.yml` and other workflows are disabled on the fork.
+-   Fork-friendly CI workflow at [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml) (format, lint, typecheck, build, unit + behavioural tests; no org secrets required). Build and lint cover all five published packages (`ag-grid-community`, `ag-grid-enterprise`, `ag-grid-angular`, `ag-grid-vue3`, `ag-grid-react`); Jest unit tests cover community + enterprise. Upstream `ci.yml` and other workflows are disabled on the fork.
 -   When syncing from upstream, disable any newly-added workflows on the `sharun` remote via `GH_HOST=github.com gh workflow disable <id> --repo sharunkumar/ag-grid` so only `Fork CI` remains active.
 
 ## Patches
@@ -64,6 +64,25 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
     -   `GetDataPath<TData>`
     -   `GetContextMenuItems<TData, TContext>`
     -   `CheckboxSelectionCallbackParams<TData, TValue, TContext>`
+    -   Callback aliases paired with the above `*Params` interfaces (kept consistent so bare
+        references error too):
+        -   `CheckboxSelectionCallback<TData, TValue, TContext>`
+        -   `RowDragCallback<TData, TValue, TContext>`
+        -   `EditableCallback<TData, TValue, TContext>`
+        -   `HeaderCheckboxSelectionCallback<TData, TValue, TContext>`
+        -   `TooltipValueGetterFunc<TData, TValue, TContext>`
+        -   `ValueSetterFunc<TData, TValue, TContext>`
+        -   `ValueFormatterFunc<TData, TValue, TContext>`
+        -   `GetRowStyle<TData, TContext>`
+        -   `GetRowClass<TData, TContext>`
+    -   Framework wrapper updates required by the type changes
+        -   `AgGridAngular` class generic constraint updated to `TColDef extends ColDef<TData, any> = ColDef<any, any>`
+        -   Angular codegen (`updateGridAndColumnProperties.js`) regex now matches both
+            `ColDef<TData>` and `ColDef<TData, any>` when substituting `TColDef`
+        -   Vue3 codegen (`updateGridAndColumnProperties.cjs`) no longer strips `<TData>` from
+            `ColDef`/`ColGroupDef` props (both generics are now required)
+        -   Hand-written `coercedGridOptions` / `gridOptions` casts in `AgGridAngular` use
+            `keyof GridOptions<TData>`
     -   Internal usages updated to pass explicit generics
         -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
         -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments
