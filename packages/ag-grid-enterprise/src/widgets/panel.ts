@@ -4,7 +4,7 @@ import type { AgPanelOptions, AgPanelPostProcessPopupParams } from '../agStack/a
 
 export interface PanelPostProcessPopupParams extends AgPanelPostProcessPopupParams {
     column?: AgColumn | null;
-    rowNode?: IRowNode | null;
+    rowNode?: IRowNode<any> | null;
 }
 
 export interface PanelOptions

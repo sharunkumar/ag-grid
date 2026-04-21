@@ -23,7 +23,7 @@ export class ShowRowGroupColValueService extends BeanStub implements NamedBean, 
      * a different group value while the row is still in its original group would be misleading.
      */
     public getGroupValue(
-        node: IRowNode,
+        node: IRowNode<any>,
         column: AgColumn | undefined,
         ignoreAggData: boolean
     ): GroupValueResult | null {
@@ -83,7 +83,7 @@ export class ShowRowGroupColValueService extends BeanStub implements NamedBean, 
      * Formats a group col value, and prefixes it with the "Total" prefix if applicable
      */
     public formatAndPrefixGroupColValue(
-        groupValue: { displayedNode: IRowNode; value: any },
+        groupValue: { displayedNode: IRowNode<any>; value: any },
         column?: AgColumn,
         exporting: boolean = false
     ): string | null {
@@ -108,7 +108,7 @@ export class ShowRowGroupColValueService extends BeanStub implements NamedBean, 
      * Formats the group col value using the underlying column's value formatter
      */
     private formatGroupColValue(
-        groupValue: { displayedNode: IRowNode; value: any },
+        groupValue: { displayedNode: IRowNode<any>; value: any },
         column?: AgColumn,
         exporting: boolean = false
     ): string | null {
@@ -158,7 +158,11 @@ export class ShowRowGroupColValueService extends BeanStub implements NamedBean, 
      * @param column column to get the displayed node for
      * @returns a parent node of node to display the value from, or undefined if no value will be inherited
      */
-    public getDisplayedNode(node: IRowNode, column: AgColumn, onlyHideOpenParents = false): IRowNode | undefined {
+    public getDisplayedNode(
+        node: IRowNode<any>,
+        column: AgColumn,
+        onlyHideOpenParents = false
+    ): IRowNode<any> | undefined {
         const gos = this.gos;
         const isGroupHideOpenParents = gos.get('groupHideOpenParents');
         const isShowOpenedGroupValue = gos.get('showOpenedGroup') && !onlyHideOpenParents;

@@ -21,7 +21,7 @@ export function redoCellEditing(beans: BeanCollection): void {
     beans.undoRedo?.redo('api');
 }
 
-export function getEditRowValues(beans: BeanCollection, rowNode: IRowNode): Record<string, any> | undefined {
+export function getEditRowValues(beans: BeanCollection, rowNode: IRowNode<any>): Record<string, any> | undefined {
     return beans.editModelSvc?.getEditRowDataValue(rowNode, { checkSiblings: true });
 }
 

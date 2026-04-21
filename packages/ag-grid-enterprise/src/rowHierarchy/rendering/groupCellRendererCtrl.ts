@@ -565,7 +565,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
     }
 
     /** Whether the group cell is editable via groupRowEditable or enableGroupEdit. */
-    private isGroupCellEditable(node: RowNode | IRowNode): boolean {
+    private isGroupCellEditable(node: RowNode | IRowNode<any>): boolean {
         const column = this.params.column;
         return (
             !!column &&

@@ -339,7 +339,7 @@ export class AgColumn<TValue = any>
         this.colEventSvc.removeEventListener(eventType, listener);
     }
 
-    public createColumnFunctionCallbackParams(rowNode: IRowNode): ColumnFunctionCallbackParams {
+    public createColumnFunctionCallbackParams(rowNode: IRowNode<any>): ColumnFunctionCallbackParams {
         return _addGridCommonParams(this.gos, {
             node: rowNode,
             data: rowNode.data,
@@ -348,11 +348,11 @@ export class AgColumn<TValue = any>
         });
     }
 
-    public isSuppressNavigable(rowNode: IRowNode): boolean {
+    public isSuppressNavigable(rowNode: IRowNode<any>): boolean {
         return this.beans.cellNavigation?.isSuppressNavigable(this, rowNode) ?? false;
     }
 
-    public isCellEditable(rowNode: IRowNode): boolean {
+    public isCellEditable(rowNode: IRowNode<any>): boolean {
         return this.beans.editSvc?.isCellEditable({ rowNode, column: this }) ?? false;
     }
 
@@ -368,19 +368,19 @@ export class AgColumn<TValue = any>
         return !!this.colDef.autoHeaderHeight;
     }
 
-    public isRowDrag(rowNode: IRowNode): boolean {
+    public isRowDrag(rowNode: IRowNode<any>): boolean {
         return this.isColumnFunc(rowNode, this.colDef.rowDrag);
     }
 
-    public isDndSource(rowNode: IRowNode): boolean {
+    public isDndSource(rowNode: IRowNode<any>): boolean {
         return this.isColumnFunc(rowNode, this.colDef.dndSource);
     }
 
-    public isCellCheckboxSelection(rowNode: IRowNode): boolean {
+    public isCellCheckboxSelection(rowNode: IRowNode<any>): boolean {
         return this.beans.selectionSvc?.isCellCheckboxSelection(this, rowNode) ?? false;
     }
 
-    public isSuppressPaste(rowNode: IRowNode): boolean {
+    public isSuppressPaste(rowNode: IRowNode<any>): boolean {
         return this.isColumnFunc(rowNode, this.colDef?.suppressPaste ?? null);
     }
 
@@ -394,7 +394,7 @@ export class AgColumn<TValue = any>
     }
 
     public isColumnFunc(
-        rowNode: IRowNode,
+        rowNode: IRowNode<any>,
         value?: boolean | ((params: ColumnFunctionCallbackParams) => boolean) | null
     ): boolean {
         // if boolean set, then just use it
@@ -678,7 +678,7 @@ export class AgColumn<TValue = any>
         return changed;
     }
 
-    private createBaseColDefParams(rowNode: IRowNode): BaseColDefParams {
+    private createBaseColDefParams(rowNode: IRowNode<any>): BaseColDefParams {
         const params: BaseColDefParams = _addGridCommonParams(this.gos, {
             node: rowNode,
             data: rowNode.data,
@@ -688,7 +688,7 @@ export class AgColumn<TValue = any>
         return params;
     }
 
-    public getColSpan(rowNode: IRowNode): number {
+    public getColSpan(rowNode: IRowNode<any>): number {
         if (_missing(this.colDef.colSpan)) {
             return 1;
         }
@@ -699,7 +699,7 @@ export class AgColumn<TValue = any>
         return Math.max(colSpan, 1);
     }
 
-    public getRowSpan(rowNode: IRowNode): number {
+    public getRowSpan(rowNode: IRowNode<any>): number {
         if (_missing(this.colDef.rowSpan)) {
             return 1;
         }

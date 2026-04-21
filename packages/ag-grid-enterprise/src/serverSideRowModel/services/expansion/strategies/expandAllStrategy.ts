@@ -21,7 +21,7 @@ export class ExpandAllStrategy extends BeanStub implements IExpansionStrategy<Ro
         };
     }
 
-    public setRowExpanded(row: IRowNode, expanded: boolean) {
+    public setRowExpanded(row: IRowNode<any>, expanded: boolean) {
         const id = row.id!;
         if (expanded === this.allExpanded) {
             this.flipped.delete(id);
@@ -30,7 +30,7 @@ export class ExpandAllStrategy extends BeanStub implements IExpansionStrategy<Ro
         this.flipped.add(id);
     }
 
-    public isRowExpanded(node: IRowNode): boolean {
+    public isRowExpanded(node: IRowNode<any>): boolean {
         const rowId = node.id!;
         return this.allExpanded !== this.flipped.has(rowId);
     }

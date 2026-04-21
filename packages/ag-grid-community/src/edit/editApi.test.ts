@@ -15,8 +15,8 @@ import { SingleCellEditStrategy } from './strategy/singleCellEditStrategy';
 import { UNEDITED } from './utils/editors';
 
 describe('Edit API', () => {
-    const rowNode1 = { rowIndex: 0, rowPinned: undefined } as unknown as IRowNode;
-    const rowNode2 = { rowIndex: 1, rowPinned: undefined } as unknown as IRowNode;
+    const rowNode1 = { rowIndex: 0, rowPinned: undefined } as unknown as IRowNode<any>;
+    const rowNode2 = { rowIndex: 1, rowPinned: undefined } as unknown as IRowNode<any>;
     const column1 = {
         getColId: () => 'col1',
         colId: 'col1',
@@ -87,7 +87,7 @@ describe('Edit API', () => {
                     }
                     return undefined;
                 }),
-                getRowCtrlByNode: jest.fn((node: IRowNode) => {
+                getRowCtrlByNode: jest.fn((node: IRowNode<any>) => {
                     if (node === rowNode1) {
                         return rowCtrl1;
                     } else if (node === rowNode2) {
@@ -99,18 +99,20 @@ describe('Edit API', () => {
                 getRowCtrls: jest.fn(() => [rowCtrl1, rowCtrl2]),
             } as unknown as RowRenderer,
             valueSvc: {
-                getValue: jest.fn((col: Column<any>, rowNode: IRowNode, _ignoreAggData: boolean, _source: string) => {
-                    if (col.getColId() === 'col1' && rowNode.rowIndex === 0) {
-                        return 'old1';
-                    } else if (col.getColId() === 'col2' && rowNode.rowIndex === 0) {
-                        return 'old2';
-                    } else if (col.getColId() === 'col1' && rowNode.rowIndex === 1) {
-                        return 'old1';
-                    } else if (col.getColId() === 'col2' && rowNode.rowIndex === 1) {
-                        return 'old2';
+                getValue: jest.fn(
+                    (col: Column<any>, rowNode: IRowNode<any>, _ignoreAggData: boolean, _source: string) => {
+                        if (col.getColId() === 'col1' && rowNode.rowIndex === 0) {
+                            return 'old1';
+                        } else if (col.getColId() === 'col2' && rowNode.rowIndex === 0) {
+                            return 'old2';
+                        } else if (col.getColId() === 'col1' && rowNode.rowIndex === 1) {
+                            return 'old1';
+                        } else if (col.getColId() === 'col2' && rowNode.rowIndex === 1) {
+                            return 'old2';
+                        }
+                        return undefined;
                     }
-                    return undefined;
-                }),
+                ),
             } as unknown as ValueService,
             registry: {
                 createDynamicBean: jest.fn(),

@@ -17,7 +17,7 @@ interface ValueAndCount {
 
 /** Distributes a numeric value to children using the chosen strategy. */
 export class DistributorNumber {
-    private readonly children: readonly IRowNode[];
+    private readonly children: readonly IRowNode<any>[];
     private readonly column: Column<any>;
     private readonly count: number;
     private readonly target: number;
@@ -97,7 +97,7 @@ export class DistributorNumber {
         }
     }
 
-    private readOne(node: IRowNode): number {
+    private readOne(node: IRowNode<any>): number {
         const { column, getVal } = this;
         if (getVal) {
             const { colDef, api, context } = this.params;
@@ -111,7 +111,7 @@ export class DistributorNumber {
      * For group children, reads the raw avg agg object { value, count } if available,
      * falling back to allLeafChildren.length. For leaf children, count is always 1.
      */
-    private readValueAndCount(node: IRowNode): ValueAndCount {
+    private readValueAndCount(node: IRowNode<any>): ValueAndCount {
         const { column, getVal } = this;
         let raw: unknown;
         if (getVal) {
@@ -132,7 +132,7 @@ export class DistributorNumber {
         return { value: toNumber(raw), count: 1 };
     }
 
-    private writeOne(node: IRowNode, value: unknown): boolean {
+    private writeOne(node: IRowNode<any>, value: unknown): boolean {
         const { column, setVal } = this;
         if (setVal) {
             const { colDef, api, context } = this.params;

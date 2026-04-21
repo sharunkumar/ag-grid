@@ -123,12 +123,12 @@ export interface Column<TValue>
     removeEventListener<T extends ColumnEventName>(eventType: T, userListener: (params: ColumnEvent<T>) => void): void;
 
     /** Returns `true` if navigation is suppressed for the given column and rowNode. */
-    isSuppressNavigable(rowNode: IRowNode): boolean;
+    isSuppressNavigable(rowNode: IRowNode<any>): boolean;
 
     /**
      * Returns `true` if the cell for this column is editable for the given `rowNode`, otherwise `false`.
      */
-    isCellEditable(rowNode: IRowNode): boolean;
+    isCellEditable(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if the fill handle is suppressed. */
     isSuppressFillHandle(): boolean;
@@ -140,16 +140,16 @@ export interface Column<TValue>
     isAutoHeaderHeight(): boolean;
 
     /** Returns `true` if this column and row node can be dragged. */
-    isRowDrag(rowNode: IRowNode): boolean;
+    isRowDrag(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if this column and row node allows dragging for native drag and drop. */
-    isDndSource(rowNode: IRowNode): boolean;
+    isDndSource(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if this column and row node has checkbox selection. */
-    isCellCheckboxSelection(rowNode: IRowNode): boolean;
+    isCellCheckboxSelection(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if paste is suppress for this column and row node. */
-    isSuppressPaste(rowNode: IRowNode): boolean;
+    isSuppressPaste(rowNode: IRowNode<any>): boolean;
 
     /** Returns `true` if a menu is visible for this column. */
     isMenuVisible(): boolean;
@@ -232,10 +232,10 @@ export interface Column<TValue>
     getAutoHeaderHeight(): number | null;
 
     /** Returns the column span for this column and row node. */
-    getColSpan(rowNode: IRowNode): number;
+    getColSpan(rowNode: IRowNode<any>): number;
 
     /** Returns the row span for this column and row node. */
-    getRowSpan(rowNode: IRowNode): number;
+    getRowSpan(rowNode: IRowNode<any>): number;
 
     /** @deprecated v32 Internal method no longer to be exposed on Column interface. */
     isGreaterThanMax(width: number): boolean;

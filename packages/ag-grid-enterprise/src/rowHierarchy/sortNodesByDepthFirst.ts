@@ -23,7 +23,12 @@ const sortBucketsAlloc = (minBucket: number): Uint32Array => {
  * Single-element minorities use copyWithin (zero allocation).
  * General case buffers the shallow minority into a short-lived local array.
  */
-const sortTwoLevels = (nodes: IRowNode[], nodeCount: number, deepest: number, deepCount: number): IRowNode[] => {
+const sortTwoLevels = (
+    nodes: IRowNode<any>[],
+    nodeCount: number,
+    deepest: number,
+    deepCount: number
+): IRowNode<any>[] => {
     const shallowCount = nodeCount - deepCount;
     const deepLevel = deepest - 1; // precomputed to avoid repeated + 1 in tight loops
 
@@ -56,7 +61,7 @@ const sortTwoLevels = (nodes: IRowNode[], nodeCount: number, deepest: number, de
     }
 
     // General case: buffer shallow nodes, compact deep nodes left, append shallow.
-    const shallow = new Array<IRowNode>(shallowCount);
+    const shallow = new Array<IRowNode<any>>(shallowCount);
     let di = 0;
     let si = 0;
     for (let i = 0; i < nodeCount; ++i) {
@@ -73,7 +78,7 @@ const sortTwoLevels = (nodes: IRowNode[], nodeCount: number, deepest: number, de
     return nodes;
 };
 
-const countingSort = (nodes: IRowNode[], nodesLen: number): RowNode[] => {
+const countingSort = (nodes: IRowNode<any>[], nodesLen: number): RowNode[] => {
     // Single-pass: find level range, check sorted order, and count per-level.
     // `unsorted` accumulates sign bits: `prevB - b` is negative when a shallower node
     // precedes a deeper one. `unsorted >= 0` => already sorted.
@@ -128,7 +133,7 @@ const countingSort = (nodes: IRowNode[], nodesLen: number): RowNode[] => {
     }
 
     // Scatter — sequential writes per bucket for cache-friendly output.
-    const output = new Array<IRowNode>(nodesLen);
+    const output = new Array<IRowNode<any>>(nodesLen);
     for (let i = 0; i < nodesLen; ++i) {
         const node = nodes[i];
         output[buckets[node.level + 1]++] = node;
@@ -145,7 +150,7 @@ const countingSort = (nodes: IRowNode[], nodesLen: number): RowNode[] => {
  *
  * @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time.
  */
-export const _sortNodesByDepthFirst = (nodes: IRowNode[], nodesLen = nodes.length): RowNode[] => {
+export const _sortNodesByDepthFirst = (nodes: IRowNode<any>[], nodesLen = nodes.length): RowNode[] => {
     // Just two nodes - swap them if we need to, O(1).
     if (nodesLen === 2) {
         if (nodes[0].level < nodes[1].level) {

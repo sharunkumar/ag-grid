@@ -63,7 +63,7 @@ export class ValueService extends BeanStub implements NamedBean {
         valueGetter: string | Function,
         data: any,
         column: AgColumn,
-        rowNode: IRowNode
+        rowNode: IRowNode<any>
     ) => any;
 
     public postConstruct(): void {
@@ -98,7 +98,7 @@ export class ValueService extends BeanStub implements NamedBean {
      */
     public getValueForDisplay(params: {
         column?: AgColumn;
-        node: IRowNode;
+        node: IRowNode<any>;
         includeValueFormatted?: boolean;
         useRawFormula?: boolean;
         exporting?: boolean;
@@ -170,7 +170,7 @@ export class ValueService extends BeanStub implements NamedBean {
     // Any change here can have a large impact. Run the getValue benchmark to verify.
     public getValue(
         column: AgColumn,
-        rowNode: IRowNode | null | undefined,
+        rowNode: IRowNode<any> | null | undefined,
         from: CellValueResolveFrom,
         ignoreAggData: boolean = false
     ): any {
@@ -230,7 +230,7 @@ export class ValueService extends BeanStub implements NamedBean {
     }
 
     /** Computes whether to ignore aggregation data for display purposes. */
-    private displayIgnoresAggData(node: IRowNode): boolean {
+    private displayIgnoresAggData(node: IRowNode<any>): boolean {
         // If doing grouping and footers, we don't want to include the agg value
         // in the header when the group is open.
         // Result is: isOpenedGroup && !groupShowsAggData
@@ -255,7 +255,7 @@ export class ValueService extends BeanStub implements NamedBean {
 
     private resolveValue(
         column: AgColumn,
-        rowNode: IRowNode,
+        rowNode: IRowNode<any>,
         ignoreAggData: boolean,
         isGroup: boolean | undefined
     ): any {
@@ -328,7 +328,7 @@ export class ValueService extends BeanStub implements NamedBean {
 
     public parseValue<TValueNew = any, TValueOld = any, TValue = any>(
         column: AgColumn,
-        rowNode: IRowNode | null,
+        rowNode: IRowNode<any> | null,
         newValue: TValueNew,
         oldValue: TValueOld
     ): TValue {
@@ -358,7 +358,7 @@ export class ValueService extends BeanStub implements NamedBean {
         return newValue as unknown as TValue;
     }
 
-    public getDeleteValue(column: AgColumn, rowNode: IRowNode): any {
+    public getDeleteValue(column: AgColumn, rowNode: IRowNode<any>): any {
         if (_exists(column.colDef.valueParser)) {
             return (
                 this.parseValue(
@@ -374,7 +374,7 @@ export class ValueService extends BeanStub implements NamedBean {
 
     public formatValue(
         column: AgColumn,
-        node: IRowNode | null,
+        node: IRowNode<any> | null,
         value: any,
         suppliedFormatter?: (value: any) => string,
         useFormatterFromColumn = true
@@ -427,7 +427,7 @@ export class ValueService extends BeanStub implements NamedBean {
      * @param eventSource The event source
      * @returns `true` if the value has been updated, otherwise `false`.
      */
-    public setValue(rowNode: IRowNode, column: AgColumn, newValue: any, eventSource?: string): boolean {
+    public setValue(rowNode: IRowNode<any>, column: AgColumn, newValue: any, eventSource?: string): boolean {
         const colDef = column.colDef;
 
         if (!rowNode.data && this.canCreateRowNodeData(rowNode, colDef)) {
@@ -523,7 +523,7 @@ export class ValueService extends BeanStub implements NamedBean {
         }
     }
 
-    private canCreateRowNodeData(rowNode: IRowNode, colDef: ColDef<any, any>): boolean {
+    private canCreateRowNodeData(rowNode: IRowNode<any>, colDef: ColDef<any, any>): boolean {
         if (!rowNode.group) {
             return true; // not a group row
         }
@@ -546,7 +546,7 @@ export class ValueService extends BeanStub implements NamedBean {
     }
 
     private finishValueChange(
-        rowNode: IRowNode,
+        rowNode: IRowNode<any>,
         column: AgColumn,
         params: ValueSetterParams,
         eventSource?: string,
@@ -568,7 +568,12 @@ export class ValueService extends BeanStub implements NamedBean {
         return true;
     }
 
-    private isSetValueSupported(column: AgColumn, rowNode: IRowNode, newValue: any, colDef: ColDef<any, any>): boolean {
+    private isSetValueSupported(
+        column: AgColumn,
+        rowNode: IRowNode<any>,
+        newValue: any,
+        colDef: ColDef<any, any>
+    ): boolean {
         const { field, valueSetter } = colDef;
 
         const formulaSvc = this.beans.formula;
@@ -595,7 +600,7 @@ export class ValueService extends BeanStub implements NamedBean {
 
     private handleExternalFormulaChange(args: {
         column: AgColumn;
-        rowNode: IRowNode;
+        rowNode: IRowNode<any>;
         newValue: any;
         setterParams: ValueSetterParams;
         eventSource?: string;
@@ -649,7 +654,7 @@ export class ValueService extends BeanStub implements NamedBean {
         params: ValueSetterParams;
         rowData: any;
         field: string | undefined;
-        rowNode: IRowNode;
+        rowNode: IRowNode<any>;
         column: AgColumn;
         newValue: any;
     }): boolean | undefined {
@@ -666,7 +671,7 @@ export class ValueService extends BeanStub implements NamedBean {
     }
 
     private dispatchCellValueChangedEvent(
-        rowNode: IRowNode,
+        rowNode: IRowNode<any>,
         params: ValueSetterParams,
         value: any,
         source?: string
@@ -738,7 +743,7 @@ export class ValueService extends BeanStub implements NamedBean {
         valueGetter: string | Function,
         data: any,
         column: AgColumn,
-        rowNode: IRowNode
+        rowNode: IRowNode<any>
     ): any {
         const colId = column.colId;
 
@@ -759,7 +764,7 @@ export class ValueService extends BeanStub implements NamedBean {
         valueGetter: string | Function,
         data: any,
         column: AgColumn,
-        rowNode: IRowNode
+        rowNode: IRowNode<any>
     ): any {
         const params: ValueGetterParams<any, any, any> = _addGridCommonParams(this.gos, {
             data: data,
@@ -779,7 +784,7 @@ export class ValueService extends BeanStub implements NamedBean {
         return result;
     }
 
-    public getValueCallback(node: IRowNode, field: string | AgColumn): any {
+    public getValueCallback(node: IRowNode<any>, field: string | AgColumn): any {
         const otherColumn = this.colModel.getColDefCol(field);
 
         if (otherColumn) {
@@ -790,7 +795,7 @@ export class ValueService extends BeanStub implements NamedBean {
     }
 
     // used by row grouping and pivot, to get key for a row. col can be a pivot col or a row grouping col
-    public getKeyForNode(col: AgColumn, rowNode: IRowNode): any {
+    public getKeyForNode(col: AgColumn, rowNode: IRowNode<any>): any {
         // Use 'data' - grouping keys should be based on committed data, not pending edits.
         // Row structure should remain stable during editing; rows only move groups when edits are committed.
         const value = this.getValue(col, rowNode, 'data');

@@ -101,7 +101,7 @@ describe('EditModelService', () => {
 });
 
 function createExpectedMap(arg0: [Required<EditPosition>, { editorValue: string }][]) {
-    const map = new Map<IRowNode, Map<Column<any>, { editorValue: string }>>();
+    const map = new Map<IRowNode<any>, Map<Column<any>, { editorValue: string }>>();
     for (const [position, value] of arg0) {
         const colMap = map.get(position.rowNode) || new Map();
         colMap.set(position.column, value);

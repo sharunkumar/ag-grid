@@ -13,7 +13,7 @@ type ResolveRowControllerType = {
     rowIndex?: number | null;
     rowId?: string | null;
     rowCtrl?: RowCtrl | null;
-    rowNode?: IRowNode | null;
+    rowNode?: IRowNode<any> | null;
     rowPinned?: RowPinnedType;
 };
 

@@ -27,7 +27,7 @@ export type FormulaFuncs = { [key: string]: { func: (params: FormulaFunctionPara
 
 export type FormulaFunctionParams = {
     /** Row for this formula */
-    row: IRowNode;
+    row: IRowNode<any>;
     /** Column for this formula */
     column: AgColumn;
     /** Top level params iterator only. */
@@ -38,7 +38,7 @@ export type FormulaFunctionParams = {
 
 export interface GetFormulaParams {
     column: AgColumn;
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
 }
 
 export interface SetFormulaParams extends GetFormulaParams {

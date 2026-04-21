@@ -10,7 +10,7 @@ export function redrawRows<TData = any>(beans: BeanCollection, params: RedrawRow
 
 export function setRowNodeExpanded(
     beans: BeanCollection,
-    rowNode: IRowNode,
+    rowNode: IRowNode<any>,
     expanded: boolean,
     expandParents?: boolean,
     forceSync?: boolean

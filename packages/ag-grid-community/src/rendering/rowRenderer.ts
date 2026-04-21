@@ -42,7 +42,7 @@ type RowCtrlByRowIndex = Record<number, RowCtrl>;
 type RowCtrlByRowNodeIdMap = Record<string, RowCtrl>;
 
 interface RowNodeMap {
-    [id: string]: IRowNode;
+    [id: string]: IRowNode<any>;
 }
 
 const ROW_ANIMATION_TIMEOUT = 400;
@@ -602,7 +602,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
         }
     }
 
-    public redrawRows(rowNodes?: IRowNode[]): void {
+    public redrawRows(rowNodes?: IRowNode<any>[]): void {
         const { editSvc } = this.beans;
         if (editSvc?.isEditing()) {
             if (editSvc.isBatchEditing()) {
@@ -887,7 +887,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
     }
 
     /** O(1) lookup of a RowCtrl by its RowNode (O(k) for sticky rows, where k is the sticky row count). */
-    public getRowCtrlByNode(node: IRowNode): RowCtrl | undefined {
+    public getRowCtrlByNode(node: IRowNode<any>): RowCtrl | undefined {
         const rowIndex = node.rowIndex;
         if (rowIndex == null) {
             return undefined;
@@ -908,7 +908,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
         return this.getStickyRowCtrlByNode(node);
     }
 
-    private getStickyRowCtrlByNode(node: IRowNode): RowCtrl | undefined {
+    private getStickyRowCtrlByNode(node: IRowNode<any>): RowCtrl | undefined {
         const stickyRowFeature = this.stickyRowFeature;
         if (!stickyRowFeature) {
             return undefined;
@@ -927,13 +927,13 @@ export class RowRenderer extends BeanStub implements NamedBean {
     }
 
     /** Refreshes the rendered row for the given node if it is currently in the viewport. Null-safe: no-op when node is null or undefined. */
-    public refreshRowByNode(node: IRowNode | null | undefined): void {
+    public refreshRowByNode(node: IRowNode<any> | null | undefined): void {
         if (node) {
             this.getRowCtrlByNode(node)?.refreshRow();
         }
     }
 
-    private refreshFullWidth(rowNodes?: IRowNode[]): void {
+    private refreshFullWidth(rowNodes?: IRowNode<any>[]): void {
         if (!rowNodes) {
             return;
         }
@@ -959,7 +959,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
     /**
      * @param rowNodes if provided, returns the RowCtrls for the provided rowNodes. otherwise returns all RowCtrls.
      */
-    public getRowCtrls(rowNodes?: IRowNode[] | null): RowCtrl[] {
+    public getRowCtrls(rowNodes?: IRowNode<any>[] | null): RowCtrl[] {
         const rowIdsMap = mapRowNodes(rowNodes);
         const allRowCtrls = this.getAllRowCtrls();
         if (!rowNodes || !rowIdsMap) {
@@ -974,7 +974,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
     // returns CellCtrl's that match the provided rowNodes and columns. eg if one row node
     // and two columns provided, that identifies 4 cells, so 4 CellCtrl's returned.
-    public getCellCtrls(rowNodes?: IRowNode[] | null, columns?: (string | AgColumn)[]): CellCtrl[] {
+    public getCellCtrls(rowNodes?: IRowNode<any>[] | null, columns?: (string | AgColumn)[]): CellCtrl[] {
         let colIdsMap: any;
         if (_exists(columns)) {
             colIdsMap = {};
@@ -1266,7 +1266,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
         this.redraw({ afterScroll: true });
     }
 
-    public getFullWidthRowCtrls(rowNodes?: IRowNode[]): RowCtrl[] {
+    public getFullWidthRowCtrls(rowNodes?: IRowNode<any>[]): RowCtrl[] {
         const rowNodesMap = mapRowNodes(rowNodes);
 
         return this.getAllRowCtrls().filter((rowCtrl: RowCtrl) => {
@@ -1718,7 +1718,7 @@ interface RefreshViewParams {
 }
 
 export function mapRowNodes(
-    rowNodes?: IRowNode[] | null
+    rowNodes?: IRowNode<any>[] | null
 ): { top: RowNodeMap; bottom: RowNodeMap; normal: RowNodeMap } | undefined {
     if (!rowNodes) {
         return;

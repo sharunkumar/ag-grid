@@ -73,7 +73,7 @@ export class RowSpanService extends BeanStub<'spannedCellsUpdated'> implements N
     // called when data changes, as this could be a hot path it's debounced
     // it uses timeouts instead of debounce so that it can be cancelled by `modelUpdated`
     // which is expected to run immediately (to exec before the rowRenderer)
-    private onRowDataUpdated({ node }: { node: IRowNode }) {
+    private onRowDataUpdated({ node }: { node: IRowNode<any> }) {
         const { spannedRowRenderer } = this.beans;
         if (node.rowPinned) {
             if (this.pinnedTimeout != null) {

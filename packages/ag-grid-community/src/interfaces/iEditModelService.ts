@@ -30,10 +30,10 @@ export type EditValue = {
 export type EditPositionValue = Required<EditPosition> & EditValue;
 
 export type EditRow<C = Column<any>, V = EditValue> = Map<C, V>;
-export type EditMap = Map<IRowNode, Map<Column<any>, EditValue>>;
+export type EditMap = Map<IRowNode<any>, Map<Column<any>, EditValue>>;
 
-export type EditValidationMap = Map<IRowNode, Map<Column<any>, EditValidation>>;
-export type EditRowValidationMap = Map<IRowNode, EditValidation>;
+export type EditValidationMap = Map<IRowNode<any>, Map<Column<any>, EditValidation>>;
+export type EditRowValidationMap = Map<IRowNode<any>, EditValidation>;
 
 export type GetEditsParams = {
     checkSiblings?: boolean;

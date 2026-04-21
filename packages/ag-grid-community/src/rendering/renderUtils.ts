@@ -14,7 +14,7 @@ import type { RowCtrl } from './row/rowCtrl';
 export function _suppressCellMouseEvent(
     gos: GridOptionsService,
     column: Column<any>,
-    node: IRowNode,
+    node: IRowNode<any>,
     event: MouseEvent
 ): boolean {
     const suppressMouseEventHandling = (column.getColDef().cellRendererParams as EventCellRendererParams)
@@ -25,7 +25,7 @@ export function _suppressCellMouseEvent(
 export function _suppressFullWidthMouseEvent(
     gos: GridOptionsService,
     cellRendererParams: ICellRendererParams<any, any, any> | undefined,
-    node: IRowNode,
+    node: IRowNode<any>,
     event: MouseEvent
 ): boolean {
     const suppressMouseEventHandling = (cellRendererParams as EventCellRendererParams)?.suppressMouseEventHandling;
@@ -35,7 +35,7 @@ export function _suppressFullWidthMouseEvent(
 function suppressMouseEvent(
     gos: GridOptionsService,
     column: Column<any> | undefined,
-    node: IRowNode,
+    node: IRowNode<any>,
     event: MouseEvent,
     suppressMouseEventHandling?: (params: SuppressMouseEventHandlingParams) => boolean
 ): boolean {

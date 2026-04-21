@@ -11,7 +11,7 @@ import { _MONTHS, _getDateParts, _parseDateTimeFromString } from 'ag-grid-commun
 const getDate = (
     { valueSvc, dataTypeSvc }: BeanCollection,
     sourceCol: AgColumn,
-    node: IRowNode | null
+    node: IRowNode<any> | null
 ): Date | null => {
     const innerValue = valueSvc.getValue(sourceCol, node, 'data');
     let date: Date | null = null;

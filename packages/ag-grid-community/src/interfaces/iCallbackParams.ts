@@ -226,7 +226,7 @@ export interface GetServerSideGroupLevelParamsParams<TData = any, TContext = any
     /** The level of the store. Top level is 0. */
     level: number;
     /** The Row Node for the group that got expanded, or undefined if top level (ie no parent) */
-    parentRowNode?: IRowNode;
+    parentRowNode?: IRowNode<any>;
     /** Active Row Group Columns, if any. */
     rowGroupColumns: Column<any>[];
     /** Active Pivot Columns, if any. */
@@ -241,14 +241,14 @@ export type IsServerSideGroupOpenByDefault<TData = any, TContext = any> = (
 export interface IsServerSideGroupOpenByDefaultParams<TData = any, TContext = any>
     extends AgGridCommon<TData, TContext> {
     data: any;
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
 }
 
 export interface IsApplyServerSideTransactionParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
     /** The transaction getting applied. */
     transaction: ServerSideTransaction;
     /** The parent RowNode, if transaction is applied to a group. */
-    parentNode: IRowNode;
+    parentNode: IRowNode<any>;
     /** Store info, if any, as passed via the success() callback when loading data. */
     groupLevelInfo: any;
 }

@@ -783,7 +783,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
             case undefined: {
                 const selectedIds = this.detailSelection.get(masterNode.id!);
                 if (selectedIds) {
-                    const nodes: IRowNode[] = [];
+                    const nodes: IRowNode<any>[] = [];
                     for (const id of selectedIds) {
                         const n = detailApi.getRowNode(id);
                         if (n) {

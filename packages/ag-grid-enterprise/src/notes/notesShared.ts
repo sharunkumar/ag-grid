@@ -11,7 +11,7 @@ import type {
 export interface NoteTarget {
     focusColumn: AgColumn;
     noteParams: GetNoteParams;
-    rowNode: IRowNode;
+    rowNode: IRowNode<any>;
     anchorElement: HTMLElement;
 }
 

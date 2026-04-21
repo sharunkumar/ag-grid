@@ -18,7 +18,7 @@ export interface IFindService {
 
     activeMatch: FindMatch | undefined;
 
-    isMatch(node: IRowNode, column: Column<any> | null): boolean;
+    isMatch(node: IRowNode<any>, column: Column<any> | null): boolean;
 
     getParts(params: FindCellValueParams): FindPart[];
 
@@ -30,9 +30,9 @@ export interface IFindService {
 
     clearActive(): void;
 
-    getNumMatches(node: IRowNode, column: Column<any> | null): number;
+    getNumMatches(node: IRowNode<any>, column: Column<any> | null): number;
 
-    registerDetailGrid(node: IRowNode, api: GridApi<any>): void;
+    registerDetailGrid(node: IRowNode<any>, api: GridApi<any>): void;
 
     refresh(maintainActive: boolean): void;
 }

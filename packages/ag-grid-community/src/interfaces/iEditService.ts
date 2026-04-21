@@ -46,7 +46,7 @@ export type IsEditingParams = {
 };
 
 export type EditRowPosition = {
-    rowNode?: IRowNode;
+    rowNode?: IRowNode<any>;
 };
 
 export interface EditPosition extends EditRowPosition {

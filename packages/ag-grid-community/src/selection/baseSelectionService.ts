@@ -250,7 +250,7 @@ export abstract class BaseSelectionService extends BeanStub {
         return true;
     }
 
-    public isCellCheckboxSelection(column: AgColumn, rowNode: IRowNode): boolean {
+    public isCellCheckboxSelection(column: AgColumn, rowNode: IRowNode<any>): boolean {
         const so = this.gos.get('rowSelection');
 
         if (so && typeof so !== 'string') {

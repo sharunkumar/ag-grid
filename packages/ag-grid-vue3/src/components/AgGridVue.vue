@@ -109,7 +109,7 @@ const getRowDataBasedOnBindings = () => {
 
 const getRowData = (): TData[] => {
     const rowData: any[] = [];
-    api?.value!.forEachLeafNode((rowNode: IRowNode) => {
+    api?.value!.forEachLeafNode((rowNode: IRowNode<any>) => {
         rowData.push(rowNode.data);
     });
     return rowData;

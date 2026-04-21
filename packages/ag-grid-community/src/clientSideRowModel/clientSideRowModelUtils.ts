@@ -2,7 +2,7 @@ import type { RowNode } from '../entities/rowNode';
 import type { IRowNode } from '../interfaces/iRowNode';
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export const _csrmFirstLeaf = (node: IRowNode): RowNode | undefined => {
+export const _csrmFirstLeaf = (node: IRowNode<any>): RowNode | undefined => {
     let childrenAfterGroup = node.childrenAfterGroup;
     while (childrenAfterGroup?.length) {
         const child = childrenAfterGroup[0];
@@ -26,7 +26,7 @@ export const _csrmFirstLeaf = (node: IRowNode): RowNode | undefined => {
 export const _csrmReorderAllLeafs = (
     allLeafs: RowNode[] | null | undefined,
     leafsToMove: ReadonlySet<RowNode>,
-    target: IRowNode | null | undefined,
+    target: IRowNode<any> | null | undefined,
     above: boolean
 ): boolean => {
     if (!leafsToMove.size || !allLeafs) {

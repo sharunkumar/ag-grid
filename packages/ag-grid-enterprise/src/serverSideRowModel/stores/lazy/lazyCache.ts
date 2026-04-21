@@ -157,7 +157,7 @@ export class LazyCache extends BeanStub {
      * @param displayIndex the display index of the node to find
      * @returns undefined if the node is not in the store bounds, otherwise will always return a node
      */
-    public getRowByDisplayIndex(displayIndex: number): IRowNode | undefined {
+    public getRowByDisplayIndex(displayIndex: number): IRowNode<any> | undefined {
         // if index isn't in store, nothing to return
         if (!this.store.isDisplayIndexInStore(displayIndex)) {
             return undefined;

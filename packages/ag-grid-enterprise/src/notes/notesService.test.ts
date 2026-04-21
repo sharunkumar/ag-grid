@@ -5,7 +5,7 @@ import { NotesService } from './notesService';
 describe('NotesService', () => {
     let service: NotesService;
     let beans: BeanCollection;
-    let rowNode: IRowNode;
+    let rowNode: IRowNode<any>;
     let colDef: ColDef<any, any>;
     let column: AgColumn;
     let currentNote: Note | undefined;
@@ -17,7 +17,7 @@ describe('NotesService', () => {
         rowNode = {
             id: '1',
             data: { athlete: 'Usain Bolt' },
-        } as unknown as IRowNode;
+        } as unknown as IRowNode<any>;
 
         colDef = {};
         currentNote = undefined;
@@ -33,7 +33,7 @@ describe('NotesService', () => {
             colDef,
             getColId: () => 'athlete',
             getColDef: () => colDef,
-            isColumnFunc: (_rowNode: IRowNode, value?: boolean | ((params: any) => boolean) | null) => {
+            isColumnFunc: (_rowNode: IRowNode<any>, value?: boolean | ((params: any) => boolean) | null) => {
                 if (typeof value === 'boolean') {
                     return value;
                 }

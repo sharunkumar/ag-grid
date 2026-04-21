@@ -12,7 +12,7 @@ import { isNumericLike, resolveStrategy, toBigInt } from './valueConversion';
 
 /** Distributes a BigInt value to children using integer-safe arithmetic. */
 export class DistributorBigInt {
-    private readonly children: readonly IRowNode[];
+    private readonly children: readonly IRowNode<any>[];
     private readonly column: Column<any>;
     private readonly count: number;
     private readonly bigCount: bigint;

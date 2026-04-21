@@ -10,7 +10,7 @@ export interface IRowGroupingEditValueSvc {
      * strategy suppresses the edit (e.g. `distribution: 'none'`).
      * Returns `true` if editable, `false` otherwise.
      */
-    isGroupCellEditable(rowNode: IRowNode, column: AgColumn): boolean;
+    isGroupCellEditable(rowNode: IRowNode<any>, column: AgColumn): boolean;
 
     /**
      * Resolves and executes groupRowValueSetter for a group row edit.

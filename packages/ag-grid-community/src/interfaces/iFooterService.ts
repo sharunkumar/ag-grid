@@ -21,6 +21,6 @@ export interface IFooterService {
     ): number;
 
     getTotalValue(value: any): string;
-    doesCellShowTotalPrefix(node: IRowNode, col?: Column<any>): boolean;
-    applyTotalPrefix(value: any, formattedValue: string | null, node: IRowNode, col: Column<any>): string;
+    doesCellShowTotalPrefix(node: IRowNode<any>, col?: Column<any>): boolean;
+    applyTotalPrefix(value: any, formattedValue: string | null, node: IRowNode<any>, col: Column<any>): string;
 }

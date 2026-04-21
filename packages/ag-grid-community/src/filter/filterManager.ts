@@ -38,7 +38,7 @@ export class FilterManager extends BeanStub implements NamedBean {
     // when we're waiting for cell data types to be inferred, we need to defer filter model updates
     private advFilterModelUpdateQueue: (AdvancedFilterModel | null | undefined)[] = [];
 
-    private alwaysPassFilter?: (rowNode: IRowNode) => boolean;
+    private alwaysPassFilter?: (rowNode: IRowNode<any>) => boolean;
 
     public postConstruct(): void {
         const refreshFiltersForAggregations = this.refreshFiltersForAggregations.bind(this);

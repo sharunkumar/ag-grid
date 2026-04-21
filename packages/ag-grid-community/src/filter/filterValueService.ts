@@ -11,7 +11,11 @@ import type { IRowNode } from '../interfaces/iRowNode';
 export class FilterValueService extends BeanStub implements NamedBean {
     beanName: BeanName = 'filterValueSvc';
 
-    public getValue(column: AgColumn, rowNode?: IRowNode | null, filterValueGetterOverride?: string | ValueGetterFunc) {
+    public getValue(
+        column: AgColumn,
+        rowNode?: IRowNode<any> | null,
+        filterValueGetterOverride?: string | ValueGetterFunc
+    ) {
         if (!rowNode) {
             return;
         }
@@ -36,7 +40,7 @@ export class FilterValueService extends BeanStub implements NamedBean {
         valueGetter: string | Function,
         data: any,
         column: AgColumn,
-        node: IRowNode,
+        node: IRowNode<any>,
         colDef: ColDef<any, any>
     ): any {
         const { expressionSvc, valueSvc } = this.beans;
