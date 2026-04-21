@@ -34,7 +34,7 @@ export interface IServerSideGetRowsRequest {
     sortModel: SortModelItem[];
 }
 
-export interface IServerSideGetRowsParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface IServerSideGetRowsParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /**
      * Details for the request. A simple object that can be converted to JSON.
      */
@@ -74,7 +74,7 @@ export interface IServerSideDatasource<TData = any> {
      * Grid calls `getRows` when it requires more rows as specified in the params.
      * Params object contains callbacks for responding to the request.
      */
-    getRows(params: IServerSideGetRowsParams<TData>): void;
+    getRows(params: IServerSideGetRowsParams<TData, any>): void;
     /** Optional method, if your datasource has state it needs to clean up. */
     destroy?(): void;
 }
