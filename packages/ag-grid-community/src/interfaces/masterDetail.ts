@@ -39,7 +39,7 @@ export interface IDetailCellRendererParams<TData, TDetail>
 
 export type GetDetailRowData<TData = any, TDetail = any> = (params: GetDetailRowDataParams<TData, TDetail>) => void;
 
-export interface GetDetailRowDataParams<TData = any, TDetail = any> {
+export interface GetDetailRowDataParams<TData, TDetail> {
     /** Row node for the details request. */
     node: IRowNode<TData>;
     /** Data for the current row. */
