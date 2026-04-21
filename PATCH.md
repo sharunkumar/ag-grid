@@ -14,6 +14,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
 ## CI
 
 -   Fork-friendly CI workflow at [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml) (format, lint, typecheck, build, unit + behavioural tests; no org secrets required). Upstream `ci.yml` and other workflows are disabled on the fork.
+-   When syncing from upstream, disable any newly-added workflows on the `sharun` remote via `GH_HOST=github.com gh workflow disable <id> --repo sharunkumar/ag-grid` so only `Fork CI` remains active.
 
 ## Patches
 
