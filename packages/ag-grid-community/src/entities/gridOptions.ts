@@ -809,7 +809,7 @@ export interface GridOptions<TData> {
      * Get chart menu items. Only applies when using AG Charts Enterprise.
      * @agModule `IntegratedChartsModule`
      */
-    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData>)[] | GetChartMenuItems<TData>;
+    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData, any>)[] | GetChartMenuItems<TData>;
 
     // *** Loading Cell Renderers *** //
     /**

@@ -12,7 +12,7 @@ import { BeanStub, _createIconNoSpan, _warn } from 'ag-grid-community';
 export class ChartMenuItemMapper extends BeanStub implements NamedBean {
     beanName = 'chartMenuItemMapper' as const;
 
-    public getChartItems(key: 'pivotChart' | 'chartRange'): MenuItemDef | null {
+    public getChartItems(key: 'pivotChart' | 'chartRange'): MenuItemDef<any, any> | null {
         const beans = this.beans;
         const chartSvc = beans.chartSvc;
         const isPivot = key === 'pivotChart';
@@ -50,7 +50,7 @@ export class ChartMenuItemMapper extends BeanStub implements NamedBean {
     }
 
     // Remove our internal _key and _enterprise properties so this does not leak out of the class on the menu items.
-    private cleanInternals(menuItem: MenuItemDefWithKey | null): MenuItemDef | null {
+    private cleanInternals(menuItem: MenuItemDefWithKey | null): MenuItemDef<any, any> | null {
         if (!menuItem) {
             return menuItem;
         }
@@ -151,7 +151,7 @@ type ChartDefToMenuItems<MenuItemKeys extends string> = {
         : never;
 };
 
-interface MenuItemDefWithKey<MenuItemKey extends string = any> extends MenuItemDef {
+interface MenuItemDefWithKey<MenuItemKey extends string = any> extends MenuItemDef<any, any> {
     _key: MenuItemKey;
     _enterprise?: boolean;
     subMenu?: MenuItemDefWithKey<MenuItemKey>[];

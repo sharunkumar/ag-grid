@@ -151,7 +151,7 @@ export interface ColGroupDef<TData> extends AbstractColDef<TData, any> {
      * The column menu button is not displayed for column groups.
      * @agModule `ColumnMenuModule`
      */
-    mainMenuItems?: (DefaultMenuItem | MenuItemDef<TData>)[] | GetMainMenuItems<TData>;
+    mainMenuItems?: (DefaultMenuItem | MenuItemDef<TData, any>)[] | GetMainMenuItems<TData>;
 }
 
 /** Select a column via:
@@ -607,12 +607,12 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      * Customise the list of menu items available in the column menu.
      * @agModule `ColumnMenuModule`
      */
-    mainMenuItems?: (DefaultMenuItem | MenuItemDef<TData>)[] | GetMainMenuItems<TData>;
+    mainMenuItems?: (DefaultMenuItem | MenuItemDef<TData, any>)[] | GetMainMenuItems<TData>;
     /**
      * Customise the list of menu items available in the context menu.
      * @agModule `ContextMenuModule`
      */
-    contextMenuItems?: (DefaultMenuItem | MenuItemDef<TData>)[] | GetContextMenuItems<TData>;
+    contextMenuItems?: (DefaultMenuItem | MenuItemDef<TData, any>)[] | GetContextMenuItems<TData>;
     /**
      * @deprecated v32.2 Use the new selection API instead. See `GridOptions.rowSelection`
      *

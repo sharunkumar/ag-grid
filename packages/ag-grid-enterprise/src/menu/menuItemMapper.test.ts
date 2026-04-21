@@ -4,8 +4,8 @@ import { MENU_ITEM_SEPARATOR, _normaliseSeparators } from './menuItemMapper';
 
 describe('_normaliseSeparators', () => {
     it('removes leading, trailing and repeated separators', () => {
-        const copyItem: MenuItemDef = { name: 'Copy' };
-        const exportItem: MenuItemDef = { name: 'Export' };
+        const copyItem: MenuItemDef<any, any> = { name: 'Copy' };
+        const exportItem: MenuItemDef<any, any> = { name: 'Export' };
         const items = [
             MENU_ITEM_SEPARATOR,
             copyItem,
@@ -21,7 +21,7 @@ describe('_normaliseSeparators', () => {
     });
 
     it('removes note separators when notes are the only menu section', () => {
-        const addNoteItem: MenuItemDef = { name: 'Add Note' };
+        const addNoteItem: MenuItemDef<any, any> = { name: 'Add Note' };
         const items = [MENU_ITEM_SEPARATOR, addNoteItem, MENU_ITEM_SEPARATOR];
 
         _normaliseSeparators(items, MENU_ITEM_SEPARATOR);

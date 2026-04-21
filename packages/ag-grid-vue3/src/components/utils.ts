@@ -714,7 +714,7 @@ export interface Props<TData> {
     /** Get chart menu items. Only applies when using AG Charts Enterprise.
          * @agModule `IntegratedChartsModule`
          */
-    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData>)[] | GetChartMenuItems<TData>,
+    chartMenuItems?: (DefaultChartMenuItem | MenuItemDef<TData, any>)[] | GetChartMenuItems<TData>,
     /** Provide your own loading cell renderer to use when data is loading via a DataSource or when a cell renderer is deferred.
          * See [Loading Cell Renderer](https://www.ag-grid.com/javascript-data-grid/component-loading-cell-renderer/) for framework specific implementation details.
          */

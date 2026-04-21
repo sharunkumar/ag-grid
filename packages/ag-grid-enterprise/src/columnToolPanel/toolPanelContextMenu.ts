@@ -59,7 +59,7 @@ export class ToolPanelContextMenu extends Component {
             if ('preventDefault' in mouseEventOrTouch) {
                 mouseEventOrTouch.preventDefault();
             }
-            const menuItemsMapped: MenuItemDef[] = this.getMappedMenuItems();
+            const menuItemsMapped: MenuItemDef<any, any>[] = this.getMappedMenuItems();
             if (menuItemsMapped.length === 0) {
                 return;
             }
@@ -208,7 +208,7 @@ export class ToolPanelContextMenu extends Component {
         return columnList.filter((col) => !predicate(col) || !this.columns.includes(col));
     }
 
-    private displayContextMenu(menuItemsMapped: MenuItemDef[]): void {
+    private displayContextMenu(menuItemsMapped: MenuItemDef<any, any>[]): void {
         const eGui = this.getGui();
         const menuList = this.createBean(new MenuList());
         const localeTextFunc = this.getLocaleTextFunc();
@@ -254,8 +254,8 @@ export class ToolPanelContextMenu extends Component {
         return this.allowScrollIntoView || this.allowGrouping || this.allowValues || this.allowPivoting;
     }
 
-    private getMappedMenuItems(): MenuItemDef[] {
-        const ret: MenuItemDef[] = [];
+    private getMappedMenuItems(): MenuItemDef<any, any>[] {
+        const ret: MenuItemDef<any, any>[] = [];
         const { menuItemMap, columns, displayName, beans } = this;
         for (const val of menuItemMap.values()) {
             const isInactive = columns.some((col) => val.allowedFunction(col) && !val.activeFunction(col));

@@ -888,7 +888,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      * @agModule `IntegratedChartsModule`
      */
     @Input() public chartMenuItems:
-        | (DefaultChartMenuItem | MenuItemDef<TData>)[]
+        | (DefaultChartMenuItem | MenuItemDef<TData, any>)[]
         | GetChartMenuItems<TData>
         | undefined = undefined;
     /** Provide your own loading cell renderer to use when data is loading via a DataSource or when a cell renderer is deferred.

@@ -2,7 +2,7 @@ import type { IComponent } from '../agStack/interfaces/iComponent';
 import type { IMenuActionParams } from './iCallbackParams';
 import type { AgGridCommon } from './iCommon';
 
-export interface MenuItemLeafDef<TData = any, TContext = any> {
+export interface MenuItemLeafDef<TData, TContext> {
     /** Name of the menu item. */
     name: string;
     /** Set to `true` to display the menu item as disabled. */
@@ -30,7 +30,7 @@ export interface MenuItemLeafDef<TData = any, TContext = any> {
     suppressCloseOnSelect?: boolean;
 }
 
-export interface MenuItemDef<TData = any, TContext = any> extends MenuItemLeafDef<TData, TContext> {
+export interface MenuItemDef<TData, TContext> extends MenuItemLeafDef<TData, TContext> {
     /**
      * If this item is a sub menu, contains a list of menu item definitions */
     subMenu?: (MenuItemDef<TData, TContext> | string)[];
@@ -94,7 +94,9 @@ export interface IMenuConfigParams {
     suppressFocus?: boolean;
 }
 
-export interface BaseMenuItemParams<TData = any, TContext = any> extends MenuItemDef, AgGridCommon<TData, TContext> {
+export interface BaseMenuItemParams<TData = any, TContext = any>
+    extends MenuItemDef<any, any>,
+        AgGridCommon<TData, TContext> {
     /** Level within the menu tree (starts at 0). */
     level: number;
     /** Returns `true` if another sub menu is open. */

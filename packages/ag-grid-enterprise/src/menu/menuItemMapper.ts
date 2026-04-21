@@ -83,18 +83,18 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
     beanName = 'menuItemMapper' as const;
 
     public mapWithStockItems(
-        originalList: (MenuItemDef | DefaultMenuItem)[],
+        originalList: (MenuItemDef<any, any> | DefaultMenuItem)[],
         column: AgColumn | null,
         node: RowNode | null,
         noteParams: GetNoteParams | undefined,
         sourceElement: () => HTMLElement,
         source: ColumnEventType
-    ): (MenuItemDef | 'separator')[] {
+    ): (MenuItemDef<any, any> | 'separator')[] {
         if (!originalList) {
             return [];
         }
 
-        const resultList: (MenuItemDef | 'separator')[] = [];
+        const resultList: (MenuItemDef<any, any> | 'separator')[] = [];
 
         const localeTextFunc = this.getLocaleTextFunc();
         const { beans, gos } = this;
@@ -124,7 +124,7 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
             column: AgColumn | null,
             sourceElement: () => HTMLElement,
             source: ColumnEventType
-        ): MenuItemDef | 'separator' | null => {
+        ): MenuItemDef<any, any> | 'separator' | null => {
             validateMenuItem(gos, key);
 
             switch (key) {
@@ -485,7 +485,7 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
         };
 
         for (const menuItemOrString of originalList) {
-            let result: MenuItemDef | 'separator' | null;
+            let result: MenuItemDef<any, any> | 'separator' | null;
 
             if (typeof menuItemOrString === 'string') {
                 if (menuItemOrString === 'note') {
@@ -514,12 +514,12 @@ export class MenuItemMapper extends BeanStub implements NamedBean {
                 continue;
             }
 
-            const resultDef = result as MenuItemDef;
+            const resultDef = result as MenuItemDef<any, any>;
             const { subMenu } = resultDef;
 
             if (subMenu && subMenu instanceof Array) {
                 resultDef.subMenu = this.mapWithStockItems(
-                    subMenu as (DefaultMenuItem | MenuItemDef)[],
+                    subMenu as (DefaultMenuItem | MenuItemDef<any, any>)[],
                     column,
                     node,
                     noteParams,
@@ -552,7 +552,7 @@ function createNoteMenuItems({
     node: RowNode | null;
     noteParams: GetNoteParams | undefined;
     localeTextFunc: LocaleTextFunc;
-}): MenuItemDef[] {
+}): MenuItemDef<any, any>[] {
     const access: INoteAccess | undefined = notesSvc?.hasDataSource()
         ? noteParams
             ? notesSvc.getNoteAccess(noteParams)
@@ -565,7 +565,7 @@ function createNoteMenuItems({
         return [];
     }
 
-    const result: MenuItemDef[] = [];
+    const result: MenuItemDef<any, any>[] = [];
 
     if (!access.note) {
         result.push({
@@ -615,7 +615,7 @@ function createAggregationSubMenu(
     aggFuncSvc: IAggFuncService,
     valueColsSvc: IColsService,
     localeTextFunc: LocaleTextFunc
-): MenuItemDef[] {
+): MenuItemDef<any, any>[] {
     let columnToUse: AgColumn | undefined;
     if (column.primary) {
         columnToUse = column;
@@ -624,7 +624,7 @@ function createAggregationSubMenu(
         columnToUse = _exists(pivotValueColumn) ? pivotValueColumn : undefined;
     }
 
-    const result: MenuItemDef[] = [];
+    const result: MenuItemDef<any, any>[] = [];
     if (columnToUse) {
         const columnIsAlreadyAggValue = columnToUse.isValueActive();
         const funcNames = aggFuncSvc.getFuncNames(columnToUse);
