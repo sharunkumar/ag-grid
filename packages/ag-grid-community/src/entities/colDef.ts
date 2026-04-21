@@ -1029,7 +1029,7 @@ export interface DndSourceOnRowDragParams<TData = any, TContext = any> extends A
 export type DndSourceCallback<TData = any, TValue = any, TContext = any> = (
     params: DndSourceCallbackParams<TData, TValue, TContext>
 ) => boolean;
-export interface EditableCallbackParams<TData = any, TValue = any, TContext = any>
+export interface EditableCallbackParams<TData, TValue, TContext>
     extends ColumnFunctionCallbackParams<TData, TValue, TContext> {}
 export type EditableCallback<TData = any, TValue = any, TContext = any> = (
     params: EditableCallbackParams<TData, TValue, TContext>
