@@ -757,7 +757,11 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
         }
     }
 
-    public setDetailSelectionState(masterNode: RowNode, detailGridOptions: GridOptions<any>, detailApi: GridApi): void {
+    public setDetailSelectionState(
+        masterNode: RowNode,
+        detailGridOptions: GridOptions<any>,
+        detailApi: GridApi<any>
+    ): void {
         if (!this.masterSelectsDetail) {
             return;
         }
@@ -807,7 +811,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
     }
 }
 
-function _isAllSelected(api: GridApi): boolean | undefined {
+function _isAllSelected(api: GridApi<any>): boolean | undefined {
     let selectedCount = 0;
     let notSelectedCount = 0;
 

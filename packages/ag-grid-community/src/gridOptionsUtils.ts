@@ -626,7 +626,7 @@ export function _combineAttributesAndGridOptions(
 }
 
 /** @internal AG_GRID_INTERNAL - Not for public use. Can change / be removed at any time. */
-export function _processOnChange(changes: any, api: GridApi): void {
+export function _processOnChange(changes: any, api: GridApi<any>): void {
     if (!changes) {
         return;
     }

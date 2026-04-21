@@ -32,7 +32,7 @@ export interface IFindService {
 
     getNumMatches(node: IRowNode, column: Column | null): number;
 
-    registerDetailGrid(node: IRowNode, api: GridApi): void;
+    registerDetailGrid(node: IRowNode, api: GridApi<any>): void;
 
     refresh(maintainActive: boolean): void;
 }

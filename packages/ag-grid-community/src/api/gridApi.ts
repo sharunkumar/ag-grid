@@ -1949,7 +1949,7 @@ export interface _AiToolkitGridApi {
     getStructuredSchema(params?: StructuredSchemaParams): any;
 }
 
-export interface GridApi<TData = any>
+export interface GridApi<TData>
     extends _CoreGridApi<TData>,
         _StateGridApi,
         _RowSelectionGridApi<TData>,

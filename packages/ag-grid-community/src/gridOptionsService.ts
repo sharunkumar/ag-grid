@@ -85,7 +85,7 @@ export class GridOptionsService
 
     private gridOptions: GridOptions<any>;
     private validation?: ValidationService;
-    private api: GridApi;
+    private api: GridApi<any>;
     private gridId: string;
 
     public wireBeans(beans: BeanCollection): void {

@@ -117,7 +117,7 @@ export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRende
         this.comp.setDetailGrid(gridOptions);
     }
 
-    public registerDetailWithMaster(api: GridApi): void {
+    public registerDetailWithMaster(api: GridApi<any>): void {
         const {
             params,
             beans: { selectionSvc, findSvc, expansionSvc },

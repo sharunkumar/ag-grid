@@ -481,7 +481,7 @@ const DetailCellRenderer = forwardRef((props: IDetailCellRendererParams, ref: an
         }
     }, []);
 
-    const registerGridApi = useCallback((api: GridApi) => {
+    const registerGridApi = useCallback((api: GridApi<any>) => {
         ctrlRef.current?.registerDetailWithMaster(api);
     }, []);
 

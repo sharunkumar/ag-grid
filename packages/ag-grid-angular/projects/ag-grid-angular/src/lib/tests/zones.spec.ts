@@ -95,7 +95,7 @@ export class GridWrapperComponent {
     zoneStatus: any = {};
 
     // Method will be provided by test case
-    setupListeners: (zone: NgZone, api: GridApi, zoneStatus: any) => void = () => {};
+    setupListeners: (zone: NgZone, api: GridApi<any>, zoneStatus: any) => void = () => {};
 
     @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
 
@@ -139,7 +139,7 @@ describe('GridWrapperComponent', () => {
         expect(api).toBeDefined();
         expect(api.getDisplayedRowCount()).toEqual(1);
 
-        fixture.componentInstance.setupListeners = (zone: NgZone, api: GridApi, zoneStatus: any) => {
+        fixture.componentInstance.setupListeners = (zone: NgZone, api: GridApi<any>, zoneStatus: any) => {
             setupTestListeners(zoneStatus, api);
         };
 
@@ -231,7 +231,7 @@ describe('GridWrapperComponent', () => {
         expect(api).toBeDefined();
         expect(api.getDisplayedRowCount()).toEqual(1);
 
-        fixture.componentInstance.setupListeners = (zone: NgZone, api: GridApi, zoneStatus: any) => {
+        fixture.componentInstance.setupListeners = (zone: NgZone, api: GridApi<any>, zoneStatus: any) => {
             // For testing purposes, we are going to add listeners to the grid outside of angular
             // This is to enable users to add listeners outside of angular and still have them run outside
             zone.runOutsideAngular(() => {

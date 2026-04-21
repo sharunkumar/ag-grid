@@ -24,7 +24,7 @@ const DetailCellRendererElement: ElementParams = {
 export class DetailCellRenderer extends Component implements ICellRenderer {
     private readonly eDetailGrid: HTMLElement = RefPlaceholder;
 
-    private detailApi?: GridApi;
+    private detailApi?: GridApi<any>;
     private params: IDetailCellRendererParams;
     private ctrl?: DetailCellRendererCtrl;
     private context: Context;

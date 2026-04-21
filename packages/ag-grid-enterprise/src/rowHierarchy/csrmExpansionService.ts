@@ -159,7 +159,7 @@ export class CsrmExpansionService
         (this.beans.rowModel as IClientSideRowModel).reMapRows();
     }
 
-    public setDetailsExpansionState(detailGridApi: GridApi): void {
+    public setDetailsExpansionState(detailGridApi: GridApi<any>): void {
         const expansionState = this.getInternalExpansionState(true);
         const allExpanded = expansionState.collapsedRowGroupIds.length === 0;
         const allCollapsed = expansionState.expandedRowGroupIds.length === 0;

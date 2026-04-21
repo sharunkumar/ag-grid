@@ -728,7 +728,7 @@ export const AG_GRID_ERRORS = {
                 msg += ' This property is no longer required and so will be removed in a future version.';
                 break;
             case 'setGridApi':
-                msg += ` This method is not called by AG Grid. To access the GridApi see: https://ag-grid.com/react-data-grid/grid-interface/#grid-api `;
+                msg += ` This method is not called by AG Grid. To access the GridApi<any> see: https://ag-grid.com/react-data-grid/grid-interface/#grid-api `;
                 break;
             case 'children':
                 msg += ` For multiple versions AgGridReact does not support children.`;

@@ -150,7 +150,7 @@ export class ServerSideExpansionService
         // is old, and we should move towards batch APIs
     }
 
-    public setDetailsExpansionState(detailGridApi: GridApi): void {
+    public setDetailsExpansionState(detailGridApi: GridApi<any>): void {
         const { gos: masterGos } = this.beans;
 
         // to prevent massive server side queries, we only propagate if the master is using a special flag

@@ -247,7 +247,7 @@ export class FindService extends BeanStub implements NamedBean, IFindService {
     }
 
     // when a detail grid is created, we need to sync the matches
-    public registerDetailGrid(node: IRowNode, api: GridApi): void {
+    public registerDetailGrid(node: IRowNode, api: GridApi<any>): void {
         const gos = this.gos;
         if (!_isClientSideRowModel(gos)) {
             return;

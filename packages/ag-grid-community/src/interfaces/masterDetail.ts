@@ -52,7 +52,7 @@ type TemplateFunc<TData = any> = (params: ICellRendererParams<TData>) => string;
 
 export interface IDetailCellRendererCtrl extends Bean {
     init(comp: IDetailCellRenderer, params: IDetailCellRendererParams): void;
-    registerDetailWithMaster(api: GridApi): void;
+    registerDetailWithMaster(api: GridApi<any>): void;
     refresh(): boolean;
 }
 
@@ -73,5 +73,5 @@ export interface DetailGridInfo {
      */
     id: string;
     /** Grid api of the detail grid. */
-    api?: GridApi;
+    api?: GridApi<any>;
 }
