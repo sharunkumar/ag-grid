@@ -784,14 +784,9 @@ export class ValueService extends BeanStub implements NamedBean {
         return result;
     }
 
-    public getValueCallback(node: IRowNode<any>, field: string | AgColumn): any {
-        const otherColumn = this.colModel.getColDefCol(field);
-
-        if (otherColumn) {
-            return this.getValue(otherColumn, node, 'data');
-        }
-
-        return null;
+    private getValueCallback(node: IRowNode<any>, field: string): any {
+        const otherColumn = this.colModel.getColDefColOrCol(field);
+        return otherColumn ? this.getValue(otherColumn, node, 'data') : null;
     }
 
     // used by row grouping and pivot, to get key for a row. col can be a pivot col or a row grouping col
