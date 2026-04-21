@@ -2070,7 +2070,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** Provide a pure function that returns a string ID to uniquely identify a given row. This enables the grid to work optimally with data changes and updates.
      * @initial
      */
-    @Input() public getRowId: GetRowIdFunc<TData> | undefined = undefined;
+    @Input() public getRowId: GetRowIdFunc<TData, any> | undefined = undefined;
     /** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.
      * @default false
      * @agModule `ClientSideRowModelModule`

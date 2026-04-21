@@ -2361,7 +2361,7 @@ export interface GridOptions<TData> {
      * Provide a pure function that returns a string ID to uniquely identify a given row. This enables the grid to work optimally with data changes and updates.
      * @initial
      */
-    getRowId?: GetRowIdFunc<TData>;
+    getRowId?: GetRowIdFunc<TData, any>;
     /**
      * When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.
      * @default false
@@ -3024,7 +3024,7 @@ export type GetChartMenuItems<TData = any, TContext = any> = (
 
 export type GetRowNodeIdFunc<TData = any> = (data: TData) => string;
 
-export type GetRowIdFunc<TData = any, TContext = any> = (params: GetRowIdParams<TData, TContext>) => string;
+export type GetRowIdFunc<TData, TContext> = (params: GetRowIdParams<TData, TContext>) => string;
 
 export interface ChartRef {
     /**
