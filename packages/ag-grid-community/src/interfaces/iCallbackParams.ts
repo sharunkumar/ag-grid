@@ -10,7 +10,7 @@ import type { DefaultMenuItem } from './menuItem';
 import type { GetNoteParams } from './notes';
 import type { ServerSideTransaction } from './serverSideTransaction';
 
-export interface GetContextMenuItemsParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface GetContextMenuItemsParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** Names of the items that would be provided by default. */
     defaultItems: DefaultMenuItem[] | undefined;
     /** The column, if a cell was clicked, otherwise null. */

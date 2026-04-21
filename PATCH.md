@@ -49,6 +49,7 @@ upstream   git@github.com:ag-grid/ag-grid.git (push)
     -   `IStatusPanelParams<TData, TContext>`
     -   `ISetFilterParams<TData, V>`
     -   `IHeaderParams<TData, TContext>`
+    -   `GetContextMenuItemsParams<TData, TContext>`
     -   Internal usages updated to pass explicit generics
         -   Reason: removing the defaults makes bare references (e.g. `colDef: ColDef`) a compile error
         -   `<any, any>` / `<any>` used (not `unknown`) because `ColDefField<unknown, unknown>` collapses to `undefined`, breaking internal `colDef.field = ...` assignments
