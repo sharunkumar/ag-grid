@@ -23,7 +23,7 @@ export interface GetContextMenuItemsParams<TData, TContext> extends AgGridCommon
     event: MouseEvent | Touch;
 }
 
-export interface GetMainMenuItemsParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface GetMainMenuItemsParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     /** The column that was clicked. Will be `null` if clicking on a column group or empty header space. */
     column: Column<any> | null;
     /** The column group that was clicked. Will be `null` if clicking on a column or empty header space. */
