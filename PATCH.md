@@ -11,6 +11,10 @@ upstream   git@github.com:ag-grid/ag-grid.git (fetch)
 upstream   git@github.com:ag-grid/ag-grid.git (push)
 ```
 
+## Syncing from upstream
+
+-   After clicking "Sync fork" on GitHub: `git fetch sharun && git merge refs/remotes/sharun/latest`.
+
 ## CI
 
 -   Fork-friendly CI workflow at [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml) (format, lint, typecheck, build, unit + behavioural tests; no org secrets required). Build and lint cover all five published packages (`ag-grid-community`, `ag-grid-enterprise`, `ag-grid-angular`, `ag-grid-vue3`, `ag-grid-react`); Jest unit tests cover community + enterprise. Upstream `ci.yml` and other workflows are disabled on the fork.
