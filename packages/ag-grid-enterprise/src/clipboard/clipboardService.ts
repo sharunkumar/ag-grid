@@ -1147,13 +1147,13 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         column: AgColumn,
         value: T,
         type: string,
-        func?: (params: WithoutGridCommon<ProcessCellForExportParams>) => T,
+        func?: (params: WithoutGridCommon<ProcessCellForExportParams<any, any>>) => T,
         canParse?: boolean,
         canFormat?: boolean
     ): T {
         const { valueSvc, formula } = this.beans;
         if (func) {
-            const params: WithoutGridCommon<ProcessCellForExportParams> = {
+            const params: WithoutGridCommon<ProcessCellForExportParams<any, any>> = {
                 column,
                 node: rowNode,
                 value,

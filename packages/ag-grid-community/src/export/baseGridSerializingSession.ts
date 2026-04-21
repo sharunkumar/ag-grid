@@ -27,7 +27,7 @@ export abstract class BaseGridSerializingSession<T> implements GridSerializingSe
     public rowGroupColsSvc?: IColsService;
     public valueSvc: ValueService;
     public gos: GridOptionsService;
-    public processCellCallback?: (params: ProcessCellForExportParams) => string;
+    public processCellCallback?: (params: ProcessCellForExportParams<any, any>) => string;
     public processHeaderCallback?: (params: ProcessHeaderForExportParams) => string;
     public processGroupHeaderCallback?: (params: ProcessGroupHeaderForExportParams) => string;
     public processRowGroupCallback?: (params: ProcessRowGroupForExportParams) => string;

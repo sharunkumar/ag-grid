@@ -83,7 +83,7 @@ export interface BaseExportParams {
     /**
      * A callback function invoked once per cell in the grid. Return a string value to be displayed in the export. For example this is useful for formatting date values.
      */
-    processCellCallback?(params: ProcessCellForExportParams): string;
+    processCellCallback?(params: ProcessCellForExportParams<any, any>): string;
     /**
      * A callback function invoked once per column. Return a string to be displayed in the column header.
      */
@@ -165,7 +165,7 @@ export type ProcessCellFromClipboard<TData = any, TContext = any> = (
     params: ProcessCellForExportParams<TData, TContext>
 ) => any;
 
-export interface ProcessCellForExportParams<TData = any, TContext = any> extends AgGridCommon<TData, TContext> {
+export interface ProcessCellForExportParams<TData, TContext> extends AgGridCommon<TData, TContext> {
     value: any;
     accumulatedRowIndex?: number;
     node?: IRowNode<TData> | null;
