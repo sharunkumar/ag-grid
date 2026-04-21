@@ -526,7 +526,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
     // NOTE: Make sure that wherever these are called that they are wrapped in frameworkOverrides.wrapOutgoing()
 
     /** Callback for after the value of a cell has changed, either due to editing or the application calling `api.setValue()`. */
-    onCellValueChanged?: (event: NewValueParams<TData, TValue>) => void;
+    onCellValueChanged?: (event: NewValueParams<TData, TValue, any>) => void;
     /** Callback called when a cell is clicked. */
     onCellClicked?: (event: CellClickedEvent<TData, TValue>) => void;
     /** Callback called when a cell is double clicked. */
@@ -1184,7 +1184,7 @@ export type TooltipValueGetterFunc<TData = any, TValue = any, TContext = any> = 
     params: ITooltipParams<TData, TValue, TContext>
 ) => string | any;
 
-export interface NewValueParams<TData = any, TValue = any, TContext = any>
+export interface NewValueParams<TData, TValue, TContext>
     extends ChangedValueParams<TData, TValue | null | undefined, TValue | null | undefined, TContext> {
     /** The raw value from the edit, before any value getter is applied. */
     newRawValue: TValue | null | undefined;
