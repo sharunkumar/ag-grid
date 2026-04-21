@@ -102,7 +102,7 @@ export interface SetFilterUi<TValue = string> {
  * @param TData type of data row
  * @param V type of value in the Set Filter
  */
-export interface SetFilterValuesFuncParams<TData = any, V = string> extends AgGridCommon<TData, any> {
+export interface SetFilterValuesFuncParams<TData, V = string> extends AgGridCommon<TData, any> {
     /** The function to call with the values to load into the filter once they are ready. */
     success: (values: (V | null)[]) => void;
     /** The column definition from which the set filter is invoked. */
