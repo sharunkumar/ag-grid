@@ -465,7 +465,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         return cssClass;
     }
 
-    private getCellClass(params: CellClassParams): string[] {
+    private getCellClass(params: CellClassParams<any, any, any>): string[] {
         const { beans } = this;
         const { rangeSvc, gos } = beans;
         const { node } = params;

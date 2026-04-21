@@ -1264,7 +1264,7 @@ export interface SuppressHeaderKeyboardEventParams<TData = any, TValue = any, TC
     event: KeyboardEvent;
 }
 
-export interface CellClassParams<TData = any, TValue = any, TContext = any> extends RowClassParams<TData, TContext> {
+export interface CellClassParams<TData, TValue, TContext> extends RowClassParams<TData, TContext> {
     /** Column for this callback */
     column: Column<TValue>;
     /** The colDef associated with the column for this cell */
