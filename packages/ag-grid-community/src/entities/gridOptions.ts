@@ -2142,7 +2142,7 @@ export interface GridOptions<TData> {
      * For customising the context menu.
      * @agModule `ContextMenuModule`
      */
-    getContextMenuItems?: GetContextMenuItems<TData>;
+    getContextMenuItems?: GetContextMenuItems<TData, any>;
     /**
      * For customising the main 'column header' menu.
      * @initial
@@ -3002,7 +3002,7 @@ type MenuCallbackReturn<TMenuItem extends string, TData = any, TContext = any> =
     | MenuItemDef<TData, TContext>
 )[];
 
-export type GetContextMenuItems<TData = any, TContext = any> = (
+export type GetContextMenuItems<TData, TContext> = (
     params: GetContextMenuItemsParams<TData, TContext>
 ) =>
     | MenuCallbackReturn<DefaultMenuItem, TData, TContext>

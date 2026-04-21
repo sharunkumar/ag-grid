@@ -612,7 +612,7 @@ export interface ColDef<TData, TValue> extends AbstractColDef<TData, TValue>, IF
      * Customise the list of menu items available in the context menu.
      * @agModule `ContextMenuModule`
      */
-    contextMenuItems?: (DefaultMenuItem | MenuItemDef<TData, any>)[] | GetContextMenuItems<TData>;
+    contextMenuItems?: (DefaultMenuItem | MenuItemDef<TData, any>)[] | GetContextMenuItems<TData, any>;
     /**
      * @deprecated v32.2 Use the new selection API instead. See `GridOptions.rowSelection`
      *

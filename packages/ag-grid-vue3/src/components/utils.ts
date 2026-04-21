@@ -1732,7 +1732,7 @@ export interface Props<TData> {
     /** For customising the context menu.
          * @agModule `ContextMenuModule`
          */
-    getContextMenuItems?: GetContextMenuItems<TData>,
+    getContextMenuItems?: GetContextMenuItems<TData, any>,
     /** For customising the main 'column header' menu.
          * @initial
          * @agModule `ColumnMenuModule`

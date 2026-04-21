@@ -1911,7 +1911,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     /** For customising the context menu.
      * @agModule `ContextMenuModule`
      */
-    @Input() public getContextMenuItems: GetContextMenuItems<TData> | undefined = undefined;
+    @Input() public getContextMenuItems: GetContextMenuItems<TData, any> | undefined = undefined;
     /** For customising the main 'column header' menu.
      * @initial
      * @agModule `ColumnMenuModule`
